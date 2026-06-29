@@ -147,6 +147,48 @@ p {
   max-width: 70ch;
 }
 
+.section-intro {
+  max-width: 52rem;
+  margin: 0 0 2rem;
+  color: var(--muted);
+}
+
+.sample-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.sample-link {
+  flex-shrink: 0;
+  display: inline-block;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  white-space: nowrap;
+}
+
+.note {
+  margin-top: 2rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .sample-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sample-link {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 @media (max-width: 640px) {
   .site-header {
     padding: 3.5rem 0 2.25rem;
