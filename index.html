@@ -4,48 +4,71 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Piotr Oszenda — Technical Writing Portfolio</title>
-  <meta name="description" content="Technical writing portfolio of Piotr Oszenda, focused on developer documentation, API content, product documentation, and knowledge architecture.">
+  <meta name="description" content="Technical writing portfolio of Piotr Oszenda, focused on developer documentation, API content, product documentation, help center writing, and knowledge architecture.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Piotr Oszenda">
+  <meta name="theme-color" content="#f7f7f5">
+
+  <!-- Replace with your final GitHub Pages or custom domain URL -->
+  <link rel="canonical" href="https://osza.github.io/myPortfolio/">
+
+  <meta property="og:title" content="Piotr Oszenda — Technical Writing Portfolio">
+  <meta property="og:description" content="Portfolio featuring developer documentation, API content, product guides, help center articles, and knowledge architecture work.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://osza.github.io/myPortfolio/">
+  <meta property="og:site_name" content="Piotr Oszenda Portfolio">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Piotr Oszenda — Technical Writing Portfolio">
+  <meta name="twitter:description" content="Technical writing portfolio focused on developer documentation, API content, and product documentation.">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="site-header">
     <div class="container">
       <p class="eyebrow">Technical Writing Portfolio</p>
       <h1>Piotr Oszenda</h1>
       <p class="intro">
-        Technical writer specializing in developer documentation, API content, and product guides.
-        I focus on clear structure and explanations that make software easier to understand and use.
+        Technical writer focused on developer documentation, API content, and product documentation.
       </p>
-      <div class="header-links">
-        <a href="#work">View work</a>
+      <p class="intro-secondary">
+        I create clear, structured content that helps people understand software and use it with confidence.
+      </p>
+
+      <nav class="header-links" aria-label="Primary">
+        <a href="#work">View samples</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
-      </div>
+      </nav>
     </div>
   </header>
 
-  <main>
-    <section class="section" id="about">
+  <main id="main">
+    <section class="section" id="about" aria-labelledby="about-heading">
       <div class="container narrow">
-        <h2>About</h2>
+        <h2 id="about-heading">About</h2>
         <p>
           I’m a Senior Technical Writer and Knowledge Architect with experience creating documentation
           for SaaS platforms, developer portals, enterprise software, and IT products.
-          My work spans developer documentation, API content, knowledge bases, release notes,
-          onboarding flows, and documentation architecture.
         </p>
         <p>
-          I’ve worked with cross-functional teams including developers, architects, QA, product managers,
-          and support teams to turn technical systems and workflows into content that is clear, useful,
-          and maintainable.
+          My work spans developer documentation, API content, help center articles, release notes,
+          onboarding materials, knowledge bases, and documentation architecture.
+        </p>
+        <p>
+          I work closely with developers, architects, QA, product managers, and support teams to turn
+          technical systems and workflows into content that is clear, useful, and maintainable.
         </p>
       </div>
     </section>
 
-    <section class="section alt" id="strengths">
+    <section class="section alt" id="strengths" aria-labelledby="strengths-heading">
       <div class="container">
-        <h2>Focus areas</h2>
-        <ul class="card-grid">
+        <h2 id="strengths-heading">Focus areas</h2>
+        <ul class="card-grid" role="list">
           <li class="card">
             <h3>Developer documentation</h3>
             <p>API guides, technical workflows, examples, and developer-facing product content.</p>
@@ -62,150 +85,138 @@
       </div>
     </section>
 
-    <section class="section" id="work">
-  <div class="container">
-    <h2>Selected samples</h2>
-    <p class="section-intro">
-      Most of my work is created for internal teams or restricted products. The examples below show a mix of
-      publicly available content and shared samples that reflect the kind of documentation I work on most often.
-    </p>
+    <section class="section" id="work" aria-labelledby="work-heading">
+      <div class="container">
+        <h2 id="work-heading">Selected samples</h2>
+        <p class="section-intro">
+          Most of my work is created for internal teams or restricted products. The examples below show a mix of
+          publicly available content and shared samples that reflect the kind of documentation I work on most often.
+        </p>
 
-    <article class="sample">
-      <div class="sample-header">
-        <div>
-          <h3>Release notes</h3>
-          <p class="meta">Mews · Product updates</p>
-        </div>
-        <a class="sample-link" href="https://releases.mews.com/en/meet-the-new-way-to-create-reservations-directly-from-the-timeline" target="_blank" rel="noopener noreferrer">Open sample</a>
-      </div>
-      <p>
-        Public release notes for Mews Operations. This example reflects my work on product updates,
-        change communication, and user-facing release content for operational features.
-      </p>
-    </article>
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h3>Release notes</h3>
+              <p class="meta">Mews · Product updates</p>
+            </div>
+            <a class="sample-link" href="https://releases.mews.com/en/save-time-with-improved-billing-automation-for-mews-operations" target="_blank" rel="noopener noreferrer">Open release notes sample</a>
+          </div>
+          <p>
+            Public release notes for Mews Operations. This example reflects work on product updates,
+            change communication, and user-facing release content for operational features.
+          </p>
+        </article>
 
-    <article class="sample">
-      <div class="sample-header">
-        <div>
-          <h3>Documentation hub</h3>
-          <p class="meta">Mews · Help center structure</p>
-        </div>
-        <a class="sample-link" href="https://help.mews.com/s/topic/0TOQC000000pMxl4AE/mews-events" target="_blank" rel="noopener noreferrer">Open sample</a>
-      </div>
-      <p>
-        Public documentation hub for Mews Events. This sample shows content organization, navigation,
-        and documentation structure for a product area with multiple user tasks and workflows.
-      </p>
-    </article>
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h3>Documentation hub</h3>
+              <p class="meta">Mews · Help center structure</p>
+            </div>
+            <a class="sample-link" href="https://help.mews.com/s/topic/0TOQC000000pMxl4AE/mews-events" target="_blank" rel="noopener noreferrer">Open documentation hub</a>
+          </div>
+          <p>
+            Public documentation hub for Mews Events. This sample shows content organization, navigation,
+            and documentation structure for a product area with multiple user tasks and workflows.
+          </p>
+        </article>
 
-    <article class="sample">
-      <div class="sample-header">
-        <div>
-          <h3>Help center article</h3>
-          <p class="meta">Mews · Workflow documentation</p>
-        </div>
-        <a class="sample-link" href="https://help.mews.com/s/article/generating-and-uploading-the-police-customer-profiles-report-for-catalonia-in-mews-operations?language=en_US" target="_blank" rel="noopener noreferrer">Open sample</a>
-      </div>
-      <p>
-        A workflow-focused help article for Mews Operations. It shows task-based writing for users working
-        with regional reporting requirements in a live product environment.
-      </p>
-    </article>
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h3>Help center article</h3>
+              <p class="meta">Mews · Workflow documentation</p>
+            </div>
+            <a class="sample-link" href="https://help.mews.com/s/article/generating-and-uploading-the-police-customer-profiles-report-for-catalonia-in-mews-operations?language=en_US" target="_blank" rel="noopener noreferrer">Open help article sample</a>
+          </div>
+          <p>
+            A workflow-focused help article for Mews Operations. It shows task-based writing for users
+            working with regional reporting requirements in a live product environment.
+          </p>
+        </article>
 
-    <article class="sample">
-      <div class="sample-header">
-        <div>
-          <h3>Reference article</h3>
-          <p class="meta">Mews · Tax-related guidance</p>
-        </div>
-        <a class="sample-link" href="https://help.mews.com/s/article/handling-tax-rate-changes" target="_blank" rel="noopener noreferrer">Open sample</a>
-      </div>
-      <p>
-        A reference-style help article covering tax rate changes in Mews Operations. This example reflects
-        documentation written to support accuracy, self-service, and time-sensitive operational updates.
-      </p>
-    </article>
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h3>Reference article</h3>
+              <p class="meta">Mews · Tax-related guidance</p>
+            </div>
+            <a class="sample-link" href="https://help.mews.com/s/article/handling-tax-rate-changes" target="_blank" rel="noopener noreferrer">Open reference article</a>
+          </div>
+          <p>
+            A reference-style help article covering tax rate changes in Mews Operations. This example reflects
+            documentation written to support accuracy, self-service, and time-sensitive operational updates.
+          </p>
+        </article>
 
-    <article class="sample">
-      <div class="sample-header">
-        <div>
-          <h3>Administrator guide workflow</h3>
-          <p class="meta">Jamf · Admin documentation</p>
-        </div>
-        <a class="sample-link" href="https://docs.jamf.com/10.29.0/jamf-pro/administrator-guide/Cloud_Identity_Providers.html" target="_blank" rel="noopener noreferrer">Open sample</a>
-      </div>
-      <p>
-        Admin-facing documentation from Jamf Pro. This sample represents workflow and configuration
-        content for technical users managing Apple device environments at scale.
-      </p>
-    </article>
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h3>Administrator guide workflow</h3>
+              <p class="meta">Jamf · Admin documentation</p>
+            </div>
+            <a class="sample-link" href="https://docs.jamf.com/10.29.0/jamf-pro/administrator-guide/Cloud_Identity_Providers.html" target="_blank" rel="noopener noreferrer">Open admin guide sample</a>
+          </div>
+          <p>
+            Admin-facing documentation from Jamf Pro. This sample represents workflow and configuration
+            content for technical users managing Apple device environments at scale.
+          </p>
+        </article>
 
-    <article class="sample">
-      <div class="sample-header">
-        <div>
-          <h3>Reference page</h3>
-          <p class="meta">SmartBear · Security documentation</p>
-        </div>
-        <a class="sample-link" href="https://support.smartbear.com/administration/docs/en/smartbear-license-management/security.html" target="_blank" rel="noopener noreferrer">Open sample</a>
-      </div>
-      <p>
-        A reference-style security page. I included this sample because it aligns well with my experience
-        documenting technical systems, structured information, and admin-facing content.
-      </p>
-    </article>
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h3>API tutorial sample</h3>
+              <p class="meta">Shared sample · PDF</p>
+            </div>
+            <a class="sample-link" href="https://files.journoportfolio.com/users/187741/uploads/1e6f4a78-ee0c-4e65-8be8-5c213261a2ca.pdf" target="_blank" rel="noopener noreferrer">Open API tutorial sample</a>
+          </div>
+          <p>
+            A shared API tutorial sample showing developer-facing instructional content. It complements my
+            experience in API documentation, developer portals, and integration-focused writing.
+          </p>
+        </article>
 
-    <article class="sample">
-      <div class="sample-header">
-        <div>
-          <h3>API tutorial sample</h3>
-          <p class="meta">Shared sample · PDF</p>
-        </div>
-        <a class="sample-link" href="https://files.journoportfolio.com/users/187741/uploads/1e6f4a78-ee0c-4e65-8be8-5c213261a2ca.pdf" target="_blank" rel="noopener noreferrer">Open sample</a>
-      </div>
-      <p>
-        A shared API tutorial sample showing developer-facing instructional content. It complements my CV
-        experience in API documentation, developer portals, and integration-focused writing.
-      </p>
-    </article>
-
-    <article class="sample">
-      <div class="sample-header">
-        <div>
-          <h3>API demo clip</h3>
-          <p class="meta">Video sample · API management</p>
-        </div>
-        <a class="sample-link" href="https://youtu.be/iQ_Vvwy58LU" target="_blank" rel="noopener noreferrer">Open sample</a>
-      </div>
-      <p>
-        A short demo clip related to API management. I’d keep this as a supporting sample rather than a lead item,
-        but it adds range to the portfolio and shows comfort with technical product communication beyond static docs.
-      </p>
-    </article>
-
-    <p class="note">
-      Some samples are publicly available; others are shared as representative examples. If a resource does not load properly, refresh the target page.
-    </p>
-  </div>
-</section>
-
-    <section class="section alt" id="skills">
-      <div class="container narrow">
-        <h2>Tools and methods</h2>
-        <p>
-          Jira, Confluence, Git/GitHub, Swagger/OpenAPI, SharePoint, static site generators, Markdown,
-          HTML, CSS, JSON, XML, Agile workflows, content audits, documentation architecture, and knowledge transfer.
+        <p class="note">
+          Some samples are publicly available, while others are shared as representative examples.
+          If a resource does not load properly, refresh the target page.
         </p>
       </div>
     </section>
 
-    <section class="section" id="contact">
+    <section class="section alt" id="tools" aria-labelledby="tools-heading">
       <div class="container narrow">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:piotr.oszenda@outlook.com">piotr.oszenda@outlook.com</a></p>
+        <h2 id="tools-heading">Tools and methods</h2>
+        <p>
+          I work with Jira, Confluence, Git and GitHub, Swagger and OpenAPI, SharePoint, static site generators,
+          Markdown, HTML, CSS, JSON, XML, and Agile workflows.
+        </p>
+        <p>
+          My projects often involve content audits, documentation architecture, workflow validation,
+          cross-functional collaboration, and knowledge transfer across distributed teams.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-heading">
+      <div class="container narrow">
+        <h2 id="contact-heading">Contact</h2>
+        <p>
+          Email:
+          <a href="mailto:piotr.oszenda@outlook.com">piotr.oszenda@outlook.com</a>
+        </p>
         <p>Location: Gijón, Spain</p>
-        <p><a href="https://h7.cl/1oYVQ" target="_blank" rel="noopener noreferrer">Professional profile</a></p>
+        <p>
+          <a href="https://h7.cl/1oYVQ" target="_blank" rel="noopener noreferrer">Professional profile</a>
+        </p>
       </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container narrow">
+      <p>Piotr Oszenda — Technical Writing Portfolio</p>
+    </div>
+  </footer>
 </body>
 </html>
