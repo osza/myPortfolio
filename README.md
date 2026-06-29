@@ -17,7 +17,7 @@ I’m a Senior Technical Writer and Knowledge Architect with experience document
 
 ## Live site
 
-GitHub Pages
+[GitHub Pages](https://osza.github.io/myPortfolio/)
 
 ## Contact
 
