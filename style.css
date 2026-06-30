@@ -101,6 +101,80 @@ button {
   margin: 0 auto;
 }
 
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus {
+  left: var(--space-4);
+  top: var(--space-4);
+  width: auto;
+  height: auto;
+  padding: var(--space-3) var(--space-4);
+  background: var(--code-bg);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  z-index: 1000;
+  overflow: visible;
+}
+
+.site-header {
+  padding: var(--space-12) 0 var(--space-10);
+}
+
+.site-header h1 {
+  margin: 0;
+  max-width: 14ch;
+  font-size: clamp(2.4rem, 5vw, 4.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.intro-secondary {
+  margin: var(--space-6) 0 0;
+  max-width: 62ch;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.header-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.header-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0.7rem var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--surface-soft);
+  color: var(--text);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.header-links a:hover {
+  background: var(--accent-soft);
+  border-color: rgba(15, 118, 110, 0.22);
+  color: var(--accent-dark);
+}
+
 .hero,
 .section {
   padding: var(--space-12) 0;
@@ -179,28 +253,6 @@ button {
   margin: var(--space-2) 0 0;
   color: var(--text-faint);
   font-size: var(--text-sm);
-}
-
-.skip-link {
-  position: absolute;
-  left: -9999px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
-.skip-link:focus {
-  left: var(--space-4);
-  top: var(--space-4);
-  width: auto;
-  height: auto;
-  padding: var(--space-3) var(--space-4);
-  background: var(--code-bg);
-  color: #ffffff;
-  border-radius: var(--radius-md);
-  z-index: 1000;
-  overflow: visible;
 }
 
 .sample p {
@@ -338,6 +390,10 @@ button {
 }
 
 @media (max-width: 680px) {
+  .site-header {
+    padding: var(--space-10) 0 var(--space-8);
+  }
+
   .hero,
   .section {
     padding: var(--space-10) 0;
@@ -352,6 +408,7 @@ button {
     align-items: stretch;
   }
 
+  .header-links a,
   .sample-link {
     width: 100%;
   }
