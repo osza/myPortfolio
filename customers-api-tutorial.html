@@ -78,13 +78,25 @@
           response returns a permanent <code>id</code> that you use in later
           requests.
         </p>
-
         <div class="code-switcher" data-code-group>
-          <div class="code-tabs" role="tablist" aria-label="Code examples for creating a customer">
-            <button class="code-tab is-active" type="button" data-code-tab="curl">cURL</button>
-            <button class="code-tab" type="button" data-code-tab="javascript">JavaScript</button>
+          <div class="code-tabs" aria-label="Code examples for creating a customer">
+            <button
+              class="code-tab is-active"
+              type="button"
+              data-code-tab="curl"
+              aria-pressed="true"
+            >
+              cURL
+            </button>
+            <button
+              class="code-tab"
+              type="button"
+              data-code-tab="javascript"
+              aria-pressed="false"
+            >
+              JavaScript
+            </button>
           </div>
-
           <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X POST "{base_url}/api/1.0/customers" \
 -H "Authorization: Bearer {access_token}" \
 -H "Content-Type: application/json" \
@@ -92,7 +104,6 @@
   "full_name": "John Doe",
   "email": "john@doe.com"
 }'</code></pre>
-
           <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers`, {
   method: "POST",
   headers: {
@@ -106,7 +117,6 @@
 });
 const customer = await response.json();</code></pre>
         </div>
-
         <p>Example response:</p>
         <pre><code>{
   "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
@@ -128,16 +138,27 @@ const customer = await response.json();</code></pre>
           Send a <code>GET</code> request to retrieve the customer record by
           using the <code>id</code> returned in the previous step.
         </p>
-
         <div class="code-switcher" data-code-group>
-          <div class="code-tabs" role="tablist" aria-label="Code examples for retrieving a customer">
-            <button class="code-tab is-active" type="button" data-code-tab="curl">cURL</button>
-            <button class="code-tab" type="button" data-code-tab="javascript">JavaScript</button>
+          <div class="code-tabs" aria-label="Code examples for retrieving a customer">
+            <button
+              class="code-tab is-active"
+              type="button"
+              data-code-tab="curl"
+              aria-pressed="true"
+            >
+              cURL
+            </button>
+            <button
+              class="code-tab"
+              type="button"
+              data-code-tab="javascript"
+              aria-pressed="false"
+            >
+              JavaScript
+            </button>
           </div>
-
           <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X GET "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
 -H "Authorization: Bearer {access_token}"</code></pre>
-
           <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(
   `${baseUrl}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh`,
   {
@@ -149,7 +170,6 @@ const customer = await response.json();</code></pre>
 );
 const customer = await response.json();</code></pre>
         </div>
-
         <p>Example response:</p>
         <pre><code>{
   "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
@@ -172,13 +192,25 @@ const customer = await response.json();</code></pre>
           customer record. In this example, you update the customer's name and
           add a business name.
         </p>
-
         <div class="code-switcher" data-code-group>
-          <div class="code-tabs" role="tablist" aria-label="Code examples for updating a customer">
-            <button class="code-tab is-active" type="button" data-code-tab="curl">cURL</button>
-            <button class="code-tab" type="button" data-code-tab="javascript">JavaScript</button>
+          <div class="code-tabs" aria-label="Code examples for updating a customer">
+            <button
+              class="code-tab is-active"
+              type="button"
+              data-code-tab="curl"
+              aria-pressed="true"
+            >
+              cURL
+            </button>
+            <button
+              class="code-tab"
+              type="button"
+              data-code-tab="javascript"
+              aria-pressed="false"
+            >
+              JavaScript
+            </button>
           </div>
-
           <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X PATCH "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
 -H "Authorization: Bearer {access_token}" \
 -H "Content-Type: application/json" \
@@ -186,7 +218,6 @@ const customer = await response.json();</code></pre>
   "full_name": "John Smith",
   "business_name": "Blahblah Ltd"
 }'</code></pre>
-
           <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(
   `${baseUrl}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh`,
   {
@@ -203,7 +234,6 @@ const customer = await response.json();</code></pre>
 );
 const customer = await response.json();</code></pre>
         </div>
-
         <p>Example response:</p>
         <pre><code>{
   "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
@@ -213,7 +243,6 @@ const customer = await response.json();</code></pre>
   "created_at": "2022-06-13T12:03:39.979397Z",
   "updated_at": "2022-06-13T12:10:13.979397Z"
 }</code></pre>
-
         <p>
           Only the fields included in the request are updated. Other fields,
           such as <code>email</code>, remain unchanged.
@@ -228,16 +257,27 @@ const customer = await response.json();</code></pre>
           </div>
         </div>
         <p>Send a <code>DELETE</code> request to remove the customer record.</p>
-
         <div class="code-switcher" data-code-group>
-          <div class="code-tabs" role="tablist" aria-label="Code examples for deleting a customer">
-            <button class="code-tab is-active" type="button" data-code-tab="curl">cURL</button>
-            <button class="code-tab" type="button" data-code-tab="javascript">JavaScript</button>
+          <div class="code-tabs" aria-label="Code examples for deleting a customer">
+            <button
+              class="code-tab is-active"
+              type="button"
+              data-code-tab="curl"
+              aria-pressed="true"
+            >
+              cURL
+            </button>
+            <button
+              class="code-tab"
+              type="button"
+              data-code-tab="javascript"
+              aria-pressed="false"
+            >
+              JavaScript
+            </button>
           </div>
-
           <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X DELETE "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
 -H "Authorization: Bearer {access_token}"</code></pre>
-
           <pre class="code-panel" data-code-panel="javascript"><code>await fetch(
   `${baseUrl}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh`,
   {
@@ -248,7 +288,6 @@ const customer = await response.json();</code></pre>
   }
 );</code></pre>
         </div>
-
         <p>A successful request returns:</p>
         <pre><code>204 No Content</code></pre>
         <p>This confirms that the customer record has been deleted.</p>
@@ -298,7 +337,9 @@ const customer = await response.json();</code></pre>
           const selected = tab.dataset.codeTab;
 
           tabs.forEach((item) => {
-            item.classList.toggle("is-active", item === tab);
+            const isSelected = item === tab;
+            item.classList.toggle("is-active", isSelected);
+            item.setAttribute("aria-pressed", String(isSelected));
           });
 
           panels.forEach((panel) => {
