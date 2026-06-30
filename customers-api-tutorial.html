@@ -35,13 +35,10 @@
           </div>
         </div>
         <p>
-          This is a sample tutorial created for portfolio purposes. The API,
-          URLs, and example data are fictional and are included only to
-          demonstrate structure, flow, and writing style.
+          This tutorial demonstrates a simple end‑to‑end workflow for managing customer data with the Customers API. The API, URLs, and example data are fictional and are provided only to illustrate structure, flow, and writing style.
         </p>
         <p>
-          In this tutorial, you create, retrieve, update, and delete a customer
-          record by using the <code>/api/1.0/customers</code> endpoint and the
+          In the following steps, you create, retrieve, update, and delete a customer record by using the <code>/api/1.0/customers</code> endpoint and the
           permanent customer <code>id</code> returned by the API.
         </p>
       </article>
@@ -53,12 +50,12 @@
             <p class="meta">Requirements</p>
           </div>
         </div>
-        <p>Make sure you have the following:</p>
+        <p>Before you begin, make sure you have:</p>
         <ul>
-          <li>An API access token.</li>
-          <li>Your environment base URL.</li>
+          <li>An API access token with permission to call the Customers API.</li>
+          <li>The base URL for your environment (for example, sandbox or production).</li>
           <li>A tool for sending HTTP requests, such as <code>curl</code> or Postman.</li>
-          <li>Access to the <code>/api/1.0/customers</code> endpoint.</li>
+          <li>Network access to the <code>/api/1.0/customers</code> endpoint.</li>
         </ul>
         <p>
           In the examples below, replace <code>{base_url}</code> and
@@ -74,7 +71,7 @@
           </div>
         </div>
         <p>
-          Send a <code>POST</code> request to create a new customer record. The
+          Use a <code>POST</code> request to create a new customer record. The
           response returns a permanent <code>id</code> that you use in later
           requests.
         </p>
@@ -135,7 +132,7 @@ const customer = await response.json();</code></pre>
           </div>
         </div>
         <p>
-          Send a <code>GET</code> request to retrieve the customer record by
+          Use a <code>GET</code> request to retrieve the customer record by
           using the <code>id</code> returned in the previous step.
         </p>
         <div class="code-switcher" data-code-group>
@@ -188,8 +185,8 @@ const customer = await response.json();</code></pre>
           </div>
         </div>
         <p>
-          Send a <code>PATCH</code> request to update selected fields on the
-          customer record. In this example, you update the customer's name and
+          Use a <code>PATCH</code> request to update selected fields on the
+          customer record. In this example, you change the customer's name and
           add a business name.
         </p>
         <div class="code-switcher" data-code-group>
@@ -244,7 +241,7 @@ const customer = await response.json();</code></pre>
   "updated_at": "2022-06-13T12:10:13.979397Z"
 }</code></pre>
         <p>
-          Only the fields included in the request are updated. Other fields,
+          Only the fields included in the request body are updated. Other fields,
           such as <code>email</code>, remain unchanged.
         </p>
       </article>
@@ -256,7 +253,7 @@ const customer = await response.json();</code></pre>
             <p class="meta">DELETE /api/1.0/customers/{id}</p>
           </div>
         </div>
-        <p>Send a <code>DELETE</code> request to remove the customer record.</p>
+        <p>Use a <code>DELETE</code> request to remove the customer record.</p>
         <div class="code-switcher" data-code-group>
           <div class="code-tabs" aria-label="Code examples for deleting a customer">
             <button
@@ -290,7 +287,7 @@ const customer = await response.json();</code></pre>
         </div>
         <p>A successful request returns:</p>
         <pre><code>204 No Content</code></pre>
-        <p>This confirms that the customer record has been deleted.</p>
+        <p>A <code>204 No Content</code> response indicates that the customer record was deleted successfully.</p>
       </article>
 
       <article class="sample">
@@ -302,7 +299,7 @@ const customer = await response.json();</code></pre>
         </div>
         <p>
           You have created a customer, retrieved it by <code>id</code>, updated
-          selected fields, and deleted the record. This is a basic end-to-end
+          selected fields, and deleted the record. This completes a basic end-to-end
           workflow for managing customer data with the Customers API.
         </p>
       </article>
@@ -317,10 +314,10 @@ const customer = await response.json();</code></pre>
         <ul>
           <li>Use the same customer <code>id</code> throughout the workflow.</li>
           <li>Include the <code>Authorization</code> header in every request.</li>
-          <li>Use <code>Content-Type: application/json</code> for requests with a body.</li>
+          <li>Use <code>Content-Type: application/json</code> for requests with a request body.</li>
           <li>
             Use <code>PATCH</code> when you want to update selected fields
-            instead of replacing the full object.
+            instead of replacing the entire object.
           </li>
         </ul>
       </article>
