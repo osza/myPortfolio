@@ -335,6 +335,44 @@ p {
   }
 }
 
+.code-switcher {
+  margin: 1rem 0;
+}
+
+.code-tabs {
+  display: inline-flex;
+  gap: 0.4rem;
+  padding: 0.3rem;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.04);
+  margin-bottom: 0.75rem;
+}
+
+.code-tab {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.code-tab.is-active {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.code-panel {
+  display: none;
+}
+
+.code-panel.is-active {
+  display: block;
+}
+
 @media (max-width: 900px) {
   .card-grid {
     grid-template-columns: 1fr;
