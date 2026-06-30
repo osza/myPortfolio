@@ -16,8 +16,8 @@
       <p class="eyebrow">API tutorial</p>
       <h1>Manage a customer record with the Customers API</h1>
       <p class="lede">
-        A sample developer tutorial showing a simple customer lifecycle workflow across create, retrieve,
-        update, and delete operations.
+        A sample developer tutorial showing a simple customer lifecycle workflow across create,
+        retrieve, update, and delete operations.
       </p>
 
       <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
@@ -34,12 +34,13 @@
           </div>
         </div>
         <p>
-          This is a sample tutorial created for portfolio purposes. The API, URLs, and example data are
-          fictional and are included only to demonstrate structure, flow, and writing style.
+          This is a sample tutorial created for portfolio purposes. The API, URLs, and example data
+          are fictional and are included only to demonstrate structure, flow, and writing style.
         </p>
         <p>
           In this tutorial, you create, retrieve, update, and delete a customer record by using the
-          <code>/api/1.0/customers</code> endpoint and the permanent customer <code>id</code> returned by the API.
+          <code>/api/1.0/customers</code> endpoint and the permanent customer <code>id</code>
+          returned by the API.
         </p>
       </article>
 
@@ -57,7 +58,10 @@
           <li>A tool for sending HTTP requests, such as <code>curl</code> or Postman.</li>
           <li>Access to the <code>/api/1.0/customers</code> endpoint.</li>
         </ul>
-        <p>In the examples below, replace <code>{base_url}</code> and <code>{access_token}</code> with your own values.</p>
+        <p>
+          In the examples below, replace <code>{base_url}</code> and
+          <code>{access_token}</code> with your own values.
+        </p>
       </article>
 
       <article class="sample">
@@ -68,18 +72,41 @@
           </div>
         </div>
         <p>
-          Send a <code>POST</code> request to create a new customer record. The response returns a permanent
-          <code>id</code> that you use in later requests.
+          Send a <code>POST</code> request to create a new customer record. The response returns
+          a permanent <code>id</code> that you use in later requests.
         </p>
-<pre><code>curl -X POST "{base_url}/api/1.0/customers" \
+
+        <div class="code-switcher" data-code-group>
+          <div class="code-tabs" role="tablist" aria-label="Code examples for creating a customer">
+            <button class="code-tab is-active" type="button" data-code-tab="curl">cURL</button>
+            <button class="code-tab" type="button" data-code-tab="javascript">JavaScript</button>
+          </div>
+
+          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X POST "{base_url}/api/1.0/customers" \
   -H "Authorization: Bearer {access_token}" \
   -H "Content-Type: application/json" \
   -d '{
     "full_name": "John Doe",
     "email": "john@doe.com"
   }'</code></pre>
+
+          <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers`, {
+  method: "POST",
+  headers: {
+    Authorization: `Bearer ${accessToken}`,
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    full_name: "John Doe",
+    email: "john@doe.com"
+  })
+});
+
+const customer = await response.json();</code></pre>
+        </div>
+
         <p>Example response:</p>
-<pre><code>{
+        <pre><code>{
   "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
   "full_name": "John Doe",
   "email": "john@doe.com",
@@ -96,13 +123,34 @@
           </div>
         </div>
         <p>
-          Send a <code>GET</code> request to retrieve the customer record by using the <code>id</code>
-          returned in the previous step.
+          Send a <code>GET</code> request to retrieve the customer record by using the
+          <code>id</code> returned in the previous step.
         </p>
-<pre><code>curl -X GET "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
+
+        <div class="code-switcher" data-code-group>
+          <div class="code-tabs" role="tablist" aria-label="Code examples for retrieving a customer">
+            <button class="code-tab is-active" type="button" data-code-tab="curl">cURL</button>
+            <button class="code-tab" type="button" data-code-tab="javascript">JavaScript</button>
+          </div>
+
+          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X GET "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
   -H "Authorization: Bearer {access_token}"</code></pre>
+
+          <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(
+  `${baseUrl}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh`,
+  {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  }
+);
+
+const customer = await response.json();</code></pre>
+        </div>
+
         <p>Example response:</p>
-<pre><code>{
+        <pre><code>{
   "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
   "full_name": "John Doe",
   "email": "john@doe.com",
@@ -119,18 +167,44 @@
           </div>
         </div>
         <p>
-          Send a <code>PATCH</code> request to update selected fields on the customer record. In this
-          example, you update the customer's name and add a business name.
+          Send a <code>PATCH</code> request to update selected fields on the customer record.
+          In this example, you update the customer's name and add a business name.
         </p>
-<pre><code>curl -X PATCH "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
+
+        <div class="code-switcher" data-code-group>
+          <div class="code-tabs" role="tablist" aria-label="Code examples for updating a customer">
+            <button class="code-tab is-active" type="button" data-code-tab="curl">cURL</button>
+            <button class="code-tab" type="button" data-code-tab="javascript">JavaScript</button>
+          </div>
+
+          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X PATCH "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
   -H "Authorization: Bearer {access_token}" \
   -H "Content-Type: application/json" \
   -d '{
     "full_name": "John Smith",
     "business_name": "Blahblah Ltd"
   }'</code></pre>
+
+          <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(
+  `${baseUrl}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh`,
+  {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      full_name: "John Smith",
+      business_name: "Blahblah Ltd"
+    })
+  }
+);
+
+const customer = await response.json();</code></pre>
+        </div>
+
         <p>Example response:</p>
-<pre><code>{
+        <pre><code>{
   "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
   "full_name": "John Smith",
   "business_name": "Blahblah Ltd",
@@ -138,9 +212,10 @@
   "created_at": "2022-06-13T12:03:39.979397Z",
   "updated_at": "2022-06-13T12:10:13.979397Z"
 }</code></pre>
+
         <p>
-          Only the fields included in the request are updated. Other fields, such as <code>email</code>,
-          remain unchanged.
+          Only the fields included in the request are updated. Other fields, such as
+          <code>email</code>, remain unchanged.
         </p>
       </article>
 
@@ -154,10 +229,29 @@
         <p>
           Send a <code>DELETE</code> request to remove the customer record.
         </p>
-<pre><code>curl -X DELETE "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
+
+        <div class="code-switcher" data-code-group>
+          <div class="code-tabs" role="tablist" aria-label="Code examples for deleting a customer">
+            <button class="code-tab is-active" type="button" data-code-tab="curl">cURL</button>
+            <button class="code-tab" type="button" data-code-tab="javascript">JavaScript</button>
+          </div>
+
+          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X DELETE "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
   -H "Authorization: Bearer {access_token}"</code></pre>
+
+          <pre class="code-panel" data-code-panel="javascript"><code>await fetch(
+  `${baseUrl}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh`,
+  {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  }
+);</code></pre>
+        </div>
+
         <p>A successful request returns:</p>
-<pre><code>204 No Content</code></pre>
+        <pre><code>204 No Content</code></pre>
         <p>This confirms that the customer record has been deleted.</p>
       </article>
 
@@ -169,8 +263,9 @@
           </div>
         </div>
         <p>
-          You have created a customer, retrieved it by <code>id</code>, updated selected fields, and deleted
-          the record. This is a basic end-to-end workflow for managing customer data with the Customers API.
+          You have created a customer, retrieved it by <code>id</code>, updated selected fields,
+          and deleted the record. This is a basic end-to-end workflow for managing customer data
+          with the Customers API.
         </p>
       </article>
 
@@ -190,5 +285,29 @@
       </article>
     </section>
   </main>
+
+  <script>
+    document.querySelectorAll("[data-code-group]").forEach((group) => {
+      const tabs = group.querySelectorAll("[data-code-tab]");
+      const panels = group.querySelectorAll("[data-code-panel]");
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const selected = tab.dataset.codeTab;
+
+          tabs.forEach((item) => {
+            item.classList.toggle("is-active", item === tab);
+          });
+
+          panels.forEach((panel) => {
+            panel.classList.toggle(
+              "is-active",
+              panel.dataset.codePanel === selected
+            );
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>
