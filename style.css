@@ -215,6 +215,10 @@ button {
   color: var(--text-soft);
 }
 
+#work .lede {
+  max-width: 78ch;
+}
+
 .section-title {
   margin: 0 0 var(--space-8);
   font-size: var(--text-2xl);
@@ -285,13 +289,6 @@ button {
 
 .sample p + p {
   margin-top: var(--space-4);
-}
-
-.sample-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  align-items: center;
 }
 
 .sample-link {
