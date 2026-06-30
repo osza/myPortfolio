@@ -11,16 +11,17 @@
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <main class="container">
-    <section class="hero" style="padding-bottom: 2rem;">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <main id="main" class="container">
+    <section class="hero hero--compact">
       <p class="eyebrow">API tutorial</p>
       <h1>Manage a customer record with the Customers API</h1>
       <p class="lede">
-        A sample developer tutorial showing a simple customer lifecycle workflow across create,
-        retrieve, update, and delete operations.
+        A sample developer tutorial showing a simple customer lifecycle workflow
+        across create, retrieve, update, and delete operations.
       </p>
-
-      <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+      <div class="hero-links">
         <a class="sample-link" href="./index.html#work">Back to portfolio</a>
       </div>
     </section>
@@ -34,13 +35,14 @@
           </div>
         </div>
         <p>
-          This is a sample tutorial created for portfolio purposes. The API, URLs, and example data
-          are fictional and are included only to demonstrate structure, flow, and writing style.
+          This is a sample tutorial created for portfolio purposes. The API,
+          URLs, and example data are fictional and are included only to
+          demonstrate structure, flow, and writing style.
         </p>
         <p>
-          In this tutorial, you create, retrieve, update, and delete a customer record by using the
-          <code>/api/1.0/customers</code> endpoint and the permanent customer <code>id</code>
-          returned by the API.
+          In this tutorial, you create, retrieve, update, and delete a customer
+          record by using the <code>/api/1.0/customers</code> endpoint and the
+          permanent customer <code>id</code> returned by the API.
         </p>
       </article>
 
@@ -72,8 +74,9 @@
           </div>
         </div>
         <p>
-          Send a <code>POST</code> request to create a new customer record. The response returns
-          a permanent <code>id</code> that you use in later requests.
+          Send a <code>POST</code> request to create a new customer record. The
+          response returns a permanent <code>id</code> that you use in later
+          requests.
         </p>
 
         <div class="code-switcher" data-code-group>
@@ -83,12 +86,12 @@
           </div>
 
           <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X POST "{base_url}/api/1.0/customers" \
-  -H "Authorization: Bearer {access_token}" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "full_name": "John Doe",
-    "email": "john@doe.com"
-  }'</code></pre>
+-H "Authorization: Bearer {access_token}" \
+-H "Content-Type: application/json" \
+-d '{
+  "full_name": "John Doe",
+  "email": "john@doe.com"
+}'</code></pre>
 
           <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers`, {
   method: "POST",
@@ -101,7 +104,6 @@
     email: "john@doe.com"
   })
 });
-
 const customer = await response.json();</code></pre>
         </div>
 
@@ -123,8 +125,8 @@ const customer = await response.json();</code></pre>
           </div>
         </div>
         <p>
-          Send a <code>GET</code> request to retrieve the customer record by using the
-          <code>id</code> returned in the previous step.
+          Send a <code>GET</code> request to retrieve the customer record by
+          using the <code>id</code> returned in the previous step.
         </p>
 
         <div class="code-switcher" data-code-group>
@@ -134,7 +136,7 @@ const customer = await response.json();</code></pre>
           </div>
 
           <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X GET "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
-  -H "Authorization: Bearer {access_token}"</code></pre>
+-H "Authorization: Bearer {access_token}"</code></pre>
 
           <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(
   `${baseUrl}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh`,
@@ -145,7 +147,6 @@ const customer = await response.json();</code></pre>
     }
   }
 );
-
 const customer = await response.json();</code></pre>
         </div>
 
@@ -167,8 +168,9 @@ const customer = await response.json();</code></pre>
           </div>
         </div>
         <p>
-          Send a <code>PATCH</code> request to update selected fields on the customer record.
-          In this example, you update the customer's name and add a business name.
+          Send a <code>PATCH</code> request to update selected fields on the
+          customer record. In this example, you update the customer's name and
+          add a business name.
         </p>
 
         <div class="code-switcher" data-code-group>
@@ -178,12 +180,12 @@ const customer = await response.json();</code></pre>
           </div>
 
           <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X PATCH "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
-  -H "Authorization: Bearer {access_token}" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "full_name": "John Smith",
-    "business_name": "Blahblah Ltd"
-  }'</code></pre>
+-H "Authorization: Bearer {access_token}" \
+-H "Content-Type: application/json" \
+-d '{
+  "full_name": "John Smith",
+  "business_name": "Blahblah Ltd"
+}'</code></pre>
 
           <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(
   `${baseUrl}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh`,
@@ -199,7 +201,6 @@ const customer = await response.json();</code></pre>
     })
   }
 );
-
 const customer = await response.json();</code></pre>
         </div>
 
@@ -214,8 +215,8 @@ const customer = await response.json();</code></pre>
 }</code></pre>
 
         <p>
-          Only the fields included in the request are updated. Other fields, such as
-          <code>email</code>, remain unchanged.
+          Only the fields included in the request are updated. Other fields,
+          such as <code>email</code>, remain unchanged.
         </p>
       </article>
 
@@ -226,9 +227,7 @@ const customer = await response.json();</code></pre>
             <p class="meta">DELETE /api/1.0/customers/{id}</p>
           </div>
         </div>
-        <p>
-          Send a <code>DELETE</code> request to remove the customer record.
-        </p>
+        <p>Send a <code>DELETE</code> request to remove the customer record.</p>
 
         <div class="code-switcher" data-code-group>
           <div class="code-tabs" role="tablist" aria-label="Code examples for deleting a customer">
@@ -237,7 +236,7 @@ const customer = await response.json();</code></pre>
           </div>
 
           <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X DELETE "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
-  -H "Authorization: Bearer {access_token}"</code></pre>
+-H "Authorization: Bearer {access_token}"</code></pre>
 
           <pre class="code-panel" data-code-panel="javascript"><code>await fetch(
   `${baseUrl}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh`,
@@ -263,9 +262,9 @@ const customer = await response.json();</code></pre>
           </div>
         </div>
         <p>
-          You have created a customer, retrieved it by <code>id</code>, updated selected fields,
-          and deleted the record. This is a basic end-to-end workflow for managing customer data
-          with the Customers API.
+          You have created a customer, retrieved it by <code>id</code>, updated
+          selected fields, and deleted the record. This is a basic end-to-end
+          workflow for managing customer data with the Customers API.
         </p>
       </article>
 
@@ -280,7 +279,10 @@ const customer = await response.json();</code></pre>
           <li>Use the same customer <code>id</code> throughout the workflow.</li>
           <li>Include the <code>Authorization</code> header in every request.</li>
           <li>Use <code>Content-Type: application/json</code> for requests with a body.</li>
-          <li>Use <code>PATCH</code> when you want to update selected fields instead of replacing the full object.</li>
+          <li>
+            Use <code>PATCH</code> when you want to update selected fields
+            instead of replacing the full object.
+          </li>
         </ul>
       </article>
     </section>
