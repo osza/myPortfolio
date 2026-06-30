@@ -69,6 +69,17 @@ svg {
   padding: var(--space-12) 0;
 }
 
+.hero--compact {
+  padding-bottom: var(--space-8);
+}
+
+.hero-links {
+  margin-top: var(--space-6);
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
 .eyebrow {
   margin: 0 0 var(--space-3);
   color: var(--accent-dark);
