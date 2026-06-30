@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customers API tutorial — Piotr Oszenda</title>
+  <meta
+    name="description"
+    content="Sample API tutorial showing how to create, retrieve, update, and delete a customer record."
+  />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="hero" style="padding-bottom: 2rem;">
+      <p class="eyebrow">API tutorial</p>
+      <h1>Manage a customer record with the Customers API</h1>
+      <p class="lede">
+        A sample developer tutorial showing a simple customer lifecycle workflow across create, retrieve,
+        update, and delete operations.
+      </p>
+
+      <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <a class="sample-link" href="./index.html#work">Back to portfolio</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>Overview</h2>
+            <p class="meta">Sample content · Fictional API</p>
+          </div>
+        </div>
+        <p>
+          This is a sample tutorial created for portfolio purposes. The API, URLs, and example data are
+          fictional and are included only to demonstrate structure, flow, and writing style.
+        </p>
+        <p>
+          In this tutorial, you create, retrieve, update, and delete a customer record by using the
+          <code>/api/1.0/customers</code> endpoint and the permanent customer <code>id</code> returned by the API.
+        </p>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>Before you start</h2>
+            <p class="meta">Requirements</p>
+          </div>
+        </div>
+        <p>Make sure you have the following:</p>
+        <ul>
+          <li>An API access token.</li>
+          <li>Your environment base URL.</li>
+          <li>A tool for sending HTTP requests, such as <code>curl</code> or Postman.</li>
+          <li>Access to the <code>/api/1.0/customers</code> endpoint.</li>
+        </ul>
+        <p>In the examples below, replace <code>{base_url}</code> and <code>{access_token}</code> with your own values.</p>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>1. Create a customer</h2>
+            <p class="meta">POST /api/1.0/customers</p>
+          </div>
+        </div>
+        <p>
+          Send a <code>POST</code> request to create a new customer record. The response returns a permanent
+          <code>id</code> that you use in later requests.
+        </p>
+<pre><code>curl -X POST "{base_url}/api/1.0/customers" \
+  -H "Authorization: Bearer {access_token}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "full_name": "John Doe",
+    "email": "john@doe.com"
+  }'</code></pre>
+        <p>Example response:</p>
+<pre><code>{
+  "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
+  "full_name": "John Doe",
+  "email": "john@doe.com",
+  "created_at": "2022-06-13T12:03:39.979397Z",
+  "updated_at": "2022-06-13T12:03:39.979397Z"
+}</code></pre>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>2. Retrieve a customer</h2>
+            <p class="meta">GET /api/1.0/customers/{id}</p>
+          </div>
+        </div>
+        <p>
+          Send a <code>GET</code> request to retrieve the customer record by using the <code>id</code>
+          returned in the previous step.
+        </p>
+<pre><code>curl -X GET "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
+  -H "Authorization: Bearer {access_token}"</code></pre>
+        <p>Example response:</p>
+<pre><code>{
+  "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
+  "full_name": "John Doe",
+  "email": "john@doe.com",
+  "created_at": "2022-06-13T12:03:39.979397Z",
+  "updated_at": "2022-06-13T12:03:39.979397Z"
+}</code></pre>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>3. Update a customer</h2>
+            <p class="meta">PATCH /api/1.0/customers/{id}</p>
+          </div>
+        </div>
+        <p>
+          Send a <code>PATCH</code> request to update selected fields on the customer record. In this
+          example, you update the customer's name and add a business name.
+        </p>
+<pre><code>curl -X PATCH "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
+  -H "Authorization: Bearer {access_token}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "full_name": "John Smith",
+    "business_name": "Blahblah Ltd"
+  }'</code></pre>
+        <p>Example response:</p>
+<pre><code>{
+  "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
+  "full_name": "John Smith",
+  "business_name": "Blahblah Ltd",
+  "email": "john@doe.com",
+  "created_at": "2022-06-13T12:03:39.979397Z",
+  "updated_at": "2022-06-13T12:10:13.979397Z"
+}</code></pre>
+        <p>
+          Only the fields included in the request are updated. Other fields, such as <code>email</code>,
+          remain unchanged.
+        </p>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>4. Delete a customer</h2>
+            <p class="meta">DELETE /api/1.0/customers/{id}</p>
+          </div>
+        </div>
+        <p>
+          Send a <code>DELETE</code> request to remove the customer record.
+        </p>
+<pre><code>curl -X DELETE "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
+  -H "Authorization: Bearer {access_token}"</code></pre>
+        <p>A successful request returns:</p>
+<pre><code>204 No Content</code></pre>
+        <p>This confirms that the customer record has been deleted.</p>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>Result</h2>
+            <p class="meta">End-to-end workflow</p>
+          </div>
+        </div>
+        <p>
+          You have created a customer, retrieved it by <code>id</code>, updated selected fields, and deleted
+          the record. This is a basic end-to-end workflow for managing customer data with the Customers API.
+        </p>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>Notes</h2>
+            <p class="meta">Implementation details</p>
+          </div>
+        </div>
+        <ul>
+          <li>Use the same customer <code>id</code> throughout the workflow.</li>
+          <li>Include the <code>Authorization</code> header in every request.</li>
+          <li>Use <code>Content-Type: application/json</code> for requests with a body.</li>
+          <li>Use <code>PATCH</code> when you want to update selected fields instead of replacing the full object.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
