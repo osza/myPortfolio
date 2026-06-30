@@ -239,6 +239,28 @@ button {
   justify-content: space-between;
   gap: var(--space-4);
   margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.sample-header > div:first-child {
+  flex: 1 1 32rem;
+  min-width: 0;
+}
+
+.sample-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 1 auto;
+}
+
+@media (max-width: 860px) {
+  .sample-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
 }
 
 .sample h2,
@@ -258,6 +280,7 @@ button {
 .sample p {
   margin: 0;
   color: var(--text-soft);
+  max-width: 68ch;
 }
 
 .sample p + p {
