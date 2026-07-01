@@ -314,7 +314,7 @@ const customer = await response.json();</code></pre>
         <ul>
           <li>Use the same customer <code>id</code> throughout the workflow.</li>
           <li>Include the <code>Authorization</code> header in every request.</li>
-          <li>Use <code>Content-Type: application/json</code> for requests with a request body.</li>
+          <li>For requests that include a JSON body, such as <code>POST</code> or <code>PATCH</code>, include the <code>Content-Type: application/json</code> header.</li>
           <li>
             Use <code>PATCH</code> when you want to update selected fields
             instead of replacing the entire object.
