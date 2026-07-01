@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>On‑chain game assets on Sui — Developer tutorial sample (Piotr Oszenda)</title>
+  <meta
+    name="description"
+    content="Hands-on tutorial showing how a game backend manages on-chain assets on the Sui blockchain, combining REST-style APIs, JSON-RPC calls, and a player-centric story."
+  />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <main id="main" class="container">
+    <!-- Hero -->
+    <section class="hero hero--compact">
+      <p class="eyebrow">Web3 gaming · Sui blockchain</p>
+      <h1>Manage on‑chain game assets with the Sui API</h1>
+      <p class="lede">
+        A technical + storytelling tutorial that walks through how a game backend
+        mints, upgrades, trades, and burns on‑chain assets on Sui to give players
+        real ownership of their items.
+      </p>
+      <div class="hero-links">
+        <a class="sample-link" href="./index.html#work">Back to portfolio</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <!-- 1. Story + context -->
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>Story: Giving players real ownership</h2>
+            <p class="meta">Narrative context · Web2 vs Web3</p>
+          </div>
+        </div>
+
+        <p>
+          Imagine you are building an action RPG where players collect weapons,
+          skins, and artifacts. In a traditional Web2 stack, each item is a row in
+          a database table, fully controlled by the game studio.
+        </p>
+        <p>
+          On Sui, each item becomes an on‑chain object: a non‑fungible token (NFT)
+          or a custom asset governed by smart contracts written in Move. Players
+          own these assets in their wallets, can trade them on external
+          marketplaces, and can carry them into other experiences. [web:34][web:18][web:20]
+        </p>
+        <p>
+          This tutorial shows how a game backend exposes a familiar REST‑style API
+          to the game client, while executing JSON‑RPC calls to Sui under the hood
+          to mint, update, transfer, and burn assets on the blockchain. [web:10][web:24][web:31]
+        </p>
+      </article>
+
+      <!-- 2. Architecture at a glance -->
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>Architecture at a glance</h2>
+            <p class="meta">Game backend · Sui node · Player wallet</p>
+          </div>
+        </div>
+
+        <p>
+          The game client never talks directly to the blockchain. Instead, it uses
+          a game API that you control. That API in turn uses a Sui RPC provider
+          (for example QuickNode or Alchemy) to send JSON‑RPC requests to the
+          network. [web:10][web:35][web:24]
+        </p>
+        <p>
+          At a high level:
+        </p>
+        <ul>
+          <li>The game client calls your REST API, for example <code>POST /api/game/v1/assets</code>.</li>
+          <li>Your backend verifies the request, builds a Sui transaction, and sends it via JSON‑RPC.</li>
+          <li>The player signs the transaction in their wallet, and Sui finalizes it on‑chain.</li>
+          <li>Your backend stores lightweight metadata and mirrors on‑chain state for fast queries.</li>
+        </ul>
+        <p>
+          This pattern lets you keep a clean, product‑oriented API surface for the game team, while
+          still benefiting from Sui’s object‑centric, high‑throughput design. [web:18][web:21][web:42]
+        </p>
+      </article>
+
+      <!-- 3. Before you start -->
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>Before you start</h2>
+            <p class="meta">Requirements: wallet, endpoint, smart contracts</p>
+          </div>
+        </div>
+
+        <p>To follow this tutorial end‑to‑end, you need:</p>
+        <ul>
+          <li>A Sui wallet on testnet with some SUI for gas (for example the official Sui Wallet).</li>
+          <li>A Sui RPC endpoint from a provider such as QuickNode or Alchemy.</li>
+          <li>A basic game backend that can send HTTP requests and handle JSON.</li>
+          <li>A Move package deployed to Sui that defines your game asset type (for example a weapon NFT).</li>
+        </ul>
+        <p>
+          In the examples below, replace <code>{sui_endpoint}</code> and
+          <code>{api_key}</code> with your own values from your RPC provider
+          dashboard, and <code>{package_id}</code> with the ID of your published
+          Move package. [web:10][web:35][web:36][web:37]
+        </p>
+      </article>
+
+      <!-- 4. Step 1: Mint an asset -->
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>1. Mint a weapon for a new player</h2>
+            <p class="meta">POST /api/game/v1/assets · JSON‑RPC mint</p>
+          </div>
+        </div>
+
+        <p>
+          When a new player finishes the tutorial level, you want to give them
+          their first weapon as an on‑chain asset. The game client calls your API,
+          and your backend mints a new object on Sui.
+        </p>
+
+        <div class="code-switcher" data-code-group>
+          <div class="code-tabs" aria-label="Code examples for minting a weapon">
+            <button
+              class="code-tab is-active"
+              type="button"
+              data-code-tab="curl"
+              aria-pressed="true"
+            >
+              cURL (game API)
+            </button>
+            <button
+              class="code-tab"
+              type="button"
+              data-code-tab="javascript"
+              aria-pressed="false"
+            >
+              JavaScript (backend → Sui)
+            </button>
+          </div>
+
+          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X POST "{base_url}/api/game/v1/assets" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer {player_session_token}" \
+  -d '{
+    "type": "weapon",
+    "name": "Blade of Dawn",
+    "rarity": "epic"
+  }'</code></pre>
+
+          <pre class="code-panel" data-code-panel="javascript"><code>async function mintWeaponForPlayer({ playerAddress, name, rarity }) {
+  const payload = {
+    jsonrpc: "2.0",
+    id: 1,
+    method: "sui_moveCall",
+    params: [
+      "{package_id}",          // Your Move package ID
+      "game_assets",           // Module name
+      "mint_weapon",           // Function name
+      [name, rarity],          // Function arguments
+      [playerAddress],         // Recipient address
+      { maxGasBudget: 10_000 } // Gas budget
+    ]
+  };
+
+  const response = await fetch("{sui_endpoint}", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer {api_key}`
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    throw new Error(`Sui RPC failed with status ${response.status}`);
+  }
+
+  const result = await response.json();
+  return result;
+}</code></pre>
+        </div>
+
+        <p>
+          On success, the Sui RPC response includes the ID of the newly minted
+          weapon object. Your backend can persist this ID alongside game metadata
+          and return it to the client. [web:10][web:35][web:41]
+        </p>
+      </article>
+
+      <!-- 5. Step 2: Upgrade an asset -->
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>2. Upgrade a weapon after a boss fight</h2>
+            <p class="meta">PATCH /api/game/v1/assets/{object_id} · JSON‑RPC update</p>
+          </div>
+        </div>
+
+        <p>
+          After a successful boss fight, you might increase the weapon’s power
+          level and change its rarity. In a Web2 backend, this is a simple update
+          in a database row. On Sui, you modify the on‑chain object via a Move
+          call. [web:18][web:20][web:26]
+        </p>
+
+        <div class="code-switcher" data-code-group>
+          <div class="code-tabs" aria-label="Code examples for upgrading a weapon">
+            <button
+              class="code-tab is-active"
+              type="button"
+              data-code-tab="curl"
+              aria-pressed="true"
+            >
+              cURL (game API)
+            </button>
+            <button
+              class="code-tab"
+              type="button"
+              data-code-tab="javascript"
+              aria-pressed="false"
+            >
+              JavaScript (backend → Sui)
+            </button>
+          </div>
+
+          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X PATCH "{base_url}/api/game/v1/assets/{object_id}" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer {player_session_token}" \
+  -d '{
+    "power_level": 42,
+    "rarity": "legendary"
+  }'</code></pre>
+
+          <pre class="code-panel" data-code-panel="javascript"><code>async function upgradeWeapon({ objectId, powerLevel, rarity }) {
+  const payload = {
+    jsonrpc: "2.0",
+    id: 2,
+    method: "sui_moveCall",
+    params: [
+      "{package_id}",
+      "game_assets",
+      "upgrade_weapon",
+      [objectId, powerLevel, rarity],
+      [], // No new recipients; weapon stays with current owner
+      { maxGasBudget: 8_000 }
+    ]
+  };
+
+  const response = await fetch("{sui_endpoint}", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer {api_key}`
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    throw new Error(`Sui RPC failed with status ${response.status}`);
+  }
+
+  const result = await response.json();
+  return result;
+}</code></pre>
+        </div>
+
+        <p>
+          This step demonstrates Sui’s resource‑oriented model: the weapon is a
+          single, non‑duplicable object; you change its state over time instead
+          of cloning or copying it. [web:18][web:26][web:28]
+        </p>
+      </article>
+
+      <!-- 6. Step 3: Trade between players -->
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>3. Trade a weapon between players</h2>
+            <p class="meta">POST /api/game/v1/trades · JSON‑RPC transfer</p>
+          </div>
+        </div>
+
+        <p>
+          One of the main reasons to use web3 in games is open economies. A player
+          can list a weapon on a marketplace, another player can buy it, and your
+          game can immediately reflect the new ownership. [web:34][web:11][web:25]
+        </p>
+
+        <div class="code-switcher" data-code-group>
+          <div class="code-tabs" aria-label="Code examples for trading a weapon">
+            <button
+              class="code-tab is-active"
+              type="button"
+              data-code-tab="curl"
+              aria-pressed="true"
+            >
+              cURL (game API)
+            </button>
+            <button
+              class="code-tab"
+              type="button"
+              data-code-tab="javascript"
+              aria-pressed="false"
+            >
+              JavaScript (backend → Sui)
+            </button>
+          </div>
+
+          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X POST "{base_url}/api/game/v1/trades" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer {seller_session_token}" \
+  -d '{
+    "object_id": "{weapon_object_id}",
+    "buyer_address": "{buyer_sui_address}",
+    "price_token": "SUI",
+    "price_amount": "10"
+  }'</code></pre>
+
+          <pre class="code-panel" data-code-panel="javascript"><code>async function transferWeapon({ objectId, fromAddress, toAddress }) {
+  const payload = {
+    jsonrpc: "2.0",
+    id: 3,
+    method: "sui_transferObject",
+    params: [
+      fromAddress,
+      objectId,
+      toAddress,
+      { maxGasBudget: 5_000 }
+    ]
+  };
+
+  const response = await fetch("{sui_endpoint}", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer {api_key}`
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    throw new Error(`Sui RPC failed with status ${response.status}`);
+  }
+
+  const result = await response.json();
+  return result;
+}</code></pre>
+        </div>
+
+        <p>
+          Unlike a SaaS backend, you are not just updating an <code>owner_id</code>
+          column. Ownership changes on‑chain and is visible to any application that
+          queries the Sui network. [web:21][web:34][web:41]
+        </p>
+      </article>
+
+      <!-- 7. Step 4: Burn an asset -->
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>4. Retire a weapon from the economy</h2>
+            <p class="meta">DELETE‑like workflow · JSON‑RPC burn</p>
+          </div>
+        </div>
+
+        <p>
+          To keep your economy sustainable, you might remove some assets from
+          circulation—for example when a weapon breaks permanently in a story
+          event, or when a limited‑time event ends. [web:34][web:22][web:25]
+        </p>
+
+        <p>
+          In your API, this looks like a delete‑style operation; in your Move
+          code, you burn or otherwise retire the object so it cannot be used or
+          traded anymore. [web:18][web:20][web:26]
+        </p>
+      </article>
+
+      <!-- 8. Error handling -->
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>Error handling and finality</h2>
+            <p class="meta">Gas, pending states, RPC failures</p>
+          </div>
+        </div>
+
+        <p>
+          Working with a blockchain introduces new failure modes compared to a
+          classic SaaS API: insufficient gas, invalid signatures, or network
+          congestion. [web:35][web:42][web:40]
+        </p>
+        <p>
+          Your tutorial should explain:
+        </p>
+        <ul>
+          <li>How to report pending vs finalized transaction status to the game client.</li>
+          <li>How to surface RPC errors with actionable messages for developers.</li>
+          <li>How to retry or reconcile state when on‑chain data and local cache diverge.</li>
+        </ul>
+      </article>
+
+      <!-- 9. Result -->
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>Result</h2>
+            <p class="meta">From Web2 items to on‑chain assets</p>
+          </div>
+        </div>
+
+        <p>
+          You have minted a weapon for a new player, upgraded its stats, traded it
+          between players, and retired it from the game economy, all while keeping
+          a clean REST‑style API surface for your game. [web:34][web:11][web:25]
+        </p>
+        <p>
+          This pattern combines familiar Web2 practices with Sui’s object‑centric
+          blockchain model, giving players real ownership and giving developers a
+          scalable way to manage game assets on‑chain. [web:18][web:21][web:26][web:42]
+        </p>
+      </article>
+
+      <!-- 10. What this sample demonstrates -->
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>What this sample demonstrates</h2>
+            <p class="meta">Technical writing in a Web3 gaming context</p>
+          </div>
+        </div>
+
+        <ul>
+          <li>Connecting product story (player journey, item lifecycle) with concrete API calls.</li>
+          <li>Explaining Sui‑specific concepts like object IDs, Move calls, and RPC endpoints in clear language.</li>
+          <li>Designing a bridge API between a traditional game backend and a Web3 stack.</li>
+          <li>Addressing error handling, finality, and performance considerations explicitly.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <!-- Code tab switcher, reusing your existing pattern -->
+  <script>
+    document.querySelectorAll("[data-code-group]").forEach((group) => {
+      const tabs = group.querySelectorAll("[data-code-tab]");
+      const panels = group.querySelectorAll("[data-code-panel]");
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const selected = tab.dataset.codeTab;
+
+          tabs.forEach((item) => {
+            const isSelected = item === tab;
+            item.classList.toggle("is-active", isSelected);
+            item.setAttribute("aria-pressed", String(isSelected));
+          });
+
+          panels.forEach((panel) => {
+            panel.classList.toggle(
+              "is-active",
+              panel.dataset.codePanel === selected
+            );
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
