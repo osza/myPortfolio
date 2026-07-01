@@ -239,14 +239,16 @@ button {
 
 .sample-header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   gap: var(--space-4);
   margin-bottom: var(--space-4);
+  justify-content: space-between;
+        flex-wrap: nowrap;
 }
 
 .sample-header > div:first-child {
-  flex: unset;
+  flex: 1 1 auto;
   min-width: 0;
 }
 
@@ -255,7 +257,8 @@ button {
   flex-wrap: wrap;
   gap: var(--space-3);
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
+    flex: 0 0 auto;
 }
 
 @media (max-width: 860px) {
