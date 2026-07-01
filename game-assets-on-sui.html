@@ -6,7 +6,7 @@
   <title>On‑chain game assets on Sui — Developer tutorial sample (Piotr Oszenda)</title>
   <meta
     name="description"
-    content="Hands-on tutorial showing how a game backend manages on-chain assets on the Sui blockchain, combining REST-style APIs, JSON-RPC calls, and a player-centric story."
+    content="Hands-on tutorial showing how a game backend and engine manage on-chain assets on the Sui blockchain, combining REST-style APIs, JSON-RPC calls, Move smart contracts, and a player-centric story."
   />
   <link rel="stylesheet" href="./style.css" />
 </head>
@@ -17,11 +17,11 @@
     <!-- Hero -->
     <section class="hero hero--compact">
       <p class="eyebrow">Web3 gaming · Sui blockchain</p>
-      <h1>Manage on‑chain game assets with the Sui API</h1>
+      <h1>Manage on‑chain game assets with the Sui stack</h1>
       <p class="lede">
         A technical + storytelling tutorial that walks through how a game backend
-        mints, upgrades, trades, and burns on‑chain assets on Sui to give players
-        real ownership of their items.
+        and engine mint, upgrade, trade, and retire on‑chain assets on Sui to
+        give players real ownership of their items.
       </p>
       <div class="hero-links">
         <a class="sample-link" href="./index.html#work">Back to portfolio</a>
@@ -51,8 +51,15 @@
         </p>
         <p>
           This tutorial shows how a game backend exposes a familiar REST‑style API
-          to the game client, while executing JSON‑RPC calls to Sui under the hood
-          to mint, update, transfer, and burn assets on the blockchain. [web:10][web:24][web:31]
+          to the game client, while Move modules and RPC clients in Rust or C++
+          interact with Sui under the hood to mint, update, transfer, and retire
+          assets on the blockchain. [web:5][web:24][web:50]
+        </p>
+        <p>
+          The examples in this tutorial are fictional and simplified for clarity,
+          but they follow the real architectural patterns recommended in Sui
+          gaming and Move documentation, including object‑centric assets,
+          programmable transactions, and Rust SDK integration. [web:34][web:58][web:57]
         </p>
       </article>
 
@@ -61,14 +68,14 @@
         <div class="sample-header">
           <div>
             <h2>Architecture at a glance</h2>
-            <p class="meta">Game backend · Sui node · Player wallet</p>
+            <p class="meta">Game engine · Backend service · Sui node</p>
           </div>
         </div>
 
         <p>
           The game client never talks directly to the blockchain. Instead, it uses
           a game API that you control. That API in turn uses a Sui RPC provider
-          (for example QuickNode or Alchemy) to send JSON‑RPC requests to the
+          (for example QuickNode or Alchemy) or an SDK to send requests to the
           network. [web:10][web:35][web:24]
         </p>
         <p>
@@ -76,7 +83,8 @@
         </p>
         <ul>
           <li>The game client calls your REST API, for example <code>POST /api/game/v1/assets</code>.</li>
-          <li>Your backend verifies the request, builds a Sui transaction, and sends it via JSON‑RPC.</li>
+          <li>Your backend (for example in Rust) verifies the request and builds a Sui transaction.</li>
+          <li>A JSON‑RPC client (Rust or C++) sends the transaction to a Sui node.</li>
           <li>The player signs the transaction in their wallet, and Sui finalizes it on‑chain.</li>
           <li>Your backend stores lightweight metadata and mirrors on‑chain state for fast queries.</li>
         </ul>
@@ -99,8 +107,8 @@
         <ul>
           <li>A Sui wallet on testnet with some SUI for gas (for example the official Sui Wallet).</li>
           <li>A Sui RPC endpoint from a provider such as QuickNode or Alchemy.</li>
-          <li>A basic game backend that can send HTTP requests and handle JSON.</li>
-          <li>A Move package deployed to Sui that defines your game asset type (for example a weapon NFT).</li>
+          <li>A backend service that can send HTTP requests and handle JSON (for example in Rust).</li>
+          <li>A Move package deployed to Sui that defines your game asset type (for example a weapon NFT). [web:34][web:18][web:37]</li>
         </ul>
         <p>
           In the examples below, replace <code>{sui_endpoint}</code> and
@@ -110,19 +118,71 @@
         </p>
       </article>
 
-      <!-- 4. Step 1: Mint an asset -->
+      <!-- 4. Move: define the weapon asset -->
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>Move: Define the weapon asset</h2>
+            <p class="meta">Smart contract logic · Resource‑oriented model</p>
+          </div>
+        </div>
+
+        <p>
+          On Sui, game assets are defined as Move structs with resource semantics:
+          they cannot be duplicated or accidentally lost, and ownership is explicit.
+          The following simplified example shows a weapon object and an entry
+          function that mints it to the player. [web:34][web:18][web:47][web:48]
+        </p>
+
+        <pre class="code-panel"><code>module game_assets::weapon {
+  use sui::object::{Self, UID};
+  use sui::tx_context::{Self, TxContext};
+  use sui::transfer;
+
+  struct Weapon has key, store {
+    id: UID,
+    name: vector&lt;u8&gt;,
+    power_level: u64,
+    rarity: vector&lt;u8&gt;
+  }
+
+  public entry fun mint_weapon(
+    name: vector&lt;u8&gt;,
+    power_level: u64,
+    rarity: vector&lt;u8&gt;,
+    ctx: &amp;mut TxContext
+  ) {
+    let weapon = Weapon {
+      id: object::new(ctx),
+      name,
+      power_level,
+      rarity
+    };
+    transfer::public_transfer(weapon, tx_context::sender(ctx));
+  }
+}</code></pre>
+
+        <p>
+          In a production game, you would add more fields (for example durability
+          or element type) and additional entry functions for upgrading, trading,
+          or burning weapons. [web:34][web:18][web:49]
+        </p>
+      </article>
+
+      <!-- 5. Step 1: Mint an asset (API + Rust + C++) -->
       <article class="sample">
         <div class="sample-header">
           <div>
             <h2>1. Mint a weapon for a new player</h2>
-            <p class="meta">POST /api/game/v1/assets · JSON‑RPC mint</p>
+            <p class="meta">POST /api/game/v1/assets · Sui RPC mint</p>
           </div>
         </div>
 
         <p>
           When a new player finishes the tutorial level, you want to give them
           their first weapon as an on‑chain asset. The game client calls your API,
-          and your backend mints a new object on Sui.
+          and your backend mints a new object on Sui using the Move function
+          defined above. [web:34][web:18][web:47]
         </p>
 
         <div class="code-switcher" data-code-group>
@@ -138,10 +198,18 @@
             <button
               class="code-tab"
               type="button"
-              data-code-tab="javascript"
+              data-code-tab="rust"
               aria-pressed="false"
             >
-              JavaScript (backend → Sui)
+              Rust backend
+            </button>
+            <button
+              class="code-tab"
+              type="button"
+              data-code-tab="cpp"
+              aria-pressed="false"
+            >
+              C++ engine (JSON‑RPC)
             </button>
           </div>
 
@@ -154,52 +222,69 @@
     "rarity": "epic"
   }'</code></pre>
 
-          <pre class="code-panel" data-code-panel="javascript"><code>async function mintWeaponForPlayer({ playerAddress, name, rarity }) {
-  const payload = {
-    jsonrpc: "2.0",
-    id: 1,
-    method: "sui_moveCall",
-    params: [
-      "{package_id}",          // Your Move package ID
-      "game_assets",           // Module name
-      "mint_weapon",           // Function name
-      [name, rarity],          // Function arguments
-      [playerAddress],         // Recipient address
-      { maxGasBudget: 10_000 } // Gas budget
-    ]
-  };
+          <pre class="code-panel" data-code-panel="rust"><code>use sui_sdk::SuiClientBuilder;
+use sui_sdk::types::base_types::SuiAddress;
 
-  const response = await fetch("{sui_endpoint}", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer {api_key}`
-    },
-    body: JSON.stringify(payload)
-  });
+async fn mint_weapon_for_player(
+    client: &sui_sdk::SuiClient,
+    player: SuiAddress,
+    name: String,
+    rarity: String,
+) -> anyhow::Result&lt;()&gt; {
+    // High-level sketch; production code would use
+    // programmable transactions and strongly typed arguments.
+    let tx = client.transaction_builder()
+        .move_call(
+            "{package_id}".parse()?,   // Move package ID
+            "game_assets".to_string(), // Module
+            "mint_weapon".to_string(), // Function
+            vec![name.into_bytes(), rarity.into_bytes()],
+            Some(player),
+        )
+        .await?;
 
-  if (!response.ok) {
-    throw new Error(`Sui RPC failed with status ${response.status}`);
-  }
-
-  const result = await response.json();
-  return result;
+    let response = client.execute_transaction(tx).await?;
+    println!("Minted weapon tx: {:?}", response);
+    Ok(())
 }</code></pre>
+
+          <pre class="code-panel" data-code-panel="cpp"><code>// Simplified C++ example sending JSON-RPC to a Sui endpoint
+json payload = {
+  {"jsonrpc", "2.0"},
+  {"id", 1},
+  {"method", "sui_moveCall"},
+  {"params", json::array({
+      "{package_id}",           // Move package ID
+      "game_assets",            // Module
+      "mint_weapon",            // Function
+      json::array({ name, rarity }),
+      json::array({ playerAddress }),
+      json::object({ { "maxGasBudget", 10000 } })
+  })}
+};
+
+auto response = httpClient.post("{sui_endpoint}", payload.dump());
+
+if (!response.ok()) {
+  throw std::runtime_error("Sui RPC failed");
+}
+
+// Parse JSON, extract weapon object ID, store it in game state.</code></pre>
         </div>
 
         <p>
           On success, the Sui RPC response includes the ID of the newly minted
-          weapon object. Your backend can persist this ID alongside game metadata
-          and return it to the client. [web:10][web:35][web:41]
+          weapon object. Your backend or engine can persist this ID alongside game
+          metadata and return it to the client. [web:10][web:35][web:24]
         </p>
       </article>
 
-      <!-- 5. Step 2: Upgrade an asset -->
+      <!-- 6. Step 2: Upgrade an asset -->
       <article class="sample">
         <div class="sample-header">
           <div>
             <h2>2. Upgrade a weapon after a boss fight</h2>
-            <p class="meta">PATCH /api/game/v1/assets/{object_id} · JSON‑RPC update</p>
+            <p class="meta">PATCH /api/game/v1/assets/{object_id} · Sui RPC update</p>
           </div>
         </div>
 
@@ -223,10 +308,10 @@
             <button
               class="code-tab"
               type="button"
-              data-code-tab="javascript"
+              data-code-tab="move"
               aria-pressed="false"
             >
-              JavaScript (backend → Sui)
+              Move (upgrade)
             </button>
           </div>
 
@@ -238,36 +323,19 @@
     "rarity": "legendary"
   }'</code></pre>
 
-          <pre class="code-panel" data-code-panel="javascript"><code>async function upgradeWeapon({ objectId, powerLevel, rarity }) {
-  const payload = {
-    jsonrpc: "2.0",
-    id: 2,
-    method: "sui_moveCall",
-    params: [
-      "{package_id}",
-      "game_assets",
-      "upgrade_weapon",
-      [objectId, powerLevel, rarity],
-      [], // No new recipients; weapon stays with current owner
-      { maxGasBudget: 8_000 }
-    ]
-  };
+          <pre class="code-panel" data-code-panel="move"><code>module game_assets::weapon_upgrade {
+  use sui::object::{Self, UID};
+  use sui::tx_context::{Self, TxContext};
 
-  const response = await fetch("{sui_endpoint}", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer {api_key}`
-    },
-    body: JSON.stringify(payload)
-  });
-
-  if (!response.ok) {
-    throw new Error(`Sui RPC failed with status ${response.status}`);
+  // Simplified example: upgrade an existing weapon
+  public entry fun upgrade_weapon(
+    weapon: &mut game_assets::weapon::Weapon,
+    new_power_level: u64,
+    new_rarity: vector&lt;u8&gt;
+  ) {
+    weapon.power_level = new_power_level;
+    weapon.rarity = new_rarity;
   }
-
-  const result = await response.json();
-  return result;
 }</code></pre>
         </div>
 
@@ -278,12 +346,12 @@
         </p>
       </article>
 
-      <!-- 6. Step 3: Trade between players -->
+      <!-- 7. Step 3: Trade between players -->
       <article class="sample">
         <div class="sample-header">
           <div>
             <h2>3. Trade a weapon between players</h2>
-            <p class="meta">POST /api/game/v1/trades · JSON‑RPC transfer</p>
+            <p class="meta">POST /api/game/v1/trades · Sui RPC transfer</p>
           </div>
         </div>
 
@@ -306,10 +374,10 @@
             <button
               class="code-tab"
               type="button"
-              data-code-tab="javascript"
+              data-code-tab="cpp"
               aria-pressed="false"
             >
-              JavaScript (backend → Sui)
+              C++ transfer
             </button>
           </div>
 
@@ -323,35 +391,25 @@
     "price_amount": "10"
   }'</code></pre>
 
-          <pre class="code-panel" data-code-panel="javascript"><code>async function transferWeapon({ objectId, fromAddress, toAddress }) {
-  const payload = {
-    jsonrpc: "2.0",
-    id: 3,
-    method: "sui_transferObject",
-    params: [
-      fromAddress,
-      objectId,
-      toAddress,
-      { maxGasBudget: 5_000 }
-    ]
-  };
+          <pre class="code-panel" data-code-panel="cpp"><code>// Simplified C++ transfer using JSON-RPC
+json payload = {
+  {"jsonrpc", "2.0"},
+  {"id", 2},
+  {"method", "sui_transferObject"},
+  {"params", json::array({
+      sellerAddress,
+      weaponObjectId,
+      buyerAddress,
+      json::object({ { "maxGasBudget", 5000 } })
+  })}
+};
 
-  const response = await fetch("{sui_endpoint}", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer {api_key}`
-    },
-    body: JSON.stringify(payload)
-  });
+auto response = httpClient.post("{sui_endpoint}", payload.dump());
+if (!response.ok()) {
+  throw std::runtime_error("Sui transfer failed");
+}
 
-  if (!response.ok) {
-    throw new Error(`Sui RPC failed with status ${response.status}`);
-  }
-
-  const result = await response.json();
-  return result;
-}</code></pre>
+// Ownership now changed on-chain; game can query Sui to confirm.</code></pre>
         </div>
 
         <p>
@@ -361,12 +419,12 @@
         </p>
       </article>
 
-      <!-- 7. Step 4: Burn an asset -->
+      <!-- 8. Step 4: Retire an asset -->
       <article class="sample">
         <div class="sample-header">
           <div>
             <h2>4. Retire a weapon from the economy</h2>
-            <p class="meta">DELETE‑like workflow · JSON‑RPC burn</p>
+            <p class="meta">Delete‑style workflow · Burn logic in Move</p>
           </div>
         </div>
 
@@ -381,9 +439,20 @@
           code, you burn or otherwise retire the object so it cannot be used or
           traded anymore. [web:18][web:20][web:26]
         </p>
+
+        <pre class="code-panel"><code>module game_assets::weapon_burn {
+  use sui::object;
+  use game_assets::weapon::Weapon;
+
+  public entry fun burn_weapon(weapon: Weapon) {
+    // Dropping the Weapon consumes the resource; depending on your
+    // design, you may log events or emit metrics here.
+    object::delete(weapon.id);
+  }
+}</code></pre>
       </article>
 
-      <!-- 8. Error handling -->
+      <!-- 9. Error handling -->
       <article class="sample">
         <div class="sample-header">
           <div>
@@ -407,7 +476,7 @@
         </ul>
       </article>
 
-      <!-- 9. Result -->
+      <!-- 10. Result -->
       <article class="sample">
         <div class="sample-header">
           <div>
@@ -428,7 +497,7 @@
         </p>
       </article>
 
-      <!-- 10. What this sample demonstrates -->
+      <!-- 11. What this sample demonstrates -->
       <article class="sample">
         <div class="sample-header">
           <div>
@@ -439,8 +508,8 @@
 
         <ul>
           <li>Connecting product story (player journey, item lifecycle) with concrete API calls.</li>
-          <li>Explaining Sui‑specific concepts like object IDs, Move calls, and RPC endpoints in clear language.</li>
-          <li>Designing a bridge API between a traditional game backend and a Web3 stack.</li>
+          <li>Explaining Sui‑specific concepts like object IDs, Move entry functions, and RPC endpoints in clear language.</li>
+          <li>Designing a bridge API between a traditional game backend and a Web3 stack using Move, Rust, and C++.</li>
           <li>Addressing error handling, finality, and performance considerations explicitly.</li>
         </ul>
       </article>
