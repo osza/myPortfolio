@@ -47,19 +47,19 @@
           On Sui, each item becomes an on‑chain object: a non‑fungible token (NFT)
           or a custom asset governed by smart contracts written in Move. Players
           own these assets in their wallets, can trade them on external
-          marketplaces, and can carry them into other experiences. [web:34][web:18][web:20]
+          marketplaces, and can carry them into other experiences.
         </p>
         <p>
           This tutorial shows how a game backend exposes a familiar REST‑style API
           to the game client, while Move modules and RPC clients in Rust or C++
           interact with Sui under the hood to mint, update, transfer, and retire
-          assets on the blockchain. [web:5][web:24][web:50]
+          assets on the blockchain.
         </p>
         <p>
           The examples in this tutorial are fictional and simplified for clarity,
           but they follow the real architectural patterns recommended in Sui
           gaming and Move documentation, including object‑centric assets,
-          programmable transactions, and Rust SDK integration. [web:34][web:58][web:57]
+          programmable transactions, and Rust SDK integration.
         </p>
       </article>
 
@@ -76,7 +76,7 @@
           The game client never talks directly to the blockchain. Instead, it uses
           a game API that you control. That API in turn uses a Sui RPC provider
           (for example QuickNode or Alchemy) or an SDK to send requests to the
-          network. [web:10][web:35][web:24]
+          network.
         </p>
         <p>
           At a high level:
@@ -90,7 +90,7 @@
         </ul>
         <p>
           This pattern lets you keep a clean, product‑oriented API surface for the game team, while
-          still benefiting from Sui’s object‑centric, high‑throughput design. [web:18][web:21][web:42]
+          still benefiting from Sui’s object‑centric, high‑throughput design.
         </p>
       </article>
 
@@ -108,13 +108,13 @@
           <li>A Sui wallet on testnet with some SUI for gas (for example the official Sui Wallet).</li>
           <li>A Sui RPC endpoint from a provider such as QuickNode or Alchemy.</li>
           <li>A backend service that can send HTTP requests and handle JSON (for example in Rust).</li>
-          <li>A Move package deployed to Sui that defines your game asset type (for example a weapon NFT). [web:34][web:18][web:37]</li>
+          <li>A Move package deployed to Sui that defines your game asset type (for example a weapon NFT).</li>
         </ul>
         <p>
           In the examples below, replace <code>{sui_endpoint}</code> and
           <code>{api_key}</code> with your own values from your RPC provider
           dashboard, and <code>{package_id}</code> with the ID of your published
-          Move package. [web:10][web:35][web:36][web:37]
+          Move package.
         </p>
       </article>
 
@@ -131,7 +131,7 @@
           On Sui, game assets are defined as Move structs with resource semantics:
           they cannot be duplicated or accidentally lost, and ownership is explicit.
           The following simplified example shows a weapon object and an entry
-          function that mints it to the player. [web:34][web:18][web:47][web:48]
+          function that mints it to the player.
         </p>
 
         <pre class="code-panel"><code>module game_assets::weapon {
@@ -165,7 +165,7 @@
         <p>
           In a production game, you would add more fields (for example durability
           or element type) and additional entry functions for upgrading, trading,
-          or burning weapons. [web:34][web:18][web:49]
+          or burning weapons.
         </p>
       </article>
 
@@ -182,7 +182,7 @@
           When a new player finishes the tutorial level, you want to give them
           their first weapon as an on‑chain asset. The game client calls your API,
           and your backend mints a new object on Sui using the Move function
-          defined above. [web:34][web:18][web:47]
+          defined above.
         </p>
 
         <div class="code-switcher" data-code-group>
@@ -275,7 +275,7 @@ if (!response.ok()) {
         <p>
           On success, the Sui RPC response includes the ID of the newly minted
           weapon object. Your backend or engine can persist this ID alongside game
-          metadata and return it to the client. [web:10][web:35][web:24]
+          metadata and return it to the client.
         </p>
       </article>
 
@@ -292,7 +292,7 @@ if (!response.ok()) {
           After a successful boss fight, you might increase the weapon’s power
           level and change its rarity. In a Web2 backend, this is a simple update
           in a database row. On Sui, you modify the on‑chain object via a Move
-          call. [web:18][web:20][web:26]
+          call.
         </p>
 
         <div class="code-switcher" data-code-group>
@@ -342,7 +342,7 @@ if (!response.ok()) {
         <p>
           This step demonstrates Sui’s resource‑oriented model: the weapon is a
           single, non‑duplicable object; you change its state over time instead
-          of cloning or copying it. [web:18][web:26][web:28]
+          of cloning or copying it.
         </p>
       </article>
 
@@ -358,7 +358,7 @@ if (!response.ok()) {
         <p>
           One of the main reasons to use web3 in games is open economies. A player
           can list a weapon on a marketplace, another player can buy it, and your
-          game can immediately reflect the new ownership. [web:34][web:11][web:25]
+          game can immediately reflect the new ownership.
         </p>
 
         <div class="code-switcher" data-code-group>
@@ -415,7 +415,7 @@ if (!response.ok()) {
         <p>
           Unlike a SaaS backend, you are not just updating an <code>owner_id</code>
           column. Ownership changes on‑chain and is visible to any application that
-          queries the Sui network. [web:21][web:34][web:41]
+          queries the Sui network.
         </p>
       </article>
 
@@ -431,13 +431,13 @@ if (!response.ok()) {
         <p>
           To keep your economy sustainable, you might remove some assets from
           circulation—for example when a weapon breaks permanently in a story
-          event, or when a limited‑time event ends. [web:34][web:22][web:25]
+          event, or when a limited‑time event ends.
         </p>
 
         <p>
           In your API, this looks like a delete‑style operation; in your Move
           code, you burn or otherwise retire the object so it cannot be used or
-          traded anymore. [web:18][web:20][web:26]
+          traded anymore.
         </p>
 
         <pre class="code-panel"><code>module game_assets::weapon_burn {
@@ -464,7 +464,7 @@ if (!response.ok()) {
         <p>
           Working with a blockchain introduces new failure modes compared to a
           classic SaaS API: insufficient gas, invalid signatures, or network
-          congestion. [web:35][web:42][web:40]
+          congestion.
         </p>
         <p>
           Your tutorial should explain:
@@ -488,12 +488,12 @@ if (!response.ok()) {
         <p>
           You have minted a weapon for a new player, upgraded its stats, traded it
           between players, and retired it from the game economy, all while keeping
-          a clean REST‑style API surface for your game. [web:34][web:11][web:25]
+          a clean REST‑style API surface for your game.
         </p>
         <p>
           This pattern combines familiar Web2 practices with Sui’s object‑centric
           blockchain model, giving players real ownership and giving developers a
-          scalable way to manage game assets on‑chain. [web:18][web:21][web:26][web:42]
+          scalable way to manage game assets on‑chain.
         </p>
       </article>
 
