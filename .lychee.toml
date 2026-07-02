@@ -1,0 +1,10 @@
+[params]
+exclude = [
+  "https://linkedin.com",
+  "https://www.linkedin.com",
+  "https://github.com",
+  <!-- add more-->
+]
+exclude_loopback = true
+max_retries = 3
+timeout = 20
