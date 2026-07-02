@@ -161,19 +161,19 @@
 
 <pre class="mermaid">
 flowchart LR
- A[API / product change] --> B[Create docs issue or task]
- B --> C[Docs branch in Git]
- C --> D[Update OpenAPI YAML spec]
- D --> E[Regenerate / adjust API reference]
- E --> F[Update Markdown guides & tutorials]
- F --> G[Open pull request]
- G --> H[Technical review (engineering)]
- G --> I[Product/support review]
- H --> J[CI: build, lint, link check]
- I --> J
- J -->|pass| K[Merge to main]
- K --> L[Auto-deploy docs site]
- L --> M[Updated knowledge hub and API docs]
+A[API / product change] --> B[Create docs issue or task]
+B --> C[Docs branch in Git]
+C --> D[Update OpenAPI YAML spec]
+D --> E[Regenerate / adjust API reference]
+E --> F[Update Markdown guides & tutorials]
+F --> G[Open pull request]
+G --> H[Technical review (engineering)]
+G --> I[Product/support review]
+H --> J[CI: build, lint, link check]
+I --> J
+J -->|pass| K[Merge to main]
+K --> L[Auto-deploy docs site]
+L --> M[Updated knowledge hub and API docs]
 </pre>
 
           <p class="note">
