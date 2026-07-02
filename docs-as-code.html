@@ -160,26 +160,26 @@
           </p>
 
 <pre class="mermaid">
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffffff', 'primaryTextColor': '#111111', 'primaryBorderColor': '#333333', 'lineColor': '#333333', 'background': '#ffffff', 'nodeBorder': '#333333'}}}%%
 flowchart TD
-    A([" "]):::phase
-    A2["① PREPARE"]:::label
-    B["API or product change"]
-    C["Create docs task or issue"]
-    D["Create docs branch in Git"]
-    E["Update OpenAPI YAML spec"]
-    F["Update API reference"]
-    G["Update guides and tutorials"]
+    A2["① PREPARE"]:::phase_prepare
+    B["API or product change"]:::prepare
+    C["Create docs task or issue"]:::prepare
+    D["Create docs branch in Git"]:::prepare
+    E["Update OpenAPI YAML spec"]:::prepare
+    F["Update API reference"]:::prepare
+    G["Update guides and tutorials"]:::prepare
 
-    R["② REVIEW"]:::label
-    H["Open pull request"]
-    I["Engineering review\n(technical accuracy)"]
-    IB["PM and support review\n(coverage and terminology)"]
-    J["CI checks\nbuild · lint · links"]
+    R["② REVIEW"]:::phase_review
+    H["Open pull request"]:::review
+    I["Engineering review\n(technical accuracy)"]:::review
+    IB["PM and support review\n(coverage and terminology)"]:::review
+    J["CI checks\nbuild · lint · links"]:::review
 
-    S["③ SHIP"]:::label
-    K["Merge to main"]
-    L["Auto-deploy docs site"]
-    M["Updated knowledge hub\nand API docs live"]
+    S["③ SHIP"]:::phase_ship
+    K["Merge to main"]:::ship
+    L["Auto-deploy docs site"]:::ship
+    M["Updated knowledge hub\nand API docs live"]:::ship
 
     A2 --> B --> C --> D --> E --> F --> G
     G --> R
@@ -191,8 +191,12 @@ flowchart TD
     J -->|pass| S
     S --> K --> L --> M
 
-    classDef label fill:#e8f4f8,stroke:#4a90b8,color:#1a1a2e,font-weight:bold
-    classDef phase fill:none,stroke:none
+    classDef phase_prepare fill:#1a7a4a,stroke:#0f4f2e,color:#ffffff,font-weight:bold
+    classDef prepare fill:#d4edda,stroke:#1a7a4a,color:#111111
+    classDef phase_review fill:#1a4a8a,stroke:#0f2e5a,color:#ffffff,font-weight:bold
+    classDef review fill:#d0e4f7,stroke:#1a4a8a,color:#111111
+    classDef phase_ship fill:#b85c00,stroke:#7a3c00,color:#ffffff,font-weight:bold
+    classDef ship fill:#fde8cc,stroke:#b85c00,color:#111111
 </pre>
 
           <p class="note">
