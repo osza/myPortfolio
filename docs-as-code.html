@@ -161,27 +161,38 @@
 
 <pre class="mermaid">
 flowchart TD
-    subgraph PREPARE ["1 · Prepare"]
-        A[API or product change] --> B[Create docs task or issue]
-        B --> C[Create docs branch in Git]
-        C --> D[Update OpenAPI YAML spec]
-        D --> E[Update API reference]
-        E --> F[Update guides and tutorials]
-    end
+    A([" "]):::phase
+    A2["① PREPARE"]:::label
+    B["API or product change"]
+    C["Create docs task or issue"]
+    D["Create docs branch in Git"]
+    E["Update OpenAPI YAML spec"]
+    F["Update API reference"]
+    G["Update guides and tutorials"]
 
-    subgraph REVIEW ["2 · Review"]
-        F --> G[Open pull request]
-        G --> H[Engineering review\ntechnical accuracy]
-        G --> I[PM and support review\ncoverage and terminology]
-        H --> J[CI checks\nbuild · lint · links]
-        I --> J
-    end
+    R["② REVIEW"]:::label
+    H["Open pull request"]
+    I["Engineering review\n(technical accuracy)"]
+    IB["PM and support review\n(coverage and terminology)"]
+    J["CI checks\nbuild · lint · links"]
 
-    subgraph SHIP ["3 · Ship"]
-        J -->|pass| K[Merge to main]
-        K --> L[Auto-deploy docs site]
-        L --> M[Updated knowledge hub\nand API docs live]
-    end
+    S["③ SHIP"]:::label
+    K["Merge to main"]
+    L["Auto-deploy docs site"]
+    M["Updated knowledge hub\nand API docs live"]
+
+    A2 --> B --> C --> D --> E --> F --> G
+    G --> R
+    R --> H
+    H --> I
+    H --> IB
+    I --> J
+    IB --> J
+    J -->|pass| S
+    S --> K --> L --> M
+
+    classDef label fill:#e8f4f8,stroke:#4a90b8,color:#1a1a2e,font-weight:bold
+    classDef phase fill:none,stroke:none
 </pre>
 
           <p class="note">
