@@ -158,7 +158,13 @@
             The diagram below shows a typical path from a product or API change to updated, deployed
             documentation in a docs-as-code setup centred on OpenAPI and Markdown.
           </p>
-          <pre><code class="language-mermaid">
+<div class="sample">
+  <p>
+    The diagram below shows a typical path from a product or API change to updated, deployed
+    documentation in a docs-as-code setup centred on OpenAPI and Markdown.
+  </p>
+
+  <pre class="mermaid">
 flowchart LR
     A[API / product change] --> B[Create docs issue or task]
     B --> C[Docs branch in Git]
@@ -173,7 +179,14 @@ flowchart LR
     J -->|pass| K[Merge to main]
     K --> L[Auto-deploy docs site]
     L --> M[Updated knowledge hub and API docs]
-          </code></pre>
+  </pre>
+
+  <p class="note">
+    In practice, I adapt this flow to the tools and constraints of each team, but the core idea
+    stays the same: one source of truth for the API, docs stored as code, and an automated path
+    from change to published documentation.
+  </p>
+</div>
           <p class="note">
             In practice, I adapt this flow to the tools and constraints of each team, but the core idea
             stays the same: one source of truth for the API, docs stored as code, and an automated path
@@ -183,11 +196,18 @@ flowchart LR
       </div>
     </section>
   </main>
-
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; Pedro Vespa Osza &middot; Documentation-as-code workflow overview</p>
+      <p>&copy; Piotr Oszenda &middot; Documentation-as-code workflow overview</p>
     </div>
   </footer>
+  <script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: "default"
+  });
+</script>
 </body>
 </html>
