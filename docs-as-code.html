@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>How I work with docs-as-code – Piotr Oszenda</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="How I work with documentation-as-code for API and integration documentation." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <p class="eyebrow">Documentation-as-code</p>
+      <h1>How I work with docs-as-code</h1>
+      <p class="intro-secondary">
+        I treat documentation as part of the product: versioned, reviewable, and deployable
+        from the same workflows as the code. This page describes how I like to design and run
+        a docs-as-code workflow for API and integration documentation.
+      </p>
+      <div class="header-links">
+        <a href="index.html">&larr;&nbsp;Back to main portfolio</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Blue-sky vision</h2>
+        <div class="sample">
+          <p>
+            In an ideal setup, all user-facing API and integration documentation lives in a single,
+            version-controlled repository together with the specifications and example payloads.
+          </p>
+          <p>
+            API reference is generated from a source of truth specification
+            (typically OpenAPI in YAML), while tutorials and integration guides are written in
+            Markdown with structured front matter for metadata, navigation, and search.
+          </p>
+          <p>
+            The documentation site is built automatically from this repository using a static site
+            generator or API documentation tool, and deployed on every successful build of the main
+            branch. Each product or API change triggers a documentation task, so that code and docs
+            can be reviewed and released together.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Working from OpenAPI as source of truth</h2>
+        <div class="sample">
+          <p>
+            For API documentation, I prefer to treat the OpenAPI specification as the main source of
+            truth. The spec in YAML defines endpoints, request and response bodies, status codes,
+            and reusable components.
+          </p>
+          <p>
+            From there, I use tools that generate the core reference pages and interactive explorers,
+            and then layer hand-written explanations, examples, and integration guides on top.
+            This keeps the mechanical parts of the documentation aligned with the actual API surface,
+            while still allowing room for narrative content.
+          </p>
+          <ul>
+            <li>OpenAPI YAML in the repository as a versioned artefact</li>
+            <li>Generated or semi-generated API reference from the spec</li>
+            <li>Markdown guides that explain use cases, workflows, and edge cases</li>
+            <li>Shared snippets for authentication, pagination, and error handling</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Day-to-day workflow</h2>
+        <div class="sample">
+          <p>
+            On a daily basis, I work from a docs repository that mirrors the product structure:
+            API specs, reference, guides, and shared snippets live next to each other.
+          </p>
+          <p>
+            For documentation work, I create focused branches such as
+            <code>feature/new-endpoint</code> or <code>fix/error-responses</code>,
+            make small commits, and open pull requests for review by engineers and product owners.
+          </p>
+          <p>
+            When the API changes, I start by updating the OpenAPI YAML, then regenerate or adjust
+            the reference content, and finally review any tutorials or integration guides that
+            depend on the changed behaviour.
+          </p>
+          <p>
+            Before merging, I run automated checks (build, link validation, linting) so that broken
+            links or structural issues are caught early, not on the live site.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Collaboration and reviews</h2>
+        <div class="sample">
+          <p>
+            I treat documentation changes as a shared responsibility between product, engineering,
+            and documentation. For new features, I usually start from a short outline or doc plan,
+            review it with the product manager and lead engineer, and only then move to full drafts
+            in Markdown.
+          </p>
+          <p>
+            Pull requests are the main review channel. Engineers focus on technical accuracy and
+            behaviour, while product and support teams review coverage, terminology, and customer
+            scenarios. This gives each merged change a visible review history and a clear rationale.
+          </p>
+          <p>
+            Once changes are approved and merged, the same pipeline that builds and deploys the docs
+            also leaves a traceable record in release notes, so it is easy to understand when and why
+            documentation for a feature was updated.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Tooling and automation</h2>
+        <div class="sample">
+          <p>
+            I rely on Git for version control and keep documentation in the same ecosystem as the code,
+            using branches, pull requests, and tags or releases to snapshot meaningful changes.
+          </p>
+          <p>
+            For API specifications, I work with OpenAPI in YAML or JSON and use tools that can validate
+            the spec and generate parts of the reference. For narrative content, I prefer Markdown with
+            simple front matter fields for titles, descriptions, and navigation.
+          </p>
+          <p>
+            Continuous integration runs builds and checks on every change to the main branch.
+            Over time, I like to add automated checks for style, links, and structure so that
+            documentation remains maintainable as the product grows.
+          </p>
+          <p>
+            This portfolio itself is versioned in Git and released through GitHub releases, as a simple
+            example of treating documentation as an evolving, versioned product.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">From API change to deployed docs</h2>
+        <div class="sample">
+          <p>
+            The diagram below shows a typical path from a product or API change to updated, deployed
+            documentation in a docs-as-code setup centred on OpenAPI and Markdown.
+          </p>
+          <pre><code class="language-mermaid">
+flowchart LR
+    A[API / product change] --> B[Create docs issue or task]
+    B --> C[Docs branch in Git]
+    C --> D[Update OpenAPI YAML spec]
+    D --> E[Regenerate / adjust API reference]
+    E --> F[Update Markdown guides & tutorials]
+    F --> G[Open pull request]
+    G --> H[Technical review (engineering)]
+    G --> I[Product/support review]
+    H --> J[CI: build, lint, link check]
+    I --> J
+    J -->|pass| K[Merge to main]
+    K --> L[Auto-deploy docs site]
+    L --> M[Updated knowledge hub and API docs]
+          </code></pre>
+          <p class="note">
+            In practice, I adapt this flow to the tools and constraints of each team, but the core idea
+            stays the same: one source of truth for the API, docs stored as code, and an automated path
+            from change to published documentation.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; Pedro Vespa Osza &middot; Documentation-as-code workflow overview</p>
+    </div>
+  </footer>
+</body>
+</html>
