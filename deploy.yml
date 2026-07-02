@@ -9,22 +9,17 @@ on:
   pull_request:
     branches: [main]
 
-# Uprawnienia potrzebne do deployu na GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Zapobiega równoległym deployom gdy kilka pushów idzie szybko po sobie
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
 
-  # -------------------------------------------------------
-  # JOB 1: Sprawdza jakość plików przed mergem i deployem
-  # -------------------------------------------------------
   lint-and-check:
     name: Lint and check
     runs-on: ubuntu-latest
@@ -33,21 +28,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      # Sprawdza zerwane linki w plikach HTML
       - name: Check links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --verbose --no-progress './**/*.html'
+          args: --verbose --no-progress --config .lychee.toml './**/*.html'
           fail: true
 
-  # -------------------------------------------------------
-  # JOB 2: Deploy – odpala się TYLKO przy pushu do main
-  # -------------------------------------------------------
   deploy:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
