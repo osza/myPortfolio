@@ -448,3 +448,18 @@ button {
     text-align: center;
   }
 }
+
+/* ── Mermaid diagram ───────────────────────── */
+.sample pre.mermaid {
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  overflow-x: auto;
+}
+
+.sample pre.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
