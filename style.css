@@ -285,7 +285,6 @@ button {
 .sample p {
   margin: 0;
   color: var(--text-soft);
-  max-width: 68ch;
 }
 
 .sample p + p {
