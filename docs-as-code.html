@@ -15,8 +15,7 @@
       <p class="eyebrow">Documentation-as-code</p>
       <h1>How I work with docs-as-code</h1>
       <p class="intro-secondary">
-        I treat documentation as part of the product: versioned, reviewable, and deployable
-        from the same workflows as the code. This page describes how I like to design and run
+        I treat documentation as part of the product: versioned, reviewable, and deployable, just like the code. This page describes how I like to design and run
         a docs-as-code workflow for API and integration documentation.
       </p>
       <div class="header-links">
@@ -37,12 +36,12 @@
           <p>
             API reference is generated from a source of truth specification
             (typically OpenAPI in YAML), while tutorials and integration guides are written in
-            Markdown with structured front matter for metadata, navigation, and search.
+            Markdown and/or HTML with structured metadata, navigation, and search.
           </p>
           <p>
             The documentation site is built automatically from this repository using a static site
-            generator or API documentation tool, and deployed on every successful build of the main
-            branch. Each product or API change triggers a documentation task, so that code and docs
+            generator, or built-in features, or API documentation tool, and deployed on every successful build of the main
+            branch. Ideally, each product or API change triggers a documentation task, so that code and docs
             can be reviewed and released together.
           </p>
         </div>
@@ -65,10 +64,10 @@
             while still allowing room for narrative content.
           </p>
           <ul>
-            <li>OpenAPI YAML in the repository as a versioned artefact</li>
+            <li>OpenAPI YAML in the repository as a behavioral artefact</li>
             <li>Generated or semi-generated API reference from the spec</li>
-            <li>Markdown guides that explain use cases, workflows, and edge cases</li>
-            <li>Shared snippets for authentication, pagination, and error handling</li>
+            <li>Guides that explain use cases, workflows, and edge cases</li>
+            <li>Snippets for authentication, pagination, and error handling</li>
           </ul>
         </div>
       </div>
