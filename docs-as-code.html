@@ -79,8 +79,7 @@
         <h2 class="section-title">Day-to-day workflow</h2>
         <div class="sample">
           <p>
-            On a daily basis, I work from a docs repository that mirrors the product structure:
-            API specs, reference, guides, and shared snippets live next to each other.
+            On a daily basis, I work from a docs repository that mirrors the product structure: API specs, reference, guides, and shared snippets live next to each other.
           </p>
           <p>
             For documentation work, I create focused branches such as
@@ -88,9 +87,7 @@
             make small commits, and open pull requests for review by engineers and product owners.
           </p>
           <p>
-            When the API changes, I start by updating the OpenAPI YAML, then regenerate or adjust
-            the reference content, and finally review any tutorials or integration guides that
-            depend on the changed behaviour.
+            When the API changes, engineers own behavioural updates to the OpenAPI YAML (new endpoints, parameters, status codes), while I focus on refining descriptions, examples, and reusable components in the spec. Any changes I commit to the YAML go through engineer review before they are merged, to keep the specification aligned with the actual implementation. I then regenerate or adjust the reference content and review any tutorials or integration guides that depend on the changed behaviour.
           </p>
           <p>
             Before merging, I run automated checks (build, link validation, linting) so that broken
