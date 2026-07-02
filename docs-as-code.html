@@ -150,21 +150,15 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">From API change to deployed docs</h2>
-        <div class="sample">
-          <p>
-            The diagram below shows a typical path from a product or API change to updated, deployed
-            documentation in a docs-as-code setup centred on OpenAPI and Markdown.
-          </p>
-<div class="sample">
-  <p>
-    The diagram below shows a typical path from a product or API change to updated, deployed
-    documentation in a docs-as-code setup centred on OpenAPI and Markdown.
-  </p>
-
-  <pre class="mermaid">
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">From API change to deployed docs</h2>
+    <div class="sample">
+      <p>
+        The diagram below shows a typical path from a product or API change to updated, deployed
+        documentation in a docs-as-code setup centred on OpenAPI and Markdown.
+      </p>
+      <pre class="mermaid">
 flowchart LR
     A[API / product change] --> B[Create docs issue or task]
     B --> C[Docs branch in Git]
@@ -179,23 +173,19 @@ flowchart LR
     J -->|pass| K[Merge to main]
     K --> L[Auto-deploy docs site]
     L --> M[Updated knowledge hub and API docs]
-  </pre>
+      </pre>
 
-  <p class="note">
-    In practice, I adapt this flow to the tools and constraints of each team, but the core idea
-    stays the same: one source of truth for the API, docs stored as code, and an automated path
-    from change to published documentation.
-  </p>
-</div>
-          <p class="note">
-            In practice, I adapt this flow to the tools and constraints of each team, but the core idea
-            stays the same: one source of truth for the API, docs stored as code, and an automated path
-            from change to published documentation.
-          </p>
-        </div>
-      </div>
-    </section>
+      <p class="note">
+        In practice, I adapt this flow to the tools and constraints of each team, but the core idea
+        stays the same: one source of truth for the API, docs stored as code, and an automated path
+        from change to published documentation.
+      </p>
+    </div>
+  </div>
+</section>
+    
   </main>
+  
   <footer class="site-footer">
     <div class="container">
       <p>&copy; Piotr Oszenda &middot; Documentation-as-code workflow overview</p>
