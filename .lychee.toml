@@ -1,10 +1,27 @@
 [params]
+# Pomija zewnętrzne domeny, które blokują boty lub są niestabilne
 exclude = [
-  "https://linkedin.com",
+  # Social media
   "https://www.linkedin.com",
+  "https://linkedin.com",
+  "https://twitter.com",
+  "https://x.com",
+
+  # GitHub (blokuje requesty od botów)
   "https://github.com",
-  <!-- add more-->
+
+  # Mews help center i release notes (wymaga logowania lub blokuje boty)
+  "https://help.mews.com",
+  "https://releases.mews.com",
+
+  # Jamf docs (stara wersja, może być niedostępna)
+  "https://docs.jamf.com",
+
+  # CDN (prawie zawsze działa, ale nie warto sprawdzać przy każdym runie)
+  "https://cdn.jsdelivr.net"
 ]
+
 exclude_loopback = true
 max_retries = 3
 timeout = 20
+accept = [200, 203, 206, 429]
