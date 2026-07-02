@@ -160,20 +160,28 @@
           </p>
 
 <pre class="mermaid">
-flowchart LR
-    A[API change] --> B[Docs task]
-    B --> C[Docs branch]
-    C --> D[Update spec]
-    D --> E[Update ref docs]
-    E --> F[Update guides]
-    F --> G[Open PR]
-    G --> H[Eng review]
-    G --> I[PM review]
-    H --> J[CI checks]
-    I --> J
-    J -->|pass| K[Merge]
-    K --> L[Deploy docs]
-    L --> M[Updated docs]
+flowchart TD
+    subgraph PREPARE ["1 · Prepare"]
+        A[API or product change] --> B[Create docs task or issue]
+        B --> C[Create docs branch in Git]
+        C --> D[Update OpenAPI YAML spec]
+        D --> E[Update API reference]
+        E --> F[Update guides and tutorials]
+    end
+
+    subgraph REVIEW ["2 · Review"]
+        F --> G[Open pull request]
+        G --> H[Engineering review\ntechnical accuracy]
+        G --> I[PM and support review\ncoverage and terminology]
+        H --> J[CI checks\nbuild · lint · links]
+        I --> J
+    end
+
+    subgraph SHIP ["3 · Ship"]
+        J -->|pass| K[Merge to main]
+        K --> L[Auto-deploy docs site]
+        L --> M[Updated knowledge hub\nand API docs live]
+    end
 </pre>
 
           <p class="note">
