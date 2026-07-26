@@ -1,146 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Piotr Oszenda — Technical Writing Portfolio</title>
+  <meta
+    name="description"
+    content="Technical writing portfolio of Piotr Oszenda, focused on developer documentation, API content, product documentation, help center writing, and knowledge architecture."
+  />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Piotr Oszenda" />
+  <meta name="theme-color" content="#f5f4ef" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="canonical" href="https://osza.github.io/myPortfolio/" />
+  <link rel="stylesheet" href="./style.css" />
+
+  <meta property="og:title" content="Piotr Oszenda — Technical Writing Portfolio" />
+  <meta
+    property="og:description"
+    content="Portfolio featuring developer documentation, API content, product guides, help center articles, and knowledge architecture work."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://osza.github.io/myPortfolio/" />
+  <meta property="og:site_name" content="Piotr Oszenda Portfolio" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Piotr Oszenda — Technical Writing Portfolio" />
+  <meta
+    name="twitter:description"
+    content="Technical writing portfolio focused on developer documentation, API content, and product documentation."
+  />
 </head>
 <body>
-  <a href="#main" class="skip-link">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <header>
-    <h1>Technical Writing Portfolio</h1>
-    <p>Piotr Oszenda</p>
-    <p>Technical writer focused on developer documentation, API content, and product documentation.</p>
-    <p>I create clear, structured content that helps people understand software and use it with confidence.</p>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#work">View samples</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <header class="site-header">
+    <div class="container">
+      <p class="eyebrow">Technical Writing Portfolio</p>
+      <h1>Piotr Oszenda</h1>
+      <p class="intro-primary">
+        Technical writer specializing in developer documentation, API content,
+        product guides, and structured knowledge design.
+      </p>
+      <p class="intro-secondary">
+        I create clear, scalable documentation experiences that help users
+        understand products faster and help teams maintain content with less
+        friction.
+      </p>
+    </div>
   </header>
 
   <main id="main">
-    <section id="about">
-      <h2>About</h2>
-      <p>I'm a Technical Writer, Content Developer, and Knowledge Architect with experience creating documentation for SaaS platforms, developer portals, enterprise software, and IT products.</p>
-      <p>My work includes developer documentation, API content, help center articles, release notes, onboarding materials, knowledge bases, and documentation architecture.</p>
-      <p>I work closely with developers, architects, QA, product managers, and support teams to turn technical systems and workflows into content that is clear, useful, and maintainable.</p>
+    <section class="section" aria-labelledby="about-title">
+      <div class="container">
+        <h2 id="about-title" class="section-title">About</h2>
+        <p>
+          My work focuses on documentation that is useful in practice: API and
+          developer docs, product documentation, structured support content, and
+          information architecture that scales as products grow.
+        </p>
+        <p>
+          I care about clarity, consistency, and content systems that make
+          documentation easier to navigate, maintain, and trust.
+        </p>
+      </div>
     </section>
 
-    <section aria-labelledby="focus-areas-heading">
-      <h2 id="focus-areas-heading">Focus areas</h2>
+    <section class="section" aria-labelledby="samples-title">
+      <div class="container">
+        <h2 id="samples-title" class="section-title">Selected writing samples</h2>
 
-      <h3>Developer documentation</h3>
-      <p>API guides, technical workflows, examples, and developer-facing product content.</p>
+        <div class="samples-grid">
+          <article class="sample-card sample-card-featured">
+            <p class="sample-type">Featured technical writing sample</p>
+            <h3>
+              <a href="./octopus-society-on-sui.html">Building an Octopus Society on Sui</a>
+            </h3>
+            <p>
+              Interview-style explainer showing how Sui supports persistent
+              identity, unique on-chain objects, shared community structures,
+              and verifiable randomness in a multiplayer game concept.
+            </p>
+            <a class="sample-link" href="./octopus-society-on-sui.html">Read sample</a>
+          </article>
 
-      <h3>Product documentation</h3>
-      <p>Help content, onboarding materials, release notes, and structured user guidance.</p>
+          <article class="sample-card">
+            <p class="sample-type">API tutorial</p>
+            <h3>
+              <a href="./customers-api-tutorial-v2.html">Customers API Tutorial</a>
+            </h3>
+            <p>
+              Step-by-step API documentation sample focused on request structure,
+              headers, and practical integration guidance for developers.
+            </p>
+            <a class="sample-link" href="./customers-api-tutorial-v2.html">Read sample</a>
+          </article>
 
-      <h3>Knowledge architecture</h3>
-      <p>Content audits, migration support, information architecture, and reusable documentation systems.</p>
+          <article class="sample-card">
+            <p class="sample-type">Docs-as-code article</p>
+            <h3>
+              <a href="./docs-as-code.html">Docs as Code</a>
+            </h3>
+            <p>
+              Documentation sample about docs-as-code workflows, showing how
+              structured writing and engineering practices fit together.
+            </p>
+            <a class="sample-link" href="./docs-as-code.html">Read sample</a>
+          </article>
+
+          <article class="sample-card">
+            <p class="sample-type">Web3 product article</p>
+            <h3>
+              <a href="./game-assets-on-sui.html">Game Assets on Sui</a>
+            </h3>
+            <p>
+              Explainer on how blockchain-based game assets can be modeled on
+              Sui, written for technical but product-aware readers.
+            </p>
+            <a class="sample-link" href="./game-assets-on-sui.html">Read sample</a>
+          </article>
+
+          <article class="sample-card">
+            <p class="sample-type">Case study</p>
+            <h3>
+              <a href="./mews-events-case-study.html">Mews Events Case Study</a>
+            </h3>
+            <p>
+              Product and documentation case study presenting structured content,
+              user context, and business-facing technical communication.
+            </p>
+            <a class="sample-link" href="./mews-events-case-study.html">Read sample</a>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section id="work" aria-labelledby="samples-heading">
-      <h2 id="samples-heading">Selected samples</h2>
-      <p>Most of my work is created for internal teams or restricted products. The examples below show a mix of publicly available content and representative samples that reflect the kind of documentation I work on most often.</p>
-
-      <h3>Release notes</h3>
-      <p>Mews · Product updates</p>
-      <p>
-        <a href="https://releases.mews.com/en/save-time-with-improved-billing-automation-for-mews-operations" target="_blank" rel="noopener noreferrer">
-          Open release notes sample
-        </a>
-      </p>
-
-      <h3>Documentation hub</h3>
-      <p>Mews · Help center structure</p>
-      <p>
-        <a href="./mews-events-case-study.html">
-          Open case study
-        </a>
-        <a href="https://help.mews.com/s/topic/0TOQC000000pMxl4AE/mews-events" target="_blank" rel="noopener noreferrer">
-          Open documentation hub
-        </a>
-      </p>
-
-      <h3>Help center article</h3>
-      <p>Mews · Workflow documentation</p>
-      <p>
-        <a href="https://help.mews.com/s/article/generating-and-uploading-the-police-customer-profiles-report-for-catalonia-in-mews-operations?language=en_US" target="_blank" rel="noopener noreferrer">
-          Open help article sample
-        </a>
-      </p>
-
-      <h3>Reference article</h3>
-      <p>Mews · Tax-related guidance</p>
-      <p>
-        <a href="https://help.mews.com/s/article/handling-tax-rate-changes" target="_blank" rel="noopener noreferrer">
-          Open reference article
-        </a>
-      </p>
-
-      <h3>Administrator guide workflow</h3>
-      <p>Jamf · Admin documentation</p>
-      <p>
-        <a href="https://docs.jamf.com/10.29.0/jamf-pro/administrator-guide/Cloud_Identity_Providers.html" target="_blank" rel="noopener noreferrer">
-          Open admin guide sample
-        </a>
-      </p>
-
-      <h3>API tutorial (v1)</h3>
-      <p>Developer documentation · REST API walkthrough</p>
-      <p>
-        <a href="./customers-api-tutorial.html">
-          Open API tutorial (v1)
-        </a>
-      </p>
-
-      <h3>API tutorial (v2)</h3>
-      <p>Developer documentation · REST API walkthrough</p>
-      <p>
-        <a href="./customers-api-tutorial-v2.html">
-          Open API tutorial (v2)
-        </a>
-      </p>
-
-      <h3>Docs‑as‑code workflow</h3>
-      <p>Documentation process · API and integration docs</p>
-      <p>
-        <a href="./docs-as-code.html">
-          Open workflow overview
-        </a>
-      </p>
-
-      <h3>On‑chain game assets on Sui</h3>
-      <p>Web3 · Sui blockchain · Developer tutorial</p>
-      <p>
-        <a href="./game-assets-on-sui.html">
-          Open Sui tutorial
-        </a>
-      </p>
-
-      <h3>Octopus Society on Sui</h3>
-      <p>Web3 · Sui blockchain · Concept overview and positioning</p>
-      <p>
-        <a href="./octopus-society-on-sui.html">
-          Open Octopus Society article
-        </a>
-      </p>
-
-      <p>Some samples are publicly available, while others are shared as representative examples. If a resource does not load properly, refresh the target page.</p>
+    <section class="section" aria-labelledby="focus-title">
+      <div class="container">
+        <h2 id="focus-title" class="section-title">Focus areas</h2>
+        <ul class="focus-list">
+          <li>Developer and API documentation</li>
+          <li>Product guides and feature education</li>
+          <li>Help center and self-service content</li>
+          <li>Information architecture</li>
+          <li>Docs-as-code workflows</li>
+          <li>Knowledge base structure and governance</li>
+        </ul>
+      </div>
     </section>
 
-    <section aria-labelledby="tools-methods-heading">
-      <h2 id="tools-methods-heading">Tools and methods</h2>
-      <p>I work with Jira, Confluence, Git and GitHub, Swagger and OpenAPI, SharePoint, static site generators, Markdown, HTML, CSS, JSON, XML. I usually follow Agile methodologies.</p>
-      <p>My projects often involve content audits, documentation architecture, workflow validation, cross-functional collaboration, and knowledge transfer across distributed teams.</p>
+    <section class="section" aria-labelledby="contact-title">
+      <div class="container">
+        <h2 id="contact-title" class="section-title">Contact</h2>
+        <p>
+          This portfolio presents selected examples of technical writing,
+          documentation thinking, and content architecture work.
+        </p>
+        <p>
+          <a href="https://github.com/osza" target="_blank" rel="noopener noreferrer">GitHub</a>
+          ·
+          <a href="https://www.linkedin.com/in/piotr-oszenda/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </p>
+      </div>
     </section>
+  </main>
 
-    <section id="contact" aria-labelledby="contact-heading">
-      <h2 id="contact-heading">Contact</h2>
-      <p>Email:
-        <a href="mailto:piotr.oszenda@outlook.com">
-          piotr.oszenda@outlook.com
-        </a>
-      </p>
-      <p>Location: Gijón, 
+  <footer class="site-footer">
+    <div class="container">
+      <p>Piotr Oszenda · Technical Writing Portfolio</p>
+    </div>
+  </footer>
+</body>
+</html>
