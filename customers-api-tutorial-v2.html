@@ -6,7 +6,7 @@
   <title>Customers API tutorial — Developer documentation sample (Piotr Oszenda)</title>
   <meta
     name="description"
-    content="Hands-on API tutorial illustrating create, retrieve, update, and delete patterns for a Customers API, designed to onboard developers quickly and showcase production-ready documentation."
+    content="Hands‑on API tutorial showing how to create, retrieve, update, and delete customer records with a fictional Customers API."
   />
   <link rel="stylesheet" href="./style.css" />
 </head>
@@ -18,7 +18,7 @@
       <p class="eyebrow">API onboarding tutorial</p>
       <h1>Manage customer data with the Customers API</h1>
       <p class="lede">
-        A hands‑on developer tutorial that walks through a complete customer lifecycle workflow
+        A hands‑on tutorial that walks through a complete customer lifecycle
         using create, retrieve, update, and delete operations on a single resource.
       </p>
       <div class="hero-links">
@@ -27,33 +27,25 @@
     </section>
 
     <section class="section">
-      <!-- Overview -->
       <article class="sample">
         <div class="sample-header">
           <div>
             <h2>Overview</h2>
-            <p class="meta">Sample content · Fictional SaaS-style API</p>
+            <p class="meta">Tutorial sample · Fictional REST API</p>
           </div>
         </div>
 
         <p>
-          This tutorial demonstrates a simple end‑to‑end workflow for managing customer data with a
-          Customers API. The API, URLs, and example data are fictional and are provided only to
-          illustrate structure, flow, and writing style.
+          This tutorial demonstrates an end‑to‑end workflow for managing customer data
+          with a fictional Customers API. The API, URLs, and example data are provided
+          to illustrate structure, flow, and documentation style.
         </p>
         <p>
-          By the end of this tutorial, you will have a working CRUD workflow for a customer
-          resource and a reusable pattern you can apply to other endpoints in a typical SaaS
-          product.
-        </p>
-        <p>
-          The examples focus on developer experience, clarity, and consistency—showing how
-          documentation can help engineers ship features faster while giving product teams and
-          stakeholders a reliable reference.
+          By the end of the tutorial, you will have created a customer record,
+          retrieved it by ID, updated selected fields, and deleted the resource.
         </p>
       </article>
 
-      <!-- Before you start -->
       <article class="sample">
         <div class="sample-header">
           <div>
@@ -65,24 +57,110 @@
         <p>Before you begin, make sure you have:</p>
         <ul>
           <li>An API access token with permission to call the Customers API.</li>
-          <li>The base URL for your environment (for example, sandbox or production).</li>
+          <li>The base URL for your environment, such as sandbox or production.</li>
           <li>A tool for sending HTTP requests, such as <code>curl</code> or Postman.</li>
           <li>Network access to the <code>/api/1.0/customers</code> endpoint.</li>
         </ul>
 
         <p>
-          In the examples below, replace <code>{base_url}</code> and <code>{access_token}</code>
-          with your own values. In a real application, you typically store these values in
-          environment variables such as <code>BASE_URL</code> and <code>ACCESS_TOKEN</code>.
+          In the examples below, replace <code>{base_url}</code> and
+          <code>{access_token}</code> with your own values. In a real application,
+          you would typically store them in environment variables such as
+          <code>BASE_URL</code> and <code>ACCESS_TOKEN</code>.
         </p>
-
         <p>
-          For safety, use a dedicated sandbox environment and a non‑production token while testing
-          this workflow.
+          For safety, use a sandbox environment and a non‑production token while
+          testing this workflow.
         </p>
       </article>
 
-      <!-- API snapshot -->
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>Base URL and headers</h2>
+            <p class="meta">Authentication and request format</p>
+          </div>
+        </div>
+
+        <p>
+          All examples in this tutorial use bearer token authentication and JSON
+          request bodies where applicable.
+        </p>
+
+        <pre class="code-panel"><code>Authorization: Bearer {access_token}
+Content-Type: application/json</code></pre>
+
+        <p>
+          Include the <code>Authorization</code> header in every request.
+          Include <code>Content-Type: application/json</code> when the request
+          contains a JSON body, such as <code>POST</code> or <code>PATCH</code>.
+        </p>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>Customer resource</h2>
+            <p class="meta">Field reference</p>
+          </div>
+        </div>
+
+        <p>
+          The tutorial uses a single <code>Customer</code> resource with the following fields:
+        </p>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>id</code></td>
+                <td>string (UUID)</td>
+                <td>No</td>
+                <td>Stable unique identifier generated by the API.</td>
+              </tr>
+              <tr>
+                <td><code>full_name</code></td>
+                <td>string</td>
+                <td>Yes</td>
+                <td>Customer’s full name.</td>
+              </tr>
+              <tr>
+                <td><code>email</code></td>
+                <td>string</td>
+                <td>Yes</td>
+                <td>Customer email address. Typically unique per customer.</td>
+              </tr>
+              <tr>
+                <td><code>business_name</code></td>
+                <td>string</td>
+                <td>No</td>
+                <td>Optional company or organization name.</td>
+              </tr>
+              <tr>
+                <td><code>created_at</code></td>
+                <td>string (ISO 8601)</td>
+                <td>No</td>
+                <td>Timestamp when the record was created.</td>
+              </tr>
+              <tr>
+                <td><code>updated_at</code></td>
+                <td>string (ISO 8601)</td>
+                <td>No</td>
+                <td>Timestamp when the record was last updated.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
       <article class="sample">
         <div class="sample-header">
           <div>
@@ -90,11 +168,6 @@
             <p class="meta">Endpoint overview</p>
           </div>
         </div>
-
-        <p>
-          The Customers API exposes a RESTful resource for managing customer data. This tutorial
-          uses the following endpoints:
-        </p>
 
         <ul>
           <li><code>POST /api/1.0/customers</code> — Create a new customer.</li>
@@ -104,12 +177,11 @@
         </ul>
 
         <p>
-          Each endpoint uses bearer token authentication and returns JSON responses with standard
-          HTTP status codes.
+          This tutorial uses a partial update model for <code>PATCH</code>:
+          only the fields included in the request body are changed.
         </p>
       </article>
 
-      <!-- 1. Create a customer -->
       <article class="sample">
         <div class="sample-header">
           <div>
@@ -119,8 +191,9 @@
         </div>
 
         <p>
-          Send a <code>POST</code> request to create a new customer resource. On success, the API
-          returns a stable <code>id</code> that you will reuse in later requests.
+          Send a <code>POST</code> request to create a customer resource.
+          On success, the API returns a stable <code>id</code> that you will reuse
+          in the next three steps.
         </p>
 
         <div class="code-switcher" data-code-group>
@@ -147,8 +220,8 @@
   -H "Authorization: Bearer {access_token}" \
   -H "Content-Type: application/json" \
   -d '{
-    "full_name": "John Doe",
-    "email": "john@doe.com"
+    "full_name": "Pedro Oszenda",
+    "email": "pedro.oszenda@example.com"
   }'</code></pre>
 
           <pre class="code-panel" data-code-panel="javascript"><code>async function createCustomer() {
@@ -159,32 +232,29 @@
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      full_name: "John Doe",
-      email: "john@doe.com"
+      full_name: "Pedro Oszenda",
+      email: "pedro.oszenda@example.com"
     })
   });
 
   if (!response.ok) {
-    // In a real app, handle 4xx/5xx responses appropriately.
     throw new Error(`Request failed with status ${response.status}`);
   }
 
-  const customer = await response.json();
-  return customer;
+  return response.json();
 }</code></pre>
         </div>
 
         <p>Example 201 response:</p>
         <pre><code>{
-  "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
-  "full_name": "John Doe",
-  "email": "john@doe.com",
-  "created_at": "2022-06-13T12:03:39.979397Z",
-  "updated_at": "2022-06-13T12:03:39.979397Z"
+  "id": "9c7c97a8-ac45-b778-8b38-26a74fdf1f6a",
+  "full_name": "Pedro Oszenda",
+  "email": "pedro.oszenda@example.com",
+  "created_at": "2026-06-13T12:03:39Z",
+  "updated_at": "2026-06-13T12:03:39Z"
 }</code></pre>
       </article>
 
-      <!-- 2. Retrieve a customer -->
       <article class="sample">
         <div class="sample-header">
           <div>
@@ -194,8 +264,8 @@
         </div>
 
         <p>
-          Send a <code>GET</code> request to retrieve the customer resource by using the
-          <code>id</code> returned in the previous step.
+          Send a <code>GET</code> request using the <code>id</code> returned in
+          the previous step.
         </p>
 
         <div class="code-switcher" data-code-group>
@@ -218,40 +288,35 @@
             </button>
           </div>
 
-          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X GET "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
+          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X GET "{base_url}/api/1.0/customers/9c7c97a8-ac45-b778-8b38-26a74fdf1f6a" \
   -H "Authorization: Bearer {access_token}"</code></pre>
 
           <pre class="code-panel" data-code-panel="javascript"><code>async function getCustomer(id) {
-  const response = await fetch(
-    `${baseUrl}/api/1.0/customers/${id}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
+  const response = await fetch(`${baseUrl}/api/1.0/customers/${id}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`
     }
-  );
+  });
 
   if (!response.ok) {
     throw new Error(`Request failed with status ${response.status}`);
   }
 
-  const customer = await response.json();
-  return customer;
+  return response.json();
 }</code></pre>
         </div>
 
         <p>Example 200 response:</p>
         <pre><code>{
-  "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
-  "full_name": "John Doe",
-  "email": "john@doe.com",
-  "created_at": "2022-06-13T12:03:39.979397Z",
-  "updated_at": "2022-06-13T12:03:39.979397Z"
+  "id": "9c7c97a8-ac45-b778-8b38-26a74fdf1f6a",
+  "full_name": "Pedro Oszenda",
+  "email": "pedro.oszenda@example.com",
+  "created_at": "2026-06-13T12:03:39Z",
+  "updated_at": "2026-06-13T12:03:39Z"
 }</code></pre>
       </article>
 
-      <!-- 3. Update a customer -->
       <article class="sample">
         <div class="sample-header">
           <div>
@@ -261,8 +326,9 @@
         </div>
 
         <p>
-          Send a <code>PATCH</code> request to update selected fields on the customer resource.
-          In this example, you change the customer's name and add a business name.
+          Send a <code>PATCH</code> request to update selected fields on the customer.
+          In this example, you add a business name without changing the existing
+          email address or the original full name.
         </p>
 
         <div class="code-switcher" data-code-group>
@@ -285,55 +351,50 @@
             </button>
           </div>
 
-          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X PATCH "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
+          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X PATCH "{base_url}/api/1.0/customers/9c7c97a8-ac45-b778-8b38-26a74fdf1f6a" \
   -H "Authorization: Bearer {access_token}" \
   -H "Content-Type: application/json" \
   -d '{
-    "full_name": "John Smith",
     "business_name": "Blahblah Ltd"
   }'</code></pre>
 
           <pre class="code-panel" data-code-panel="javascript"><code>async function updateCustomer(id) {
-  const response = await fetch(
-    `${baseUrl}/api/1.0/customers/${id}`,
-    {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        full_name: "John Smith",
-        business_name: "Blahblah Ltd"
-      })
-    }
-  );
+  const response = await fetch(`${baseUrl}/api/1.0/customers/${id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      business_name: "Blahblah Ltd"
+    })
+  });
 
   if (!response.ok) {
     throw new Error(`Request failed with status ${response.status}`);
   }
 
-  const customer = await response.json();
-  return customer;
+  return response.json();
 }</code></pre>
         </div>
 
         <p>Example 200 response:</p>
         <pre><code>{
-  "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
-  "full_name": "John Smith",
+  "id": "9c7c97a8-ac45-b778-8b38-26a74fdf1f6a",
+  "full_name": "Pedro Oszenda",
   "business_name": "Blahblah Ltd",
-  "email": "john@doe.com",
-  "created_at": "2022-06-13T12:03:39.979397Z",
-  "updated_at": "2022-06-13T12:10:13.979397Z"
+  "email": "pedro.oszenda@example.com",
+  "created_at": "2026-06-13T12:03:39Z",
+  "updated_at": "2026-06-13T12:10:13Z"
 }</code></pre>
+
         <p>
-          Only the fields included in the request body are updated. Other fields, such as
-          <code>email</code>, remain unchanged.
+          Only the fields included in the request body are updated.
+          Other fields, such as <code>full_name</code> and <code>email</code>,
+          remain unchanged.
         </p>
       </article>
 
-      <!-- 4. Delete a customer -->
       <article class="sample">
         <div class="sample-header">
           <div>
@@ -343,7 +404,8 @@
         </div>
 
         <p>
-          Send a <code>DELETE</code> request to remove the customer resource permanently.
+          Send a <code>DELETE</code> request to remove the customer resource.
+          In this tutorial, <code>DELETE</code> represents a permanent delete.
         </p>
 
         <div class="code-switcher" data-code-group>
@@ -366,49 +428,45 @@
             </button>
           </div>
 
-          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X DELETE "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
+          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X DELETE "{base_url}/api/1.0/customers/9c7c97a8-ac45-b778-8b38-26a74fdf1f6a" \
   -H "Authorization: Bearer {access_token}"</code></pre>
 
           <pre class="code-panel" data-code-panel="javascript"><code>async function deleteCustomer(id) {
-  const response = await fetch(
-    `${baseUrl}/api/1.0/customers/${id}`,
-    {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
+  const response = await fetch(`${baseUrl}/api/1.0/customers/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${accessToken}`
     }
-  );
+  });
 
   if (!response.ok) {
     throw new Error(`Request failed with status ${response.status}`);
   }
 
-  // A 204 No Content response indicates that the customer was deleted successfully.
   return;
 }</code></pre>
         </div>
 
-        <p>A successful request returns:</p>
+        <p>Successful response:</p>
         <pre><code>204 No Content</code></pre>
+
         <p>
-          A <code>204 No Content</code> response indicates that the customer resource was deleted
-          successfully.
+          A <code>204 No Content</code> response indicates that the resource was
+          deleted successfully.
         </p>
       </article>
 
-      <!-- Error handling -->
       <article class="sample">
         <div class="sample-header">
           <div>
             <h2>Error handling</h2>
-            <p class="meta">Typical 4xx response</p>
+            <p class="meta">Typical error responses</p>
           </div>
         </div>
 
         <p>
-          When a request is invalid, the API returns a 4xx status code and a JSON error payload
-          describing what went wrong. This helps developers diagnose issues quickly.
+          When a request fails, the API returns an appropriate 4xx status code
+          together with a JSON error payload.
         </p>
 
         <p>Example 400 response when a required field is missing:</p>
@@ -424,53 +482,48 @@
     ]
   }
 }</code></pre>
+
+        <p>Example 404 response when the customer does not exist:</p>
+        <pre><code>{
+  "error": {
+    "code": "not_found",
+    "message": "Customer '9c7c97a8-ac45-b778-8b38-26a74fdf1f6a' was not found."
+  }
+}</code></pre>
       </article>
 
-      <!-- Result -->
       <article class="sample">
         <div class="sample-header">
           <div>
             <h2>Result</h2>
-            <p class="meta">End-to-end workflow</p>
+            <p class="meta">End‑to‑end workflow</p>
           </div>
         </div>
 
         <p>
-          You have created a customer, retrieved it by <code>id</code>, updated selected fields,
-          and deleted the resource. This completes a basic end‑to‑end workflow for managing
-          customer data with the Customers API.
+          You have created a customer, retrieved it by <code>id</code>, updated
+          selected fields, and deleted the resource.
         </p>
         <p>
-          This pattern mirrors a typical customer lifecycle in modern SaaS applications and can be
-          used as an onboarding path for new engineers joining billing, CRM, or customer data
-          teams.
+          This workflow gives developers a simple pattern they can reuse when
+          working with other resource‑oriented endpoints.
         </p>
       </article>
 
-      <!-- Notes / documentation patterns -->
       <article class="sample">
         <div class="sample-header">
           <div>
-            <h2>Implementation notes and documentation patterns</h2>
-            <p class="meta">How this sample is structured</p>
+            <h2>Writing patterns used here</h2>
+            <p class="meta">Structure and consistency</p>
           </div>
         </div>
 
         <ul>
           <li>Use the same customer <code>id</code> throughout the workflow.</li>
-          <li>Include the <code>Authorization</code> header in every request.</li>
-          <li>
-            For requests that include a JSON body, such as <code>POST</code> or <code>PATCH</code>,
-            include the <code>Content-Type: application/json</code> header.
-          </li>
-          <li>
-            Use <code>PATCH</code> when you want to update selected fields instead of replacing the
-            entire object.
-          </li>
-          <li>
-            The tutorial combines narrative steps, multi‑language code snippets, and a concise API
-            snapshot, illustrating a documentation pattern that scales across endpoints.
-          </li>
+          <li>Keep request and response examples small, realistic, and consistent.</li>
+          <li>Show both cURL and JavaScript examples for each operation.</li>
+          <li>Document the resource model before walking through the CRUD flow.</li>
+          <li>Explain expected success and error responses close to each task.</li>
         </ul>
       </article>
     </section>
