@@ -290,3 +290,383 @@ tx.moveCall({
   ],
 });
 
+// Build the transaction for wallet approval or pass it to an authorized signer.</code></pre>
+        </div>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>2. Mint a unique shell</h2>
+            <p class="meta">POST /api/octopus/v1/shells · Create an owned collectible</p>
+          </div>
+        </div>
+
+        <p>
+          A shell is not just inventory filler. It is a unique, tradeable belonging
+          with its own origin and rarity. That makes it a natural Sui object rather
+          than a value hidden behind a database row.
+        </p>
+
+        <div class="code-switcher" data-code-group>
+          <div class="code-tabs" role="tablist" aria-label="Code examples for minting a shell">
+            <button class="code-tab is-active" type="button" role="tab" id="shell-mint-tab-curl" aria-selected="true" aria-controls="shell-mint-panel-curl" data-code-tab="curl">cURL (game API)</button>
+            <button class="code-tab" type="button" role="tab" id="shell-mint-tab-ts" aria-selected="false" aria-controls="shell-mint-panel-ts" tabindex="-1" data-code-tab="ts">TypeScript SDK</button>
+          </div>
+
+          <pre class="code-panel is-active" id="shell-mint-panel-curl" role="tabpanel" aria-labelledby="shell-mint-tab-curl" data-code-panel="curl"><code>curl -X POST "{base_url}/api/octopus/v1/shells" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer {player_session_token}" \
+  -d '{
+    "label": "Spiral Moon Shell",
+    "origin_reef": "North Tide Hollow",
+    "rarity": 3,
+    "recipient": "{player_sui_address}"
+  }'</code></pre>
+
+          <pre class="code-panel" id="shell-mint-panel-ts" role="tabpanel" aria-labelledby="shell-mint-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
+
+const tx = new Transaction();
+
+tx.moveCall({
+  target: '{package_id}::assets::mint_shell',
+  arguments: [
+    tx.pure.string('Spiral Moon Shell'),
+    tx.pure.string('North Tide Hollow'),
+    tx.pure.u8(3),
+    tx.pure.address(playerAddress),
+  ],
+});</code></pre>
+        </div>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>3. Polish a shell in place</h2>
+            <p class="meta">PATCH /api/octopus/v1/shells/{object_id} · Mutate an owned object</p>
+          </div>
+        </div>
+
+        <p>
+          Some changes should mutate the existing object instead of replacing it.
+          Here, polishing a shell improves its rarity in place. Because the Move
+          function takes <code>&mut Shell</code>, the transaction must include the
+          current shell as a mutable input.
+        </p>
+
+        <div class="code-switcher" data-code-group>
+          <div class="code-tabs" role="tablist" aria-label="Code examples for polishing a shell">
+            <button class="code-tab is-active" type="button" role="tab" id="shell-upgrade-tab-curl" aria-selected="true" aria-controls="shell-upgrade-panel-curl" data-code-tab="curl">cURL (game API)</button>
+            <button class="code-tab" type="button" role="tab" id="shell-upgrade-tab-ts" aria-selected="false" aria-controls="shell-upgrade-panel-ts" tabindex="-1" data-code-tab="ts">TypeScript SDK</button>
+          </div>
+
+          <pre class="code-panel is-active" id="shell-upgrade-panel-curl" role="tabpanel" aria-labelledby="shell-upgrade-tab-curl" data-code-panel="curl"><code>curl -X PATCH "{base_url}/api/octopus/v1/shells/{object_id}" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer {player_session_token}" \
+  -d '{
+    "rarity": 5
+  }'</code></pre>
+
+          <pre class="code-panel" id="shell-upgrade-panel-ts" role="tabpanel" aria-labelledby="shell-upgrade-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
+
+const tx = new Transaction();
+
+tx.moveCall({
+  target: '{package_id}::assets::polish_shell',
+  arguments: [
+    tx.object('{shell_object_id}'),
+    tx.pure.u8(5),
+  ],
+});</code></pre>
+        </div>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>4. Trade in the tide pool</h2>
+            <p class="meta">POST /api/octopus/v1/trades · Direct transfer or Kiosk-backed listing</p>
+          </div>
+        </div>
+
+        <p>
+          Trading in this game should feel like a social exchange between octopi,
+          not just a generic buy button. One octopus might transfer a shell
+          directly to a neighbour, or list it in a Kiosk-style market flow for
+          discovery, settlement, and transfer.
+        </p>
+
+        <div class="code-switcher" data-code-group>
+          <div class="code-tabs" role="tablist" aria-label="Code examples for trading a shell">
+            <button class="code-tab is-active" type="button" role="tab" id="trade-tab-curl" aria-selected="true" aria-controls="trade-panel-curl" data-code-tab="curl">cURL (game API)</button>
+            <button class="code-tab" type="button" role="tab" id="trade-tab-ts" aria-selected="false" aria-controls="trade-panel-ts" tabindex="-1" data-code-tab="ts">TypeScript SDK</button>
+          </div>
+
+          <pre class="code-panel is-active" id="trade-panel-curl" role="tabpanel" aria-labelledby="trade-tab-curl" data-code-panel="curl"><code>curl -X POST "{base_url}/api/octopus/v1/trades" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer {seller_session_token}" \
+  -d '{
+    "object_id": "{shell_object_id}",
+    "buyer_address": "{buyer_sui_address}",
+    "price_token": "SUI",
+    "price_amount": "10",
+    "trade_note": "Three bright pebbles and one rare shell would also work in a custom flow."
+  }'</code></pre>
+
+          <pre class="code-panel" id="trade-panel-ts" role="tabpanel" aria-labelledby="trade-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
+
+const tx = new Transaction();
+
+tx.moveCall({
+  target: '{package_id}::assets::transfer_shell',
+  arguments: [
+    tx.object('{shell_object_id}'),
+    tx.pure.address(buyerAddress),
+  ],
+});
+
+// In a fuller marketplace flow, your backend could instead prepare Kiosk listing
+// or purchase calls and return them for wallet approval.</code></pre>
+        </div>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>5. Model a communal mussel farm</h2>
+            <p class="meta">Shared object · Multi-player structure</p>
+          </div>
+        </div>
+
+        <p>
+          A mussel farm is not a private item like a shell. It is a communal
+          structure that several octopi can interact with. That makes it a better
+          fit for a shared object than for a plain owned object.
+        </p>
+
+        <pre class="code-panel"><code>module octopus_society::farm {
+  use sui::object::{Self, UID};
+  use sui::tx_context::TxContext;
+
+  public struct MusselFarm has key {
+    id: UID,
+    total_mussels_ready: u64,
+    last_harvest_epoch: u64,
+  }
+
+  public fun new_farm(
+    total_mussels_ready: u64,
+    last_harvest_epoch: u64,
+    ctx: &mut TxContext,
+  ): MusselFarm {
+    MusselFarm {
+      id: object::new(ctx),
+      total_mussels_ready,
+      last_harvest_epoch,
+    }
+  }
+
+  public entry fun restock_farm(
+    farm: &mut MusselFarm,
+    added_mussels: u64,
+  ) {
+    farm.total_mussels_ready = farm.total_mussels_ready + added_mussels;
+  }
+
+  public entry fun harvest_farm(
+    farm: &mut MusselFarm,
+    harvested: u64,
+    current_epoch: u64,
+  ) {
+    farm.total_mussels_ready = farm.total_mussels_ready - harvested;
+    farm.last_harvest_epoch = current_epoch;
+  }
+}</code></pre>
+
+        <p>
+          The important design point is not the arithmetic. It is that the same
+          farm object can be referenced and mutated through game rules by multiple
+          players, which is exactly the communal pattern the octopus society requires.
+        </p>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>6. Harvest with a Programmable Transaction Block</h2>
+            <p class="meta">POST /api/octopus/v1/farms/{farm_id}/harvest · Bundle player and shared-state actions</p>
+          </div>
+        </div>
+
+        <p>
+          A trip to the farm is rarely a single isolated state change. In one visit,
+          an octopus might check the shared farm, harvest what is ready, update its
+          own contribution trail, and receive mussels into personal inventory.
+        </p>
+        <p>
+          That is the kind of flow where Programmable Transaction Blocks become
+          especially useful, because the player approves a single bundled action
+          instead of a chain of disconnected mutations.
+        </p>
+
+        <div class="code-switcher" data-code-group>
+          <div class="code-tabs" role="tablist" aria-label="Code examples for harvesting a mussel farm">
+            <button class="code-tab is-active" type="button" role="tab" id="farm-tab-curl" aria-selected="true" aria-controls="farm-panel-curl" data-code-tab="curl">cURL (game API)</button>
+            <button class="code-tab" type="button" role="tab" id="farm-tab-ts" aria-selected="false" aria-controls="farm-panel-ts" tabindex="-1" data-code-tab="ts">TypeScript SDK</button>
+          </div>
+
+          <pre class="code-panel is-active" id="farm-panel-curl" role="tabpanel" aria-labelledby="farm-tab-curl" data-code-panel="curl"><code>curl -X POST "{base_url}/api/octopus/v1/farms/{farm_object_id}/harvest" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer {player_session_token}" \
+  -d '{
+    "octopus_id": "{octopus_object_id}",
+    "harvest_amount": 8,
+    "deposit_to_inventory": true
+  }'</code></pre>
+
+          <pre class="code-panel" id="farm-panel-ts" role="tabpanel" aria-labelledby="farm-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
+
+const tx = new Transaction();
+
+tx.moveCall({
+  target: '{package_id}::farm::harvest_farm',
+  arguments: [
+    tx.object('{farm_object_id}'),
+    tx.pure.u64(8),
+    tx.pure.u64(currentEpoch),
+  ],
+});
+
+// In a fuller PTB, you could also:
+// - update the player's octopus contribution record
+// - mint or transfer harvested mussels into player inventory
+// - attach additional bookkeeping calls before submission</code></pre>
+        </div>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>7. Fair randomness for discovered items</h2>
+            <p class="meta">Rarity outcomes · Trust in shared systems</p>
+          </div>
+        </div>
+
+        <p>
+          Randomness matters in this game too. A newly discovered pebble may vary
+          in shape, colour, or rarity, and a seasonal farm event may produce an
+          unexpectedly strong yield.
+        </p>
+        <p>
+          The design goal is not only surprise. It is trust. If the game says that
+          a rare shell or pebble came from chance, players should be able to treat
+          that outcome as a chain-backed result rather than a server-side claim they
+          simply have to accept.
+        </p>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>Retire a shell when it leaves the world</h2>
+            <p class="meta">DELETE /api/octopus/v1/shells/{object_id} · Remove the object</p>
+          </div>
+        </div>
+
+        <p>
+          Some objects should disappear permanently. If a shell is intentionally
+          retired from the world state, consume the object and delete its
+          <code>UID</code>. After that, it is no longer available for transfer or mutation.
+        </p>
+
+        <div class="code-switcher" data-code-group>
+          <div class="code-tabs" role="tablist" aria-label="Code examples for retiring a shell">
+            <button class="code-tab is-active" type="button" role="tab" id="retire-tab-curl" aria-selected="true" aria-controls="retire-panel-curl" data-code-tab="curl">cURL (game API)</button>
+            <button class="code-tab" type="button" role="tab" id="retire-tab-move" aria-selected="false" aria-controls="retire-panel-move" tabindex="-1" data-code-tab="move">Move (burn)</button>
+          </div>
+
+          <pre class="code-panel is-active" id="retire-panel-curl" role="tabpanel" aria-labelledby="retire-tab-curl" data-code-panel="curl"><code>curl -X DELETE "{base_url}/api/octopus/v1/shells/{object_id}" \
+  -H "Authorization: Bearer {player_session_token}"</code></pre>
+
+          <pre class="code-panel" id="retire-panel-move" role="tabpanel" aria-labelledby="retire-tab-move" data-code-panel="move" hidden><code>public entry fun retire_shell(shell: Shell) {
+  let Shell {
+    id,
+    label: _,
+    origin_reef: _,
+    rarity: _,
+  } = shell;
+  object::delete(id);
+}</code></pre>
+        </div>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>Error handling and finality</h2>
+            <p class="meta">Gas, stale references, execution status, reconciliation</p>
+          </div>
+        </div>
+
+        <p>
+          Blockchain flows still add failure modes that a REST-only system does not:
+          insufficient gas, signature rejection, stale object references, and
+          on-chain execution errors.
+        </p>
+
+        <ul>
+          <li>Model transaction creation, signature approval, submission, execution, and indexed state as separate states.</li>
+          <li>Rebuild transactions when object references become stale.</li>
+          <li>Store transaction digests and reconcile backend metadata from transaction effects.</li>
+          <li>Do not treat API acceptance as final success until on-chain execution is confirmed.</li>
+          <li>Be especially careful with shared objects such as communal farms, where concurrency and current object state matter directly to transaction validity.</li>
+        </ul>
+      </article>
+
+      <article class="sample">
+        <div class="sample-header">
+          <div>
+            <h2>What this sample demonstrates</h2>
+            <p class="meta">Technical writing in a Web3 gaming context</p>
+          </div>
+        </div>
+
+        <ul>
+          <li>How to explain Sui's object model through a coherent game world rather than generic RPG loot examples.</li>
+          <li>How one player can be modeled as one persistent octopus identity object held directly in a wallet.</li>
+          <li>How unique shells and pebbles map naturally to owned Sui objects instead of database-only assets.</li>
+          <li>How communal mussel farms justify shared objects and PTB-based action bundling.</li>
+          <li>How trading, randomness, and ownership can all follow from the same society-driven design instead of feeling like unrelated blockchain features.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    document.querySelectorAll("[data-code-group]").forEach((group) => {
+      const tabs = group.querySelectorAll("[data-code-tab]");
+      const panels = group.querySelectorAll("[data-code-panel]");
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const selected = tab.dataset.codeTab;
+
+          tabs.forEach((item) => {
+            const isSelected = item === tab;
+            item.classList.toggle("is-active", isSelected);
+            item.setAttribute("aria-selected", String(isSelected));
+            item.tabIndex = isSelected ? 0 : -1;
+          });
+
+          panels.forEach((panel) => {
+            const isSelected = panel.dataset.codePanel === selected;
+            panel.classList.toggle("is-active", isSelected);
+            panel.toggleAttribute("hidden", !isSelected);
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
