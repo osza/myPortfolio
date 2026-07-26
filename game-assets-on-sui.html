@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>On-chain game assets on Sui — Developer tutorial sample (Piotr Oszenda)</title>
+  <title>On‑chain game assets on Sui — Developer tutorial sample (Piotr Oszenda)</title>
   <meta
     name="description"
-    content="Hands-on tutorial showing how a game backend and engine manage on-chain assets on the Sui blockchain using Move objects, wallet signing, and Programmable Transaction Blocks."
+    content="Hands‑on tutorial showing how a game backend and engine manage on‑chain assets on the Sui blockchain using Move objects, wallet signing, and Programmable Transaction Blocks."
   />
   <link rel="stylesheet" href="./style.css" />
 </head>
@@ -16,11 +16,11 @@
   <main id="main" class="container">
     <section class="hero hero--compact">
       <p class="eyebrow">Web3 gaming · Sui blockchain</p>
-      <h1>Manage on-chain game assets with the Sui stack</h1>
+      <h1>Manage on‑chain game assets with the Sui stack</h1>
       <p class="lede">
         A technical + storytelling tutorial showing how a game backend and client
         work with Move modules, wallet signing, and Sui objects to mint, upgrade,
-        transfer, and retire player-owned assets.
+        transfer, and retire player‑owned assets.
       </p>
       <div class="hero-links">
         <a class="sample-link" href="./index.html#work">Back to portfolio</a>
@@ -42,13 +42,13 @@
           in a game database and controlled entirely by the studio.
         </p>
         <p>
-          On Sui, each item can be represented as an on-chain object defined in Move.
+          On Sui, each item can be represented as an on‑chain object defined in Move.
           A player can hold that object in a wallet, transfer it, and prove ownership
-          to other services directly on-chain.
+          to other services directly on‑chain.
         </p>
         <p>
           This tutorial shows how a game backend can expose a familiar API layer
-          while the blockchain-facing logic uses Sui objects and Programmable
+          while the blockchain‑facing logic uses Sui objects and Programmable
           Transaction Blocks under the hood.
         </p>
         <p>
@@ -74,14 +74,14 @@
 
         <ul>
           <li>The game client calls your API, for example <code>POST /api/game/v1/assets</code>.</li>
-          <li>Your backend validates the request, resolves current on-chain inputs, and builds a transaction payload.</li>
-          <li>The payload is returned to the client for wallet approval, or routed to an authorized signer when the business flow requires service-controlled minting.</li>
+          <li>Your backend validates the request, resolves current on‑chain inputs, and builds a transaction payload.</li>
+          <li>The payload is returned to the client for wallet approval, or routed to an authorized signer when the business flow requires service‑controlled minting.</li>
           <li>The signed transaction is submitted to the Sui network.</li>
-          <li>Your backend stores transaction digests, reads effects, and reconciles local metadata with on-chain state.</li>
+          <li>Your backend stores transaction digests, reads effects, and reconciles local metadata with on‑chain state.</li>
         </ul>
 
         <p>
-          This keeps your API developer-friendly without hiding the fact that the
+          This keeps your API developer‑friendly without hiding the fact that the
           source of truth for ownership and mutation is the Sui object model.
         </p>
       </article>
@@ -191,7 +191,7 @@
         <p>
           This sample models a straightforward owned object lifecycle: mint, mutate,
           transfer, and delete. It is intentionally simple, but it matches Sui’s
-          object-based design much better than a pseudo-database or legacy RPC-style example.
+          object‑based design much better than a pseudo‑database or legacy RPC‑style example.
         </p>
       </article>
 
@@ -206,7 +206,7 @@
         <p>
           When a player completes a quest or onboarding flow, your backend can build
           a transaction that calls <code>mint_weapon</code>. Depending on your product
-          model, that transaction may be signed by the player, by a game-controlled
+          model, that transaction may be signed by the player, by a game‑controlled
           signer, or through a sponsored flow.
         </p>
 
@@ -292,14 +292,14 @@ tx.moveCall({
         <div class="sample-header">
           <div>
             <h2>3. Transfer a weapon</h2>
-            <p class="meta">POST /api/game/v1/trades · Change ownership on-chain</p>
+            <p class="meta">POST /api/game/v1/trades · Change ownership on‑chain</p>
           </div>
         </div>
 
         <p>
           The simplest trade flow is a direct transfer from one player to another.
           In a production marketplace, you would usually combine transfer with payment,
-          escrow, validation, or kiosk-based rules.
+          escrow, validation, or kiosk‑based rules.
         </p>
 
         <div class="code-switcher" data-code-group>
@@ -376,8 +376,8 @@ tx.moveCall({
         </div>
 
         <p>
-          Blockchain flows add failure modes that classic REST-only systems do not:
-          insufficient gas, signature rejection, stale object references, and on-chain
+          Blockchain flows add failure modes that classic REST‑only systems do not:
+          insufficient gas, signature rejection, stale object references, and on‑chain
           execution errors.
         </p>
 
@@ -385,7 +385,7 @@ tx.moveCall({
           <li>Model transaction creation, signature approval, submission, execution, and indexed state as separate states.</li>
           <li>Rebuild transactions when object references become stale.</li>
           <li>Store transaction digests and reconcile backend metadata from transaction effects.</li>
-          <li>Do not treat API acceptance as final success until on-chain execution is confirmed.</li>
+          <li>Do not treat API acceptance as final success until on‑chain execution is confirmed.</li>
         </ul>
       </article>
 
@@ -399,9 +399,9 @@ tx.moveCall({
 
         <ul>
           <li>How to explain player ownership using Sui’s object model instead of database metaphors alone.</li>
-          <li>How a backend API can support a wallet-centric transaction flow without hiding blockchain realities.</li>
+          <li>How a backend API can support a wallet‑centric transaction flow without hiding blockchain realities.</li>
           <li>How Move object lifecycle operations map to a game narrative: mint, upgrade, transfer, and retire.</li>
-          <li>How to replace outdated integration examples with current Sui transaction-building patterns.</li>
+          <li>How to replace outdated integration examples with current Sui transaction‑building patterns.</li>
         </ul>
       </article>
     </section>
