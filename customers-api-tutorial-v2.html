@@ -6,7 +6,7 @@
   <title>Customers API tutorial — Developer documentation sample (Piotr Oszenda)</title>
   <meta
     name="description"
-    content="Hands‑on API tutorial showing how to create, retrieve, update, and delete customer records with a fictional Customers API."
+    content="Hands-on API tutorial showing how to create, retrieve, update, and delete customer records with a fictional Customers API."
   />
   <link rel="stylesheet" href="./style.css" />
 </head>
@@ -18,7 +18,7 @@
       <p class="eyebrow">API onboarding tutorial</p>
       <h1>Manage customer data with the Customers API</h1>
       <p class="lede">
-        A hands‑on tutorial that walks through a complete customer lifecycle
+        A hands-on tutorial that walks through a complete customer lifecycle
         using create, retrieve, update, and delete operations on a single resource.
       </p>
       <div class="hero-links">
@@ -29,14 +29,14 @@
     <section class="section">
       <article class="sample">
         <div class="sample-header">
-          <div>
+          <div class="sample-heading">
             <h2>Overview</h2>
             <p class="meta">Tutorial sample · Fictional REST API</p>
           </div>
         </div>
 
         <p>
-          This tutorial demonstrates an end‑to‑end workflow for managing customer data
+          This tutorial demonstrates an end-to-end workflow for managing customer data
           with a fictional Customers API. The API, URLs, and example data are provided
           to illustrate structure, flow, and documentation style.
         </p>
@@ -48,7 +48,7 @@
 
       <article class="sample">
         <div class="sample-header">
-          <div>
+          <div class="sample-heading">
             <h2>Before you start</h2>
             <p class="meta">Requirements and setup</p>
           </div>
@@ -69,14 +69,14 @@
           <code>BASE_URL</code> and <code>ACCESS_TOKEN</code>.
         </p>
         <p>
-          For safety, use a sandbox environment and a non‑production token while
+          For safety, use a sandbox environment and a non-production token while
           testing this workflow.
         </p>
       </article>
 
       <article class="sample">
         <div class="sample-header">
-          <div>
+          <div class="sample-heading">
             <h2>Base URL and headers</h2>
             <p class="meta">Authentication and request format</p>
           </div>
@@ -87,7 +87,7 @@
           request bodies where applicable.
         </p>
 
-        <pre class="code-panel"><code>Authorization: Bearer {access_token}
+        <pre class="code-panel is-active"><code>Authorization: Bearer {access_token}
 Content-Type: application/json</code></pre>
 
         <p>
@@ -99,7 +99,7 @@ Content-Type: application/json</code></pre>
 
       <article class="sample">
         <div class="sample-header">
-          <div>
+          <div class="sample-heading">
             <h2>Customer resource</h2>
             <p class="meta">Field reference</p>
           </div>
@@ -163,7 +163,7 @@ Content-Type: application/json</code></pre>
 
       <article class="sample">
         <div class="sample-header">
-          <div>
+          <div class="sample-heading">
             <h2>Customers API snapshot</h2>
             <p class="meta">Endpoint overview</p>
           </div>
@@ -184,7 +184,7 @@ Content-Type: application/json</code></pre>
 
       <article class="sample">
         <div class="sample-header">
-          <div>
+          <div class="sample-heading">
             <h2>1. Create a customer</h2>
             <p class="meta">POST /api/1.0/customers · 201 Created</p>
           </div>
@@ -197,26 +197,44 @@ Content-Type: application/json</code></pre>
         </p>
 
         <div class="code-switcher" data-code-group>
-          <div class="code-tabs" aria-label="Code examples for creating a customer">
+          <div
+            class="code-tabs"
+            role="tablist"
+            aria-label="Code examples for creating a customer"
+          >
             <button
+              id="create-tab-curl"
               class="code-tab is-active"
               type="button"
+              role="tab"
               data-code-tab="curl"
-              aria-pressed="true"
+              aria-selected="true"
+              aria-controls="create-panel-curl"
+              tabindex="0"
             >
               cURL
             </button>
             <button
+              id="create-tab-javascript"
               class="code-tab"
               type="button"
+              role="tab"
               data-code-tab="javascript"
-              aria-pressed="false"
+              aria-selected="false"
+              aria-controls="create-panel-javascript"
+              tabindex="-1"
             >
               JavaScript
             </button>
           </div>
 
-          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X POST "{base_url}/api/1.0/customers" \
+          <pre
+            id="create-panel-curl"
+            class="code-panel is-active"
+            role="tabpanel"
+            data-code-panel="curl"
+            aria-labelledby="create-tab-curl"
+          ><code>curl -X POST "{base_url}/api/1.0/customers" \
   -H "Authorization: Bearer {access_token}" \
   -H "Content-Type: application/json" \
   -d '{
@@ -224,7 +242,14 @@ Content-Type: application/json</code></pre>
     "email": "pedro.oszenda@example.com"
   }'</code></pre>
 
-          <pre class="code-panel" data-code-panel="javascript"><code>async function createCustomer() {
+          <pre
+            id="create-panel-javascript"
+            class="code-panel"
+            role="tabpanel"
+            data-code-panel="javascript"
+            aria-labelledby="create-tab-javascript"
+            hidden
+          ><code>async function createCustomer() {
   const response = await fetch(`${baseUrl}/api/1.0/customers`, {
     method: "POST",
     headers: {
@@ -246,7 +271,7 @@ Content-Type: application/json</code></pre>
         </div>
 
         <p>Example 201 response:</p>
-        <pre><code>{
+        <pre class="code-panel is-active"><code>{
   "id": "9c7c97a8-ac45-b778-8b38-26a74fdf1f6a",
   "full_name": "Pedro Oszenda",
   "email": "pedro.oszenda@example.com",
@@ -257,7 +282,7 @@ Content-Type: application/json</code></pre>
 
       <article class="sample">
         <div class="sample-header">
-          <div>
+          <div class="sample-heading">
             <h2>2. Retrieve a customer</h2>
             <p class="meta">GET /api/1.0/customers/{id} · 200 OK</p>
           </div>
@@ -269,29 +294,54 @@ Content-Type: application/json</code></pre>
         </p>
 
         <div class="code-switcher" data-code-group>
-          <div class="code-tabs" aria-label="Code examples for retrieving a customer">
+          <div
+            class="code-tabs"
+            role="tablist"
+            aria-label="Code examples for retrieving a customer"
+          >
             <button
+              id="retrieve-tab-curl"
               class="code-tab is-active"
               type="button"
+              role="tab"
               data-code-tab="curl"
-              aria-pressed="true"
+              aria-selected="true"
+              aria-controls="retrieve-panel-curl"
+              tabindex="0"
             >
               cURL
             </button>
             <button
+              id="retrieve-tab-javascript"
               class="code-tab"
               type="button"
+              role="tab"
               data-code-tab="javascript"
-              aria-pressed="false"
+              aria-selected="false"
+              aria-controls="retrieve-panel-javascript"
+              tabindex="-1"
             >
               JavaScript
             </button>
           </div>
 
-          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X GET "{base_url}/api/1.0/customers/9c7c97a8-ac45-b778-8b38-26a74fdf1f6a" \
+          <pre
+            id="retrieve-panel-curl"
+            class="code-panel is-active"
+            role="tabpanel"
+            data-code-panel="curl"
+            aria-labelledby="retrieve-tab-curl"
+          ><code>curl -X GET "{base_url}/api/1.0/customers/9c7c97a8-ac45-b778-8b38-26a74fdf1f6a" \
   -H "Authorization: Bearer {access_token}"</code></pre>
 
-          <pre class="code-panel" data-code-panel="javascript"><code>async function getCustomer(id) {
+          <pre
+            id="retrieve-panel-javascript"
+            class="code-panel"
+            role="tabpanel"
+            data-code-panel="javascript"
+            aria-labelledby="retrieve-tab-javascript"
+            hidden
+          ><code>async function getCustomer(id) {
   const response = await fetch(`${baseUrl}/api/1.0/customers/${id}`, {
     method: "GET",
     headers: {
@@ -308,7 +358,7 @@ Content-Type: application/json</code></pre>
         </div>
 
         <p>Example 200 response:</p>
-        <pre><code>{
+        <pre class="code-panel is-active"><code>{
   "id": "9c7c97a8-ac45-b778-8b38-26a74fdf1f6a",
   "full_name": "Pedro Oszenda",
   "email": "pedro.oszenda@example.com",
@@ -319,7 +369,7 @@ Content-Type: application/json</code></pre>
 
       <article class="sample">
         <div class="sample-header">
-          <div>
+          <div class="sample-heading">
             <h2>3. Update a customer</h2>
             <p class="meta">PATCH /api/1.0/customers/{id} · 200 OK</p>
           </div>
@@ -332,33 +382,58 @@ Content-Type: application/json</code></pre>
         </p>
 
         <div class="code-switcher" data-code-group>
-          <div class="code-tabs" aria-label="Code examples for updating a customer">
+          <div
+            class="code-tabs"
+            role="tablist"
+            aria-label="Code examples for updating a customer"
+          >
             <button
+              id="update-tab-curl"
               class="code-tab is-active"
               type="button"
+              role="tab"
               data-code-tab="curl"
-              aria-pressed="true"
+              aria-selected="true"
+              aria-controls="update-panel-curl"
+              tabindex="0"
             >
               cURL
             </button>
             <button
+              id="update-tab-javascript"
               class="code-tab"
               type="button"
+              role="tab"
               data-code-tab="javascript"
-              aria-pressed="false"
+              aria-selected="false"
+              aria-controls="update-panel-javascript"
+              tabindex="-1"
             >
               JavaScript
             </button>
           </div>
 
-          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X PATCH "{base_url}/api/1.0/customers/9c7c97a8-ac45-b778-8b38-26a74fdf1f6a" \
+          <pre
+            id="update-panel-curl"
+            class="code-panel is-active"
+            role="tabpanel"
+            data-code-panel="curl"
+            aria-labelledby="update-tab-curl"
+          ><code>curl -X PATCH "{base_url}/api/1.0/customers/9c7c97a8-ac45-b778-8b38-26a74fdf1f6a" \
   -H "Authorization: Bearer {access_token}" \
   -H "Content-Type: application/json" \
   -d '{
     "business_name": "Blahblah Ltd"
   }'</code></pre>
 
-          <pre class="code-panel" data-code-panel="javascript"><code>async function updateCustomer(id) {
+          <pre
+            id="update-panel-javascript"
+            class="code-panel"
+            role="tabpanel"
+            data-code-panel="javascript"
+            aria-labelledby="update-tab-javascript"
+            hidden
+          ><code>async function updateCustomer(id) {
   const response = await fetch(`${baseUrl}/api/1.0/customers/${id}`, {
     method: "PATCH",
     headers: {
@@ -379,7 +454,7 @@ Content-Type: application/json</code></pre>
         </div>
 
         <p>Example 200 response:</p>
-        <pre><code>{
+        <pre class="code-panel is-active"><code>{
   "id": "9c7c97a8-ac45-b778-8b38-26a74fdf1f6a",
   "full_name": "Pedro Oszenda",
   "business_name": "Blahblah Ltd",
@@ -397,7 +472,7 @@ Content-Type: application/json</code></pre>
 
       <article class="sample">
         <div class="sample-header">
-          <div>
+          <div class="sample-heading">
             <h2>4. Delete a customer</h2>
             <p class="meta">DELETE /api/1.0/customers/{id} · 204 No Content</p>
           </div>
@@ -409,29 +484,54 @@ Content-Type: application/json</code></pre>
         </p>
 
         <div class="code-switcher" data-code-group>
-          <div class="code-tabs" aria-label="Code examples for deleting a customer">
+          <div
+            class="code-tabs"
+            role="tablist"
+            aria-label="Code examples for deleting a customer"
+          >
             <button
+              id="delete-tab-curl"
               class="code-tab is-active"
               type="button"
+              role="tab"
               data-code-tab="curl"
-              aria-pressed="true"
+              aria-selected="true"
+              aria-controls="delete-panel-curl"
+              tabindex="0"
             >
               cURL
             </button>
             <button
+              id="delete-tab-javascript"
               class="code-tab"
               type="button"
+              role="tab"
               data-code-tab="javascript"
-              aria-pressed="false"
+              aria-selected="false"
+              aria-controls="delete-panel-javascript"
+              tabindex="-1"
             >
               JavaScript
             </button>
           </div>
 
-          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X DELETE "{base_url}/api/1.0/customers/9c7c97a8-ac45-b778-8b38-26a74fdf1f6a" \
+          <pre
+            id="delete-panel-curl"
+            class="code-panel is-active"
+            role="tabpanel"
+            data-code-panel="curl"
+            aria-labelledby="delete-tab-curl"
+          ><code>curl -X DELETE "{base_url}/api/1.0/customers/9c7c97a8-ac45-b778-8b38-26a74fdf1f6a" \
   -H "Authorization: Bearer {access_token}"</code></pre>
 
-          <pre class="code-panel" data-code-panel="javascript"><code>async function deleteCustomer(id) {
+          <pre
+            id="delete-panel-javascript"
+            class="code-panel"
+            role="tabpanel"
+            data-code-panel="javascript"
+            aria-labelledby="delete-tab-javascript"
+            hidden
+          ><code>async function deleteCustomer(id) {
   const response = await fetch(`${baseUrl}/api/1.0/customers/${id}`, {
     method: "DELETE",
     headers: {
@@ -442,13 +542,11 @@ Content-Type: application/json</code></pre>
   if (!response.ok) {
     throw new Error(`Request failed with status ${response.status}`);
   }
-
-  return;
 }</code></pre>
         </div>
 
         <p>Successful response:</p>
-        <pre><code>204 No Content</code></pre>
+        <pre class="code-panel is-active"><code>204 No Content</code></pre>
 
         <p>
           A <code>204 No Content</code> response indicates that the resource was
@@ -458,7 +556,7 @@ Content-Type: application/json</code></pre>
 
       <article class="sample">
         <div class="sample-header">
-          <div>
+          <div class="sample-heading">
             <h2>Error handling</h2>
             <p class="meta">Typical error responses</p>
           </div>
@@ -470,7 +568,7 @@ Content-Type: application/json</code></pre>
         </p>
 
         <p>Example 400 response when a required field is missing:</p>
-        <pre><code>{
+        <pre class="code-panel is-active"><code>{
   "error": {
     "code": "invalid_request",
     "message": "The 'email' field is required.",
@@ -484,7 +582,7 @@ Content-Type: application/json</code></pre>
 }</code></pre>
 
         <p>Example 404 response when the customer does not exist:</p>
-        <pre><code>{
+        <pre class="code-panel is-active"><code>{
   "error": {
     "code": "not_found",
     "message": "Customer '9c7c97a8-ac45-b778-8b38-26a74fdf1f6a' was not found."
@@ -494,9 +592,9 @@ Content-Type: application/json</code></pre>
 
       <article class="sample">
         <div class="sample-header">
-          <div>
+          <div class="sample-heading">
             <h2>Result</h2>
-            <p class="meta">End‑to‑end workflow</p>
+            <p class="meta">End-to-end workflow</p>
           </div>
         </div>
 
@@ -506,13 +604,13 @@ Content-Type: application/json</code></pre>
         </p>
         <p>
           This workflow gives developers a simple pattern they can reuse when
-          working with other resource‑oriented endpoints.
+          working with other resource-oriented endpoints.
         </p>
       </article>
 
       <article class="sample">
         <div class="sample-header">
-          <div>
+          <div class="sample-heading">
             <h2>Writing patterns used here</h2>
             <p class="meta">Structure and consistency</p>
           </div>
@@ -531,25 +629,49 @@ Content-Type: application/json</code></pre>
 
   <script>
     document.querySelectorAll("[data-code-group]").forEach((group) => {
-      const tabs = group.querySelectorAll("[data-code-tab]");
-      const panels = group.querySelectorAll("[data-code-panel]");
+      const tabs = Array.from(group.querySelectorAll("[data-code-tab]"));
+      const panels = Array.from(group.querySelectorAll("[data-code-panel]"));
 
-      tabs.forEach((tab) => {
+      const activateTab = (selectedTab) => {
+        const selectedKey = selectedTab.dataset.codeTab;
+
+        tabs.forEach((tab) => {
+          const isSelected = tab === selectedTab;
+          tab.classList.toggle("is-active", isSelected);
+          tab.setAttribute("aria-selected", String(isSelected));
+          tab.setAttribute("tabindex", isSelected ? "0" : "-1");
+        });
+
+        panels.forEach((panel) => {
+          const isSelected = panel.dataset.codePanel === selectedKey;
+          panel.classList.toggle("is-active", isSelected);
+          panel.hidden = !isSelected;
+        });
+      };
+
+      tabs.forEach((tab, index) => {
         tab.addEventListener("click", () => {
-          const selected = tab.dataset.codeTab;
+          activateTab(tab);
+        });
 
-          tabs.forEach((item) => {
-            const isSelected = item === tab;
-            item.classList.toggle("is-active", isSelected);
-            item.setAttribute("aria-pressed", String(isSelected));
-          });
+        tab.addEventListener("keydown", (event) => {
+          let nextIndex = null;
 
-          panels.forEach((panel) => {
-            panel.classList.toggle(
-              "is-active",
-              panel.dataset.codePanel === selected
-            );
-          });
+          if (event.key === "ArrowRight") {
+            nextIndex = (index + 1) % tabs.length;
+          } else if (event.key === "ArrowLeft") {
+            nextIndex = (index - 1 + tabs.length) % tabs.length;
+          } else if (event.key === "Home") {
+            nextIndex = 0;
+          } else if (event.key === "End") {
+            nextIndex = tabs.length - 1;
+          }
+
+          if (nextIndex !== null) {
+            event.preventDefault();
+            tabs[nextIndex].focus();
+            activateTab(tabs[nextIndex]);
+          }
         });
       });
     });
