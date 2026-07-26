@@ -18,6 +18,9 @@
   --code-text: #e5eefb;
   --code-border: rgba(15, 23, 42, 0.08);
   --code-inline-bg: rgba(15, 23, 42, 0.06);
+  --code-tab-bg: #edf3f1;
+  --code-tab-active-bg: #0f766e;
+  --code-tab-active-text: #ffffff;
 
   --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
   --shadow-md: 0 12px 32px rgba(15, 23, 42, 0.08);
@@ -140,7 +143,8 @@ a:hover {
   padding: var(--space-12) 0 var(--space-10);
 }
 
-.site-header h1 {
+.site-header h1,
+.hero h1 {
   margin: 0;
   max-width: 14ch;
   font-size: var(--text-3xl);
@@ -162,6 +166,12 @@ a:hover {
 .lede,
 .section-intro {
   max-width: 68ch;
+}
+
+.lede {
+  margin: var(--space-4) 0 0;
+  color: var(--text-soft);
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
 }
 
 .intro-primary {
@@ -187,11 +197,14 @@ a:hover {
 .header-links a,
 .sample-link,
 .sample-card h3 a,
-.breadcrumb-nav a {
+.breadcrumb-nav a,
+.code-tab {
   transition:
     color var(--transition-fast),
     background var(--transition-fast),
-    border-color var(--transition-fast);
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .header-links a,
@@ -345,7 +358,6 @@ a:hover {
   text-transform: uppercase;
 }
 
-/* CTA w próbkach – wyrównanie w jednej linii z nagłówkiem */
 .sample-link {
   display: inline-flex;
   align-items: center;
@@ -393,7 +405,6 @@ a:hover {
   margin-top: var(--space-6);
 }
 
-/* Nowy układ nagłówka próbki */
 .sample-header {
   display: flex;
   align-items: flex-start;
@@ -408,6 +419,7 @@ a:hover {
   min-width: 0;
 }
 
+.sample h2,
 .sample h3 {
   margin: 0;
   font-size: clamp(1.45rem, 1.5vw, 1.85rem);
@@ -421,7 +433,6 @@ a:hover {
   font-size: clamp(1rem, 1.2vw, 1.15rem);
 }
 
-/* Kontener CTA – prawa kolumna, jedna linia z nagłówkiem */
 .sample-actions {
   display: flex;
   flex: 0 0 auto;
@@ -433,12 +444,122 @@ a:hover {
   padding-top: 0.1rem;
 }
 
-.sample > p:last-child {
-  margin: 0;
-  max-width: none;
+.sample p,
+.sample ul,
+.sample ol,
+.sample pre,
+.sample .code-switcher {
+  margin-top: var(--space-4);
+}
+
+.sample p:first-of-type,
+.sample ul:first-of-type,
+.sample ol:first-of-type,
+.sample pre:first-of-type,
+.sample .code-switcher:first-of-type {
+  margin-top: 0;
+}
+
+.sample p {
+  max-width: 70ch;
   color: var(--text);
-  font-size: clamp(1.02rem, 1.15vw, 1.15rem);
+}
+
+.sample ul,
+.sample ol {
+  padding-left: 1.25rem;
+  color: var(--text-soft);
+}
+
+.sample li + li {
+  margin-top: var(--space-2);
+}
+
+.sample code {
+  padding: 0.15rem 0.38rem;
+  border-radius: var(--radius-xs);
+  background: var(--code-inline-bg);
+  font-size: 0.92em;
+  color: var(--text);
+}
+
+.code-switcher {
+  margin-top: var(--space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-soft);
+  overflow: hidden;
+}
+
+.code-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-muted);
+}
+
+.code-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0.6rem 0.95rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  background: var(--code-tab-bg);
+  color: var(--text-soft);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.code-tab:hover {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+.code-tab.is-active,
+.code-tab[aria-selected="true"] {
+  background: var(--code-tab-active-bg);
+  border-color: var(--code-tab-active-bg);
+  color: var(--code-tab-active-text);
+  box-shadow: 0 6px 18px rgba(15, 118, 110, 0.18);
+}
+
+.code-panel {
+  margin: 0;
+  padding: var(--space-5);
+  background: var(--code-bg);
+  color: var(--code-text);
+  border: 0;
+  border-radius: 0;
+  overflow-x: auto;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.code-panel code {
+  display: block;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.92rem;
   line-height: 1.65;
+  white-space: pre;
+}
+
+.code-panel[hidden] {
+  display: none;
+}
+
+.sample > pre.code-panel {
+  margin-top: var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--code-border);
 }
 
 .editorial-note {
@@ -507,7 +628,21 @@ footer .section-intro a:hover,
   }
 
   .header-links,
-  .sample-actions {
+  .sample-actions,
+  .code-tabs {
     gap: var(--space-2);
+  }
+
+  .code-tab {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .code-panel {
+    padding: var(--space-4);
+  }
+
+  .code-panel code {
+    font-size: 0.88rem;
   }
 }
