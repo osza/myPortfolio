@@ -345,13 +345,13 @@ a:hover {
   text-transform: uppercase;
 }
 
+/* CTA w próbkach – wyrównanie w jednej linii z nagłówkiem */
 .sample-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   align-self: flex-start;
   min-height: 40px;
-  margin-top: var(--space-5);
   padding: 0.72rem 1rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
@@ -359,12 +359,7 @@ a:hover {
   color: var(--text);
   font-size: var(--text-sm);
   font-weight: 600;
-}
-
-.sample-link:hover {
-  background: var(--accent-soft);
-  border-color: rgba(15, 118, 110, 0.22);
-  color: var(--accent-dark);
+  white-space: nowrap;
 }
 
 .sample-summary {
@@ -398,4 +393,121 @@ a:hover {
   margin-top: var(--space-6);
 }
 
-.sample-head
+/* Nowy układ nagłówka próbki */
+.sample-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-5);
+  flex-wrap: nowrap;
+  margin-bottom: var(--space-4);
+}
+
+.sample-heading {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.sample h3 {
+  margin: 0;
+  font-size: clamp(1.45rem, 1.5vw, 1.85rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.sample .meta {
+  margin: var(--space-3) 0 0;
+  color: var(--text-soft);
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+}
+
+/* Kontener CTA – prawa kolumna, jedna linia z nagłówkiem */
+.sample-actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin: 0;
+  padding-top: 0.1rem;
+}
+
+.sample > p:last-child {
+  margin: 0;
+  max-width: none;
+  color: var(--text);
+  font-size: clamp(1.02rem, 1.15vw, 1.15rem);
+  line-height: 1.65;
+}
+
+.editorial-note {
+  margin-top: var(--space-6);
+  padding: var(--space-5) var(--space-6);
+  background: var(--surface-soft);
+  color: var(--text-soft);
+}
+
+footer .section-intro a,
+.section-intro a,
+.editorial-note a {
+  color: var(--accent-dark);
+}
+
+footer .section-intro a:hover,
+.section-intro a:hover,
+.editorial-note a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .samples-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sample-card-featured {
+    grid-column: auto;
+  }
+
+  .sample-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sample-actions {
+    width: 100%;
+    justify-content: flex-start;
+    padding-top: 0;
+  }
+
+  .sample-link {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header {
+    padding-top: var(--space-10);
+  }
+
+  .hero,
+  .section {
+    padding: var(--space-10) 0;
+  }
+
+  .sample,
+  .sample-card,
+  .sample-summary,
+  .editorial-note {
+    padding: var(--space-5);
+  }
+
+  .container {
+    width: min(var(--container), calc(100% - 1.25rem));
+  }
+
+  .header-links,
+  .sample-actions {
+    gap: var(--space-2);
+  }
+}
