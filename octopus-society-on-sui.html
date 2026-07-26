@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Building an Octopus Society on Sui, by Piotr Oszenda</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Interview-style technical writing sample explaining why Sui fits a multiplayer blockchain game built around persistent identity, unique objects, shared communal structures, and verifiable randomness."
+  />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <p class="eyebrow">Web3 gaming · Sui blockchain</p>
+      <h1>Building an Octopus Society on Sui</h1>
+      <p class="intro-secondary">
+        A Q&amp;A sample that explains why Sui is a strong fit for a multiplayer
+        game where each player embodies a single octopus living in a shared
+        ocean community, trading unique objects and tending communal farms.
+      </p>
+      <div class="header-links">
+        <a href="./index.html">Back to portfolio</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Interview</h2>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h2>Setting the scene</h2>
+              <p class="meta">Concept framing · Multiplayer society design</p>
+            </div>
+          </div>
+
+          <p><strong>Interviewer:</strong> Let&apos;s set the scene. This isn&apos;t a &quot;collect and hoard&quot; game — it&apos;s a society. Every player is one octopus, living among other octopi, trading shells and pebbles, farming mussels together. Why does that framing matter when you&apos;re choosing a blockchain?</p>
+
+          <p><strong>Developer:</strong> Because it changes what actually needs to be true on-chain. A collection game just needs &quot;player owns object.&quot; A society needs objects to move between many owners constantly, some objects to be jointly managed, and the whole thing to feel alive and responsive rather than like a spreadsheet with a shell icon.</p>
+
+          <p>That is a much higher bar for the underlying platform, and it is exactly the bar I used when I looked at Sui.</p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h2>One player, one octopus</h2>
+              <p class="meta">Persistent identity · On-chain player model</p>
+            </div>
+          </div>
+
+          <p><strong>Interviewer:</strong> Start with the octopus itself. One player, one octopus — that&apos;s the player&apos;s identity in this world. What does that need from the chain?</p>
+
+          <p><strong>Developer:</strong> It needs to be a genuine, persistent object, not a login record. On Sui, my octopus is a Move object with its own on-chain identity. Its age, territory, and relationships with other octopi can all live as fields on that one object.</p>
+
+          <p>The player does not just have an account that references an octopus somewhere in a database. The player holds the octopus the same way they would hold any other asset in their wallet. That distinction matters enormously for a game built around identity and belonging in a community, rather than just ownership of loot.</p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h2>Unique pebbles and shells</h2>
+              <p class="meta">Object model · Tradeable unique assets</p>
+            </div>
+          </div>
+
+          <p><strong>Interviewer:</strong> Now the pebbles and shells. You&apos;ve decided these are unique — every pebble is its own thing, not an interchangeable currency. Why does that decision push you toward Sui specifically?</p>
+
+          <p><strong>Developer:</strong> Because unique, tradeable objects are Sui&apos;s native data model, not a workaround bolted onto a token standard. Every pebble and shell can be its own object on-chain, with its own traits such as where it was found, its shape, or its rarity.</p>
+
+          <p>Because Sui separates owned objects cleanly at the protocol level, transferring a shell from one octopus to another is a direct, first-class operation. I am not simulating uniqueness on top of a fungible token. Uniqueness is simply how the object exists.</p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h2>Trading in the tide pool</h2>
+              <p class="meta">Marketplace model · Social exchange</p>
+            </div>
+          </div>
+
+          <p><strong>Interviewer:</strong> And trading between players — since everything is unique and freely tradeable, how does that actually work without you building a marketplace from scratch?</p>
+
+          <p><strong>Developer:</strong> This is where Sui&apos;s <code>Kiosk</code> model comes back in, and it fits this game even better than it would fit a simple collectible. In an octopus society, trading is not just &quot;buy the rarest item.&quot; It is closer to how a real community exchanges goods.</p>
+
+          <p>An octopus might swap three pebbles for one rare shell, list something for other octopi to browse, or make a direct trade with a neighbour. Kiosk gives me listing, purchasing, and ownership transfer as a native pattern, so I can build that social marketplace feel without writing escrow and settlement logic from the ground up.</p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h2>Communal mussel farms</h2>
+              <p class="meta">Shared objects · Group-owned game structures</p>
+            </div>
+          </div>
+
+          <p><strong>Interviewer:</strong> Let&apos;s talk about the mussel farms. You said these have a community dimension — they&apos;re not purely solo. What does that require, technically?</p>
+
+          <p><strong>Developer:</strong> It requires shared control over a single object, which is a genuinely hard problem on a lot of chains. A mussel farm is not owned by one octopus in the way a pebble is. It might be tended by several octopi who each contribute effort and each have a claim on what it produces.</p>
+
+          <p>On Sui, I can model a farm as a <code>shared object</code> — one that is not locked to a single owner&apos;s authority but can be referenced and mutated by transactions from multiple players, with the game&apos;s Move logic defining exactly who is allowed to do what. That is the difference between one player&apos;s private idle timer and a real communal structure that a group of octopi maintain together.</p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h2>Day-to-day farm actions</h2>
+              <p class="meta">Programmable Transaction Blocks · Multi-step player actions</p>
+            </div>
+          </div>
+
+          <p><strong>Interviewer:</strong> How does that shared-object model affect the day-to-day feel of the game — an octopus checking on the farm, harvesting mussels, restocking it?</p>
+
+          <p><strong>Developer:</strong> This is where <code>Programmable Transaction Blocks</code> earn their keep again, just at a bigger scale than a single-player action. A visit to the farm might involve checking the shared farm object, harvesting whatever is ready, updating that octopus&apos;s contribution record, and depositing mussels into that player&apos;s own inventory — all as one transaction the player approves once.</p>
+
+          <p>Because Sui&apos;s object model tracks exactly which objects a transaction touches — the shared farm, the player&apos;s own octopus, the mussels being minted — the network can process these efficiently even with lots of octopi visiting the same farm, without everything queuing up behind a single global bottleneck.</p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h2>Parallel activity</h2>
+              <p class="meta">Scalability · Non-conflicting transactions</p>
+            </div>
+          </div>
+
+          <p><strong>Interviewer:</strong> Speaking of many players touching the same objects — doesn&apos;t a shared farm become a congestion point if fifty octopi want to harvest at once?</p>
+
+          <p><strong>Developer:</strong> That is a real concern on chains where all state changes funnel through one global sequence. Sui&apos;s object-centric execution model is specifically built to parallelise transactions that do not actually conflict.</p>
+
+          <p>If two octopi are harvesting from two different farms, there is no reason those transactions should compete with each other, and Sui&apos;s architecture is designed to recognise that automatically. That is not just a nice side effect for me. It is close to a hard requirement once you accept that the whole premise of the game is many players interacting with shared community structures at once.</p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h2>Randomness and trust</h2>
+              <p class="meta">Fair outcomes · Verifiable game logic</p>
+            </div>
+          </div>
+
+          <p><strong>Interviewer:</strong> Randomness comes up naturally too, I&apos;d guess — what a pebble looks like when it&apos;s found, how much a farm yields this season.</p>
+
+          <p><strong>Developer:</strong> Exactly, and the same argument applies here as it would in any game asking players to trust an outcome. If I want players to believe that finding a rare pebble or getting a strong harvest is genuinely down to chance and not something I quietly control server-side, that randomness needs to be verifiable, not just asserted.</p>
+
+          <p>Sui&apos;s built-in on-chain randomness lets me generate those outcomes in a way players can actually check, which matters even more in a society-style game because trust between the game and its community is the whole point.</p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h2>Architecture in one paragraph</h2>
+              <p class="meta">Closing argument · Why Sui fits the concept</p>
+            </div>
+          </div>
+
+          <p><strong>Interviewer:</strong> Zooming out — if you had to justify this whole architecture in one paragraph, what would you say?</p>
+
+          <p><strong>Developer:</strong> I&apos;d say this: I am not building a game where players collect isolated pets and occasionally trade them. I am building a small society, and a society needs individual identity, unique tradeable belongings, shared communal structures, fair chance mechanics, and low-friction interaction — all at once, all the time.</p>
+
+          <p>Sui&apos;s object model gives me persistent identity for each octopus, native uniqueness for every pebble and shell, shared objects for farms multiple players tend together, verifiable randomness for fair outcomes, and transaction bundling that keeps the whole experience feeling like play rather than paperwork. I did not have to bend the platform to fit the concept. The concept just happens to be exactly the kind of system Sui was built to represent.</p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div>
+              <h2>Editorial note</h2>
+              <p class="meta">Scope note · Positioning of the sample</p>
+            </div>
+          </div>
+
+          <p>
+            This version keeps pebbles and shells as unique NFT-style objects
+            rather than fungible currency, models mussel farms as Sui shared
+            objects to reflect communal ownership, and stays within an
+            &quot;advantages of Sui&quot; framing without naming competing chains.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© Piotr Oszenda · Interview-style blockchain game architecture sample</p>
+    </div>
+  </footer>
+</body>
+</html>
