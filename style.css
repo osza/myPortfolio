@@ -291,6 +291,10 @@ button {
   margin-top: var(--space-4);
 }
 
+.sample ul + p {
+  margin-top: var(--space-4);
+}
+
 .sample-link {
   display: inline-flex;
   align-items: center;
