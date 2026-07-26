@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>On-chain game assets on Sui; developer tutorial sample (Piotr Oszenda)</title>
+  <title>Game assets on Sui for an octopus society; developer tutorial sample (Piotr Oszenda)</title>
   <meta
     name="description"
-    content="Hands-on tutorial showing how a game backend and engine manage on-chain assets on the Sui blockchain using Move objects, wallet signing, and Programmable Transaction Blocks."
+    content="Hands-on tutorial showing how a game backend and client manage octopus identities, unique shells and pebbles, communal mussel farms, and Sui transactions using Move objects, Kiosk patterns, shared objects, and Programmable Transaction Blocks."
   />
   <link rel="stylesheet" href="./style.css" />
 </head>
@@ -16,11 +16,12 @@
   <main id="main" class="container">
     <section class="hero hero--compact">
       <p class="eyebrow">Web3 gaming · Sui blockchain</p>
-      <h1>Manage on-chain game assets with the Sui stack</h1>
+      <h1>Build an octopus society on Sui</h1>
       <p class="lede">
         A technical/storytelling tutorial showing how a game backend and client
-        work with Move modules, wallet signing, and Sui objects to mint, upgrade,
-        transfer, and retire player-owned assets.
+        work with Move modules, wallet signing, Sui objects, shared objects,
+        Kiosk-style trade, and Programmable Transaction Blocks in a game where
+        every player is one octopus living in a shared society.
       </p>
       <div class="hero-links">
         <a class="sample-link" href="./index.html#work">Back to portfolio</a>
@@ -31,30 +32,33 @@
       <article class="sample">
         <div class="sample-header">
           <div>
-            <h2>Giving players real ownership</h2>
+            <h2>Start with a society, not a loot table</h2>
             <p class="meta">Narrative context · Web2 vs Web3</p>
           </div>
         </div>
 
         <p>
-          Imagine you are building an action RPG where players collect weapons,
-          skins, and artifacts. In a traditional Web2 stack, each item is stored
-          in a game database and controlled entirely by the studio.
+          Imagine you are building a game where each player is one octopus living
+          among other octopi, trading shells and pebbles, tending communal mussel
+          farms, and building a reputation in a shared tide pool.
         </p>
         <p>
-          On Sui, each item can be represented as an on-chain object defined in Move.
-          A player can hold that object in a wallet, transfer it, and prove ownership
-          to other services directly on-chain.
+          In a traditional Web2 stack, that world usually collapses into rows in a
+          studio-controlled database. The octopus identity, the shells it owns, and
+          the farm it helps maintain are all ultimately just records the developer
+          can rewrite at will.
         </p>
         <p>
-          This tutorial shows how a game backend can expose a familiar API layer
-          while the blockchain-facing logic uses Sui objects and Programmable
-          Transaction Blocks under the hood.
+          On Sui, those parts of the world can be modeled as on-chain objects
+          defined in Move. The player can hold an octopus object in a wallet, own
+          unique shells and pebbles directly, and interact with shared structures
+          through explicit transaction logic.
         </p>
         <p>
-          The examples are intentionally simplified. They focus on transaction shape,
-          object flow, and responsibility boundaries rather than production concerns
-          such as sponsored transactions, key custody, retries, monitoring, or indexing.
+          This tutorial keeps the examples intentionally simplified. The focus is
+          on object shape, transaction flow, and system boundaries rather than full
+          production concerns such as sponsored transactions, indexing pipelines,
+          retries, observability, or custody design.
         </p>
       </article>
 
@@ -67,22 +71,23 @@
         </div>
 
         <p>
-          A common Sui integration pattern is to let the backend validate intent and
-          prepare transaction data, while signing happens in a wallet or another
-          explicitly trusted signer.
+          A common Sui integration pattern is still the same: the backend validates
+          intent and prepares transaction data, while signing happens in a wallet
+          or another explicitly trusted signer.
         </p>
 
         <ul>
-          <li>The game client calls your API, for example <code>POST /api/game/v1/assets</code>.</li>
-          <li>Your backend validates the request, resolves current on-chain inputs, and builds a transaction payload.</li>
-          <li>The payload is returned to the client for wallet approval, or routed to an authorized signer when the business flow requires service-controlled minting.</li>
+          <li>The game client calls your API, for example <code>POST /api/octopus/v1/shells</code> or <code>POST /api/octopus/v1/farms/{farm_id}/harvest</code>.</li>
+          <li>Your backend validates the request, resolves current on-chain object inputs, and builds a transaction payload.</li>
+          <li>The payload is returned to the client for wallet approval, or routed to an authorized signer when the product flow requires service-controlled minting.</li>
           <li>The signed transaction is submitted to the Sui network.</li>
-          <li>Your backend stores transaction digests, reads effects, and reconciles local metadata with on-chain state.</li>
+          <li>Your backend stores transaction digests, reads effects, and reconciles local metadata with the resulting on-chain object state.</li>
         </ul>
 
         <p>
-          This keeps your API developer-friendly without hiding the fact that the
-          source of truth for ownership and mutation is the Sui object model.
+          This keeps the API familiar for application developers without hiding the
+          fact that the source of truth for ownership, transfer, and mutation is
+          the Sui object model.
         </p>
       </article>
 
@@ -95,15 +100,16 @@
         </div>
 
         <ul>
-          <li>A Sui wallet on testnet with SUI for gas, unless you use sponsored transactions.</li>
+          <li>A Sui wallet on testnet with SUI for gas, unless your flow uses sponsored transactions.</li>
           <li>A current Sui full node or provider endpoint.</li>
-          <li>A published Move package for your game asset types.</li>
+          <li>A published Move package for your octopus, shell, pebble, and farm types.</li>
           <li>A backend service that can build transaction payloads and track transaction results.</li>
         </ul>
 
         <p>
-          Replace <code>{package_id}</code>, <code>{asset_object_id}</code>, and
-          wallet addresses with real values from your environment. Keep private keys,
+          Replace <code>{package_id}</code>, <code>{octopus_object_id}</code>,
+          <code>{shell_object_id}</code>, <code>{farm_object_id}</code>, and wallet
+          addresses with real values from your environment. Keep private keys,
           admin capabilities, and RPC secrets out of client code and out of source control.
         </p>
       </article>
@@ -111,326 +117,176 @@
       <article class="sample">
         <div class="sample-header">
           <div>
-            <h2>Move: Define the weapon asset</h2>
-            <p class="meta">Smart contract logic · Sui object semantics</p>
+            <h2>Move: Define the core game objects</h2>
+            <p class="meta">Smart contract logic · Identity object · Unique belongings</p>
           </div>
         </div>
 
         <p>
-          In Sui, owned objects need a <code>UID</code> field and the
+          In this game, the first important object is not a weapon. It is the
+          octopus itself. That object represents the player's identity in the
+          society, while shells and pebbles are unique belongings the octopus can
+          own, trade, and carry between interactions.
+        </p>
+        <p>
+          On Sui, owned objects need a <code>UID</code> field and the
           <code>key</code> ability. If you want an object to be transferable with
           <code>transfer::public_transfer</code>, it also needs the
           <code>store</code> ability.
         </p>
 
-        <pre class="code-panel"><code>module game_assets::weapon {
+        <pre class="code-panel"><code>module octopus_society::assets {
   use std::string::String;
   use sui::object::{Self, UID};
   use sui::transfer;
   use sui::tx_context::TxContext;
 
-  public struct Weapon has key, store {
+  public struct Octopus has key, store {
     id: UID,
     name: String,
-    power_level: u64,
+    age: u64,
+    territory: String,
+    reputation: u64,
+  }
+
+  public struct Shell has key, store {
+    id: UID,
+    label: String,
+    origin_reef: String,
     rarity: u8,
   }
 
-  public fun new(
-    name: String,
-    power_level: u64,
+  public struct Pebble has key, store {
+    id: UID,
+    shape: String,
+    colour: String,
     rarity: u8,
+  }
+
+  public fun new_octopus(
+    name: String,
+    age: u64,
+    territory: String,
     ctx: &mut TxContext,
-  ): Weapon {
-    Weapon {
+  ): Octopus {
+    Octopus {
       id: object::new(ctx),
       name,
-      power_level,
+      age,
+      territory,
+      reputation: 0,
+    }
+  }
+
+  public fun new_shell(
+    label: String,
+    origin_reef: String,
+    rarity: u8,
+    ctx: &mut TxContext,
+  ): Shell {
+    Shell {
+      id: object::new(ctx),
+      label,
+      origin_reef,
       rarity,
     }
   }
 
-  public entry fun mint_weapon(
+  public entry fun mint_octopus(
     name: String,
-    power_level: u64,
+    age: u64,
+    territory: String,
+    recipient: address,
+    ctx: &mut TxContext,
+  ) {
+    let octopus = new_octopus(name, age, territory, ctx);
+    transfer::public_transfer(octopus, recipient);
+  }
+
+  public entry fun mint_shell(
+    label: String,
+    origin_reef: String,
     rarity: u8,
     recipient: address,
     ctx: &mut TxContext,
   ) {
-    let weapon = new(name, power_level, rarity, ctx);
-    transfer::public_transfer(weapon, recipient);
+    let shell = new_shell(label, origin_reef, rarity, ctx);
+    transfer::public_transfer(shell, recipient);
   }
 
-  public entry fun upgrade_weapon(
-    weapon: &mut Weapon,
-    new_power_level: u64,
+  public entry fun polish_shell(
+    shell: &mut Shell,
     new_rarity: u8,
   ) {
-    weapon.power_level = new_power_level;
-    weapon.rarity = new_rarity;
+    shell.rarity = new_rarity;
   }
 
-  public entry fun transfer_weapon(
-    weapon: Weapon,
+  public entry fun transfer_shell(
+    shell: Shell,
     recipient: address,
   ) {
-    transfer::public_transfer(weapon, recipient);
+    transfer::public_transfer(shell, recipient);
   }
 
-  public entry fun burn_weapon(weapon: Weapon) {
-    let Weapon {
+  public entry fun retire_shell(shell: Shell) {
+    let Shell {
       id,
-      name: _,
-      power_level: _,
+      label: _,
+      origin_reef: _,
       rarity: _,
-    } = weapon;
+    } = shell;
     object::delete(id);
   }
 }</code></pre>
 
         <p>
-          This sample models a straightforward owned object lifecycle: mint, mutate,
-          transfer, and delete. It is intentionally simple, but it matches Sui's
-          object-based design much better than a pseudo-database or legacy RPC-style example.
+          This gives you a cleaner fit for the society described elsewhere in the
+          portfolio: one player, one octopus identity object, plus unique belongings
+          that can circulate between players without pretending they are fungible tokens.
         </p>
       </article>
 
       <article class="sample">
         <div class="sample-header">
           <div>
-            <h2>1. Mint a weapon</h2>
-            <p class="meta">POST /api/game/v1/assets · Create an owned object</p>
+            <h2>1. Mint an octopus identity</h2>
+            <p class="meta">POST /api/octopus/v1/identities · Create the player character</p>
           </div>
         </div>
 
         <p>
-          When a player completes a quest or onboarding flow, your backend can build
-          a transaction that calls <code>mint_weapon</code>. Depending on your product
-          model, that transaction may be signed by the player, by a game-controlled
-          signer, or through a sponsored flow.
+          In this world, onboarding is not "create a generic account and attach
+          cosmetics later." It is "mint the player's octopus identity." That
+          object becomes the anchor for age, territory, and future social actions.
         </p>
 
         <div class="code-switcher" data-code-group>
-          <div class="code-tabs" role="tablist" aria-label="Code examples for minting a weapon">
-            <button class="code-tab is-active" type="button" role="tab" id="mint-tab-curl" aria-selected="true" aria-controls="mint-panel-curl" data-code-tab="curl">cURL (game API)</button>
-            <button class="code-tab" type="button" role="tab" id="mint-tab-ts" aria-selected="false" aria-controls="mint-panel-ts" tabindex="-1" data-code-tab="ts">TypeScript SDK</button>
+          <div class="code-tabs" role="tablist" aria-label="Code examples for minting an octopus identity">
+            <button class="code-tab is-active" type="button" role="tab" id="identity-tab-curl" aria-selected="true" aria-controls="identity-panel-curl" data-code-tab="curl">cURL (game API)</button>
+            <button class="code-tab" type="button" role="tab" id="identity-tab-ts" aria-selected="false" aria-controls="identity-panel-ts" tabindex="-1" data-code-tab="ts">TypeScript SDK</button>
           </div>
 
-          <pre class="code-panel is-active" id="mint-panel-curl" role="tabpanel" aria-labelledby="mint-tab-curl" data-code-panel="curl"><code>curl -X POST "{base_url}/api/game/v1/assets" \
+          <pre class="code-panel is-active" id="identity-panel-curl" role="tabpanel" aria-labelledby="identity-tab-curl" data-code-panel="curl"><code>curl -X POST "{base_url}/api/octopus/v1/identities" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer {player_session_token}" \
   -d '{
-    "type": "weapon",
-    "name": "Blade of Dawn",
-    "power_level": 12,
-    "rarity": 3,
+    "name": "Nerida",
+    "age": 4,
+    "territory": "Glass Kelp Ridge",
     "recipient": "{player_sui_address}"
   }'</code></pre>
 
-          <pre class="code-panel" id="mint-panel-ts" role="tabpanel" aria-labelledby="mint-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
+          <pre class="code-panel" id="identity-panel-ts" role="tabpanel" aria-labelledby="identity-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
 
 const tx = new Transaction();
 
 tx.moveCall({
-  target: '{package_id}::weapon::mint_weapon',
+  target: '{package_id}::assets::mint_octopus',
   arguments: [
-    tx.pure.string('Blade of Dawn'),
-    tx.pure.u64(12),
-    tx.pure.u8(3),
+    tx.pure.string('Nerida'),
+    tx.pure.u64(4),
+    tx.pure.string('Glass Kelp Ridge'),
     tx.pure.address(playerAddress),
   ],
 });
 
-// Build the transaction for wallet approval or pass it to an authorized signer.</code></pre>
-        </div>
-      </article>
-
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>2. Upgrade a weapon</h2>
-            <p class="meta">PATCH /api/game/v1/assets/{object_id} · Mutate an owned object</p>
-          </div>
-        </div>
-
-        <p>
-          Upgrading changes the existing object in place. Because the Move function
-          takes <code>&mut Weapon</code>, the transaction must include the current
-          object as a mutable input.
-        </p>
-
-        <div class="code-switcher" data-code-group>
-          <div class="code-tabs" role="tablist" aria-label="Code examples for upgrading a weapon">
-            <button class="code-tab is-active" type="button" role="tab" id="upgrade-tab-curl" aria-selected="true" aria-controls="upgrade-panel-curl" data-code-tab="curl">cURL (game API)</button>
-            <button class="code-tab" type="button" role="tab" id="upgrade-tab-ts" aria-selected="false" aria-controls="upgrade-panel-ts" tabindex="-1" data-code-tab="ts">TypeScript SDK</button>
-          </div>
-
-          <pre class="code-panel is-active" id="upgrade-panel-curl" role="tabpanel" aria-labelledby="upgrade-tab-curl" data-code-panel="curl"><code>curl -X PATCH "{base_url}/api/game/v1/assets/{object_id}" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer {player_session_token}" \
-  -d '{
-    "power_level": 42,
-    "rarity": 5
-  }'</code></pre>
-
-          <pre class="code-panel" id="upgrade-panel-ts" role="tabpanel" aria-labelledby="upgrade-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
-
-const tx = new Transaction();
-
-tx.moveCall({
-  target: '{package_id}::weapon::upgrade_weapon',
-  arguments: [
-    tx.object('{asset_object_id}'),
-    tx.pure.u64(42),
-    tx.pure.u8(5),
-  ],
-});</code></pre>
-        </div>
-      </article>
-
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>3. Transfer a weapon</h2>
-            <p class="meta">POST /api/game/v1/trades · Change ownership on-chain</p>
-          </div>
-        </div>
-
-        <p>
-          The simplest trade flow is a direct transfer from one player to another.
-          In a production marketplace, you would usually combine transfer with
-          payment, escrow, validation, or kiosk-based rules.
-        </p>
-
-        <div class="code-switcher" data-code-group>
-          <div class="code-tabs" role="tablist" aria-label="Code examples for transferring a weapon">
-            <button class="code-tab is-active" type="button" role="tab" id="transfer-tab-curl" aria-selected="true" aria-controls="transfer-panel-curl" data-code-tab="curl">cURL (game API)</button>
-            <button class="code-tab" type="button" role="tab" id="transfer-tab-ts" aria-selected="false" aria-controls="transfer-panel-ts" tabindex="-1" data-code-tab="ts">TypeScript SDK</button>
-          </div>
-
-          <pre class="code-panel is-active" id="transfer-panel-curl" role="tabpanel" aria-labelledby="transfer-tab-curl" data-code-panel="curl"><code>curl -X POST "{base_url}/api/game/v1/trades" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer {seller_session_token}" \
-  -d '{
-    "object_id": "{weapon_object_id}",
-    "buyer_address": "{buyer_sui_address}",
-    "price_token": "SUI",
-    "price_amount": "10"
-  }'</code></pre>
-
-          <pre class="code-panel" id="transfer-panel-ts" role="tabpanel" aria-labelledby="transfer-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
-
-const tx = new Transaction();
-
-tx.moveCall({
-  target: '{package_id}::weapon::transfer_weapon',
-  arguments: [
-    tx.object('{weapon_object_id}'),
-    tx.pure.address(buyerAddress),
-  ],
-});</code></pre>
-        </div>
-      </article>
-
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>4. Retire a weapon</h2>
-            <p class="meta">DELETE /api/game/v1/assets/{object_id} · Remove the object</p>
-          </div>
-        </div>
-
-        <p>
-          To remove an asset permanently, consume the object and delete its
-          <code>UID</code>. After that, the object is no longer available for
-          future transfer or mutation.
-        </p>
-
-        <div class="code-switcher" data-code-group>
-          <div class="code-tabs" role="tablist" aria-label="Code examples for retiring a weapon">
-            <button class="code-tab is-active" type="button" role="tab" id="retire-tab-curl" aria-selected="true" aria-controls="retire-panel-curl" data-code-tab="curl">cURL (game API)</button>
-            <button class="code-tab" type="button" role="tab" id="retire-tab-move" aria-selected="false" aria-controls="retire-panel-move" tabindex="-1" data-code-tab="move">Move (burn)</button>
-          </div>
-
-          <pre class="code-panel is-active" id="retire-panel-curl" role="tabpanel" aria-labelledby="retire-tab-curl" data-code-panel="curl"><code>curl -X DELETE "{base_url}/api/game/v1/assets/{object_id}" \
-  -H "Authorization: Bearer {player_session_token}"</code></pre>
-
-          <pre class="code-panel" id="retire-panel-move" role="tabpanel" aria-labelledby="retire-tab-move" data-code-panel="move" hidden><code>public entry fun burn_weapon(weapon: Weapon) {
-  let Weapon {
-    id,
-    name: _,
-    power_level: _,
-    rarity: _,
-  } = weapon;
-  object::delete(id);
-}</code></pre>
-        </div>
-      </article>
-
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>Error handling and finality</h2>
-            <p class="meta">Gas, stale references, execution status, reconciliation</p>
-          </div>
-        </div>
-
-        <p>
-          Blockchain flows add failure modes that classic REST-only systems do not:
-          insufficient gas, signature rejection, stale object references, and
-          on-chain execution errors.
-        </p>
-
-        <ul>
-          <li>Model transaction creation, signature approval, submission, execution, and indexed state as separate states.</li>
-          <li>Rebuild transactions when object references become stale.</li>
-          <li>Store transaction digests and reconcile backend metadata from transaction effects.</li>
-          <li>Do not treat API acceptance as final success until on-chain execution is confirmed.</li>
-        </ul>
-      </article>
-
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>What this sample demonstrates</h2>
-            <p class="meta">Technical writing in a Web3 gaming context</p>
-          </div>
-        </div>
-
-        <ul>
-          <li>How to explain player ownership using Sui's object model instead of database metaphors alone.</li>
-          <li>How a backend API can support a wallet-centric transaction flow without hiding blockchain realities.</li>
-          <li>How Move object lifecycle operations map to a game narrative: mint, upgrade, transfer, and retire.</li>
-          <li>How to replace outdated integration examples with current Sui transaction-building patterns.</li>
-        </ul>
-      </article>
-    </section>
-  </main>
-
-  <script>
-    document.querySelectorAll("[data-code-group]").forEach((group) => {
-      const tabs = group.querySelectorAll("[data-code-tab]");
-      const panels = group.querySelectorAll("[data-code-panel]");
-
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          const selected = tab.dataset.codeTab;
-
-          tabs.forEach((item) => {
-            const isSelected = item === tab;
-            item.classList.toggle("is-active", isSelected);
-            item.setAttribute("aria-selected", String(isSelected));
-            item.tabIndex = isSelected ? 0 : -1;
-          });
-
-          panels.forEach((panel) => {
-            const isSelected = panel.dataset.codePanel === selected;
-            panel.classList.toggle("is-active", isSelected);
-            panel.toggleAttribute("hidden", !isSelected);
-          });
-        });
-      });
-    });
-  </script>
-</body>
-</html>
