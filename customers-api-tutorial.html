@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Customers API tutorial — Piotr Oszenda</title>
   <meta
     name="description"
-    content="Sample API tutorial showing how to create, retrieve, update, and delete a customer record."
+    content="Hands-on API tutorial showing how to create, retrieve, update, and delete a customer record with a fictional Customers API."
   />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -22,55 +22,57 @@
   <header class="site-header">
     <div class="container">
       <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-        <a href="./index.html#work">Portfolio</a>
-        <span aria-hidden="true">/</span>
-        <span>Customers API tutorial v1</span>
+        <a href="./index.html#work">Back to portfolio</a>
       </nav>
 
       <section class="hero hero--compact" aria-labelledby="page-title">
-        <p class="eyebrow">API tutorial</p>
+        <p class="eyebrow">Developer documentation sample</p>
         <h1 id="page-title">Manage a customer record with the Customers API</h1>
+
         <p class="lede">
-          A sample developer tutorial showing a simple customer lifecycle workflow across create, retrieve, update, and delete operations.
+          A fictional API tutorial that demonstrates how to structure a clear onboarding workflow for a single resource, from authentication and setup to create, retrieve, update, and delete operations.
         </p>
 
         <div class="hero-actions">
-          <a class="button-link button-link--primary" href="./index.html#work">Back to portfolio</a>
+          <a class="button-link button-link--primary" href="#tutorial">Read tutorial</a>
+          <a class="button-link" href="./index.html#work">Back to portfolio</a>
         </div>
 
-        <div class="hero-stats" aria-label="Tutorial characteristics">
-          <span class="hero-stat">Developer documentation</span>
-          <span class="hero-stat">Step-by-step workflow</span>
-          <span class="hero-stat">Fictional API example</span>
-          <span class="hero-stat">CRUD tutorial</span>
+        <div class="hero-stats" aria-label="Tutorial metadata">
+          <span class="hero-stat">REST API</span>
+          <span class="hero-stat">CRUD workflow</span>
+          <span class="hero-stat">cURL + JavaScript</span>
+          <span class="hero-stat">Interactive tabs</span>
         </div>
       </section>
     </div>
   </header>
 
   <main id="main">
-    <section class="section" aria-labelledby="overview-title">
+    <section class="section" id="tutorial" aria-labelledby="overview-title">
       <div class="container">
         <div class="section-header">
-          <p class="section-kicker">Context</p>
-          <h2 class="section-title" id="overview-title">Overview</h2>
+          <p class="section-kicker">Overview</p>
+          <h2 class="section-title" id="overview-title">A compact API onboarding flow</h2>
           <p class="section-intro">
-            This sample is designed to show tutorial structure, flow, and developer-facing writing style rather than describe a real production API.
+            This sample is designed as an onboarding tutorial for developers who need one complete workflow before moving on to broader API reference material.
           </p>
         </div>
 
         <article class="sample">
           <div class="sample-header">
             <div class="sample-heading">
-              <h3>What this tutorial covers</h3>
-              <p class="meta">Sample content · Fictional API</p>
+              <h3>Scenario</h3>
+              <p class="meta">Tutorial framing · first-use workflow</p>
             </div>
           </div>
+
           <p class="sample-summary">
-            This tutorial demonstrates a simple end-to-end workflow for managing customer data with the Customers API. The API, URLs, and example data are fictional and are provided only to illustrate structure, flow, and writing style.
+            The tutorial follows a single customer record through a full lifecycle. This keeps the reader focused on one resource, one sequence, and one clear success outcome.
           </p>
+
           <p class="sample-summary">
-            In the following steps, you create, retrieve, update, and delete a customer record by using the <code>/api/1.0/customers</code> endpoint and the permanent customer <code>id</code> returned by the API.
+            The API in this example is fictional. The structure, pacing, and explanation style are intended to demonstrate how I write task-based developer documentation.
           </p>
         </article>
       </div>
@@ -82,7 +84,7 @@
           <p class="section-kicker">Preparation</p>
           <h2 class="section-title" id="before-you-start-title">Before you start</h2>
           <p class="section-intro">
-            The tutorial assumes a standard API workflow with authentication, environment-specific base URLs, and a tool for testing requests.
+            The setup section defines what the user needs before sending a first request and reduces ambiguity around environment, access, and tooling.
           </p>
         </div>
 
@@ -90,30 +92,47 @@
           <div class="sample-header">
             <div class="sample-heading">
               <h3>Requirements</h3>
-              <p class="meta">Access · Environment · Request tooling</p>
+              <p class="meta">Environment · access · request tooling</p>
             </div>
           </div>
-          <p class="sample-summary">Before you begin, make sure you have:</p>
+
           <ul>
-            <li>An API access token with permission to call the Customers API.</li>
-            <li>The base URL for your environment, for example sandbox or production.</li>
+            <li>An API access token with permission to use the Customers API.</li>
+            <li>The base URL for the target environment, such as sandbox or production.</li>
             <li>A tool for sending HTTP requests, such as <code>curl</code> or Postman.</li>
-            <li>Network access to the <code>/api/1.0/customers</code> endpoint.</li>
+            <li>Basic familiarity with JSON request and response payloads.</li>
           </ul>
+
           <p class="sample-summary">
-            In the examples below, replace <code>{base_url}</code> and <code>{access_token}</code> with your own values.
+            Replace placeholder values such as <code>{base_url}</code> and <code>{access_token}</code> with your own values before running the examples.
           </p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>Authentication headers</h3>
+              <p class="meta">Bearer token authentication</p>
+            </div>
+          </div>
+
+          <p class="sample-summary">
+            All requests in this tutorial use bearer token authentication and JSON where a request body is required.
+          </p>
+
+          <pre class="code-panel is-active"><code>Authorization: Bearer {access_token}
+Content-Type: application/json</code></pre>
         </article>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="workflow-title">
+    <section class="section" aria-labelledby="crud-title">
       <div class="container">
         <div class="section-header">
           <p class="section-kicker">Workflow</p>
-          <h2 class="section-title" id="workflow-title">Customer lifecycle tutorial</h2>
+          <h2 class="section-title" id="crud-title">Customer lifecycle tutorial</h2>
           <p class="section-intro">
-            The sequence below follows a simple CRUD flow so developers can understand how a customer record is created and then reused in later requests.
+            Each step pairs explanatory context with switchable code examples so readers can compare request styles without leaving the flow.
           </p>
         </div>
 
@@ -124,6 +143,7 @@
               <p class="meta">POST /api/1.0/customers</p>
             </div>
           </div>
+
           <p class="sample-summary">
             Use a <code>POST</code> request to create a new customer record. The response returns a permanent <code>id</code> that you use in later requests.
           </p>
@@ -167,10 +187,12 @@
     email: "john@doe.com"
   })
 });
+
 const customer = await response.json();</code></pre>
           </div>
 
           <p class="sample-summary">Example response:</p>
+
           <pre class="code-panel is-active"><code>{
   "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
   "full_name": "John Doe",
@@ -187,6 +209,7 @@ const customer = await response.json();</code></pre>
               <p class="meta">GET /api/1.0/customers/{id}</p>
             </div>
           </div>
+
           <p class="sample-summary">
             Use a <code>GET</code> request to retrieve the customer record by using the <code>id</code> returned in the previous step.
           </p>
@@ -219,10 +242,12 @@ const customer = await response.json();</code></pre>
     Authorization: `Bearer ${accessToken}`
   }
 });
+
 const customerDetails = await response.json();</code></pre>
           </div>
 
           <p class="sample-summary">Example response:</p>
+
           <pre class="code-panel is-active"><code>{
   "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
   "full_name": "John Doe",
@@ -239,6 +264,7 @@ const customerDetails = await response.json();</code></pre>
               <p class="meta">PATCH /api/1.0/customers/{id}</p>
             </div>
           </div>
+
           <p class="sample-summary">
             Use a <code>PATCH</code> request to update selected fields on an existing customer record.
           </p>
@@ -267,7 +293,7 @@ const customerDetails = await response.json();</code></pre>
 -H "Authorization: Bearer {access_token}" \
 -H "Content-Type: application/json" \
 -d '{
-  "full_name": "Johnathan Doe"
+  "email": "john.doe@newdomain.com"
 }'</code></pre>
 
             <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
@@ -277,19 +303,21 @@ const customerDetails = await response.json();</code></pre>
     "Content-Type": "application/json"
   },
   body: JSON.stringify({
-    full_name: "Johnathan Doe"
+    email: "john.doe@newdomain.com"
   })
 });
+
 const updatedCustomer = await response.json();</code></pre>
           </div>
 
           <p class="sample-summary">Example response:</p>
+
           <pre class="code-panel is-active"><code>{
   "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
-  "full_name": "Johnathan Doe",
-  "email": "john@doe.com",
+  "full_name": "John Doe",
+  "email": "john.doe@newdomain.com",
   "created_at": "2022-06-13T12:03:39.979397Z",
-  "updated_at": "2022-06-13T12:16:11.103004Z"
+  "updated_at": "2022-06-13T12:14:04.321890Z"
 }</code></pre>
         </article>
 
@@ -300,8 +328,9 @@ const updatedCustomer = await response.json();</code></pre>
               <p class="meta">DELETE /api/1.0/customers/{id}</p>
             </div>
           </div>
+
           <p class="sample-summary">
-            Use a <code>DELETE</code> request to remove the customer record when you no longer need it.
+            Use a <code>DELETE</code> request to remove the resource after the workflow is complete.
           </p>
 
           <div class="code-switcher" data-code-group>
@@ -336,6 +365,7 @@ const updatedCustomer = await response.json();</code></pre>
           </div>
 
           <p class="sample-summary">Example response:</p>
+
           <pre class="code-panel is-active"><code>{
   "status": "deleted",
   "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh"
@@ -343,79 +373,31 @@ const updatedCustomer = await response.json();</code></pre>
         </article>
       </div>
     </section>
-
-    <section class="section" aria-labelledby="result-title">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-kicker">Outcome</p>
-          <h2 class="section-title" id="result-title">Result</h2>
-          <p class="section-intro">
-            The tutorial is intended as a compact writing sample that demonstrates sequence, clarity, and code-example structure for a developer audience.
-          </p>
-        </div>
-
-        <article class="sample">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3>What this sample demonstrates</h3>
-              <p class="meta">Structure · Task flow · Developer guidance</p>
-            </div>
-          </div>
-          <p class="sample-summary">
-            The page shows how a simple workflow can be broken into small, reusable steps that combine task explanation, endpoint context, request examples, and example responses in a predictable format.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="notes-title">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-kicker">Notes</p>
-          <h2 class="section-title" id="notes-title">Notes</h2>
-          <p class="section-intro">
-            These notes clarify the scope of the sample and the purpose of the examples used throughout the tutorial.
-          </p>
-        </div>
-
-        <article class="sample">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3>Scope and assumptions</h3>
-              <p class="meta">Fictional data · Documentation sample</p>
-            </div>
-          </div>
-          <p class="sample-summary">
-            The API and all example responses are fictional. The purpose of the sample is to show tutorial design, sequencing, and writing style rather than represent a production-ready reference.
-          </p>
-        </article>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>Piotr Oszenda · Technical writing portfolio</p>
+      <p>Customers API tutorial sample — part of the Piotr Oszenda technical writing portfolio.</p>
     </div>
   </footer>
 
   <script>
-    document.querySelectorAll('[data-code-group]').forEach((group) => {
-      const tabs = group.querySelectorAll('[data-code-tab]');
-      const panels = group.querySelectorAll('[data-code-panel]');
+    document.querySelectorAll("[data-code-group]").forEach((group) => {
+      const tabs = Array.from(group.querySelectorAll("[data-code-tab]"));
+      const panels = Array.from(group.querySelectorAll("[data-code-panel]"));
 
       tabs.forEach((tab) => {
-        tab.addEventListener('click', () => {
+        tab.addEventListener("click", () => {
           const target = tab.dataset.codeTab;
 
           tabs.forEach((item) => {
-            const isActive = item === tab;
-            item.classList.toggle('is-active', isActive);
-            item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            const isActive = item.dataset.codeTab === target;
+            item.classList.toggle("is-active", isActive);
+            item.setAttribute("aria-pressed", String(isActive));
           });
 
           panels.forEach((panel) => {
-            panel.classList.toggle('is-active', panel.dataset.codePanel === target);
+            panel.classList.toggle("is-active", panel.dataset.codePanel === target);
           });
         });
       });
