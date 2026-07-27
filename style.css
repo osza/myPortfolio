@@ -299,7 +299,6 @@ code:not(pre code) {
 
 .hero-actions,
 .hero-links,
-.sample-actions,
 .breadcrumb-nav,
 .header-links {
   display: flex;
@@ -338,6 +337,7 @@ code:not(pre code) {
 .sample-link {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.45rem;
   width: fit-content;
   padding: 0.72rem 1rem;
@@ -348,6 +348,7 @@ code:not(pre code) {
   color: var(--text);
   font-size: var(--text-sm);
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .button-link:hover,
@@ -452,20 +453,23 @@ code:not(pre code) {
 .sample-header {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   gap: var(--space-4);
-  align-items: start;
+}
+
+.sample-heading {
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .sample-heading .meta {
   margin-top: var(--space-2);
 }
 
-.sample + .sample {
-  margin-top: 0;
-}
-
-.sample-actions {
-  margin-top: var(--space-4);
+.sample-link {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  margin-left: auto;
 }
 
 .contact-grid {
@@ -623,6 +627,12 @@ tr:last-child td {
 
   .sample-header {
     flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sample-link {
+    margin-left: 0;
+    margin-top: var(--space-3);
   }
 }
 
@@ -655,15 +665,18 @@ tr:last-child td {
   .hero-actions,
   .hero-links,
   .hero-stats,
-  .sample-actions,
   .breadcrumb-nav,
   .header-links {
     gap: var(--space-2);
   }
 
   .button-link,
-  .sample-link,
   .hero-stat {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .sample-link {
     width: 100%;
     justify-content: center;
   }
