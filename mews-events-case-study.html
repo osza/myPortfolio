@@ -22,9 +22,7 @@
   <header class="site-header">
     <div class="container">
       <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-        <a href="./index.html#work">Portfolio</a>
-        <span aria-hidden="true">/</span>
-        <span>Mews Events case study</span>
+        <a href="./index.html#work">Back to portfolio</a>
       </nav>
 
       <section class="hero hero--compact" aria-labelledby="page-title">
@@ -119,39 +117,66 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="approach-title">
+    <section class="section" aria-labelledby="challenge-title">
       <div class="container">
         <div class="section-header">
-          <p class="section-kicker">Process</p>
-          <h2 class="section-title" id="approach-title">Approach</h2>
+          <p class="section-kicker">Problem</p>
+          <h2 class="section-title" id="challenge-title">The documentation challenge</h2>
           <p class="section-intro">
-            The work required building structure from incomplete inputs while keeping the documentation practical for users and sustainable for future maintenance.
+            The module needed to be documented quickly, but the source material was not structured for end users and did not yet fit Mews documentation standards.
           </p>
         </div>
 
         <article class="sample">
           <div class="sample-header">
             <div class="sample-heading">
-              <h3>How I worked</h3>
-              <p class="meta">Audit · Product demos · Stakeholder collaboration</p>
+              <h3>Main constraints</h3>
+              <p class="meta">Migration · consistency · usability</p>
             </div>
           </div>
-          <p class="sample-summary">
-            I worked from limited original material, product demos, stage testing, and discussions with product, UX, onboarding, support, and development teams. This helped me reconstruct user workflows, understand terminology gaps, and identify which content would need to be discoverable both in the help center and through product-linked guidance.
-          </p>
-        </article>
 
-        <article class="sample">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3>How I shaped the structure</h3>
-              <p class="meta">Task-based navigation · UI alignment · Terminology consistency</p>
-            </div>
-          </div>
-          <p class="sample-summary">
-            The final structure combined UI-based navigation with task-based workflows and clearer glossary alignment. It also created a stronger foundation for internal consistency, future localization, and maintenance as the product area evolved.
-          </p>
+          <ul>
+            <li>The existing material was fragmented and largely support-oriented.</li>
+            <li>The new area needed to fit an established help center model and taxonomy.</li>
+            <li>Users needed task-focused content, not internal implementation notes.</li>
+            <li>The structure had to support future expansion and localization.</li>
+          </ul>
         </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="approach-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Approach</p>
+          <h2 class="section-title" id="approach-title">How I structured the work</h2>
+          <p class="section-intro">
+            I approached the project as both a content and systems problem, so the published articles would be useful immediately and maintainable later.
+          </p>
+        </div>
+
+        <div class="writing-sample">
+          <article class="note">
+            <p class="sample-type">Information architecture</p>
+            <p>
+              I mapped the module into a clear help center structure with logical entry points, article groupings, and user-oriented navigation.
+            </p>
+          </article>
+
+          <article class="note">
+            <p class="sample-type">Content design</p>
+            <p>
+              I translated internal operational knowledge into public-facing documentation focused on tasks, concepts, and discoverability.
+            </p>
+          </article>
+
+          <article class="note">
+            <p class="sample-type">Operational setup</p>
+            <p>
+              I organised the CMS layer in Salesforce so the content model would be easier to maintain, connect, and scale.
+            </p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -161,28 +186,42 @@
           <p class="section-kicker">Outcome</p>
           <h2 class="section-title" id="outcome-title">Result</h2>
           <p class="section-intro">
-            The outcome was not only a set of articles, but a usable documentation structure that could support release, onboarding, and future scaling.
+            The project delivered a documentation area that matched the rest of the Mews help center and gave the module a clearer public-facing entry point.
           </p>
         </div>
 
-        <article class="sample">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3>Release-ready documentation hub</h3>
-              <p class="meta">Public help content · Maintainable foundation</p>
-            </div>
-          </div>
-          <p class="sample-summary">
-            The result was a public-facing documentation hub ready at release, with a clearer structure for users, better support for onboarding, and a solid base for future content improvements, localization, and AI consumption.
-          </p>
-        </article>
+        <div class="samples-grid">
+          <article class="sample-card">
+            <p class="sample-type">Clarity</p>
+            <h3>Usable public structure</h3>
+            <p>
+              The documentation was reorganised into a model that was easier for customers to browse and understand.
+            </p>
+          </article>
+
+          <article class="sample-card">
+            <p class="sample-type">Consistency</p>
+            <h3>Aligned with Mews standards</h3>
+            <p>
+              The new content fit the established help center architecture instead of feeling like a separate imported product.
+            </p>
+          </article>
+
+          <article class="sample-card">
+            <p class="sample-type">Scalability</p>
+            <h3>Ready for future growth</h3>
+            <p>
+              The CMS and content structure supported later additions, editing, and long-term documentation maintenance.
+            </p>
+          </article>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>Piotr Oszenda · Technical writing portfolio</p>
+      <p>Mews Events case study — part of the Piotr Oszenda technical writing portfolio.</p>
     </div>
   </footer>
 </body>
