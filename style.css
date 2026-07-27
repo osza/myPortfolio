@@ -306,7 +306,6 @@ code:not(pre code) {
 .sample-card,
 .contact-card,
 .sample,
-.code-panel,
 .note,
 .editorial-note,
 .table-wrapper {
@@ -439,19 +438,26 @@ code:not(pre code) {
   font-weight: 600;
 }
 
+.code-switcher {
+  margin-top: var(--space-5);
+}
+
 .code-tabs {
   display: flex;
   gap: var(--space-2);
-  margin: var(--space-5) 0 var(--space-3);
+  margin: 0 0 var(--space-3);
+  flex-wrap: wrap;
 }
 
 .code-tab {
   padding: 0.65rem 0.9rem;
+  border: 1px solid transparent;
   border-radius: var(--radius-full);
   background: var(--code-tab-bg);
   color: var(--text-soft);
   font-size: var(--text-sm);
   font-weight: 600;
+  cursor: pointer;
 }
 
 .code-tab.is-active {
@@ -460,12 +466,19 @@ code:not(pre code) {
 }
 
 .code-panel {
-  margin-top: var(--space-4);
+  display: none;
+  margin-top: 0;
   padding: var(--space-5);
   overflow-x: auto;
+  border: 1px solid var(--code-border);
+  border-radius: var(--radius-lg);
   background: var(--code-bg);
   color: var(--code-text);
-  border-color: var(--code-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.code-panel.is-active {
+  display: block;
 }
 
 .code-panel code {
