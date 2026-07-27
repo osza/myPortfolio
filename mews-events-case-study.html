@@ -1,105 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mews Events case study — Piotr Oszenda</title>
   <meta
     name="description"
     content="Case study about designing the documentation architecture for Mews Events."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
   />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <main id="main" class="container">
-    <section class="hero hero--compact">
-      <p class="eyebrow">Case study</p>
-      <h1>Mews Events</h1>
-      <p class="lede">
-        Documentation architecture for a newly acquired module used to manage
-        quotes for hotel-hosted events.
-      </p>
+  <header class="site-header">
+    <div class="container">
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <a href="./index.html#work">Portfolio</a>
+        <span aria-hidden="true">/</span>
+        <span>Mews Events case study</span>
+      </nav>
 
-      <div class="hero-links">
-        <a class="sample-link" href="./index.html#work">Back to portfolio</a>
-        <a
-          class="sample-link"
-          href="https://help.mews.com/s/topic/0TOQC000000pMxl4AE/mews-events"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Open documentation hub
-        </a>
+      <section class="hero hero--compact" aria-labelledby="page-title">
+        <p class="eyebrow">Case study</p>
+        <h1 id="page-title">Mews Events</h1>
+        <p class="lede">
+          Documentation architecture for a newly acquired module used to manage quotes for hotel-hosted events.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button-link button-link--primary" href="./index.html#work">Back to portfolio</a>
+          <a
+            class="button-link"
+            href="https://help.mews.com/s/topic/0TOQC000000pMxl4AE/mews-events"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open documentation hub
+          </a>
+        </div>
+
+        <div class="hero-stats" aria-label="Case study focus">
+          <span class="hero-stat">Information architecture</span>
+          <span class="hero-stat">Help center content</span>
+          <span class="hero-stat">Workflow design</span>
+          <span class="hero-stat">Localization readiness</span>
+        </div>
+      </section>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section" aria-labelledby="overview-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Context</p>
+          <h2 class="section-title" id="overview-title">Overview</h2>
+          <p class="section-intro">
+            This case study shows how I approached documentation architecture for a newly integrated product area and turned fragmented internal material into a release-ready public documentation hub.
+          </p>
+        </div>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>Starting point</h3>
+              <p class="meta">New module · Fragmented source material</p>
+            </div>
+          </div>
+          <p class="sample-summary">
+            Mews Events, originally quotello, was brought into the Mews product ecosystem as a module for event quotes and related workflows. Before release, the documentation existed only as fragmented internal notes, written mainly for support use and not ready for public help content.
+          </p>
+        </article>
       </div>
     </section>
 
-    <section class="section">
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>Overview</h2>
-            <p class="meta">Information architecture · Help center content</p>
-          </div>
+    <section class="section" aria-labelledby="role-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Contribution</p>
+          <h2 class="section-title" id="role-title">What I did</h2>
+          <p class="section-intro">
+            My role combined information architecture, content design, system organisation, and writing for a product area that needed to fit the broader Mews help model from day one.
+          </p>
         </div>
-        <p>
-          Mews Events, originally quotello, was brought into the Mews product
-          ecosystem as a module for event quotes and related workflows. Before
-          release, the documentation existed only as fragmented internal notes,
-          written mainly for support use and not ready for public help content.
-        </p>
-      </article>
 
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>What I did</h2>
-            <p class="meta">Structure · Writing · Localization readiness</p>
-          </div>
-        </div>
-        <p>
-          I designed the documentation architecture for the new product area,
-          including navigation nodes, internal CMS structure in Salesforce, page
-          templates, cross-linking, tagging, and content writing. The goal was
-          to align the module with the existing Mews help center model and make
-          the content easier to find, localize, and maintain.
-        </p>
-      </article>
-
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>Approach</h2>
-            <p class="meta">
-              Audit · Workflow-based structure · Terminology alignment
+        <div class="samples-grid">
+          <article class="sample-card">
+            <p class="sample-type">Structure</p>
+            <h3>Documentation architecture</h3>
+            <p>
+              I designed the overall documentation structure for the new product area, including navigation nodes, article grouping, and a model that aligned the module with the existing Mews help center.
             </p>
-          </div>
-        </div>
-        <p>
-          I worked from limited original material, product demos, stage testing,
-          and discussions with product, UX, onboarding, support, and
-          development teams. The final structure combined UI-based navigation
-          with task-based workflows and clearer glossary alignment, while also
-          linking key articles back into the product UI.
-        </p>
-      </article>
+          </article>
 
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>Result</h2>
-            <p class="meta">Release-ready documentation</p>
-          </div>
+          <article class="sample-card">
+            <p class="sample-type">System design</p>
+            <h3>CMS organisation</h3>
+            <p>
+              I defined internal CMS structure in Salesforce, including templates, cross-linking patterns, and tagging, so the content would be easier to manage and expand over time.
+            </p>
+          </article>
+
+          <article class="sample-card">
+            <p class="sample-type">Content</p>
+            <h3>Public-facing help content</h3>
+            <p>
+              I wrote and shaped content that could move beyond support-only internal notes and become clearer, easier to find, and ready for broader user-facing use.
+            </p>
+          </article>
         </div>
-        <p>
-          The result was a public-facing documentation hub ready at release,
-          with a clearer structure for users, better support for onboarding, and
-          a solid base for future content improvements, localization, and AI
-          consumption.
-        </p>
-      </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="approach-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Process</p>
+          <h2 class="section-title" id="approach-title">Approach</h2>
+          <p class="section-intro">
+            The work required building structure from incomplete inputs while keeping the documentation practical for users and sustainable for future maintenance.
+          </p>
+        </div>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>How I worked</h3>
+              <p class="meta">Audit · Product demos · Stakeholder collaboration</p>
+            </div>
+          </div>
+          <p class="sample-summary">
+            I worked from limited original material, product demos, stage testing, and discussions with product, UX, onboarding, support, and development teams. This helped me reconstruct user workflows, understand terminology gaps, and identify which content would need to be discoverable both in the help center and through product-linked guidance.
+          </p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>How I shaped the structure</h3>
+              <p class="meta">Task-based navigation · UI alignment · Terminology consistency</p>
+            </div>
+          </div>
+          <p class="sample-summary">
+            The final structure combined UI-based navigation with task-based workflows and clearer glossary alignment. It also created a stronger foundation for internal consistency, future localization, and maintenance as the product area evolved.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="outcome-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Outcome</p>
+          <h2 class="section-title" id="outcome-title">Result</h2>
+          <p class="section-intro">
+            The outcome was not only a set of articles, but a usable documentation structure that could support release, onboarding, and future scaling.
+          </p>
+        </div>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>Release-ready documentation hub</h3>
+              <p class="meta">Public help content · Maintainable foundation</p>
+            </div>
+          </div>
+          <p class="sample-summary">
+            The result was a public-facing documentation hub ready at release, with a clearer structure for users, better support for onboarding, and a solid base for future content improvements, localization, and AI consumption.
+          </p>
+        </article>
+      </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Piotr Oszenda · Technical writing portfolio</p>
+    </div>
+  </footer>
 </body>
 </html>
