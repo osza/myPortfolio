@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>How I design docs‑as‑code workflows — Piotr Oszenda</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <title>How I design docs-as-code workflows — Piotr Oszenda</title>
   <meta
     name="description"
-    content="How I design docs‑as‑code workflows for API, integration, and product documentation."
+    content="Documentation architecture sample showing how I design practical docs-as-code workflows, contributor processes, and governance structures."
+  />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
   />
   <link rel="stylesheet" href="./style.css" />
 </head>
@@ -15,216 +21,205 @@
 
   <header class="site-header">
     <div class="container">
-      <p class="eyebrow">Docs‑as‑code</p>
-      <h1>How I design docs‑as‑code workflows</h1>
-      <p class="intro-secondary">
-        I treat documentation as part of the delivery system (release), not as a layer added
-        after implementation. This page outlines how I structure docs‑as‑code
-        workflows so API and integration documentation stays versioned, reviewable,
-        technically accurate, and ready to ship with the product.
-      </p>
-      <div class="header-links">
-        <a href="./index.html">Back to portfolio</a>
-      </div>
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <a href="./index.html#work">Back to portfolio</a>
+      </nav>
+
+      <section class="hero hero--compact" aria-labelledby="page-title">
+        <p class="eyebrow">Documentation architecture sample</p>
+        <h1 id="page-title">How I design docs-as-code workflows</h1>
+
+        <p class="lede">
+          A representative sample that shows how I structure documentation systems around contribution flow, content review, publishing control, and long-term maintainability.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button-link button-link--primary" href="#workflow">Read workflow</a>
+          <a class="button-link" href="./index.html#work">Back to portfolio</a>
+        </div>
+
+        <div class="hero-stats" aria-label="Workflow focus">
+          <span class="hero-stat">Docs-as-code</span>
+          <span class="hero-stat">Governance</span>
+          <span class="hero-stat">Contributor flow</span>
+          <span class="hero-stat">Information architecture</span>
+        </div>
+      </section>
     </div>
   </header>
 
   <main id="main">
-    <section class="section">
+    <section class="section" id="workflow" aria-labelledby="overview-title">
       <div class="container">
-        <h2 class="section-title">Operating model</h2>
-        <div class="sample">
-          <p>
-            In the perfect documentation setup, product docs, API reference,
-            integration guides, and shared examples all live in a version‑controlled
-            environment alongside the artefacts that define product behaviour.
+        <div class="section-header">
+          <p class="section-kicker">Overview</p>
+          <h2 class="section-title" id="overview-title">Documentation systems need more than version control</h2>
+          <p class="section-intro">
+            A docs-as-code setup is effective when contribution flow, ownership, review, and publishing are designed as one connected system rather than as isolated tooling decisions.
           </p>
-          <p>
-            That usually means API reference is generated from a source‑of‑truth
-            specification such as OpenAPI, while explanatory content is maintained
-            as Markdown or HTML with structured metadata, reusable components,
-            navigation, and search.
+        </div>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>Core principle</h3>
+              <p class="meta">Process design · documentation operations</p>
+            </div>
+          </div>
+
+          <p class="sample-summary">
+            I treat docs-as-code as an operating model, not just a repository pattern. The repository, branching strategy, review path, and publishing process must all support the people who maintain the documentation.
           </p>
-          <p>
-            The key idea is simple: documentation should move through the same
-            delivery path as the product itself. It should be planned, reviewed,
-            tested, versioned, and deployed with the same discipline as code.
+
+          <p class="sample-summary">
+            The goal is not simply to “store docs in Git”. The goal is to make documentation easier to update, review, reuse, and trust over time.
           </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="workflow-components-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">System design</p>
+          <h2 class="section-title" id="workflow-components-title">Workflow components I usually define first</h2>
+          <p class="section-intro">
+            Before selecting detailed tooling patterns, I define the contribution model, review ownership, structure rules, and publishing expectations.
+          </p>
+        </div>
+
+        <div class="samples-grid">
+          <article class="sample-card">
+            <p class="sample-type">Contribution</p>
+            <h3>Who can change content</h3>
+            <p>
+              Define whether documentation is owned by a central team, distributed across product teams, or maintained through a hybrid contribution model.
+            </p>
+          </article>
+
+          <article class="sample-card">
+            <p class="sample-type">Review</p>
+            <h3>How changes are approved</h3>
+            <p>
+              Clarify technical review, editorial review, and publication rules so contributors understand what “done” means.
+            </p>
+          </article>
+
+          <article class="sample-card">
+            <p class="sample-type">Publishing</p>
+            <h3>What reaches production</h3>
+            <p>
+              Separate draft, review, and release states to prevent incomplete or unvalidated content from being published accidentally.
+            </p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" aria-labelledby="flow-title">
       <div class="container">
-        <h2 class="section-title">OpenAPI as the anchor</h2>
-        <div class="sample">
-          <p>
-            For API documentation, I prefer to use the OpenAPI specification as the
-            anchor (source of truth) for accuracy and consistency. The YAML or JSON spec defines
-            endpoints, parameters, request and response bodies, status codes, and
-            reusable schemas.
+        <div class="section-header">
+          <p class="section-kicker">Flow</p>
+          <h2 class="section-title" id="flow-title">A practical contributor path</h2>
+          <p class="section-intro">
+            The most effective workflows reduce ambiguity. Contributors should always know where to make a change, how to propose it, and what happens next.
           </p>
-          <p>
-            From there, I use tooling to generate the core reference layer and then
-            add the human layer on top: explanations, examples, task‑based guides,
-            edge cases, and integration notes that help developers understand not
-            just what the API exposes, but how to use it well.
+        </div>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>Suggested lifecycle</h3>
+              <p class="meta">Draft · review · publish · maintain</p>
+            </div>
+          </div>
+
+          <div class="mermaid">
+flowchart LR
+  A[Identify change] --> B[Update source content]
+  B --> C[Open pull request]
+  C --> D[Editorial and technical review]
+  D --> E[Merge approved changes]
+  E --> F[Publish automatically]
+  F --> G[Monitor and maintain]
+          </div>
+
+          <p class="sample-summary">
+            This sequence keeps the workflow understandable for occasional contributors while still providing the control needed for high-value or technically sensitive documentation.
           </p>
-          <p>
-            This split keeps the mechanical parts aligned with implementation while
-            preserving room for editorial quality and developer education.
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="governance-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Governance</p>
+          <h2 class="section-title" id="governance-title">Rules that make documentation easier to trust</h2>
+          <p class="section-intro">
+            Governance should not create friction for its own sake. It should make content quality, ownership, and update responsibility easier to understand.
           </p>
-          <ul>
-            <li>OpenAPI in the repository as the primary behavioural artefact.</li>
-            <li>Generated or semi‑generated API reference from the specification.</li>
-            <li>Guides that explain workflows, decisions, and edge cases.</li>
-            <li>Reusable snippets for authentication, pagination, retries, and error handling.</li>
-          </ul>
+        </div>
+
+        <div class="writing-sample">
+          <article class="note">
+            <p class="sample-type">Ownership</p>
+            <p>
+              Assign clear responsibility for each content area so updates do not stall between product, support, and documentation teams.
+            </p>
+          </article>
+
+          <article class="note">
+            <p class="sample-type">Standards</p>
+            <p>
+              Use templates, front matter rules, and content patterns to make contributions more consistent and easier to review.
+            </p>
+          </article>
+
+          <article class="note">
+            <p class="sample-type">Maintenance</p>
+            <p>
+              Build maintenance into the workflow with periodic review, change triggers, and clear expectations for stale content.
+            </p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" aria-labelledby="outcome-title">
       <div class="container">
-        <h2 class="section-title">Workflow in practice</h2>
-        <div class="sample">
-          <p>
-            In day‑to‑day work, I structure documentation repositories so that API
-            specs, generated reference inputs, guides, and shared examples are easy
-            to maintain together. The goal is to reduce fragmentation and make the
-            relationship between reference and narrative content visible.
-          </p>
-          <p>
-            I usually work in focused branches such as
-            <code>feature/new-endpoint</code> or <code>fix/error-responses</code>,
-            keep commits small, and use pull requests as the main review surface
-            for documentation changes.
-          </p>
-          <p>
-            When behaviour changes, engineers typically own the implementation and
-            the corresponding specification updates, while I focus on descriptions,
-            examples, terminology, information architecture, and the surrounding
-            guidance. Where I edit the specification directly, those changes still
-            go through engineering review so the reference stays aligned with the
-            real API.
-          </p>
-          <p>
-            Before merge, I expect automated checks such as linting, link
-            validation, and site builds to catch structural issues early, before
-            they become production documentation defects.
+        <div class="section-header">
+          <p class="section-kicker">Outcome</p>
+          <h2 class="section-title" id="outcome-title">What a good docs-as-code workflow should achieve</h2>
+          <p class="section-intro">
+            The right workflow improves documentation quality because it improves the path from product change to published explanation.
           </p>
         </div>
-      </div>
-    </section>
 
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">Collaboration model</h2>
-        <div class="sample">
-          <p>
-            I treat documentation as a cross‑functional system rather than a
-            handoff. Product, engineering, support, and documentation each bring a
-            different lens: behaviour, priorities, terminology, customer needs,
-            and completeness.
-          </p>
-          <p>
-            For larger changes, I prefer to start with a short documentation plan
-            or outline before drafting. That gives stakeholders a fast way to align
-            on scope, audience, gaps, and dependencies before the writing expands.
-          </p>
-          <p>
-            Pull requests remain the main review mechanism. Engineers validate
-            technical correctness, while product and support teams review coverage,
-            wording, and user scenarios. This creates a traceable decision history
-            and makes documentation changes easier to audit over time.
-          </p>
-        </div>
-      </div>
-    </section>
+        <div class="samples-grid">
+          <article class="sample-card">
+            <p class="sample-type">Speed</p>
+            <h3>Faster updates</h3>
+            <p>
+              Contributors can ship improvements through a known process instead of waiting for manual publishing steps or unclear ownership.
+            </p>
+          </article>
 
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">Tooling and governance</h2>
-        <div class="sample">
-          <p>
-            I rely on Git as the operational backbone for documentation: branches,
-            pull requests, tags, and releases all help make documentation changes
-            visible, reviewable, and reversible.
-          </p>
-          <p>
-            For API specifications, I work with OpenAPI in YAML or JSON and use
-            tools that validate the specification and generate parts of the
-            reference. For narrative content, I prefer lightweight formats such as
-            Markdown with structured front matter for metadata and navigation.
-          </p>
-          <p>
-            Over time, I like to add governance through automation: style checks,
-            structural validation, link checking, and build verification. That
-            keeps quality standards enforceable as documentation volume grows.
-          </p>
-          <p>
-            This portfolio itself is versioned in Git and released through GitHub
-            releases, which reflects the same principle on a smaller scale:
-            documentation is a maintained product, not a static asset.
-          </p>
-        </div>
-      </div>
-    </section>
+          <article class="sample-card">
+            <p class="sample-type">Quality</p>
+            <h3>More reliable review</h3>
+            <p>
+              Editorial and technical checks become part of the workflow rather than optional follow-up work.
+            </p>
+          </article>
 
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">From change to release</h2>
-        <div class="sample">
-          <p>
-            The flow below shows the path I aim for in a docs‑as‑code environment:
-            a product or API change triggers structured documentation work, review,
-            automated checks, and a predictable publishing step.
-          </p>
-
-          <pre class="mermaid">%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffffff', 'primaryTextColor': '#111111', 'primaryBorderColor': '#333333', 'lineColor': '#333333', 'background': '#ffffff', 'nodeBorder': '#333333'}}}%%
-flowchart TD
-  A2["① PREPARE"]:::phase_prepare
-  B["API or product change"]:::prepare
-  C["Create docs task or issue"]:::prepare
-  D["Create docs branch in Git"]:::prepare
-  E["Update OpenAPI YAML spec\n(Limited)"]:::prepare
-  F["Update API reference\n(Limited)"]:::prepare
-  G["Update guides and tutorials"]:::prepare
-
-  R["② REVIEW"]:::phase_review
-  H["Open pull request"]:::review
-  I["Engineering review\n(technical accuracy)"]:::review
-  IB["PM and support review\n(coverage and terminology)"]:::review
-  J["CI checks\nbuild · lint · links"]:::review
-
-  S["③ SHIP"]:::phase_ship
-  K["Merge to main"]:::ship
-  L["Auto‑deploy docs site"]:::ship
-  M["Updated knowledge hub\nand API docs live"]:::ship
-
-  A2 --> B --> C --> D --> E --> F --> G
-  G --> R
-  R --> H
-  H --> I
-  H --> IB
-  I --> J
-  IB --> J
-  J -->|pass| S
-  S --> K --> L --> M
-
-  classDef phase_prepare fill:#1a7a4a,stroke:#0f4f2e,color:#ffffff,font-weight:bold
-  classDef prepare fill:#d4edda,stroke:#1a7a4a,color:#111111
-  classDef phase_review fill:#1a4a8a,stroke:#0f2e5a,color:#ffffff,font-weight:bold
-  classDef review fill:#d0e4f7,stroke:#1a4a8a,color:#111111
-  classDef phase_ship fill:#b85c00,stroke:#7a3c00,color:#ffffff,font-weight:bold
-  classDef ship fill:#fde8cc,stroke:#b85c00,color:#111111</pre>
-
-          <p class="note">
-            The exact tooling changes from team to team, but the underlying model
-            stays consistent: one trusted API definition, documentation stored as
-            code, collaborative review, and an automated path from change to
-            published docs.
-          </p>
+          <article class="sample-card">
+            <p class="sample-type">Scale</p>
+            <h3>Better long-term maintainability</h3>
+            <p>
+              The system supports growth because it standardises contribution, publication, and accountability across teams.
+            </p>
+          </article>
         </div>
       </div>
     </section>
@@ -232,18 +227,8 @@ flowchart TD
 
   <footer class="site-footer">
     <div class="container">
-      <p>© Piotr Oszenda · Docs‑as‑code workflow design overview</p>
+      <p>Docs-as-code workflow sample — part of the Piotr Oszenda technical writing portfolio.</p>
     </div>
   </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({
-        startOnLoad: true,
-        theme: "default"
-      });
-    }
-  </script>
 </body>
 </html>
