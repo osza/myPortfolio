@@ -1,107 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Customers API tutorial — Piotr Oszenda</title>
   <meta
     name="description"
     content="Sample API tutorial showing how to create, retrieve, update, and delete a customer record."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
   />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <main id="main" class="container">
-    <section class="hero hero--compact">
-      <p class="eyebrow">API tutorial</p>
-      <h1>Manage a customer record with the Customers API</h1>
-      <p class="lede">
-        A sample developer tutorial showing a simple customer lifecycle workflow
-        across create, retrieve, update, and delete operations.
-      </p>
-      <div class="hero-links">
-        <a class="sample-link" href="./index.html#work">Back to portfolio</a>
+  <header class="site-header">
+    <div class="container">
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <a href="./index.html#work">Portfolio</a>
+        <span aria-hidden="true">/</span>
+        <span>Customers API tutorial v1</span>
+      </nav>
+
+      <section class="hero hero--compact" aria-labelledby="page-title">
+        <p class="eyebrow">API tutorial</p>
+        <h1 id="page-title">Manage a customer record with the Customers API</h1>
+        <p class="lede">
+          A sample developer tutorial showing a simple customer lifecycle workflow across create, retrieve, update, and delete operations.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button-link button-link--primary" href="./index.html#work">Back to portfolio</a>
+        </div>
+
+        <div class="hero-stats" aria-label="Tutorial characteristics">
+          <span class="hero-stat">Developer documentation</span>
+          <span class="hero-stat">Step-by-step workflow</span>
+          <span class="hero-stat">Fictional API example</span>
+          <span class="hero-stat">CRUD tutorial</span>
+        </div>
+      </section>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section" aria-labelledby="overview-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Context</p>
+          <h2 class="section-title" id="overview-title">Overview</h2>
+          <p class="section-intro">
+            This sample is designed to show tutorial structure, flow, and developer-facing writing style rather than describe a real production API.
+          </p>
+        </div>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>What this tutorial covers</h3>
+              <p class="meta">Sample content · Fictional API</p>
+            </div>
+          </div>
+          <p class="sample-summary">
+            This tutorial demonstrates a simple end-to-end workflow for managing customer data with the Customers API. The API, URLs, and example data are fictional and are provided only to illustrate structure, flow, and writing style.
+          </p>
+          <p class="sample-summary">
+            In the following steps, you create, retrieve, update, and delete a customer record by using the <code>/api/1.0/customers</code> endpoint and the permanent customer <code>id</code> returned by the API.
+          </p>
+        </article>
       </div>
     </section>
 
-    <section class="section">
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>Overview</h2>
-            <p class="meta">Sample content · Fictional API</p>
-          </div>
+    <section class="section" aria-labelledby="before-you-start-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Preparation</p>
+          <h2 class="section-title" id="before-you-start-title">Before you start</h2>
+          <p class="section-intro">
+            The tutorial assumes a standard API workflow with authentication, environment-specific base URLs, and a tool for testing requests.
+          </p>
         </div>
-        <p>
-          This tutorial demonstrates a simple end‑to‑end workflow for managing customer data with the Customers API. The API, URLs, and example data are fictional and are provided only to illustrate structure, flow, and writing style.
-        </p>
-        <p>
-          In the following steps, you create, retrieve, update, and delete a customer record by using the <code>/api/1.0/customers</code> endpoint and the
-          permanent customer <code>id</code> returned by the API.
-        </p>
-      </article>
 
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>Before you start</h2>
-            <p class="meta">Requirements</p>
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>Requirements</h3>
+              <p class="meta">Access · Environment · Request tooling</p>
+            </div>
           </div>
-        </div>
-        <p>Before you begin, make sure you have:</p>
-        <ul>
-          <li>An API access token with permission to call the Customers API.</li>
-          <li>The base URL for your environment (for example, sandbox or production).</li>
-          <li>A tool for sending HTTP requests, such as <code>curl</code> or Postman.</li>
-          <li>Network access to the <code>/api/1.0/customers</code> endpoint.</li>
-        </ul>
-        <p>
-          In the examples below, replace <code>{base_url}</code> and
-          <code>{access_token}</code> with your own values.
-        </p>
-      </article>
+          <p class="sample-summary">Before you begin, make sure you have:</p>
+          <ul>
+            <li>An API access token with permission to call the Customers API.</li>
+            <li>The base URL for your environment, for example sandbox or production.</li>
+            <li>A tool for sending HTTP requests, such as <code>curl</code> or Postman.</li>
+            <li>Network access to the <code>/api/1.0/customers</code> endpoint.</li>
+          </ul>
+          <p class="sample-summary">
+            In the examples below, replace <code>{base_url}</code> and <code>{access_token}</code> with your own values.
+          </p>
+        </article>
+      </div>
+    </section>
 
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>1. Create a customer</h2>
-            <p class="meta">POST /api/1.0/customers</p>
-          </div>
+    <section class="section" aria-labelledby="workflow-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Workflow</p>
+          <h2 class="section-title" id="workflow-title">Customer lifecycle tutorial</h2>
+          <p class="section-intro">
+            The sequence below follows a simple CRUD flow so developers can understand how a customer record is created and then reused in later requests.
+          </p>
         </div>
-        <p>
-          Use a <code>POST</code> request to create a new customer record. The
-          response returns a permanent <code>id</code> that you use in later
-          requests.
-        </p>
-        <div class="code-switcher" data-code-group>
-          <div class="code-tabs" aria-label="Code examples for creating a customer">
-            <button
-              class="code-tab is-active"
-              type="button"
-              data-code-tab="curl"
-              aria-pressed="true"
-            >
-              cURL
-            </button>
-            <button
-              class="code-tab"
-              type="button"
-              data-code-tab="javascript"
-              aria-pressed="false"
-            >
-              JavaScript
-            </button>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>1. Create a customer</h3>
+              <p class="meta">POST /api/1.0/customers</p>
+            </div>
           </div>
-          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X POST "{base_url}/api/1.0/customers" \
+          <p class="sample-summary">
+            Use a <code>POST</code> request to create a new customer record. The response returns a permanent <code>id</code> that you use in later requests.
+          </p>
+
+          <div class="code-switcher" data-code-group>
+            <div class="code-tabs" aria-label="Code examples for creating a customer">
+              <button
+                class="code-tab is-active"
+                type="button"
+                data-code-tab="curl"
+                aria-pressed="true"
+              >
+                cURL
+              </button>
+              <button
+                class="code-tab"
+                type="button"
+                data-code-tab="javascript"
+                aria-pressed="false"
+              >
+                JavaScript
+              </button>
+            </div>
+
+            <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X POST "{base_url}/api/1.0/customers" \
 -H "Authorization: Bearer {access_token}" \
 -H "Content-Type: application/json" \
 -d '{
   "full_name": "John Doe",
   "email": "john@doe.com"
 }'</code></pre>
-          <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers`, {
+
+            <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers`, {
   method: "POST",
   headers: {
     Authorization: `Bearer ${accessToken}`,
@@ -113,237 +168,254 @@
   })
 });
 const customer = await response.json();</code></pre>
-        </div>
-        <p>Example response:</p>
-        <pre><code>{
+          </div>
+
+          <p class="sample-summary">Example response:</p>
+          <pre class="code-panel is-active"><code>{
   "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
   "full_name": "John Doe",
   "email": "john@doe.com",
   "created_at": "2022-06-13T12:03:39.979397Z",
   "updated_at": "2022-06-13T12:03:39.979397Z"
 }</code></pre>
-      </article>
+        </article>
 
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>2. Retrieve a customer</h2>
-            <p class="meta">GET /api/1.0/customers/{id}</p>
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>2. Retrieve a customer</h3>
+              <p class="meta">GET /api/1.0/customers/{id}</p>
+            </div>
           </div>
-        </div>
-        <p>
-          Use a <code>GET</code> request to retrieve the customer record by
-          using the <code>id</code> returned in the previous step.
-        </p>
-        <div class="code-switcher" data-code-group>
-          <div class="code-tabs" aria-label="Code examples for retrieving a customer">
-            <button
-              class="code-tab is-active"
-              type="button"
-              data-code-tab="curl"
-              aria-pressed="true"
-            >
-              cURL
-            </button>
-            <button
-              class="code-tab"
-              type="button"
-              data-code-tab="javascript"
-              aria-pressed="false"
-            >
-              JavaScript
-            </button>
-          </div>
-          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X GET "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
+          <p class="sample-summary">
+            Use a <code>GET</code> request to retrieve the customer record by using the <code>id</code> returned in the previous step.
+          </p>
+
+          <div class="code-switcher" data-code-group>
+            <div class="code-tabs" aria-label="Code examples for retrieving a customer">
+              <button
+                class="code-tab is-active"
+                type="button"
+                data-code-tab="curl"
+                aria-pressed="true"
+              >
+                cURL
+              </button>
+              <button
+                class="code-tab"
+                type="button"
+                data-code-tab="javascript"
+                aria-pressed="false"
+              >
+                JavaScript
+              </button>
+            </div>
+
+            <pre class="code-panel is-active" data-code-panel="curl"><code>curl "{base_url}/api/1.0/customers/{id}" \
 -H "Authorization: Bearer {access_token}"</code></pre>
-          <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(
-  `${baseUrl}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh`,
-  {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${accessToken}`
-    }
+
+            <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
+  headers: {
+    Authorization: `Bearer ${accessToken}`
   }
-);
-const customer = await response.json();</code></pre>
-        </div>
-        <p>Example response:</p>
-        <pre><code>{
+});
+const customerDetails = await response.json();</code></pre>
+          </div>
+
+          <p class="sample-summary">Example response:</p>
+          <pre class="code-panel is-active"><code>{
   "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
   "full_name": "John Doe",
   "email": "john@doe.com",
   "created_at": "2022-06-13T12:03:39.979397Z",
   "updated_at": "2022-06-13T12:03:39.979397Z"
 }</code></pre>
-      </article>
+        </article>
 
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>3. Update a customer</h2>
-            <p class="meta">PATCH /api/1.0/customers/{id}</p>
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>3. Update a customer</h3>
+              <p class="meta">PATCH /api/1.0/customers/{id}</p>
+            </div>
           </div>
-        </div>
-        <p>
-          Use a <code>PATCH</code> request to update selected fields on the
-          customer record. In this example, you change the customer's name and
-          add a business name.
-        </p>
-        <div class="code-switcher" data-code-group>
-          <div class="code-tabs" aria-label="Code examples for updating a customer">
-            <button
-              class="code-tab is-active"
-              type="button"
-              data-code-tab="curl"
-              aria-pressed="true"
-            >
-              cURL
-            </button>
-            <button
-              class="code-tab"
-              type="button"
-              data-code-tab="javascript"
-              aria-pressed="false"
-            >
-              JavaScript
-            </button>
-          </div>
-          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X PATCH "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
+          <p class="sample-summary">
+            Use a <code>PATCH</code> request to update selected fields on an existing customer record.
+          </p>
+
+          <div class="code-switcher" data-code-group>
+            <div class="code-tabs" aria-label="Code examples for updating a customer">
+              <button
+                class="code-tab is-active"
+                type="button"
+                data-code-tab="curl"
+                aria-pressed="true"
+              >
+                cURL
+              </button>
+              <button
+                class="code-tab"
+                type="button"
+                data-code-tab="javascript"
+                aria-pressed="false"
+              >
+                JavaScript
+              </button>
+            </div>
+
+            <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X PATCH "{base_url}/api/1.0/customers/{id}" \
 -H "Authorization: Bearer {access_token}" \
 -H "Content-Type: application/json" \
 -d '{
-  "full_name": "John Smith",
-  "business_name": "Blahblah Ltd"
+  "full_name": "Johnathan Doe"
 }'</code></pre>
-          <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(
-  `${baseUrl}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh`,
-  {
-    method: "PATCH",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      full_name: "John Smith",
-      business_name: "Blahblah Ltd"
-    })
-  }
-);
-const customer = await response.json();</code></pre>
-        </div>
-        <p>Example response:</p>
-        <pre><code>{
+
+            <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
+  method: "PATCH",
+  headers: {
+    Authorization: `Bearer ${accessToken}`,
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    full_name: "Johnathan Doe"
+  })
+});
+const updatedCustomer = await response.json();</code></pre>
+          </div>
+
+          <p class="sample-summary">Example response:</p>
+          <pre class="code-panel is-active"><code>{
   "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh",
-  "full_name": "John Smith",
-  "business_name": "Blahblah Ltd",
+  "full_name": "Johnathan Doe",
   "email": "john@doe.com",
   "created_at": "2022-06-13T12:03:39.979397Z",
-  "updated_at": "2022-06-13T12:10:13.979397Z"
+  "updated_at": "2022-06-13T12:16:11.103004Z"
 }</code></pre>
-        <p>
-          Only the fields included in the request body are updated. Other fields,
-          such as <code>email</code>, remain unchanged.
-        </p>
-      </article>
+        </article>
 
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>4. Delete a customer</h2>
-            <p class="meta">DELETE /api/1.0/customers/{id}</p>
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>4. Delete a customer</h3>
+              <p class="meta">DELETE /api/1.0/customers/{id}</p>
+            </div>
           </div>
-        </div>
-        <p>Use a <code>DELETE</code> request to remove the customer record.</p>
-        <div class="code-switcher" data-code-group>
-          <div class="code-tabs" aria-label="Code examples for deleting a customer">
-            <button
-              class="code-tab is-active"
-              type="button"
-              data-code-tab="curl"
-              aria-pressed="true"
-            >
-              cURL
-            </button>
-            <button
-              class="code-tab"
-              type="button"
-              data-code-tab="javascript"
-              aria-pressed="false"
-            >
-              JavaScript
-            </button>
-          </div>
-          <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X DELETE "{base_url}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh" \
+          <p class="sample-summary">
+            Use a <code>DELETE</code> request to remove the customer record when you no longer need it.
+          </p>
+
+          <div class="code-switcher" data-code-group>
+            <div class="code-tabs" aria-label="Code examples for deleting a customer">
+              <button
+                class="code-tab is-active"
+                type="button"
+                data-code-tab="curl"
+                aria-pressed="true"
+              >
+                cURL
+              </button>
+              <button
+                class="code-tab"
+                type="button"
+                data-code-tab="javascript"
+                aria-pressed="false"
+              >
+                JavaScript
+              </button>
+            </div>
+
+            <pre class="code-panel is-active" data-code-panel="curl"><code>curl -X DELETE "{base_url}/api/1.0/customers/{id}" \
 -H "Authorization: Bearer {access_token}"</code></pre>
-          <pre class="code-panel" data-code-panel="javascript"><code>await fetch(
-  `${baseUrl}/api/1.0/customers/9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh`,
-  {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${accessToken}`
-    }
+
+            <pre class="code-panel" data-code-panel="javascript"><code>await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
+  method: "DELETE",
+  headers: {
+    Authorization: `Bearer ${accessToken}`
   }
-);</code></pre>
-        </div>
-        <p>A successful request returns:</p>
-        <pre><code>204 No Content</code></pre>
-        <p>A <code>204 No Content</code> response indicates that the customer record was deleted successfully.</p>
-      </article>
-
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>Result</h2>
-            <p class="meta">End-to-end workflow</p>
+});</code></pre>
           </div>
-        </div>
-        <p>
-          You have created a customer, retrieved it by <code>id</code>, updated
-          selected fields, and deleted the record. This completes a basic end-to-end
-          workflow for managing customer data with the Customers API.
-        </p>
-      </article>
 
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>Notes</h2>
-            <p class="meta">Implementation details</p>
-          </div>
+          <p class="sample-summary">Example response:</p>
+          <pre class="code-panel is-active"><code>{
+  "status": "deleted",
+  "id": "9c7c97a8-ac45-bh78-8b38-26a74fdf1fgh"
+}</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="result-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Outcome</p>
+          <h2 class="section-title" id="result-title">Result</h2>
+          <p class="section-intro">
+            The tutorial is intended as a compact writing sample that demonstrates sequence, clarity, and code-example structure for a developer audience.
+          </p>
         </div>
-        <ul>
-          <li>Use the same customer <code>id</code> throughout the workflow.</li>
-          <li>Include the <code>Authorization</code> header in every request.</li>
-          <li>For requests that include a JSON body, such as <code>POST</code> or <code>PATCH</code>, include the <code>Content-Type: application/json</code> header.</li>
-          <li>
-            Use <code>PATCH</code> when you want to update selected fields
-            instead of replacing the entire object.
-          </li>
-        </ul>
-      </article>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>What this sample demonstrates</h3>
+              <p class="meta">Structure · Task flow · Developer guidance</p>
+            </div>
+          </div>
+          <p class="sample-summary">
+            The page shows how a simple workflow can be broken into small, reusable steps that combine task explanation, endpoint context, request examples, and example responses in a predictable format.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="notes-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Notes</p>
+          <h2 class="section-title" id="notes-title">Notes</h2>
+          <p class="section-intro">
+            These notes clarify the scope of the sample and the purpose of the examples used throughout the tutorial.
+          </p>
+        </div>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>Scope and assumptions</h3>
+              <p class="meta">Fictional data · Documentation sample</p>
+            </div>
+          </div>
+          <p class="sample-summary">
+            The API and all example responses are fictional. The purpose of the sample is to show tutorial design, sequencing, and writing style rather than represent a production-ready reference.
+          </p>
+        </article>
+      </div>
     </section>
   </main>
 
+  <footer class="site-footer">
+    <div class="container">
+      <p>Piotr Oszenda · Technical writing portfolio</p>
+    </div>
+  </footer>
+
   <script>
-    document.querySelectorAll("[data-code-group]").forEach((group) => {
-      const tabs = group.querySelectorAll("[data-code-tab]");
-      const panels = group.querySelectorAll("[data-code-panel]");
+    document.querySelectorAll('[data-code-group]').forEach((group) => {
+      const tabs = group.querySelectorAll('[data-code-tab]');
+      const panels = group.querySelectorAll('[data-code-panel]');
 
       tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          const selected = tab.dataset.codeTab;
+        tab.addEventListener('click', () => {
+          const target = tab.dataset.codeTab;
 
           tabs.forEach((item) => {
-            const isSelected = item === tab;
-            item.classList.toggle("is-active", isSelected);
-            item.setAttribute("aria-pressed", String(isSelected));
+            const isActive = item === tab;
+            item.classList.toggle('is-active', isActive);
+            item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
           });
 
           panels.forEach((panel) => {
-            panel.classList.toggle(
-              "is-active",
-              panel.dataset.codePanel === selected
-            );
+            panel.classList.toggle('is-active', panel.dataset.codePanel === target);
           });
         });
       });
