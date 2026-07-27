@@ -273,11 +273,15 @@ a:hover {
   color: var(--text-soft);
 }
 
+.section-intro + .section-intro {
+  margin-top: var(--space-4);
+}
+
 .samples-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-5);
-  align-items: start;
+  align-items: stretch;
 }
 
 .sample-card,
@@ -294,29 +298,23 @@ a:hover {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: var(--space-5);
-  min-height: 0;
-}
-
-.sample-card-featured {
-  grid-column: 1 / -1;
+  min-height: 100%;
   padding: var(--space-6);
   background: linear-gradient(to bottom, var(--surface), var(--surface-soft));
 }
 
-.sample-card h3 {
-  margin: 0;
-  max-width: 20ch;
-  font-size: clamp(1.45rem, 1.5vw, 1.85rem);
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+.sample-card:hover {
+  border-color: rgba(15, 118, 110, 0.2);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
-.sample-card:not(.sample-card-featured) h3 {
+.sample-card h3 {
+  margin: 0;
   max-width: 18ch;
-  font-size: 1.1rem;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.35rem, 1.8vw, 1.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
 }
 
 .sample-card h3 a {
@@ -580,14 +578,6 @@ footer .section-intro a:hover,
 }
 
 @media (max-width: 900px) {
-  .samples-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .sample-card-featured {
-    grid-column: auto;
-  }
-
   .sample-header {
     flex-direction: column;
     align-items: flex-start;
@@ -642,5 +632,9 @@ footer .section-intro a:hover,
 
   .code-panel code {
     font-size: 0.88rem;
+  }
+
+  .samples-grid {
+    grid-template-columns: 1fr;
   }
 }
