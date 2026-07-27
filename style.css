@@ -272,6 +272,10 @@ code:not(pre code) {
   margin-top: var(--space-4);
 }
 
+.editorial-note {
+  margin-top: var(--space-6);
+}
+
 .section-header {
   margin-bottom: var(--space-8);
 }
