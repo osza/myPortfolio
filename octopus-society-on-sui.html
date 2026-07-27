@@ -1,24 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Building an Octopus Society on Sui | Technical Writing Sample by Piotr Oszenda</title>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Octopus Society on Sui — Piotr Oszenda</title>
   <meta
     name="description"
-    content="Technical writing sample by Piotr Oszenda explaining why Sui is a strong architectural fit for a multiplayer blockchain game built around persistent identity, unique objects, shared community structures, and verifiable randomness."
+    content="Writing sample about structuring user-facing blockchain product content for Octopus Society on Sui."
   />
-  <meta name="author" content="Piotr Oszenda" />
-  <meta name="robots" content="index,follow" />
-
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="Building an Octopus Society on Sui" />
-  <meta
-    property="og:description"
-    content="An interview-style technical writing sample explaining why Sui fits a multiplayer blockchain game built around shared ownership, unique assets, and verifiable randomness."
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
   />
-
-  <link rel="canonical" href="./octopus-society-on-sui.html" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
@@ -27,191 +22,200 @@
   <header class="site-header">
     <div class="container">
       <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-        <a href="./index.html">Portfolio</a>
-        <span aria-hidden="true">/</span>
-        <span>Writing sample</span>
+        <a href="./index.html#work">Back to portfolio</a>
       </nav>
 
-      <section class="hero hero--compact">
-        <p class="eyebrow">Technical writing sample · Web3 gaming · Sui blockchain</p>
-
-        <h1>Building an Octopus Society on Sui</h1>
-
+      <section class="hero hero--compact" aria-labelledby="page-title">
+        <p class="eyebrow">Product writing sample</p>
+        <h1 id="page-title">Octopus Society on Sui</h1>
         <p class="lede">
-          This sample uses an interview format to explain why Sui is a strong
-          architectural fit for a multiplayer blockchain game where each player
-          embodies a single octopus living in a shared ocean society, trading
-          unique objects and maintaining communal farms.
+          A sample focused on turning a complex blockchain product into clearer, more approachable user-facing documentation and launch content.
         </p>
 
         <div class="hero-actions">
-          <a class="sample-link" href="./index.html#work">Back to portfolio</a>
+          <a class="button-link button-link--primary" href="./index.html#work">Back to portfolio</a>
         </div>
 
-        <div class="hero-stats" aria-label="Sample highlights">
-          <span class="hero-stat">Interview format</span>
-          <span class="hero-stat">Architecture rationale</span>
-          <span class="hero-stat">Shared objects</span>
-          <span class="hero-stat">Verifiable randomness</span>
+        <div class="hero-stats" aria-label="Sample focus">
+          <span class="hero-stat">Web3 content</span>
+          <span class="hero-stat">User education</span>
+          <span class="hero-stat">Product positioning</span>
+          <span class="hero-stat">Technical clarity</span>
         </div>
       </section>
     </div>
   </header>
 
   <main id="main">
-    <section class="section">
+    <section class="section" aria-labelledby="overview-title">
       <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Context</p>
+          <h2 class="section-title" id="overview-title">Overview</h2>
+          <p class="section-intro">
+            This sample shows how I would shape communication for a blockchain-based product so that the user journey remains understandable even when the underlying system is technically complex.
+          </p>
+        </div>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>Documentation goal</h3>
+              <p class="meta">Accessibility · trust · onboarding</p>
+            </div>
+          </div>
+
+          <p class="sample-summary">
+            Products built on blockchain infrastructure often combine unfamiliar terminology, new trust assumptions, and technical steps that can overwhelm first-time users. The writing goal is to reduce that friction without oversimplifying the product.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="challenge-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Problem</p>
+          <h2 class="section-title" id="challenge-title">Why this kind of product content is difficult</h2>
+          <p class="section-intro">
+            Blockchain product communication often fails when it assumes too much prior knowledge or prioritises novelty over user understanding.
+          </p>
+        </div>
+
         <div class="samples-grid">
           <article class="sample-card">
-            <p class="sample-type">What this sample demonstrates</p>
-            <h2>Portfolio value</h2>
-            <ul>
-              <li>Audience-aware explanation of blockchain architecture through a fictional product concept.</li>
-              <li>Clear translation of technical primitives into user-facing design implications.</li>
-              <li>Structured long-form writing designed for readability, scannability, and portfolio review.</li>
-            </ul>
+            <p class="sample-type">Language</p>
+            <h3>Specialised terminology</h3>
+            <p>
+              Terms related to wallets, networks, tokens, and on-chain actions can become barriers if they are introduced without context.
+            </p>
+          </article>
+
+          <article class="sample-card">
+            <p class="sample-type">Trust</p>
+            <h3>High-stakes user actions</h3>
+            <p>
+              Blockchain interactions often feel irreversible, so users need clearer expectations and stronger reassurance before acting.
+            </p>
+          </article>
+
+          <article class="sample-card">
+            <p class="sample-type">Flow</p>
+            <h3>Multi-step onboarding</h3>
+            <p>
+              Setup often spans wallet creation, funding, connection, and feature discovery, which makes sequence design especially important.
+            </p>
           </article>
         </div>
       </div>
     </section>
 
-    <article class="section writing-sample">
+    <section class="section" aria-labelledby="approach-title">
       <div class="container">
-        <header class="section-header">
-          <p class="section-kicker">Interview format</p>
-          <h2 class="section-title">Why Sui fits the concept</h2>
+        <div class="section-header">
+          <p class="section-kicker">Approach</p>
+          <h2 class="section-title" id="approach-title">How I would structure the content</h2>
           <p class="section-intro">
-            The sections below show how the platform choice is justified through
-            gameplay requirements such as identity, ownership, shared state,
-            scalability, and trust.
+            My approach is to introduce technical ideas only when the user needs them and to keep product meaning ahead of protocol detail.
           </p>
-        </header>
+        </div>
 
-        <section class="sample" aria-labelledby="scene-title">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3 id="scene-title">Setting the scene</h3>
-              <p class="meta">Concept framing · Multiplayer society design</p>
-            </div>
-          </div>
-          <p class="sample-summary"><strong>Interviewer:</strong> Let's set the scene. This isn't a "collect and hoard" game — it's a society. Every player is one octopus, living among other octopi, trading shells and pebbles, farming mussels together. Why does that framing matter when you're choosing a blockchain?</p>
-          <p class="sample-summary"><strong>Developer:</strong> Because it changes what actually needs to be true on-chain. A collection game just needs "player owns object." A society needs objects to move between many owners constantly, some objects to be jointly managed, and the whole thing to feel alive and responsive rather than like a spreadsheet with a shell icon.</p>
-          <p class="sample-summary">That is a much higher bar for the underlying platform, and it is exactly the bar I used when I looked at Sui.</p>
-        </section>
+        <div class="writing-sample">
+          <article class="note">
+            <p class="sample-type">Onboarding</p>
+            <p>
+              Start with what the product lets the user do, then explain only the minimum blockchain concepts needed to complete that action.
+            </p>
+          </article>
 
-        <section class="sample" aria-labelledby="identity-title">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3 id="identity-title">One player, one octopus</h3>
-              <p class="meta">Persistent identity · On-chain player model</p>
-            </div>
-          </div>
-          <p class="sample-summary"><strong>Interviewer:</strong> Start with the octopus itself. One player, one octopus — that's the player's identity in this world. What does that need from the chain?</p>
-          <p class="sample-summary"><strong>Developer:</strong> It needs to be a genuine, persistent object, not a login record. On Sui, my octopus is a Move object with its own on-chain identity. Its age, territory, and relationships with other octopi can all live as fields on that one object.</p>
-          <p class="sample-summary">The player does not just have an account that references an octopus somewhere in a database. The player holds the octopus itself. That distinction matters because it turns identity into something portable and durable inside the game world rather than something the studio can silently rewrite behind the curtain.</p>
-        </section>
+          <article class="note">
+            <p class="sample-type">Task guidance</p>
+            <p>
+              Break flows into clearly named steps and call out risk-sensitive moments such as approvals, wallet signatures, and asset transfers.
+            </p>
+          </article>
 
-        <section class="sample" aria-labelledby="ownership-title">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3 id="ownership-title">Shells, pebbles, and real ownership</h3>
-              <p class="meta">Unique assets · Object ownership</p>
-            </div>
-          </div>
-          <p class="sample-summary"><strong>Interviewer:</strong> So the octopus itself is an object. What about the shells and pebbles it collects and trades?</p>
-          <p class="sample-summary"><strong>Developer:</strong> That is where Sui starts to feel especially natural. Shells and pebbles are not abstract balances. They are individual things with their own history, rarity, appearance, and significance. Sui's object model maps directly onto that idea, because every shell or pebble can be its own on-chain object rather than an entry in some global token ledger.</p>
-          <p class="sample-summary">That means ownership is not simulated. If my octopus finds a rare shell, that shell can exist as a distinct asset my wallet controls. If I trade it to another octopus, I am transferring that specific object, not updating a number in a central database.</p>
-        </section>
-
-        <section class="sample" aria-labelledby="trading-title">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3 id="trading-title">Trading without friction</h3>
-              <p class="meta">Transfers · Marketplace logic</p>
-            </div>
-          </div>
-          <p class="sample-summary"><strong>Interviewer:</strong> Trading sounds core to the social side of the game. Why is Sui a good fit there?</p>
-          <p class="sample-summary"><strong>Developer:</strong> Because object transfer is a first-class concept. If octopi are constantly swapping shells, pebbles, crafted items, or rare finds, I need those exchanges to be reliable and cheap enough that players do not feel punished for participating in the economy.</p>
-          <p class="sample-summary">Sui is designed around moving and mutating objects directly, which makes peer-to-peer exchange feel like part of the world instead of an awkward blockchain tax sitting on top of it. That matters in a social game, because if trading feels heavy, players stop doing it and the society starts to die.</p>
-        </section>
-
-        <section class="sample" aria-labelledby="farms-title">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3 id="farms-title">Communal mussel farms</h3>
-              <p class="meta">Shared objects · Group-owned game structures</p>
-            </div>
-          </div>
-          <p class="sample-summary"><strong>Interviewer:</strong> Let's talk about the mussel farms. You said these have a community dimension — they're not purely solo. What does that require, technically?</p>
-          <p class="sample-summary"><strong>Developer:</strong> It requires shared control over a single object, which is a genuinely hard problem on a lot of chains. A mussel farm is not owned by one octopus in the way a pebble is. It might be tended by several octopi who each contribute effort and each have a claim on what it produces.</p>
-          <p class="sample-summary">On Sui, I can model a farm as a <code>shared object</code> — one that is not locked to a single owner's authority but can be referenced and mutated by transactions from multiple players, with the game's Move logic defining exactly who is allowed to do what. That is the difference between one player's private idle timer and a real communal structure that a group of octopi maintain together.</p>
-        </section>
-
-        <section class="sample" aria-labelledby="actions-title">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3 id="actions-title">Day-to-day farm actions</h3>
-              <p class="meta">Programmable Transaction Blocks · Multi-step player actions</p>
-            </div>
-          </div>
-          <p class="sample-summary"><strong>Interviewer:</strong> How does that shared-object model affect the day-to-day feel of the game — an octopus checking on the farm, harvesting mussels, restocking it?</p>
-          <p class="sample-summary"><strong>Developer:</strong> This is where <code>Programmable Transaction Blocks</code> earn their keep again, just at a bigger scale than a single-player action. A visit to the farm might involve checking the shared farm object, harvesting whatever is ready, updating that octopus's contribution record, and depositing mussels into that player's own inventory — all as one transaction the player approves once.</p>
-          <p class="sample-summary">Because Sui's object model tracks exactly which objects a transaction touches — the shared farm, the player's own octopus, the mussels being minted — the network can process these efficiently even with lots of octopi visiting the same farm, without everything queuing up behind a single global bottleneck.</p>
-        </section>
-
-        <section class="sample" aria-labelledby="parallel-title">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3 id="parallel-title">Parallel activity</h3>
-              <p class="meta">Scalability · Non-conflicting transactions</p>
-            </div>
-          </div>
-          <p class="sample-summary"><strong>Interviewer:</strong> Speaking of many players touching the same objects — doesn't a shared farm become a congestion point if fifty octopi want to harvest at once?</p>
-          <p class="sample-summary"><strong>Developer:</strong> That is a real concern on chains where all state changes funnel through one global sequence. Sui's object-centric execution model is specifically built to parallelise transactions that do not actually conflict.</p>
-          <p class="sample-summary">If two octopi are harvesting from two different farms, there is no reason those transactions should compete with each other, and Sui's architecture is designed to recognise that automatically. That is not just a nice side effect for me. It is close to a hard requirement once you accept that the whole premise of the game is many players interacting with shared community structures at once.</p>
-        </section>
-
-        <section class="sample" aria-labelledby="randomness-title">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3 id="randomness-title">Randomness and trust</h3>
-              <p class="meta">Fair outcomes · Verifiable game logic</p>
-            </div>
-          </div>
-          <p class="sample-summary"><strong>Interviewer:</strong> Randomness comes up naturally too, I'd guess — what a pebble looks like when it's found, how much a farm yields this season.</p>
-          <p class="sample-summary"><strong>Developer:</strong> Exactly, and the same argument applies here as it would in any game asking players to trust an outcome. If I want players to believe that finding a rare pebble or getting a strong harvest is genuinely down to chance and not something I quietly control server-side, that randomness needs to be verifiable, not just asserted.</p>
-          <p class="sample-summary">Sui's built-in on-chain randomness lets me generate those outcomes in a way players can actually check, which matters even more in a society-style game because trust between the game and its community is the whole point.</p>
-        </section>
-
-        <section class="sample" aria-labelledby="architecture-title">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3 id="architecture-title">Architecture in one paragraph</h3>
-              <p class="meta">Backend · Wallet · Chain responsibilities</p>
-            </div>
-          </div>
-          <p class="sample-summary"><strong>Interviewer:</strong> If you had to compress the architecture into one paragraph for a non-specialist stakeholder, how would you explain it?</p>
-          <p class="sample-summary"><strong>Developer:</strong> The backend still matters — it can prepare actions, enforce game rules, and coordinate the player experience — but the actual identity objects, tradeable belongings, and communal structures live on-chain as Sui objects. The wallet approves important actions, the chain records who owns what and how shared structures change, and the result is a game world where social trust comes from the architecture itself rather than from a promise that the developer will behave.</p>
-        </section>
-
-        <section class="sample" aria-labelledby="conclusion-title">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3 id="conclusion-title">Why this matters</h3>
-              <p class="meta">Product reasoning · Platform fit</p>
-            </div>
-          </div>
-          <p class="sample-summary"><strong>Interviewer:</strong> So the short version is that Sui is not just fast enough — it matches the structure of the game.</p>
-          <p class="sample-summary"><strong>Developer:</strong> Exactly. If the game were just menus and cosmetics, I would not need all of this. But if the fantasy is a living society of octopi with real identity, distinct belongings, communal farms, constant trade, and meaningful chance, then Sui fits not as a marketing layer but as part of the actual design logic.</p>
-          <p class="sample-summary">That is why I keep returning to it for this concept: the chain's object model, shared-object support, scaling approach, and verifiable randomness all line up with the world I want the player to believe in.</p>
-        </section>
+          <article class="note">
+            <p class="sample-type">Trust language</p>
+            <p>
+              Use precise, non-hyped wording so users understand what is happening, what they control, and what cannot be undone.
+            </p>
+          </article>
+        </div>
       </div>
-    </article>
+    </section>
+
+    <section class="section" aria-labelledby="sample-structure-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Structure</p>
+          <h2 class="section-title" id="sample-structure-title">Recommended content model</h2>
+          <p class="section-intro">
+            A useful blockchain documentation set usually balances product introduction, task guidance, glossary support, and trust-building information.
+          </p>
+        </div>
+
+        <div class="samples-grid">
+          <article class="sample-card">
+            <p class="sample-type">Getting started</p>
+            <h3>Quick orientation</h3>
+            <p>
+              Explain the product purpose, who it is for, and what the first successful outcome looks like.
+            </p>
+          </article>
+
+          <article class="sample-card">
+            <p class="sample-type">How-to guides</p>
+            <h3>Action-based tutorials</h3>
+            <p>
+              Lead users through real tasks such as connecting a wallet, joining, claiming, or managing in-app assets.
+            </p>
+          </article>
+
+          <article class="sample-card">
+            <p class="sample-type">Reference</p>
+            <h3>Concept support</h3>
+            <p>
+              Provide concise explanations of terms, roles, and network-specific concepts that users may need during the journey.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="outcome-title">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker">Outcome</p>
+          <h2 class="section-title" id="outcome-title">What strong product writing achieves here</h2>
+          <p class="section-intro">
+            Good product writing makes the system feel more navigable, credible, and usable without pretending the underlying complexity does not exist.
+          </p>
+        </div>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>Expected result</h3>
+              <p class="meta">Clarity · confidence · conversion</p>
+            </div>
+          </div>
+
+          <p class="sample-summary">
+            When users understand the sequence, the vocabulary, and the consequences of their actions, they can move through the product with more confidence and less abandonment.
+          </p>
+
+          <p class="sample-summary">
+            That is especially important in blockchain products, where trust is shaped as much by the quality of explanation as by the quality of the interface itself.
+          </p>
+        </article>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>Piotr Oszenda · Technical writing portfolio</p>
+      <p>Octopus Society on Sui — product writing sample for the Piotr Oszenda portfolio.</p>
     </div>
   </footer>
 </body>
