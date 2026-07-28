@@ -247,7 +247,7 @@ select {
 }
 
 .hero {
-  padding-block: clamp(4rem, 9vw, 8rem) clamp(3rem, 6vw, 5rem);
+  padding-block: clamp(1.5rem, 3vw, 2.75rem) clamp(3rem, 6vw, 5rem);
 }
 
 .hero__grid {
@@ -689,7 +689,7 @@ select {
   }
 
   .hero {
-    padding-top: 2.5rem;
+    padding-top: 1.25rem;
   }
 
   .hero-panel,
