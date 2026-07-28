@@ -1,59 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Octopus Society on Sui — Piotr Oszenda</title>
+  <meta charset="utf-8">
+  <title>Octopus Society on Sui — Product writing sample (Piotr Oszenda)</title>
   <meta
     name="description"
     content="Writing sample about structuring user-facing blockchain product content for Octopus Society on Sui."
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  >
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet"
-  />
-  <link rel="stylesheet" href="./style.css" />
+  >
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
-    <div class="container">
-      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-        <a href="./index.html#work">Back to portfolio</a>
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html#top" aria-label="Go to homepage">
+        <span class="brand__mark" aria-hidden="true">PO</span>
+        <span>Piotr Oszenda</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#approach">Approach</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#samples">Samples</a>
+        <a href="index.html#contact">Contact</a>
       </nav>
-
-      <section class="hero hero--compact" aria-labelledby="page-title">
-        <p class="eyebrow">Product writing sample</p>
-        <h1 id="page-title">Octopus Society on Sui</h1>
-        <p class="lede">
-          A sample focused on turning a complex blockchain product into clearer, more approachable user-facing documentation and launch content.
-        </p>
-
-        <div class="hero-actions">
-          <a class="button-link button-link--primary" href="./index.html#work">Back to portfolio</a>
-        </div>
-
-        <div class="hero-stats" aria-label="Sample focus">
-          <span class="hero-stat">Web3 content</span>
-          <span class="hero-stat">User education</span>
-          <span class="hero-stat">Product positioning</span>
-          <span class="hero-stat">Technical clarity</span>
-        </div>
-      </section>
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
+    <section class="hero hero--compact" id="top">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">Product writing sample</p>
+          <h1 id="page-title">Octopus Society on Sui</h1>
+          <p class="hero__lead">
+            A sample focused on turning a complex blockchain product into clearer, more approachable user-facing
+            documentation and launch content.
+          </p>
+
+          <div class="hero__actions">
+            <a class="button-link button-link--primary" href="index.html#work">Back to portfolio</a>
+          </div>
+
+          <div class="hero-stats" aria-label="Sample focus">
+            <span class="hero-stat">Web3 content</span>
+            <span class="hero-stat">User education</span>
+            <span class="hero-stat">Product positioning</span>
+            <span class="hero-stat">Technical clarity</span>
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-labelledby="sample-proof-title">
+          <p class="hero-panel__label" id="sample-proof-title">What this sample demonstrates</p>
+          <ul class="case-proof-list">
+            <li>
+              <strong>Product-first explanation of blockchain detail.</strong>
+              <span>The content keeps user outcomes ahead of protocol specifics while still acknowledging technical constraints.</span>
+            </li>
+            <li>
+              <strong>Sequenced onboarding for risk-sensitive actions.</strong>
+              <span>Wallet steps, approvals, and transfers are framed as clear, ordered tasks instead of scattered requirements.</span>
+            </li>
+            <li>
+              <strong>Trust-building language without hype.</strong>
+              <span>Users see what they control, what is irreversible, and why the product is credible.</span>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
     <section class="section" aria-labelledby="overview-title">
       <div class="container">
         <div class="section-header">
           <p class="section-kicker">Context</p>
           <h2 class="section-title" id="overview-title">Overview</h2>
           <p class="section-intro">
-            This sample shows how I would shape communication for a blockchain-based product so that the user journey remains understandable even when the underlying system is technically complex.
+            This sample shows how to shape communication for a blockchain-based product so the user journey remains
+            understandable even when the underlying system is technically complex.
           </p>
         </div>
 
@@ -66,7 +99,9 @@
           </div>
 
           <p class="sample-summary">
-            Products built on blockchain infrastructure often combine unfamiliar terminology, new trust assumptions, and technical steps that can overwhelm first-time users. The writing goal is to reduce that friction without oversimplifying the product.
+            Products built on blockchain infrastructure often combine unfamiliar terminology, new trust assumptions,
+            and technical steps that can overwhelm first-time users. The writing goal is to reduce that friction without
+            oversimplifying the product.
           </p>
         </article>
       </div>
@@ -78,12 +113,13 @@
           <p class="section-kicker">Problem</p>
           <h2 class="section-title" id="challenge-title">Why this kind of product content is difficult</h2>
           <p class="section-intro">
-            Blockchain product communication often fails when it assumes too much prior knowledge or prioritises novelty over user understanding.
+            Blockchain product communication often fails when it assumes too much prior knowledge or prioritises novelty
+            over user understanding.
           </p>
         </div>
 
         <div class="samples-grid">
-          <article class="sample-card">
+          <article class="sample-card sample-card--regular">
             <p class="sample-type">Language</p>
             <h3>Specialised terminology</h3>
             <p>
@@ -91,7 +127,7 @@
             </p>
           </article>
 
-          <article class="sample-card">
+          <article class="sample-card sample-card--regular">
             <p class="sample-type">Trust</p>
             <h3>High-stakes user actions</h3>
             <p>
@@ -99,7 +135,7 @@
             </p>
           </article>
 
-          <article class="sample-card">
+          <article class="sample-card sample-card--regular">
             <p class="sample-type">Flow</p>
             <h3>Multi-step onboarding</h3>
             <p>
@@ -114,31 +150,34 @@
       <div class="container">
         <div class="section-header">
           <p class="section-kicker">Approach</p>
-          <h2 class="section-title" id="approach-title">How I would structure the content</h2>
+          <h2 class="section-title" id="approach-title">How to structure the content</h2>
           <p class="section-intro">
-            My approach is to introduce technical ideas only when the user needs them and to keep product meaning ahead of protocol detail.
+            The content introduces technical ideas only when the user needs them and keeps product meaning ahead of protocol detail.
           </p>
         </div>
 
-        <div class="writing-sample">
-          <article class="note">
+        <div class="samples-grid">
+          <article class="sample-card sample-card--regular">
             <p class="sample-type">Onboarding</p>
+            <h3>Lead with outcomes</h3>
             <p>
               Start with what the product lets the user do, then explain only the minimum blockchain concepts needed to complete that action.
             </p>
           </article>
 
-          <article class="note">
+          <article class="sample-card sample-card--regular">
             <p class="sample-type">Task guidance</p>
+            <h3>Sequence risk-sensitive steps</h3>
             <p>
-              Break flows into clearly named steps and call out risk-sensitive moments such as approvals, wallet signatures, and asset transfers.
+              Break flows into clearly named steps and call out approvals, wallet signatures, and asset transfers so users recognise higher-risk moments.
             </p>
           </article>
 
-          <article class="note">
+          <article class="sample-card sample-card--regular">
             <p class="sample-type">Trust language</p>
+            <h3>Stay precise and neutral</h3>
             <p>
-              Use precise, non-hyped wording so users understand what is happening, what they control, and what cannot be undone.
+              Use clear, non-hyped wording so users understand what is happening, what they control, and what cannot be undone.
             </p>
           </article>
         </div>
@@ -151,12 +190,12 @@
           <p class="section-kicker">Structure</p>
           <h2 class="section-title" id="sample-structure-title">Recommended content model</h2>
           <p class="section-intro">
-            A useful blockchain documentation set usually balances product introduction, task guidance, glossary support, and trust-building information.
+            A useful blockchain documentation set balances product introduction, task guidance, glossary support, and trust-building information.
           </p>
         </div>
 
         <div class="samples-grid">
-          <article class="sample-card">
+          <article class="sample-card sample-card--regular">
             <p class="sample-type">Getting started</p>
             <h3>Quick orientation</h3>
             <p>
@@ -164,7 +203,7 @@
             </p>
           </article>
 
-          <article class="sample-card">
+          <article class="sample-card sample-card--regular">
             <p class="sample-type">How-to guides</p>
             <h3>Action-based tutorials</h3>
             <p>
@@ -172,7 +211,7 @@
             </p>
           </article>
 
-          <article class="sample-card">
+          <article class="sample-card sample-card--regular">
             <p class="sample-type">Reference</p>
             <h3>Concept support</h3>
             <p>
@@ -214,8 +253,9 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>Portfolio ♦︎ Piotr Oszenda</p>
+    <div class="container site-footer__inner">
+      <span>Piotr Oszenda — Technical Writer · Knowledge Manager · Documentation Architect</span>
+      <span>Based in Gijón, Spain · Working across product, developer, and knowledge systems</span>
     </div>
   </footer>
 </body>
