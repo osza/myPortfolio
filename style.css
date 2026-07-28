@@ -134,19 +134,21 @@ select {
 }
 
 .skip-link {
-  position: absolute;
+  position: fixed;
   left: 1rem;
-  top: -3rem;
+  top: 1rem;
+  transform: translateY(-200%);
   background: var(--color-primary);
   color: var(--color-white);
   padding: 0.75rem 1rem;
   border-radius: var(--radius-pill);
-  z-index: 100;
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
 }
 
 .skip-link:focus,
 .skip-link:focus-visible {
-  top: 1rem;
+  transform: translateY(0);
 }
 
 .site-header {
@@ -224,11 +226,11 @@ select {
   transform: scaleX(1);
 }
 
-#main {
+#work {
   scroll-margin-top: var(--header-offset);
 }
 
-#main:focus {
+#work:focus {
   outline: none;
 }
 
