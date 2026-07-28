@@ -174,8 +174,8 @@ Content-Type: application/json</code></pre>
           </p>
 
           <p class="sample-summary">
-            In a real implementation, you should also handle HTTP status codes (such as <code>201 Created</code> or
-            <code>4xx</code> errors) explicitly and log or surface error messages to make debugging easier.
+            In a real implementation, handle HTTP status codes (such as <code>201 Created</code> or <code>4xx</code> errors)
+            explicitly and log or surface error messages to make debugging easier.
           </p>
         </article>
       </div>
@@ -273,7 +273,7 @@ Content-Type: application/json</code></pre>
           </ul>
 
           <p class="sample-summary">
-            This tutorial uses a partial update model for <code>PATCH</code>: only the fields included in the request body are changed.
+            The tutorial uses a partial update model for <code>PATCH</code>: only the fields included in the request body are changed.
           </p>
         </article>
       </div>
@@ -334,6 +334,10 @@ if (!response.ok) {
 
 const customer = await response.json();</code></pre>
           </div>
+
+          <p class="sample-summary">
+            The client creates the initial customer record and obtains an <code>id</code> that you reuse in later requests.
+          </p>
         </article>
 
         <article class="sample">
@@ -367,6 +371,10 @@ if (!response.ok) {
 
 const customerDetails = await response.json();</code></pre>
           </div>
+
+          <p class="sample-summary">
+            The client retrieves the current representation of the customer and confirms that the record can be looked up by <code>id</code>.
+          </p>
         </article>
 
         <article class="sample">
@@ -410,6 +418,10 @@ if (!response.ok) {
 
 const updatedCustomer = await response.json();</code></pre>
           </div>
+
+          <p class="sample-summary">
+            The email and business name change, while all other fields remain as before.
+          </p>
         </article>
 
         <article class="sample">
@@ -441,6 +453,10 @@ if (!response.ok) {
   // Handle non-2xx responses in a real implementation
 }</code></pre>
           </div>
+
+          <p class="sample-summary">
+            The API removes the customer record; subsequent <code>GET</code> requests for the same <code>id</code> should return an error such as <code>404 Not Found</code>.
+          </p>
         </article>
       </div>
     </section>
