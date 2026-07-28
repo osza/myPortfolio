@@ -133,8 +133,6 @@ select {
   margin-inline: auto;
 }
 
-/* Skip link */
-
 .skip-link {
   position: fixed;
   top: 1rem;
@@ -164,8 +162,6 @@ select {
   pointer-events: auto;
   transform: translateY(0);
 }
-
-/* Header */
 
 .site-header {
   position: sticky;
@@ -242,8 +238,6 @@ select {
   transform: scaleX(1);
 }
 
-/* Main anchor */
-
 #main {
   scroll-margin-top: var(--header-offset);
 }
@@ -251,8 +245,6 @@ select {
 #main:focus {
   outline: none;
 }
-
-/* Hero */
 
 .hero {
   padding-block: clamp(1.5rem, 3vw, 2.75rem) clamp(3rem, 6vw, 5rem);
@@ -312,8 +304,6 @@ select {
   margin-top: var(--space-8);
 }
 
-/* Buttons */
-
 .button-link {
   display: inline-flex;
   align-items: center;
@@ -351,8 +341,6 @@ select {
   border-color: rgba(13, 102, 102, 0.22);
 }
 
-/* Hero panel */
-
 .hero-panel {
   padding: var(--space-8);
   border-radius: var(--radius-xl);
@@ -372,40 +360,44 @@ select {
 
 .proof-list,
 .metric-list,
-.tag-list {
+.tag-list,
+.case-proof-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.proof-list {
+.proof-list,
+.case-proof-list {
   display: grid;
   gap: var(--space-4);
 }
 
-.proof-list li {
+.proof-list li,
+.case-proof-list li {
   padding-bottom: var(--space-4);
   border-bottom: 1px solid var(--color-divider);
 }
 
-.proof-list li:last-child {
+.proof-list li:last-child,
+.case-proof-list li:last-child {
   padding-bottom: 0;
   border-bottom: 0;
 }
 
-.proof-list strong {
+.proof-list strong,
+.case-proof-list strong {
   display: block;
   margin-bottom: 0.35rem;
   font-size: var(--text-sm);
   color: var(--color-text);
 }
 
-.proof-list span {
+.proof-list span,
+.case-proof-list span {
   color: var(--color-text-muted);
   font-size: var(--text-sm);
 }
-
-/* Sections */
 
 .section {
   padding-block: clamp(2rem, 4vw, 3.5rem);
@@ -416,8 +408,6 @@ select {
   border-top: 1px solid var(--color-divider);
   border-bottom: 1px solid var(--color-divider);
 }
-
-/* Reduce top padding for note-layout section to avoid large gap after Approach */
 
 .section[aria-labelledby="note-heading"] {
   padding-top: clamp(1.25rem, 3vw, 2rem);
@@ -445,12 +435,14 @@ select {
   color: var(--color-text-muted);
 }
 
-/* Cards, grids, etc. */
-
 .results-grid,
 .expertise-grid,
 .samples-grid,
-.contact-grid {
+.contact-grid,
+.case-results,
+.case-grid,
+.case-summary,
+.case-role {
   display: grid;
   gap: var(--space-5);
 }
@@ -459,12 +451,22 @@ select {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.case-results,
+.case-grid,
+.case-summary,
+.case-role {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .result-card,
 .expertise-card,
 .sample-card,
 .contact-card,
 .timeline-card,
-.note-card {
+.note-card,
+.case-panel,
+.case-callout,
+.case-table {
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   background: rgba(255, 255, 255, 0.82);
@@ -474,7 +476,9 @@ select {
 .result-card,
 .expertise-card,
 .contact-card,
-.note-card {
+.note-card,
+.case-panel,
+.case-callout {
   padding: var(--space-6);
 }
 
@@ -490,7 +494,10 @@ select {
 .result-card p,
 .expertise-card p,
 .contact-card p,
-.note-card p {
+.note-card p,
+.case-panel p,
+.case-callout p,
+.case-table p {
   margin: 0;
   color: var(--color-text-muted);
 }
@@ -502,25 +509,30 @@ select {
 .expertise-card h3,
 .sample-card h3,
 .timeline-card h3,
-.contact-card h3 {
+.contact-card h3,
+.case-panel h3,
+.case-callout h3,
+.case-table h3 {
   margin: 0 0 var(--space-3);
   font-size: 1.05rem;
   line-height: 1.25;
 }
 
 .expertise-card ul,
-.timeline-card ul {
+.timeline-card ul,
+.case-panel ul,
+.case-callout ul {
   margin: var(--space-4) 0 0;
   padding-left: 1.1rem;
   color: var(--color-text-muted);
 }
 
 .expertise-card li,
-.timeline-card li {
+.timeline-card li,
+.case-panel li,
+.case-callout li {
   margin-bottom: 0.55rem;
 }
-
-/* Note layout */
 
 .note-layout {
   display: grid;
@@ -548,8 +560,6 @@ select {
   font-style: normal;
   font-size: var(--text-sm);
 }
-
-/* Timeline, samples, contact, footer — unchanged */
 
 .timeline {
   display: grid;
@@ -605,10 +615,15 @@ select {
   border-color: rgba(13, 102, 102, 0.22);
 }
 
-.sample-card__meta {
+.sample-card__meta,
+.case-hero__meta {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+.case-hero__meta {
+  margin-top: var(--space-5);
 }
 
 .chip {
@@ -664,6 +679,69 @@ select {
   color: var(--color-primary);
 }
 
+.case-hero__grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: start;
+  gap: var(--space-10);
+}
+
+.case-intro {
+  max-width: 66ch;
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  margin: var(--space-5) 0 0;
+}
+
+.case-back {
+  margin-bottom: var(--space-5);
+}
+
+.case-back a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.case-back a::before {
+  content: "←";
+}
+
+.case-table {
+  overflow: hidden;
+}
+
+.case-table header {
+  padding: var(--space-6) var(--space-6) var(--space-3);
+}
+
+.case-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.case-table th,
+.case-table td {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid var(--color-divider);
+}
+
+.case-table th {
+  width: 22%;
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  background: rgba(13, 102, 102, 0.035);
+}
+
+.case-callout {
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(245,251,250,0.92));
+}
+
 .site-footer {
   padding: var(--space-8) 0 var(--space-10);
   border-top: 1px solid var(--color-divider);
@@ -678,12 +756,15 @@ select {
   font-size: var(--text-sm);
 }
 
-/* Responsive */
-
 @media (max-width: 1100px) {
   .hero__grid,
   .section__header,
-  .note-layout {
+  .note-layout,
+  .case-hero__grid,
+  .case-results,
+  .case-grid,
+  .case-summary,
+  .case-role {
     grid-template-columns: 1fr;
   }
 
@@ -696,6 +777,21 @@ select {
   .sample-card--featured,
   .sample-card--regular {
     grid-column: span 6;
+  }
+
+  .case-table th,
+  .case-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .case-table th {
+    border-bottom: 0;
+    padding-bottom: 0.25rem;
+  }
+
+  .case-table td {
+    padding-top: 0;
   }
 }
 
@@ -726,14 +822,20 @@ select {
   .sample-card,
   .contact-card,
   .timeline-card,
-  .note-card {
+  .note-card,
+  .case-panel,
+  .case-callout {
     padding: var(--space-5);
   }
 
   .results-grid,
   .expertise-grid,
   .contact-grid,
-  .samples-grid {
+  .samples-grid,
+  .case-results,
+  .case-grid,
+  .case-summary,
+  .case-role {
     grid-template-columns: 1fr;
   }
 
