@@ -226,3 +226,52 @@ sui client gas</code></pre>
 
         <div class="card">
           <p class="card__eyebrow">1. Connect the wallet</p>
+          <h3>Check the active address and balance</h3>
+
+          <div class="code-switcher" data-code-group>
+            <div class="code-tabs" role="tablist">
+              <button class="code-tab is-active" data-code-tab="cli" aria-pressed="true">Sui CLI</button>
+              <button class="code-tab" data-code-tab="ts" aria-pressed="false">TypeScript</button>
+            </div>
+
+            <pre class="code-panel is-active" data-code-panel="cli">de>sui client active-address
+sui client switch --address {my_address}</code></pre>
+
+            <pre class="code-panel" data-code-panel="ts">de>import { SuiClient, getFullnodeUrl } from "@mysten/sui.js/client";
+
+const client = new SuiClient({ url: getFullnodeUrl("testnet") });
+
+const address = "{my_address}";
+const balance = await client.getBalance({ owner: address });</code></pre>
+          </div>
+
+          <p>The client confirms the active address and gas balance before any transaction is submitted.</p>
+        </div>
+
+        <div class="card">
+          <p class="card__eyebrow">2. Join Octopus Society</p>
+          <h3>Mint a membership object</h3>
+
+          <div class="code-switcher" data-code-group>
+            <div class="code-tabs" role="tablist">
+              <button class="code-tab is-active" data-code-tab="cli" aria-pressed="true">Sui CLI</button>
+              <button class="code-tab" data-code-tab="ts" aria-pressed="false">TypeScript</button>
+            </div>
+
+            <pre class="code-panel is-active" data-code-panel="cli">de>sui client call \
+  --package {package_id} \
+  --module octopus_society \
+  --function join \
+  --args 1 \
+  --gas-budget 10000000</code></pre>
+
+            <pre class="code-panel" data-code-panel="ts">de>import { TransactionBlock } from "@mysten/sui.js/transactions";
+
+const tx = new TransactionBlock();
+tx.moveCall({
+  target: `${packageId}::octopus_society::join`,
+  arguments: [tx.pure(1)],
+});
+
+const result = await client.signAndExecuteTransactionBlock({
+  signer: keypair
