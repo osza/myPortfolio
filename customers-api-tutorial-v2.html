@@ -172,6 +172,11 @@ Content-Type: application/json</code></pre>
             Include the <code>Authorization</code> header in every request. Include <code>Content-Type: application/json</code>
             when the request contains a JSON body, such as <code>POST</code> or <code>PATCH</code>.
           </p>
+
+          <p class="sample-summary">
+            In a real implementation, you should also handle HTTP status codes (such as <code>201 Created</code> or
+            <code>4xx</code> errors) explicitly and log or surface error messages to make debugging easier.
+          </p>
         </article>
       </div>
     </section>
@@ -323,6 +328,10 @@ Content-Type: application/json</code></pre>
   })
 });
 
+if (!response.ok) {
+  // Handle non-2xx responses in a real implementation
+}
+
 const customer = await response.json();</code></pre>
           </div>
         </article>
@@ -351,6 +360,10 @@ const customer = await response.json();</code></pre>
     Authorization: `Bearer ${accessToken}`
   }
 });
+
+if (!response.ok) {
+  // Handle non-2xx responses in a real implementation
+}
 
 const customerDetails = await response.json();</code></pre>
           </div>
@@ -391,6 +404,10 @@ const customerDetails = await response.json();</code></pre>
   })
 });
 
+if (!response.ok) {
+  // Handle non-2xx responses in a real implementation
+}
+
 const updatedCustomer = await response.json();</code></pre>
           </div>
         </article>
@@ -413,12 +430,16 @@ const updatedCustomer = await response.json();</code></pre>
   --url {base_url}/api/1.0/customers/{id} \
   --header "Authorization: Bearer {access_token}"</code></pre>
 
-            <pre class="code-panel" data-code-panel="javascript"><code>await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
+            <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
   method: "DELETE",
   headers: {
     Authorization: `Bearer ${accessToken}`
   }
-});</code></pre>
+});
+
+if (!response.ok) {
+  // Handle non-2xx responses in a real implementation
+}</code></pre>
           </div>
         </article>
       </div>
