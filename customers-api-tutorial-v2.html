@@ -1,53 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <title>Customers API tutorial — Developer documentation sample (Piotr Oszenda)</title>
   <meta
     name="description"
     content="Hands-on API tutorial showing how to create, retrieve, update, and delete customer records with a fictional Customers API."
-  />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  >
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet"
-  />
-  <link rel="stylesheet" href="./style.css" />
+  >
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
-    <div class="container">
-      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-        <a href="./index.html#work">Back to portfolio</a>
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html#top" aria-label="Go to homepage">
+        <span class="brand__mark" aria-hidden="true">PO</span>
+        <span>Piotr Oszenda</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#approach">Approach</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#samples">Samples</a>
+        <a href="index.html#contact">Contact</a>
       </nav>
-
-      <section class="hero hero--compact" aria-labelledby="page-title">
-        <p class="eyebrow">API onboarding tutorial</p>
-        <h1 id="page-title">Manage customer data with the Customers API</h1>
-        <p class="lede">
-          A hands-on tutorial that walks through a complete customer lifecycle using create, retrieve, update, and delete operations on a single resource.
-        </p>
-
-        <div class="hero-actions">
-          <a class="button-link button-link--primary" href="#overview">Read tutorial</a>
-          <a class="button-link" href="./index.html#work">Back to portfolio</a>
-        </div>
-
-        <div class="hero-stats" aria-label="Tutorial metadata">
-          <span class="hero-stat">REST API</span>
-          <span class="hero-stat">CRUD workflow</span>
-          <span class="hero-stat">cURL + JavaScript</span>
-          <span class="hero-stat">Expanded sample</span>
-        </div>
-      </section>
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
+    <section class="hero" id="top">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">API onboarding tutorial</p>
+          <h1>Manage customer data with the Customers API</h1>
+          <p class="hero__lead">
+            A hands-on tutorial that walks through a complete customer lifecycle using create, retrieve, update,
+            and delete operations on a single resource.
+          </p>
+
+          <div class="hero__actions">
+            <a class="button-link button-link--primary" href="#overview">Read tutorial</a>
+            <a class="button-link button-link--secondary" href="index.html#samples">Back to selected work</a>
+          </div>
+
+          <div class="hero-stats" aria-label="Tutorial metadata">
+            <span class="hero-stat">REST API</span>
+            <span class="hero-stat">CRUD workflow</span>
+            <span class="hero-stat">cURL + JavaScript</span>
+            <span class="hero-stat">Expanded sample</span>
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-labelledby="tutorial-proof-title">
+          <p class="hero-panel__label" id="tutorial-proof-title">What this tutorial demonstrates</p>
+          <ul class="case-proof-list">
+            <li>
+              <strong>A full CRUD journey on one resource.</strong>
+              <span>The reader follows a single customer record from creation to deletion, reducing cognitive load.</span>
+            </li>
+            <li>
+              <strong>Parallel examples in cURL and JavaScript.</strong>
+              <span>Developers can switch between code styles without losing context or task continuity.</span>
+            </li>
+            <li>
+              <strong>Explicit preparation, reference, and workflow.</strong>
+              <span>Setup, resource model, and step-by-step tasks make the tutorial reusable as onboarding material.</span>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
     <section class="section" id="overview" aria-labelledby="overview-title">
       <div class="container">
         <div class="section-header">
@@ -67,11 +99,13 @@
           </div>
 
           <p class="sample-summary">
-            This tutorial demonstrates an end-to-end workflow for managing customer data with a fictional Customers API. The API, URLs, and example data are provided to illustrate structure, flow, and documentation style.
+            This tutorial demonstrates an end-to-end workflow for managing customer data with a fictional Customers API.
+            The API, URLs, and example data are provided to illustrate structure, flow, and documentation style.
           </p>
 
           <p class="sample-summary">
-            By the end of the tutorial, you will have created a customer record, retrieved it by ID, updated selected fields, and deleted the resource.
+            By the end of the tutorial, you will have created a customer record, retrieved it by ID,
+            updated selected fields, and deleted the resource.
           </p>
         </article>
       </div>
@@ -105,7 +139,9 @@
           </ul>
 
           <p class="sample-summary">
-            In the examples below, replace <code>{base_url}</code> and <code>{access_token}</code> with your own values. In a real application, you would typically store them in environment variables such as <code>BASE_URL</code> and <code>ACCESS_TOKEN</code>.
+            In the examples below, replace <code>{base_url}</code> and <code>{access_token}</code> with your own values.
+            In a real application, you would typically store them in environment variables such as <code>BASE_URL</code>
+            and <code>ACCESS_TOKEN</code>.
           </p>
 
           <p class="sample-summary">
@@ -129,7 +165,8 @@
 Content-Type: application/json</code></pre>
 
           <p class="sample-summary">
-            Include the <code>Authorization</code> header in every request. Include <code>Content-Type: application/json</code> when the request contains a JSON body, such as <code>POST</code> or <code>PATCH</code>.
+            Include the <code>Authorization</code> header in every request. Include <code>Content-Type: application/json</code>
+            when the request contains a JSON body, such as <code>POST</code> or <code>PATCH</code>.
           </p>
         </article>
       </div>
@@ -237,7 +274,7 @@ Content-Type: application/json</code></pre>
           <p class="section-kicker">Workflow</p>
           <h2 class="section-title" id="workflow-title">CRUD tutorial</h2>
           <p class="section-intro">
-            Each step keeps the task sequence explicit and lets the reader switch between `cURL` and `JavaScript` without losing context. 
+            Each step keeps the task sequence explicit and lets the reader switch between cURL and JavaScript without losing context.
           </p>
         </div>
 
@@ -390,7 +427,7 @@ const updatedCustomer = await response.json();</code></pre>
         </div>
 
         <div class="samples-grid">
-          <article class="sample-card">
+          <article class="sample-card sample-card--regular">
             <p class="sample-type">Clarity</p>
             <h3>One resource, one journey</h3>
             <p>
@@ -398,7 +435,7 @@ const updatedCustomer = await response.json();</code></pre>
             </p>
           </article>
 
-          <article class="sample-card">
+          <article class="sample-card sample-card--regular">
             <p class="sample-type">Reusability</p>
             <h3>Reference-friendly sections</h3>
             <p>
@@ -406,7 +443,7 @@ const updatedCustomer = await response.json();</code></pre>
             </p>
           </article>
 
-          <article class="sample-card">
+          <article class="sample-card sample-card--regular">
             <p class="sample-type">Onboarding</p>
             <h3>Fast path to confidence</h3>
             <p>
@@ -419,8 +456,9 @@ const updatedCustomer = await response.json();</code></pre>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>Portfolio ♦︎ Piotr Oszenda</p>
+    <div class="container site-footer__inner">
+      <span>Piotr Oszenda — Technical Writer · Knowledge Manager · Documentation Architect</span>
+      <span>Based in Gijón, Spain · Working across product, developer, and knowledge systems</span>
     </div>
   </footer>
 
