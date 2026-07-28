@@ -2,19 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Octopus Society on Sui — Product writing sample (Piotr Oszenda)</title>
+  <title>Octopus Society on Sui tutorial — Developer documentation sample (Piotr Oszenda)</title>
   <meta
     name="description"
-    content="Writing sample about structuring user-facing blockchain product content for Octopus Society on Sui."
+    content="Hands-on Sui tutorial showing how to connect a wallet, join Octopus Society, verify membership, and claim a reward."
   >
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
+  //fonts.googleapis.com">
+  //fonts.gstatic.com" crossorigin>
+  //fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
-  <link rel="stylesheet" href="style.css">
+  >
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -37,226 +36,193 @@
   </header>
 
   <main id="main" tabindex="-1">
-    <section class="hero hero--compact" id="top">
+    <section class="hero" id="top">
       <div class="container hero__grid">
         <div>
-          <p class="eyebrow">Product writing sample</p>
-          <h1 id="page-title">Octopus Society on Sui</h1>
+          <p class="eyebrow">SUI onboarding tutorial</p>
+          <h1>Join Octopus Society on Sui</h1>
           <p class="hero__lead">
-            A sample focused on turning a complex blockchain product into clearer, more approachable user-facing
-            documentation and launch content.
+            A hands-on tutorial that walks through connecting a wallet, joining Octopus Society,
+            verifying membership on-chain, and claiming a member reward.
           </p>
 
           <div class="hero__actions">
-            <a class="button-link button-link--primary" href="index.html#work">Back to portfolio</a>
-          </div>
-
-          <div class="hero-stats" aria-label="Sample focus">
-            <span class="hero-stat">Web3 content</span>
-            <span class="hero-stat">User education</span>
-            <span class="hero-stat">Product positioning</span>
-            <span class="hero-stat">Technical clarity</span>
+            <a class="button button--primary" href="#overview">Read tutorial</a>
+            <a class="button button--ghost" href="index.html#samples">Back to selected work</a>
           </div>
         </div>
 
-        <aside class="hero-panel" aria-labelledby="sample-proof-title">
-          <p class="hero-panel__label" id="sample-proof-title">What this sample demonstrates</p>
-          <ul class="case-proof-list">
-            <li>
-              <strong>Product-first explanation of blockchain detail.</strong>
-              <span>The content keeps user outcomes ahead of protocol specifics while still acknowledging technical constraints.</span>
-            </li>
-            <li>
-              <strong>Sequenced onboarding for risk-sensitive actions.</strong>
-              <span>Wallet steps, approvals, and transfers are framed as clear, ordered tasks instead of scattered requirements.</span>
-            </li>
-            <li>
-              <strong>Trust-building language without hype.</strong>
-              <span>Users see what they control, what is irreversible, and why the product is credible.</span>
-            </li>
+        <ul class="hero__tags" aria-label="Tutorial highlights">
+          >Sui CLI</li>
+          >Move objects</li>
+          >CLI + TypeScript</li>
+          >Expanded sample</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">What this tutorial demonstrates</p>
+        <ul class="feature-list">
+          >
+            <strong>A full membership journey on one object.</strong>
+            The reader follows a single membership object from minting to verification and reward claim, reducing cognitive load.
+          </li>
+          >
+            <strong>Parallel examples in Sui CLI and TypeScript.</strong>
+            Developers can switch between command-line and SDK code without losing context or task continuity.
+          </li>
+          >
+            <strong>Explicit preparation, reference, and workflow.</strong>
+            Setup, object model, and step-by-step tasks make the tutorial reusable as onboarding material.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="overview">
+      <div class="container">
+        <p class="eyebrow">Context</p>
+        <h2>Overview</h2>
+        <p>
+          This tutorial is structured as a compact but complete onboarding flow for a fictional
+          membership module on Sui.
+        </p>
+
+        <div class="card">
+          <p class="card__eyebrow">Overview</p>
+          <h3>Tutorial sample · Fictional Move package</h3>
+          <p>
+            This tutorial demonstrates an end-to-end workflow for joining Octopus Society, a fictional
+            membership module built with Move on Sui. The package ID, object IDs, and example data are
+            provided to illustrate structure, flow, and documentation style.
+          </p>
+          <p>
+            By the end of the tutorial, you will have connected a wallet, minted a membership object,
+            verified ownership on-chain, and claimed a reward tied to that membership.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Preparation</p>
+        <h2>Before you start</h2>
+        <p>
+          The setup section establishes the environment, credentials, and tooling needed before the
+          membership flow begins.
+        </p>
+
+        <div class="card">
+          <p class="card__eyebrow">Requirements and setup</p>
+          <h3>Environment · Wallet · Request tooling</h3>
+          <p>Before you begin, make sure you have:</p>
+          <ul>
+            >The Sui CLI installed and configured for an active environment, such as testnet.</li>
+            >A wallet address with test SUI for gas, funded through a testnet faucet.</li>
+            >Node.js and the de>@mysten/sui.js</code> package if you plan to use the TypeScript examples.</li>
+            >The package ID for the Octopus Society Move module.</li>
           </ul>
-        </aside>
+          <p>
+            In the examples below, replace de>{package_id}</code> and de>{my_address}</code> with your
+            own values. In a real application, you would typically store them in environment variables such
+            as de>PACKAGE_ID</code> and de>ACTIVE_ADDRESS</code>.
+          </p>
+          <p>For safety, use a testnet environment while testing this workflow.</p>
+        </div>
+
+        <div class="card">
+          <p class="card__eyebrow">Active environment and gas</p>
+          <h3>Network and gas budget</h3>
+          <p>All examples in this tutorial target testnet and use an explicit gas budget.</p>
+          <pre>de>sui client active-address
+sui client gas</code></pre>
+          <p>
+            Confirm your active address holds enough gas before minting or transferring objects. In a real
+            implementation, handle transaction failures explicitly and surface clear error messages when gas
+            is insufficient.
+          </p>
+        </div>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="overview-title">
+    <section class="section">
       <div class="container">
-        <div class="section-header">
-          <p class="section-kicker">Context</p>
-          <h2 class="section-title" id="overview-title">Overview</h2>
-          <p class="section-intro">
-            This sample shows how to shape communication for a blockchain-based product so the user journey remains
-            understandable even when the underlying system is technically complex.
-          </p>
+        <p class="eyebrow">Reference</p>
+        <h2>Object model</h2>
+        <p>
+          The tutorial introduces the membership object before the task sequence so the later examples stay
+          predictable and easy to follow.
+        </p>
+
+        <div class="card">
+          <p class="card__eyebrow">Membership object</p>
+          <h3>Field reference</h3>
+          <p>The tutorial uses a single de>Membership</code> object with the following fields:</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Set by</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>de>id</code></td>
+                <td>UID</td>
+                <td>Module</td>
+                <td>Unique object ID generated when the membership is minted.</td>
+              </tr>
+              <tr>
+                <td>de>member</code></td>
+                <td>address</td>
+                <td>Module</td>
+                <td>Address that owns the membership object.</td>
+              </tr>
+              <tr>
+                <td>de>tier</code></td>
+                <td>u8</td>
+                <td>Caller</td>
+                <td>Membership tier selected when joining.</td>
+              </tr>
+              <tr>
+                <td>de>joined_at</code></td>
+                <td>u64</td>
+                <td>Module</td>
+                <td>Epoch timestamp recorded when the membership is created.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
-        <article class="sample">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3>Documentation goal</h3>
-              <p class="meta">Accessibility · trust · onboarding</p>
-            </div>
-          </div>
-
-          <p class="sample-summary">
-            Products built on blockchain infrastructure often combine unfamiliar terminology, new trust assumptions,
-            and technical steps that can overwhelm first-time users. The writing goal is to reduce that friction without
-            oversimplifying the product.
+        <div class="card">
+          <p class="card__eyebrow">Module snapshot</p>
+          <h3>Function overview</h3>
+          <ul>
+            >de>join(tier: u8)</code> — Mints a new de>Membership</code> object for the caller.</li>
+            >de>verify_membership(membership: &Membership)</code> — Reads membership fields without modifying state.</li>
+            >de>claim_reward(membership: &Membership)</code> — Emits a reward event for an existing member.</li>
+          </ul>
+          <p>
+            The tutorial uses one membership per address. Calling de>join</code> again with the same
+            address creates a separate object rather than replacing the existing one.
           </p>
-        </article>
+        </div>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="challenge-title">
+    <section class="section">
       <div class="container">
-        <div class="section-header">
-          <p class="section-kicker">Problem</p>
-          <h2 class="section-title" id="challenge-title">Why this kind of product content is difficult</h2>
-          <p class="section-intro">
-            Blockchain product communication often fails when it assumes too much prior knowledge or prioritises novelty
-            over user understanding.
-          </p>
-        </div>
+        <p class="eyebrow">Workflow</p>
+        <h2>Membership tutorial</h2>
+        <p>
+          Each step keeps the task sequence explicit and lets the reader switch between the Sui CLI and
+          TypeScript without losing context.
+        </p>
 
-        <div class="samples-grid">
-          <article class="sample-card sample-card--regular">
-            <p class="sample-type">Language</p>
-            <h3>Specialised terminology</h3>
-            <p>
-              Terms related to wallets, networks, tokens, and on-chain actions can become barriers if they are introduced without context.
-            </p>
-          </article>
-
-          <article class="sample-card sample-card--regular">
-            <p class="sample-type">Trust</p>
-            <h3>High-stakes user actions</h3>
-            <p>
-              Blockchain interactions often feel irreversible, so users need clearer expectations and stronger reassurance before acting.
-            </p>
-          </article>
-
-          <article class="sample-card sample-card--regular">
-            <p class="sample-type">Flow</p>
-            <h3>Multi-step onboarding</h3>
-            <p>
-              Setup often spans wallet creation, funding, connection, and feature discovery, which makes sequence design especially important.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="approach-title">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-kicker">Approach</p>
-          <h2 class="section-title" id="approach-title">How to structure the content</h2>
-          <p class="section-intro">
-            The content introduces technical ideas only when the user needs them and keeps product meaning ahead of protocol detail.
-          </p>
-        </div>
-
-        <div class="samples-grid">
-          <article class="sample-card sample-card--regular">
-            <p class="sample-type">Onboarding</p>
-            <h3>Lead with outcomes</h3>
-            <p>
-              Start with what the product lets the user do, then explain only the minimum blockchain concepts needed to complete that action.
-            </p>
-          </article>
-
-          <article class="sample-card sample-card--regular">
-            <p class="sample-type">Task guidance</p>
-            <h3>Sequence risk-sensitive steps</h3>
-            <p>
-              Break flows into clearly named steps and call out approvals, wallet signatures, and asset transfers so users recognise higher-risk moments.
-            </p>
-          </article>
-
-          <article class="sample-card sample-card--regular">
-            <p class="sample-type">Trust language</p>
-            <h3>Stay precise and neutral</h3>
-            <p>
-              Use clear, non-hyped wording so users understand what is happening, what they control, and what cannot be undone.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="sample-structure-title">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-kicker">Structure</p>
-          <h2 class="section-title" id="sample-structure-title">Recommended content model</h2>
-          <p class="section-intro">
-            A useful blockchain documentation set balances product introduction, task guidance, glossary support, and trust-building information.
-          </p>
-        </div>
-
-        <div class="samples-grid">
-          <article class="sample-card sample-card--regular">
-            <p class="sample-type">Getting started</p>
-            <h3>Quick orientation</h3>
-            <p>
-              Explain the product purpose, who it is for, and what the first successful outcome looks like.
-            </p>
-          </article>
-
-          <article class="sample-card sample-card--regular">
-            <p class="sample-type">How-to guides</p>
-            <h3>Action-based tutorials</h3>
-            <p>
-              Lead users through real tasks such as connecting a wallet, joining, claiming, or managing in-app assets.
-            </p>
-          </article>
-
-          <article class="sample-card sample-card--regular">
-            <p class="sample-type">Reference</p>
-            <h3>Concept support</h3>
-            <p>
-              Provide concise explanations of terms, roles, and network-specific concepts that users may need during the journey.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="outcome-title">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-kicker">Outcome</p>
-          <h2 class="section-title" id="outcome-title">What strong product writing achieves here</h2>
-          <p class="section-intro">
-            Good product writing makes the system feel more navigable, credible, and usable without pretending the underlying complexity does not exist.
-          </p>
-        </div>
-
-        <article class="sample">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3>Expected result</h3>
-              <p class="meta">Clarity · confidence · conversion</p>
-            </div>
-          </div>
-
-          <p class="sample-summary">
-            When users understand the sequence, the vocabulary, and the consequences of their actions, they can move through the product with more confidence and less abandonment.
-          </p>
-
-          <p class="sample-summary">
-            That is especially important in blockchain products, where trust is shaped as much by the quality of explanation as by the quality of the interface itself.
-          </p>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container site-footer__inner">
-      <span>Piotr Oszenda — Technical Writer · Knowledge Manager · Documentation Architect</span>
-      <span>Based in Gijón, Spain · Working across product, developer, and knowledge systems</span>
-    </div>
-  </footer>
-</body>
-</html>
+        <div class="card">
+          <p class="card__eyebrow">1. Connect the wallet</p>
