@@ -797,6 +797,10 @@ select {
   color: var(--color-text-faint);
 }
 
+.sample--spaced {
+  margin-top: var(--space-5);
+}
+
 .sample-summary {
   margin: 0 0 var(--space-4);
   color: var(--color-text-muted);
