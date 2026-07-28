@@ -802,6 +802,11 @@ select {
   color: var(--color-text-muted);
 }
 
+/* extra spacing when a summary follows a code block */
+.code-switcher + .sample-summary {
+  margin-top: var(--space-4);
+}
+
 .table-wrapper {
   margin-top: var(--space-4);
   border-radius: var(--radius-md);
