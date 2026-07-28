@@ -213,109 +213,49 @@
             <h2 class="section-title" id="samples-title">CLI and TypeScript examples</h2>
           </div>
           <p class="section-intro">
-            The examples below are intentionally practical: they show the actual flow a developer would follow to mint, inspect, and verify a membership object in Sui.
+            The examples mirror the structure of the Customers API tutorial so the two portfolio samples feel visually consistent.
           </p>
         </div>
 
         <article class="sample">
           <div class="sample-header">
             <div class="sample-heading">
-              <h3>1. Join with Sui CLI</h3>
-              <p class="meta">Run the transaction from the terminal</p>
+              <h3>Sui CLI</h3>
+              <p class="meta">Command-line workflow</p>
             </div>
           </div>
-
           <p class="sample-summary">
-            Use the CLI when you want to validate the contract entry point quickly and see the transaction output before wiring it into an app.
+            The CLI example demonstrates the join and inspection flow with short commands and readable output.
           </p>
-
           <pre><code>sui client call \
   --package &lt;PACKAGE_ID&gt; \
   --module octopus_society \
   --function join \
-  --args &lt;WALLET_ADDRESS&gt; \
-  --gas-budget 10000000</code></pre>
+  --args &lt;WALLET_ADDRESS&gt;
 
-          <p class="sample-summary">
-            The call mints a membership object and returns a transaction digest that you can use to inspect the result.
-          </p>
+sui client object &lt;MEMBERSHIP_OBJECT_ID&gt;</code></pre>
         </article>
 
         <article class="sample sample--spaced">
           <div class="sample-header">
             <div class="sample-heading">
-              <h3>2. Verify the membership object</h3>
-              <p class="meta">Check ownership and state</p>
+              <h3>TypeScript</h3>
+              <p class="meta">SDK workflow</p>
             </div>
           </div>
-
           <p class="sample-summary">
-            After the join transaction succeeds, inspect the object directly so the reader sees the same data the game or app will later consume.
+            The SDK example keeps the same sequence but makes it easy to embed the flow in a script or tutorial app.
           </p>
-
-          <pre><code>sui client object &lt;MEMBERSHIP_OBJECT_ID&gt;</code></pre>
-
-          <p class="sample-summary">
-            In a real tutorial, this is where you explain which fields matter: owner, membership tier, join timestamp, and reward eligibility.
-          </p>
-        </article>
-
-        <article class="sample sample--spaced">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3>3. Join from TypeScript</h3>
-              <p class="meta">Embed the flow in a game or web app</p>
-            </div>
-          </div>
-
-          <p class="sample-summary">
-            This version is better for a game client or documentation example because it shows the same action from application code.
-          </p>
-
-          <pre><code>import { SuiClient, TransactionBlock } from '@mysten/sui.js';
+          <pre><code>import { SuiClient } from '@mysten/sui.js/client';
 
 const client = new SuiClient({ url: 'https://fullnode.testnet.sui.io' });
 
-const tx = new TransactionBlock();
-tx.moveCall({
-  target: `${packageId}::octopus_society::join`,
-  arguments: [tx.pure(walletAddress)],
-});
-
-const result = await client.signAndExecuteTransactionBlock({
-  signer: keypair,
-  transactionBlock: tx,
-});
-
-console.log(result.digest);</code></pre>
-
-          <p class="sample-summary">
-            This example makes the tutorial hands-on because it shows the exact call path a developer would wire into a game client, script, or demo app.
-          </p>
-        </article>
-
-        <article class="sample sample--spaced">
-          <div class="sample-header">
-            <div class="sample-heading">
-              <h3>4. Read the object in TypeScript</h3>
-              <p class="meta">Fetch the result and render it in UI</p>
-            </div>
-          </div>
-
-          <p class="sample-summary">
-            Use the object ID from the transaction result to render the current membership state in the app or game UI.
-          </p>
-
-          <pre><code>const object = await client.getObject({
-  id: membershipObjectId,
-  options: { showContent: true, showOwner: true },
-});
-
-console.log(object.data?.content);</code></pre>
-
-          <p class="sample-summary">
-            This closes the loop from transaction to UI and makes the tutorial genuinely useful for developers who need a working reference.
-          </p>
+const result = await client.call({
+  packageObjectId: packageId,
+  module: 'octopus_society',
+  function: 'join',
+  arguments: [walletAddress],
+});</code></pre>
         </article>
       </div>
     </section>
