@@ -319,10 +319,6 @@ Content-Type: application/json</code></pre>
     "email": "john@doe.com",
     "business_name": "Northwind Studio"
   }'</code></pre>
-            </div>
-
-            <div class="code-block">
-              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
               <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers`, {
   method: "POST",
   headers: {
@@ -368,10 +364,6 @@ const customer = await response.json();</code></pre>
               <pre class="code-panel is-active" data-code-panel="curl"><code>curl --request GET \
   --url {base_url}/api/1.0/customers/{id} \
   --header "Authorization: Bearer {access_token}"</code></pre>
-            </div>
-
-            <div class="code-block">
-              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
               <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
   method: "GET",
   headers: {
@@ -435,10 +427,6 @@ const customerDetails = await response.json();</code></pre>
     "email": "john.doe@northwind.example",
     "business_name": "Northwind Labs"
   }'</code></pre>
-            </div>
-
-            <div class="code-block">
-              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
               <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
   method: "PATCH",
   headers: {
@@ -502,10 +490,6 @@ const updatedCustomer = await response.json();</code></pre>
               <pre class="code-panel is-active" data-code-panel="curl"><code>curl --request DELETE \
   --url {base_url}/api/1.0/customers/{id} \
   --header "Authorization: Bearer {access_token}"</code></pre>
-            </div>
-
-            <div class="code-block">
-              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
               <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
   method: "DELETE",
   headers: {
@@ -599,7 +583,9 @@ if (!response.ok) {
     document.querySelectorAll(".code-copy-button").forEach((button) => {
       button.addEventListener("click", async () => {
         const codeBlock = button.closest(".code-block");
-        const codeElement = codeBlock?.querySelector("code");
+        const activePanel = codeBlock?.querySelector(".code-panel.is-active code");
+        const fallbackPanel = codeBlock?.querySelector(".code-panel code");
+        const codeElement = activePanel || fallbackPanel;
 
         if (!codeElement) {
           return;
