@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Customers API tutorial — Developer documentation sample (Piotr Oszenda)</title>
+  <title>Customers API tutorial – Developer documentation sample (Piotr Oszenda)</title>
   <meta
     name="description"
     content="Hands-on API tutorial showing how to create, retrieve, update, and delete customer records with a fictional Customers API."
@@ -266,10 +266,10 @@ Content-Type: application/json</code></pre>
           </div>
 
           <ul>
-            <li><code>POST /api/1.0/customers</code> — Create a new customer.</li>
-            <li><code>GET /api/1.0/customers/{id}</code> — Retrieve a customer by ID.</li>
-            <li><code>PATCH /api/1.0/customers/{id}</code> — Update selected fields on a customer.</li>
-            <li><code>DELETE /api/1.0/customers/{id}</code> — Delete a customer.</li>
+            <li><code>POST /api/1.0/customers</code> – Create a new customer.</li>
+            <li><code>GET /api/1.0/customers/{id}</code> – Retrieve a customer by ID.</li>
+            <li><code>PATCH /api/1.0/customers/{id}</code> – Update selected fields on a customer.</li>
+            <li><code>DELETE /api/1.0/customers/{id}</code> – Delete a customer.</li>
           </ul>
 
           <p class="sample-summary">
@@ -372,8 +372,25 @@ if (!response.ok) {
 const customerDetails = await response.json();</code></pre>
           </div>
 
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h4>Example response</h4>
+              <p class="meta">200 OK · application/json</p>
+            </div>
+          </div>
+
+          <pre class="code-panel is-active"><code>{
+  "id": "d3f4a7d2-6f53-4c8d-9e12-91c7b0b7ef44",
+  "full_name": "John Doe",
+  "email": "john@doe.com",
+  "business_name": "Northwind Studio",
+  "created_at": "2026-07-21T10:15:42Z",
+  "updated_at": "2026-07-21T10:15:42Z"
+}</code></pre>
+
           <p class="sample-summary">
             The client retrieves the current representation of the customer and confirms that the record can be looked up by <code>id</code>.
+            The response body shows the fields returned by the API for this resource, including the generated identifier and timestamps.
           </p>
         </article>
 
@@ -419,8 +436,25 @@ if (!response.ok) {
 const updatedCustomer = await response.json();</code></pre>
           </div>
 
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h4>Example response</h4>
+              <p class="meta">200 OK · application/json</p>
+            </div>
+          </div>
+
+          <pre class="code-panel is-active"><code>{
+  "id": "d3f4a7d2-6f53-4c8d-9e12-91c7b0b7ef44",
+  "full_name": "John Doe",
+  "email": "john.doe@northwind.example",
+  "business_name": "Northwind Labs",
+  "created_at": "2026-07-21T10:15:42Z",
+  "updated_at": "2026-07-21T10:22:09Z"
+}</code></pre>
+
           <p class="sample-summary">
             The email and business name change, while all other fields remain as before.
+            The updated response confirms both modified fields and shows a newer <code>updated_at</code> timestamp.
           </p>
         </article>
 
@@ -504,7 +538,7 @@ if (!response.ok) {
 
   <footer class="site-footer">
     <div class="container site-footer__inner">
-      <span>Piotr Oszenda — Technical Writer · Knowledge Manager · Documentation Architect</span>
+      <span>Piotr Oszenda – Technical Writer · Knowledge Manager · Documentation Architect</span>
       <span>Based in Gijón, Spain · Working across product, developer, and knowledge systems</span>
     </div>
   </footer>
