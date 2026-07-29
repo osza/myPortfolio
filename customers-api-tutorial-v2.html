@@ -504,7 +504,7 @@ if (!response.ok) {
           </div>
 
           <p class="sample-summary">
-            The API removes the customer record, and a later <code>GET</code> request for the same <code>id</code> should return an error such as <code>404 Not Found</code>.
+            The API removes the customer record and typically returns <code>204 No Content</code>. A later GET request for the same id should return <code>404 Not Found</code>.
           </p>
         </article>
       </div>
