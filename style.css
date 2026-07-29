@@ -784,7 +784,8 @@ select {
   margin-bottom: var(--space-4);
 }
 
-.sample-heading h3 {
+.sample-heading h3,
+.sample-heading h4 {
   margin: 0;
   font-size: 1.05rem;
 }
@@ -807,7 +808,8 @@ select {
 }
 
 /* extra spacing when a summary follows a code block */
-.code-switcher + .sample-summary {
+.code-switcher + .sample-summary,
+.code-block + .sample-summary {
   margin-top: var(--space-4);
 }
 
@@ -872,6 +874,12 @@ select {
   color: var(--color-white);
 }
 
+/* Code blocks with copy button */
+
+.code-block {
+  position: relative;
+}
+
 .code-panel {
   margin: 0;
   padding: var(--space-4);
@@ -884,12 +892,69 @@ select {
   overflow-x: auto;
 }
 
+.code-block .code-panel {
+  padding-top: 3.25rem;
+}
+
 .code-panel code {
+  display: block;
   white-space: pre;
 }
 
 .code-panel:not(.is-active) {
   display: none;
+}
+
+.code-copy-button {
+  position: absolute;
+  top: 0.875rem;
+  right: 0.875rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.75rem;
+  min-height: 2.25rem;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-pill);
+  background: rgba(15, 23, 42, 0.88);
+  color: #f8fafc;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.code-copy-button:hover,
+.code-copy-button:focus-visible {
+  background: rgba(30, 41, 59, 0.96);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}
+
+.code-copy-button:hover {
+  transform: translateY(-1px);
+}
+
+.code-copy-button:active {
+  transform: translateY(0);
+}
+
+.code-copy-button.is-copied {
+  background: rgba(22, 101, 52, 0.92);
+  border-color: rgba(134, 239, 172, 0.34);
+  color: #f0fdf4;
 }
 
 /* Hero metadata on tutorial pages */
@@ -1031,6 +1096,19 @@ select {
 
   .button-link {
     width: 100%;
+  }
+
+  .code-copy-button {
+    top: 0.75rem;
+    right: 0.75rem;
+    min-width: 4.25rem;
+    min-height: 2.1rem;
+    padding: 0.4rem 0.72rem;
+    font-size: 0.78rem;
+  }
+
+  .code-block .code-panel {
+    padding-top: 3rem;
   }
 
   .site-footer__inner {
