@@ -165,8 +165,11 @@
             All examples in this tutorial use bearer token authentication and JSON request bodies where applicable.
           </p>
 
-          <pre class="code-panel is-active"><code>Authorization: Bearer {access_token}
+          <div class="code-block">
+            <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+            <pre class="code-panel is-active"><code>Authorization: Bearer {access_token}
 Content-Type: application/json</code></pre>
+          </div>
 
           <p class="sample-summary">
             Include the <code>Authorization</code> header in every request. Include <code>Content-Type: application/json</code>
@@ -305,7 +308,9 @@ Content-Type: application/json</code></pre>
               <button class="code-tab" type="button" data-code-tab="javascript" aria-pressed="false">JavaScript</button>
             </div>
 
-            <pre class="code-panel is-active" data-code-panel="curl"><code>curl --request POST \
+            <div class="code-block">
+              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+              <pre class="code-panel is-active" data-code-panel="curl"><code>curl --request POST \
   --url {base_url}/api/1.0/customers \
   --header "Authorization: Bearer {access_token}" \
   --header "Content-Type: application/json" \
@@ -314,8 +319,11 @@ Content-Type: application/json</code></pre>
     "email": "john@doe.com",
     "business_name": "Northwind Studio"
   }'</code></pre>
+            </div>
 
-            <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers`, {
+            <div class="code-block">
+              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+              <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers`, {
   method: "POST",
   headers: {
     Authorization: `Bearer ${accessToken}`,
@@ -333,6 +341,7 @@ if (!response.ok) {
 }
 
 const customer = await response.json();</code></pre>
+            </div>
           </div>
 
           <p class="sample-summary">
@@ -354,11 +363,16 @@ const customer = await response.json();</code></pre>
               <button class="code-tab" type="button" data-code-tab="javascript" aria-pressed="false">JavaScript</button>
             </div>
 
-            <pre class="code-panel is-active" data-code-panel="curl"><code>curl --request GET \
+            <div class="code-block">
+              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+              <pre class="code-panel is-active" data-code-panel="curl"><code>curl --request GET \
   --url {base_url}/api/1.0/customers/{id} \
   --header "Authorization: Bearer {access_token}"</code></pre>
+            </div>
 
-            <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
+            <div class="code-block">
+              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+              <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
   method: "GET",
   headers: {
     Authorization: `Bearer ${accessToken}`
@@ -370,6 +384,7 @@ if (!response.ok) {
 }
 
 const customerDetails = await response.json();</code></pre>
+            </div>
           </div>
 
           <div class="sample-header">
@@ -379,7 +394,9 @@ const customerDetails = await response.json();</code></pre>
             </div>
           </div>
 
-          <pre class="code-panel is-active"><code>{
+          <div class="code-block">
+            <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+            <pre class="code-panel is-active"><code>{
   "id": "d3f4a7d2-6f53-4c8d-9e12-91c7b0b7ef44",
   "full_name": "John Doe",
   "email": "john@doe.com",
@@ -387,6 +404,7 @@ const customerDetails = await response.json();</code></pre>
   "created_at": "2026-07-21T10:15:42Z",
   "updated_at": "2026-07-21T10:15:42Z"
 }</code></pre>
+          </div>
 
           <p class="sample-summary">
             The client retrieves the current representation of the customer and confirms that the record can be looked up by <code>id</code>.
@@ -408,7 +426,9 @@ const customerDetails = await response.json();</code></pre>
               <button class="code-tab" type="button" data-code-tab="javascript" aria-pressed="false">JavaScript</button>
             </div>
 
-            <pre class="code-panel is-active" data-code-panel="curl"><code>curl --request PATCH \
+            <div class="code-block">
+              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+              <pre class="code-panel is-active" data-code-panel="curl"><code>curl --request PATCH \
   --url {base_url}/api/1.0/customers/{id} \
   --header "Authorization: Bearer {access_token}" \
   --header "Content-Type: application/json" \
@@ -416,8 +436,11 @@ const customerDetails = await response.json();</code></pre>
     "email": "john.doe@northwind.example",
     "business_name": "Northwind Labs"
   }'</code></pre>
+            </div>
 
-            <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
+            <div class="code-block">
+              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+              <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
   method: "PATCH",
   headers: {
     Authorization: `Bearer ${accessToken}`,
@@ -434,6 +457,7 @@ if (!response.ok) {
 }
 
 const updatedCustomer = await response.json();</code></pre>
+            </div>
           </div>
 
           <div class="sample-header">
@@ -443,7 +467,9 @@ const updatedCustomer = await response.json();</code></pre>
             </div>
           </div>
 
-          <pre class="code-panel is-active"><code>{
+          <div class="code-block">
+            <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+            <pre class="code-panel is-active"><code>{
   "id": "d3f4a7d2-6f53-4c8d-9e12-91c7b0b7ef44",
   "full_name": "John Doe",
   "email": "john.doe@northwind.example",
@@ -451,6 +477,7 @@ const updatedCustomer = await response.json();</code></pre>
   "created_at": "2026-07-21T10:15:42Z",
   "updated_at": "2026-07-21T10:22:09Z"
 }</code></pre>
+          </div>
 
           <p class="sample-summary">
             The email and business name change, while all other fields remain as before.
@@ -472,11 +499,16 @@ const updatedCustomer = await response.json();</code></pre>
               <button class="code-tab" type="button" data-code-tab="javascript" aria-pressed="false">JavaScript</button>
             </div>
 
-            <pre class="code-panel is-active" data-code-panel="curl"><code>curl --request DELETE \
+            <div class="code-block">
+              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+              <pre class="code-panel is-active" data-code-panel="curl"><code>curl --request DELETE \
   --url {base_url}/api/1.0/customers/{id} \
   --header "Authorization: Bearer {access_token}"</code></pre>
+            </div>
 
-            <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
+            <div class="code-block">
+              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+              <pre class="code-panel" data-code-panel="javascript"><code>const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
   method: "DELETE",
   headers: {
     Authorization: `Bearer ${accessToken}`
@@ -486,6 +518,7 @@ const updatedCustomer = await response.json();</code></pre>
 if (!response.ok) {
   // Handle non-2xx responses in a real implementation
 }</code></pre>
+            </div>
           </div>
 
           <p class="sample-summary">
@@ -562,6 +595,34 @@ if (!response.ok) {
             panel.classList.toggle("is-active", panel.dataset.codePanel === target);
           });
         });
+      });
+    });
+
+    document.querySelectorAll(".code-copy-button").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const codeBlock = button.closest(".code-block");
+        const codeElement = codeBlock?.querySelector("code");
+
+        if (!codeElement) {
+          return;
+        }
+
+        const originalLabel = button.textContent;
+        const codeText = codeElement.textContent ?? "";
+
+        try {
+          await navigator.clipboard.writeText(codeText);
+          button.textContent = "Copied";
+          button.classList.add("is-copied");
+        } catch (error) {
+          button.textContent = "Failed";
+          button.classList.add("is-copied");
+        }
+
+        window.setTimeout(() => {
+          button.textContent = originalLabel;
+          button.classList.remove("is-copied");
+        }, 1800);
       });
     });
   </script>
