@@ -1,61 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>How I design docs-as-code workflows — Piotr Oszenda</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Docs-as-code workflow sample — Piotr Oszenda</title>
   <meta
     name="description"
-    content="Documentation architecture sample showing how I design practical docs-as-code workflows, contributor processes, and governance structures."
-  />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    content="A documentation architecture sample showing how I design docs-as-code workflows, contributor processes, review rules, and publishing structures."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet"
-  />
-  <link rel="stylesheet" href="./style.css" />
+  >
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: true, theme: 'default' });
+  </script>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
-    <div class="container">
-      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-        <a href="./index.html#work">Back to portfolio</a>
+    <div class="container site-header__inner">
+      <a class="brand" href="./index.html#top" aria-label="Go back to homepage">
+        <span class="brand__mark" aria-hidden="true">PO</span>
+        <span>Piotr Oszenda</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="./index.html#work">Work</a>
+        <a href="./index.html#approach">Approach</a>
+        <a href="./index.html#experience">Experience</a>
+        <a href="./index.html#samples">Samples</a>
+        <a href="./index.html#contact">Contact</a>
       </nav>
-
-      <section class="hero hero--compact" aria-labelledby="page-title">
-        <p class="eyebrow">Documentation architecture sample</p>
-        <h1 id="page-title">How I design docs-as-code workflows</h1>
-
-        <p class="lede">
-          A representative sample that shows how I structure documentation systems around contribution flow, review rules, publishing control, and long-term maintainability.
-        </p>
-
-        <div class="hero-actions">
-          <a class="button-link button-link--primary" href="#workflow">Read workflow</a>
-          <a class="button-link" href="./index.html#work">Back to portfolio</a>
-        </div>
-
-        <div class="hero-stats" aria-label="Workflow focus">
-          <span class="hero-stat">Docs-as-code</span>
-          <span class="hero-stat">Governance</span>
-          <span class="hero-stat">Contributor flow</span>
-          <span class="hero-stat">Information architecture</span>
-        </div>
-      </section>
     </div>
   </header>
 
-  <main id="main">
-    <section class="section" id="workflow" aria-labelledby="overview-title">
+  <main id="main" tabindex="-1">
+    <section class="hero" id="top">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">Documentation architecture sample</p>
+          <h1>How I design docs-as-code workflows</h1>
+          <p class="hero__lead">
+            A representative sample that shows how I structure documentation systems around contribution flow,
+            review rules, publishing control, and long-term maintainability.
+          </p>
+
+          <div class="hero__actions">
+            <a class="button-link button-link--primary" href="#workflow">Read the workflow</a>
+            <a class="button-link button-link--secondary" href="./index.html#samples">Back to samples</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-labelledby="focus-title">
+          <p class="hero-panel__label" id="focus-title">Workflow focus</p>
+          <ul class="proof-list">
+            <li>
+              <strong>Docs-as-code</strong>
+              <span>Versioned content, structured source files, and reusable publishing patterns.</span>
+            </li>
+            <li>
+              <strong>Governance</strong>
+              <span>Ownership, review paths, and release control for documentation teams.</span>
+            </li>
+            <li>
+              <strong>Contributor flow</strong>
+              <span>Clear rules for authors, reviewers, and maintainers working across product areas.</span>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section--accent" id="workflow">
       <div class="container">
-        <div class="section-header">
-          <p class="section-kicker">Overview</p>
-          <h2 class="section-title" id="overview-title">Documentation systems need more than version control</h2>
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Overview</p>
+            <h2 class="section-title">Documentation systems need more than version control.</h2>
+          </div>
           <p class="section-intro">
-            A docs-as-code setup is effective when contribution flow, ownership, review, and publishing are designed as one connected system rather than as isolated tooling decisions.
+            A docs-as-code setup works best when contribution flow, ownership, review, and publishing are designed as one connected system instead of isolated tooling decisions.
           </p>
         </div>
 
@@ -78,35 +108,46 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="workflow-components-title">
+    <section class="section" id="components">
       <div class="container">
-        <div class="section-header">
-          <p class="section-kicker">System design</p>
-          <h2 class="section-title" id="workflow-components-title">Workflow components I usually define first</h2>
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">System design</p>
+            <h2 class="section-title">The workflow components I define first.</h2>
+          </div>
           <p class="section-intro">
-            Before selecting detailed tooling patterns, I define the contribution model, review ownership, structure rules, and publishing expectations.
+            Before choosing detailed tooling patterns, I define who can contribute, how changes are reviewed, and what the publishing rules are.
           </p>
         </div>
 
         <div class="samples-grid">
-          <article class="sample-card">
-            <p class="sample-type">Contribution</p>
+          <article class="sample-card sample-card--regular">
+            <div class="sample-card__meta">
+              <span class="chip">Contribution</span>
+              <span class="chip">Ownership</span>
+            </div>
             <h3>Who can change content</h3>
             <p>
               Define whether documentation is owned by a central team, distributed across product teams, or maintained through a hybrid contribution model.
             </p>
           </article>
 
-          <article class="sample-card">
-            <p class="sample-type">Review</p>
+          <article class="sample-card sample-card--regular">
+            <div class="sample-card__meta">
+              <span class="chip">Review</span>
+              <span class="chip">Approval</span>
+            </div>
             <h3>How changes are approved</h3>
             <p>
               Clarify technical review, editorial review, and publication rules so contributors understand what done means.
             </p>
           </article>
 
-          <article class="sample-card">
-            <p class="sample-type">Publishing</p>
+          <article class="sample-card sample-card--regular">
+            <div class="sample-card__meta">
+              <span class="chip">Publishing</span>
+              <span class="chip">Release control</span>
+            </div>
             <h3>What reaches production</h3>
             <p>
               Separate draft, review, and release states to prevent incomplete or unvalidated content from being published accidentally.
@@ -116,120 +157,198 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="flow-title">
+    <section class="section section--accent" id="flow">
       <div class="container">
-        <div class="section-header">
-          <p class="section-kicker">Flow</p>
-          <h2 class="section-title" id="flow-title">A practical contributor path</h2>
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Contributor flow</p>
+            <h2 class="section-title">A simple path from draft to publish.</h2>
+          </div>
           <p class="section-intro">
-            The most effective workflows reduce ambiguity. Contributors should always know where to make a change, how to propose it, and what happens next.
+            A good docs-as-code flow reduces uncertainty for authors and makes review expectations visible from the start.
+          </p>
+        </div>
+
+        <div class="results-grid">
+          <article class="result-card">
+            <span class="result-card__value">1</span>
+            <p>Draft in a structured source file using agreed naming, headings, and content conventions.</p>
+          </article>
+
+          <article class="result-card">
+            <span class="result-card__value">2</span>
+            <p>Review for correctness, terminology, and task completeness before content moves forward.</p>
+          </article>
+
+          <article class="result-card">
+            <span class="result-card__value">3</span>
+            <p>Publish through a controlled process that preserves consistency across the wider documentation set.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mermaid">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Mermaid diagram</p>
+            <h2 class="section-title">A compact view of the docs-as-code workflow.</h2>
+          </div>
+          <p class="section-intro">
+            This version uses a shorter left-to-right path so the diagram reads cleanly inside the existing card layout.
           </p>
         </div>
 
         <article class="sample">
           <div class="sample-header">
             <div class="sample-heading">
-              <h3>Suggested lifecycle</h3>
-              <p class="meta">Draft · review · publish · maintain</p>
+              <h3>Workflow map</h3>
+              <p class="meta">Mermaid · process overview</p>
             </div>
           </div>
 
-          <div class="mermaid">
+          <div class="sample-summary mermaid-wrap">
+            <pre class="mermaid">%%{init: {"flowchart": {"curve": "basis", "nodeSpacing": 30, "rankSpacing": 34}, "themeVariables": {"fontFamily": "Inter", "fontSize": "15px", "primaryColor": "#f5f3ee", "primaryTextColor": "#1f1d19", "primaryBorderColor": "#0d6666", "lineColor": "#5f5a52", "secondaryColor": "#f5f3ee", "tertiaryColor": "#f5f3ee"}} }%%
 flowchart LR
-  A[Identify change] --> B[Update source content]
-  B --> C[Open pull request]
-  C --> D[Editorial and technical review]
-  D --> E[Merge approved changes]
-  E --> F[Publish automatically]
-  F --> G[Monitor and maintain]
+  A[Source] --> B[Review]
+  B --> C[Validate]
+  C --> D[Publish]
+  D --> E[Live docs]
+  E --> F[Feedback]
+  F --> A
+
+  classDef default fill:#f5f3ee,stroke:#0d6666,color:#1f1d19,stroke-width:1px;
+  class A,B,C,D,E,F default;
+</pre>
           </div>
 
           <p class="sample-summary">
-            This sequence keeps the workflow understandable for occasional contributors while still providing the control needed for high-value or technically sensitive documentation.
+            The diagram is meant to read like the rest of the page: restrained, editorial, and easy to scan.
           </p>
         </article>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="governance-title">
+    <section class="section" id="source-files">
       <div class="container">
-        <div class="section-header">
-          <p class="section-kicker">Governance</p>
-          <h2 class="section-title" id="governance-title">Rules that make documentation easier to trust</h2>
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Source structure</p>
+            <h2 class="section-title">What I keep visible in the repo.</h2>
+          </div>
           <p class="section-intro">
-            Governance should not create friction for its own sake. It should make content quality, ownership, and update responsibility easier to understand.
+            Docs-as-code becomes easier to maintain when the repository itself communicates structure, ownership, and reusable patterns.
           </p>
         </div>
 
-        <div class="writing-sample">
-          <article class="note">
-            <p class="sample-type">Ownership</p>
-            <p>
-              Assign clear responsibility for each content area so updates do not stall between product, support, and documentation teams.
-            </p>
+        <div class="timeline">
+          <article class="timeline-card">
+            <div class="timeline-card__meta">
+              <span>Structure</span>
+              <span>Navigation</span>
+              <span>Consistency</span>
+            </div>
+            <h3>Use predictable files and pages.</h3>
+            <ul>
+              <li>Keep titles and file names aligned.</li>
+              <li>Use consistent section order across samples.</li>
+              <li>Make the source easy to scan for contributors.</li>
+            </ul>
+            <p class="timeline-card__tools">Examples: markdown source, HTML output, supporting assets, clear paths</p>
           </article>
 
-          <article class="note">
-            <p class="sample-type">Standards</p>
-            <p>
-              Use templates, front matter rules, and content patterns to make contributions more consistent and easier to review.
-            </p>
-          </article>
-
-          <article class="note">
-            <p class="sample-type">Maintenance</p>
-            <p>
-              Build maintenance into the workflow with periodic review, change triggers, and clear expectations for stale content.
-            </p>
+          <article class="timeline-card">
+            <div class="timeline-card__meta">
+              <span>Governance</span>
+              <span>Editorial control</span>
+              <span>Maintenance</span>
+            </div>
+            <h3>Make ownership and review explicit.</h3>
+            <ul>
+              <li>Document who approves changes.</li>
+              <li>Define what needs technical validation.</li>
+              <li>Keep publishing steps lightweight but controlled.</li>
+            </ul>
+            <p class="timeline-card__tools">Examples: review notes, contributor rules, release checkpoints</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="outcome-title">
+    <section class="section" id="related-samples">
       <div class="container">
-        <div class="section-header">
-          <p class="section-kicker">Outcome</p>
-          <h2 class="section-title" id="outcome-title">What a good docs-as-code workflow should achieve</h2>
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Related samples</p>
+            <h2 class="section-title">Other portfolio pages that connect to this approach.</h2>
+          </div>
           <p class="section-intro">
-            The right workflow improves documentation quality because it improves the path from product change to published explanation.
+            This sample sits alongside tutorial and case-study pages that show how I build and maintain structured documentation.
           </p>
         </div>
 
         <div class="samples-grid">
-          <article class="sample-card">
-            <p class="sample-type">Speed</p>
-            <h3>Faster updates</h3>
+          <article class="sample-card sample-card--regular">
+            <div class="sample-card__meta">
+              <span class="chip">Tutorial</span>
+              <span class="chip">API</span>
+            </div>
+            <h3>Customers API tutorial</h3>
             <p>
-              Contributors can ship improvements through a known process instead of waiting for manual publishing steps or unclear ownership.
+              A published tutorial that shows how I explain CRUD operations and structure task-based developer guidance.
             </p>
+            <a class="sample-card__link" href="./customers-api-tutorial-v2.html">View tutorial</a>
           </article>
 
-          <article class="sample-card">
-            <p class="sample-type">Quality</p>
-            <h3>More reliable review</h3>
+          <article class="sample-card sample-card--regular">
+            <div class="sample-card__meta">
+              <span class="chip">Source</span>
+              <span class="chip">Markdown</span>
+            </div>
+            <h3>Customers API source file</h3>
             <p>
-              Editorial and technical checks become part of the workflow rather than optional follow-up work.
+              The Markdown source version of the same tutorial, showing how content can move from source to published HTML.
             </p>
+            <a class="sample-card__link" href="./customers-api-tutorial-v2.md">View source</a>
           </article>
 
-          <article class="sample-card">
-            <p class="sample-type">Scale</p>
-            <h3>Better long-term maintainability</h3>
+          <article class="sample-card sample-card--regular">
+            <div class="sample-card__meta">
+              <span class="chip">Portfolio</span>
+              <span class="chip">Docs-as-code</span>
+            </div>
+            <h3>Main sample index</h3>
             <p>
-              The system supports growth because it standardises contribution, publication, and accountability across teams.
+              The portfolio homepage where this docs-as-code sample is surfaced alongside other selected work.
             </p>
+            <a class="sample-card__link" href="./index.html#samples">Back to samples</a>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--accent" id="contact">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Contact</p>
+            <h2 class="section-title">Available for documentation architecture, docs-as-code, and content operations work.</h2>
+          </div>
+          <p class="section-intro">
+            I work remotely and collaborate comfortably across product, engineering, QA, support, and consulting environments.
+          </p>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>Portfolio ♦︎ Piotr Oszenda</p>
+    <div class="container site-footer__inner">
+      <span>Piotr Oszenda — Technical Writer · Knowledge Manager · Documentation Architect</span>
+      <span>Based in Gijón, Spain · Working across product, developer, and knowledge systems</span>
     </div>
   </footer>
-  
+
 </body>
 </html>

@@ -744,11 +744,6 @@ select {
 
 /* Tutorial / sample-page specific components */
 
-.section-header,
-.section__header {
-  /* keep compatibility with older tutorial pages that use .section-header */
-}
-
 .section-header {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
@@ -757,11 +752,13 @@ select {
   margin-bottom: var(--space-10);
 }
 
-.section-header .section-title {
+.section-header .section-title,
+.section__header .section-title {
   margin: 0;
 }
 
-.section-header .section-intro {
+.section-header .section-intro,
+.section__header .section-intro {
   margin: 0;
   max-width: 62ch;
   color: var(--color-text-muted);
@@ -925,8 +922,8 @@ select {
   line-height: 1;
   letter-spacing: 0.01em;
   cursor: pointer;
-  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
   transition:
     background-color var(--transition),
@@ -1002,6 +999,29 @@ select {
   gap: var(--space-4);
   color: var(--color-text-faint);
   font-size: var(--text-sm);
+}
+
+/* Mermaid diagrams */
+
+.mermaid-wrap {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  padding: var(--space-4) 0 var(--space-2);
+}
+
+.mermaid-wrap > pre.mermaid {
+  margin: 0;
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.mermaid-wrap > pre.mermaid > svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 @media (max-width: 1100px) {
