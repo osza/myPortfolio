@@ -94,7 +94,7 @@ Each step keeps the task sequence explicit and lets the reader switch between cU
 
 `POST /api/1.0/customers`
 
-#### cURL
+#### cURL - Create customer
 
 ```bash
 curl --request POST \
@@ -108,7 +108,7 @@ curl --request POST \
   }'
 ```
 
-#### JavaScript
+#### JavaScript - Create customer
 
 ```javascript
 const response = await fetch(`${baseUrl}/api/1.0/customers`, {
@@ -137,7 +137,7 @@ The client creates the initial customer record and obtains an `id` that you reus
 
 `GET /api/1.0/customers/{id}`
 
-#### cURL
+#### cURL - Retrieve customer
 
 ```bash
 curl --request GET \
@@ -145,7 +145,7 @@ curl --request GET \
   --header "Authorization: Bearer {access_token}"
 ```
 
-#### JavaScript
+#### JavaScript - Retrieve customer
 
 ```javascript
 const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
@@ -168,7 +168,7 @@ Use this step to confirm that the resource was created successfully and that the
 
 `PATCH /api/1.0/customers/{id}`
 
-#### cURL
+#### cURL - Update customer
 
 ```bash
 curl --request PATCH \
@@ -181,7 +181,7 @@ curl --request PATCH \
   }'
 ```
 
-#### JavaScript
+#### JavaScript - Update customer
 
 ```javascript
 const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
@@ -209,7 +209,7 @@ The partial update modifies only the fields included in the request body. Other 
 
 `DELETE /api/1.0/customers/{id}`
 
-#### cURL
+#### cURL - Delete customer
 
 ```bash
 curl --request DELETE \
@@ -217,7 +217,7 @@ curl --request DELETE \
   --header "Authorization: Bearer {access_token}"
 ```
 
-#### JavaScript
+#### JavaScript - Delete customer
 
 ```javascript
 const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
