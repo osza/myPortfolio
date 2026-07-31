@@ -209,22 +209,31 @@
           </div>
 
           <div class="sample-summary mermaid-wrap">
-            <pre class="mermaid">%%{init: {"flowchart": {"curve": "basis", "nodeSpacing": 30, "rankSpacing": 34}, "themeVariables": {"fontFamily": "Inter", "fontSize": "15px", "primaryColor": "#f5f3ee", "primaryTextColor": "#1f1d19", "primaryBorderColor": "#0d6666", "lineColor": "#5f5a52", "secondaryColor": "#f5f3ee", "tertiaryColor": "#f5f3ee"}} }%%
-flowchart LR
-  A[Source] --> B[Review]
-  B --> C[Validate]
-  C --> D[Publish]
-  D --> E[Live docs]
-  E --> F[Feedback]
-  F --> A
+            <pre class="mermaid">%%{init: {"flowchart": {"nodeSpacing": 30, "rankSpacing": 34}, "themeVariables": {"fontFamily": "Inter", "fontSize": "15px", "primaryColor": "#f5f3ee", "primaryTextColor": "#1f1d19", "primaryBorderColor": "#0d6666", "lineColor": "#5f5a52", "secondaryColor": "#f5f3ee", "tertiaryColor": "#f5f3ee"}} }%%
+          flowchart LR
+            A[Stakeholder input] --> B[Research]
+            B --> C[Information design]
+            C --> D[Drafting]
+            D --> E[Review]
+            E --> F[Editing]
+            F --> G[Validation]
+            G --> H[Publication]
+            H --> I[Customer feedback]
+            I --> B
 
-  classDef default fill:#f5f3ee,stroke:#0d6666,color:#1f1d19,stroke-width:1px;
-  class A,B,C,D,E,F default;
-</pre>
+            classDef editorial fill:#fcfbf8,stroke:#0d6666,color:#1f1d19,stroke-width:1.6px;
+            classDef editorialAccent fill:#0d6666,stroke:#0a5050,color:#ffffff,stroke-width:2px;
+            classDef loop fill:#dcebea,stroke:#0d6666,color:#1f1d19,stroke-width:1.5px;
+
+            class A,D,E,I loop;
+            class B,C,F,G editorial;
+            class H editorialAccent;
+
+            </pre>
           </div>
 
           <p class="sample-summary">
-            The diagram is meant to read like the rest of the page: restrained, editorial, and easy to scan.
+            This flow captures real-world documentation work by including stakeholder input from developers, SMEs, and product owners, followed by review and validation before publication. After publication, customer feedback goes back into research and helps improve the next version.
           </p>
         </article>
       </div>
