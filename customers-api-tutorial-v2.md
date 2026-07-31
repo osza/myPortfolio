@@ -232,7 +232,7 @@ if (!response.ok) {
 }
 ```
 
-After the `DELETE` request succeeds, the customer resource is removed and should no longer be returned by subsequent retrieval requests.
+After the `DELETE` request succeeds, the API removes the customer record and typically returns `204 No Content`. A later `GET` request for the same `id` should return `404 Not Found`.
 
 ## Expected workflow result
 
@@ -244,3 +244,22 @@ At the end of this tutorial, you should have completed the following sequence on
 4. Delete the record when testing is complete.
 
 This structure helps new developers understand a complete resource lifecycle before they work with more complex endpoints or multi-resource workflows.
+
+## Why this tutorial structure works
+
+The sample is intentionally sequenced to reduce cognitive load for first-time readers while preserving technical accuracy.
+
+### One resource, one journey
+
+A single resource model keeps the workflow easy to follow and avoids context switching between unrelated examples.
+
+### Reference-friendly sections
+
+Each step can be reused later as standalone guidance without losing the logic of the full tutorial sequence.
+
+### Fast path to confidence
+
+The reader completes one meaningful task loop quickly, which makes the broader API feel easier to approach.
+
+[Back to selected work](index.html#samples)
+
