@@ -708,6 +708,15 @@ select {
 
 .case-back a::before {
   content: "←";
+.sample--spaced {
+  margin-top: var(--space-5);
+}
+
+
+.sample-summary {
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  background: var(--surface-soft);
 }
 
 .case-table {
