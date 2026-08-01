@@ -2,18 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Game assets on Sui for an octopus society — Developer tutorial sample (Piotr Oszenda)</title>
-  <meta
-    name="description"
-    content="Hands-on tutorial illustrating how a game backend and client can model octopus identities, unique assets, communal structures, and transaction flows on Sui."
-  >
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Game assets on Sui for an octopus society — Developer tutorial sample · Piotr Oszenda</title>
+  <meta name="description" content="Hands-on tutorial illustrating how a game backend and client can model octopus identities, unique assets, communal structures, and transaction flows on Sui.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -43,21 +37,21 @@
           <p class="eyebrow">Web3 gaming · Sui blockchain</p>
           <h1>Build an octopus society on Sui</h1>
           <p class="hero__lead">
-            A technical, story-driven tutorial that uses a fictional game world to explain how Move modules,
-            wallet signing, Sui objects, shared objects, and transaction flows can support game logic on Sui.
+            A technical, story-driven tutorial that uses a fictional game world to explain how Move modules, wallet signing,
+            Sui objects, shared objects, and transaction flows can support game logic on Sui.
           </p>
 
           <div class="hero__actions">
             <a class="button-link button-link--primary" href="#content">Read tutorial</a>
             <a class="button-link button-link--secondary" href="index.html#work">Back to portfolio</a>
           </div>
+        </div>
 
-          <div class="hero-stats" aria-label="Tutorial metadata">
-            <span class="hero-stat">Sui blockchain</span>
-            <span class="hero-stat">Game backend</span>
-            <span class="hero-stat">Move objects</span>
-            <span class="hero-stat">Transaction flows</span>
-          </div>
+        <div class="hero-stats" aria-label="Tutorial metadata">
+          <span class="hero-stat">Sui blockchain</span>
+          <span class="hero-stat">Game backend</span>
+          <span class="hero-stat">Move objects</span>
+          <span class="hero-stat">Transaction flows</span>
         </div>
 
         <aside class="hero-panel" aria-labelledby="tutorial-proof-title">
@@ -91,23 +85,20 @@
           </div>
 
           <p class="sample-summary">
-            Imagine you are building a game where each player is one octopus living among other octopi,
-            trading shells and pebbles, tending communal mussel farms, and building a reputation in a shared tide pool.
+            Imagine you are building a game where each player is one octopus living among other octopi, trading shells and pebbles,
+            tending communal mussel farms, and building a reputation in a shared tide pool.
           </p>
           <p class="sample-summary">
-            In a traditional Web2 stack, that world is often represented as rows in a studio-controlled database.
-            The octopus identity, the shells it owns, and the farm it helps maintain may all be stored as records
-            the developer controls directly.
+            In a traditional Web2 stack, that world is often represented as rows in a studio-controlled database. The octopus identity,
+            the shells it owns, and the farm it helps maintain may all be stored as records the developer controls directly.
           </p>
           <p class="sample-summary">
-            On Sui, those parts of the world can be modeled as on-chain objects defined in Move. The player can hold
-            an octopus object in a wallet, own unique shells and pebbles directly, and interact with shared structures
-            through explicit transaction logic.
+            On Sui, those parts of the world can be modeled as on-chain objects defined in Move. The player can hold an octopus object in a wallet,
+            own unique shells and pebbles directly, and interact with shared structures through explicit transaction logic.
           </p>
           <p class="sample-summary">
-            The examples stay intentionally simplified and focus on object shape, transaction flow, and system boundaries
-            rather than full production concerns such as sponsored transactions, indexing pipelines, retries,
-            observability, or custody design.
+            The examples stay intentionally simplified and focus on object shape, transaction flow, and system boundaries rather than full production concerns
+            such as sponsored transactions, indexing pipelines, retries, observability, or custody design.
           </p>
         </article>
 
@@ -120,21 +111,18 @@
           </div>
 
           <p class="sample-summary">
-            One common Sui integration pattern still follows a familiar structure: the backend validates request context
-            and prepares transaction data, while signing happens in a wallet or another explicitly trusted signer.
+            One common Sui integration pattern still follows a familiar structure: the backend validates request context and prepares transaction data,
+            while signing happens in a wallet or another explicitly trusted signer.
           </p>
-
           <ul>
-            <li>The game client calls your API, for example <code>POST /api/octopus/v1/shells</code> or <code>POST /api/octopus/v1/farms/{farm_id}/harvest</code>.</li>
+            <li>The game client calls your API, for example <code>POST /api/octopus/v1/shells</code> or <code>POST /api/octopus/v1/farms/{farmId}/harvest</code>.</li>
             <li>Your backend validates the request, resolves current on-chain object inputs, and builds a transaction payload.</li>
             <li>The payload is returned to the client for wallet approval, or routed to an authorized signer when the product flow requires service-controlled minting.</li>
             <li>The signed transaction is submitted to the Sui network.</li>
             <li>Your backend stores transaction digests, reads effects, and reconciles local metadata with the resulting on-chain object state.</li>
           </ul>
-
           <p class="sample-summary">
-            This can keep the API familiar for application developers while making it clear that ownership, transfer,
-            and mutation ultimately follow the Sui object model.
+            This can keep the API familiar for application developers while making it clear that ownership, transfer, and mutation ultimately follow the Sui object model.
           </p>
         </article>
 
@@ -142,7 +130,7 @@
           <div class="sample-header">
             <div class="sample-heading">
               <h2>Before you start</h2>
-              <p class="meta">Requirements: wallet, endpoint, package, indexing</p>
+              <p class="meta">Requirements · wallet · endpoint · package · indexing</p>
             </div>
           </div>
 
@@ -152,32 +140,27 @@
             <li>A published Move package for your octopus, shell, pebble, and farm types.</li>
             <li>A backend service that can build transaction payloads and track transaction results.</li>
           </ul>
-
           <p class="sample-summary">
-            Replace <code>{package_id}</code>, <code>{octopus_object_id}</code>, <code>{shell_object_id}</code>,
-            <code>{farm_object_id}</code>, and wallet addresses with values from your environment. Keep private keys,
-            admin capabilities, and RPC secrets out of client code and out of source control.
+            Replace <code>packageId</code>, <code>octopusObjectId</code>, <code>shellObjectId</code>, <code>farmObjectId</code>, and wallet addresses with values from your environment.
+            Keep private keys, admin capabilities, and RPC secrets out of client code and out of source control.
           </p>
         </article>
 
         <article class="sample">
           <div class="sample-header">
             <div class="sample-heading">
-              <h2>Move: Define the core game objects</h2>
+              <h2>Move: define the core game objects</h2>
               <p class="meta">Smart contract logic · Identity object · Unique belongings</p>
             </div>
           </div>
 
           <p class="sample-summary">
-            In this game, the first important object is not a weapon. It is the octopus itself. That object represents
-            the player's identity in the society, while shells and pebbles are unique belongings the octopus can own,
-            trade, and carry between interactions.
+            In this game, the first important object is not a weapon. It is the octopus itself. That object represents the player’s identity in the society,
+            while shells and pebbles are unique belongings the octopus can own, trade, and carry between interactions.
           </p>
           <p class="sample-summary">
-            On Sui, owned objects need a <code>UID</code> field and the <code>key</code> ability. If you want an object
-            to be transferable with <code>transfer::public_transfer</code>, it also needs the <code>store</code> ability.
+            On Sui, owned objects need a <code>UID</code> field and the <code>key</code> ability. If you want an object to be transferable with <code>transfer::public_transfer</code>, it also needs the <code>store</code> ability.
           </p>
-
           <pre class="code-panel"><code>module octopus_society::assets {
   use std::string::String;
   use sui::object::{Self, UID};
@@ -185,103 +168,69 @@
   use sui::tx_context::TxContext;
 
   public struct Octopus has key, store {
-    id: UID,
-    name: String,
-    age: u64,
-    territory: String,
-    reputation: u64,
+      id: UID,
+      name: String,
+      age: u64,
+      territory: String,
+      reputation: u64,
   }
 
   public struct Shell has key, store {
-    id: UID,
-    label: String,
-    origin_reef: String,
-    rarity: u8,
+      id: UID,
+      label: String,
+      origin_reef: String,
+      rarity: u8,
   }
 
   public struct Pebble has key, store {
-    id: UID,
-    shape: String,
-    colour: String,
-    rarity: u8,
+      id: UID,
+      shape: String,
+      colour: String,
+      rarity: u8,
   }
 
-  public fun new_octopus(
-    name: String,
-    age: u64,
-    territory: String,
-    ctx: &mut TxContext,
-  ): Octopus {
-    Octopus {
-      id: object::new(ctx),
-      name,
-      age,
-      territory,
-      reputation: 0,
-    }
+  public fun new_octopus(name: String, age: u64, territory: String, ctx: &mut TxContext): Octopus {
+      Octopus {
+          id: object::new(ctx),
+          name,
+          age,
+          territory,
+          reputation: 0,
+      }
   }
 
-  public fun new_shell(
-    label: String,
-    origin_reef: String,
-    rarity: u8,
-    ctx: &mut TxContext,
-  ): Shell {
-    Shell {
-      id: object::new(ctx),
-      label,
-      origin_reef,
-      rarity,
-    }
+  public fun new_shell(label: String, origin_reef: String, rarity: u8, ctx: &mut TxContext): Shell {
+      Shell {
+          id: object::new(ctx),
+          label,
+          origin_reef,
+          rarity,
+      }
   }
 
-  public entry fun mint_octopus(
-    name: String,
-    age: u64,
-    territory: String,
-    recipient: address,
-    ctx: &mut TxContext,
-  ) {
-    let octopus = new_octopus(name, age, territory, ctx);
-    transfer::public_transfer(octopus, recipient);
+  public entry fun mint_octopus(name: String, age: u64, territory: String, recipient: address, ctx: &mut TxContext) {
+      let octopus = new_octopus(name, age, territory, ctx);
+      transfer::public_transfer(octopus, recipient)
   }
 
-  public entry fun mint_shell(
-    label: String,
-    origin_reef: String,
-    rarity: u8,
-    recipient: address,
-    ctx: &mut TxContext,
-  ) {
-    let shell = new_shell(label, origin_reef, rarity, ctx);
-    transfer::public_transfer(shell, recipient);
+  public entry fun mint_shell(label: String, origin_reef: String, rarity: u8, recipient: address, ctx: &mut TxContext) {
+      let shell = new_shell(label, origin_reef, rarity, ctx);
+      transfer::public_transfer(shell, recipient)
   }
 
-  public entry fun polish_shell(
-    shell: &mut Shell,
-    new_rarity: u8,
-  ) {
-    shell.rarity = new_rarity;
+  public entry fun polish_shell(shell: &mut Shell, new_rarity: u8) {
+      shell.rarity = new_rarity
   }
 
-  public entry fun transfer_shell(
-    shell: Shell,
-    recipient: address,
-  ) {
-    transfer::public_transfer(shell, recipient);
+  public entry fun transfer_shell(shell: Shell, recipient: address) {
+      transfer::public_transfer(shell, recipient)
   }
 
   public entry fun retire_shell(shell: Shell) {
-    let Shell {
-      id,
-      label: _,
-      origin_reef: _,
-      rarity: _,
-    } = shell;
-    object::delete(id);
+      let Shell { id, label: _, origin_reef: _, rarity: _, .. } = shell;
+      object::delete(id)
   }
 }</code></pre>
-
           <p class="sample-summary">
             This model follows the social structure used throughout this sample: one player, one octopus identity object,
             plus unique belongings that can circulate between players without being modeled as fungible assets.
@@ -297,17 +246,18 @@
           </div>
 
           <p class="sample-summary">
-            In this sample, onboarding begins by minting the player's octopus identity rather than creating a generic
-            account and attaching cosmetics later. The identity object anchors age, territory, and future social actions.
+            In this sample, onboarding begins by minting the player’s octopus identity rather than creating a generic account and attaching cosmetics later.
+            The identity object anchors age, territory, and future social actions.
           </p>
 
           <div class="code-switcher" data-code-group>
             <div class="code-tabs" role="tablist" aria-label="Code examples for minting an octopus identity">
-              <button class="code-tab is-active" type="button" role="tab" id="identity-tab-curl" aria-selected="true" aria-controls="identity-panel-curl" data-code-tab="curl">cURL (game API)</button>
+              <button class="code-tab is-active" type="button" role="tab" id="identity-tab-curl" aria-selected="true" aria-controls="identity-panel-curl" data-code-tab="curl">cURL game API</button>
               <button class="code-tab" type="button" role="tab" id="identity-tab-ts" aria-selected="false" aria-controls="identity-panel-ts" tabindex="-1" data-code-tab="ts">TypeScript SDK</button>
             </div>
-
-            <pre class="code-panel is-active" id="identity-panel-curl" role="tabpanel" aria-labelledby="identity-tab-curl" data-code-panel="curl"><code>curl -X POST "{base_url}/api/octopus/v1/identities" \
+            <div class="code-block">
+              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+              <pre class="code-panel is-active" id="identity-panel-curl" role="tabpanel" aria-labelledby="identity-tab-curl" data-code-panel="curl"><code>curl -X POST "{base_url}/api/octopus/v1/identities" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer {player_session_token}" \
   -d '{
@@ -316,13 +266,11 @@
     "territory": "Glass Kelp Ridge",
     "recipient": "{player_sui_address}"
   }'</code></pre>
-
-            <pre class="code-panel" id="identity-panel-ts" role="tabpanel" aria-labelledby="identity-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
+              <pre class="code-panel" id="identity-panel-ts" role="tabpanel" aria-labelledby="identity-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
 
 const tx = new Transaction();
-
 tx.moveCall({
-  target: '{package_id}::assets::mint_octopus',
+  target: `${packageId}::assets::mint_octopus`,
   arguments: [
     tx.pure.string('Nerida'),
     tx.pure.u64(4),
@@ -332,8 +280,8 @@ tx.moveCall({
 });
 
 // Build the transaction for wallet approval or pass it to an authorized signer.</code></pre>
+            </div>
           </div>
-
           <p class="sample-summary">
             The flow produces an octopus identity object whose ID can be reused in later interactions and transaction flows.
           </p>
@@ -348,17 +296,17 @@ tx.moveCall({
           </div>
 
           <p class="sample-summary">
-            A shell is a unique, tradeable belonging with its own origin and rarity. That makes it a strong fit
-            for a Sui object model rather than a value hidden behind a database row.
+            A shell is a unique, tradeable belonging with its own origin and rarity. That makes it a strong fit for a Sui object model rather than a value hidden behind a database row.
           </p>
 
           <div class="code-switcher" data-code-group>
             <div class="code-tabs" role="tablist" aria-label="Code examples for minting a shell">
-              <button class="code-tab is-active" type="button" role="tab" id="shell-mint-tab-curl" aria-selected="true" aria-controls="shell-mint-panel-curl" data-code-tab="curl">cURL (game API)</button>
+              <button class="code-tab is-active" type="button" role="tab" id="shell-mint-tab-curl" aria-selected="true" aria-controls="shell-mint-panel-curl" data-code-tab="curl">cURL game API</button>
               <button class="code-tab" type="button" role="tab" id="shell-mint-tab-ts" aria-selected="false" aria-controls="shell-mint-panel-ts" tabindex="-1" data-code-tab="ts">TypeScript SDK</button>
             </div>
-
-            <pre class="code-panel is-active" id="shell-mint-panel-curl" role="tabpanel" aria-labelledby="shell-mint-tab-curl" data-code-panel="curl"><code>curl -X POST "{base_url}/api/octopus/v1/shells" \
+            <div class="code-block">
+              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+              <pre class="code-panel is-active" id="shell-mint-panel-curl" role="tabpanel" aria-labelledby="shell-mint-tab-curl" data-code-panel="curl"><code>curl -X POST "{base_url}/api/octopus/v1/shells" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer {player_session_token}" \
   -d '{
@@ -367,13 +315,11 @@ tx.moveCall({
     "rarity": 3,
     "recipient": "{player_sui_address}"
   }'</code></pre>
-
-            <pre class="code-panel" id="shell-mint-panel-ts" role="tabpanel" aria-labelledby="shell-mint-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
+              <pre class="code-panel" id="shell-mint-panel-ts" role="tabpanel" aria-labelledby="shell-mint-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
 
 const tx = new Transaction();
-
 tx.moveCall({
-  target: '{package_id}::assets::mint_shell',
+  target: `${packageId}::assets::mint_shell`,
   arguments: [
     tx.pure.string('Spiral Moon Shell'),
     tx.pure.string('North Tide Hollow'),
@@ -381,8 +327,8 @@ tx.moveCall({
     tx.pure.address(playerAddress),
   ],
 });</code></pre>
+            </div>
           </div>
-
           <p class="sample-summary">
             The flow produces a shell object owned by the player, with explicit origin and rarity that can later support trade and polish flows.
           </p>
@@ -392,45 +338,39 @@ tx.moveCall({
           <div class="sample-header">
             <div class="sample-heading">
               <h2>3. Polish a shell in place</h2>
-              <p class="meta">PATCH /api/octopus/v1/shells/{object_id} · Mutate an owned object</p>
+              <p class="meta">PATCH /api/octopus/v1/shells/{objectId} · Mutate an owned object</p>
             </div>
           </div>
 
           <p class="sample-summary">
-            Some changes should mutate the existing object instead of replacing it. Polishing a shell improves its rarity
-            in place, and because the Move function takes <code>&amp;mut Shell</code>, the transaction must include the
-            current shell as a mutable input.
+            Some changes should mutate the existing object instead of replacing it. Polishing a shell improves its rarity in place, and because the Move function takes <code>&mut Shell</code>,
+            the transaction must include the current shell as a mutable input.
           </p>
 
           <div class="code-switcher" data-code-group>
             <div class="code-tabs" role="tablist" aria-label="Code examples for polishing a shell">
-              <button class="code-tab is-active" type="button" role="tab" id="shell-upgrade-tab-curl" aria-selected="true" aria-controls="shell-upgrade-panel-curl" data-code-tab="curl">cURL (game API)</button>
+              <button class="code-tab is-active" type="button" role="tab" id="shell-upgrade-tab-curl" aria-selected="true" aria-controls="shell-upgrade-panel-curl" data-code-tab="curl">cURL game API</button>
               <button class="code-tab" type="button" role="tab" id="shell-upgrade-tab-ts" aria-selected="false" aria-controls="shell-upgrade-panel-ts" tabindex="-1" data-code-tab="ts">TypeScript SDK</button>
             </div>
-
-            <pre class="code-panel is-active" id="shell-upgrade-panel-curl" role="tabpanel" aria-labelledby="shell-upgrade-tab-curl" data-code-panel="curl"><code>curl -X PATCH "{base_url}/api/octopus/v1/shells/{object_id}" \
+            <div class="code-block">
+              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+              <pre class="code-panel is-active" id="shell-upgrade-panel-curl" role="tabpanel" aria-labelledby="shell-upgrade-tab-curl" data-code-panel="curl"><code>curl -X PATCH "{base_url}/api/octopus/v1/shells/{objectId}" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer {player_session_token}" \
   -d '{
     "rarity": 5
   }'</code></pre>
-
-            <pre class="code-panel" id="shell-upgrade-panel-ts" role="tabpanel" aria-labelledby="shell-upgrade-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
+              <pre class="code-panel" id="shell-upgrade-panel-ts" role="tabpanel" aria-labelledby="shell-upgrade-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
 
 const tx = new Transaction();
-
 tx.moveCall({
-  target: '{package_id}::assets::polish_shell',
-  arguments: [
-    tx.object('{shell_object_id}'),
-    tx.pure.u8(5),
-  ],
+  target: `${packageId}::assets::polish_shell`,
+  arguments: [tx.object(shellObjectId), tx.pure.u8(5)],
 });</code></pre>
+            </div>
           </div>
-
           <p class="sample-summary">
-            The shell’s rarity increases while its identity and ownership remain unchanged, reinforcing the idea of
-            object mutation instead of replacement.
+            The shell’s rarity increases while its identity and ownership remain unchanged, reinforcing the idea of object mutation instead of replacement.
           </p>
         </article>
 
@@ -443,47 +383,40 @@ tx.moveCall({
           </div>
 
           <p class="sample-summary">
-            In this sample, trading is modeled as a social exchange between octopi rather than as a generic store interaction.
-            One octopus can transfer a shell directly to a neighbour, and a fuller marketplace implementation could extend
-            that flow with Kiosk-style listing, discovery, settlement, and transfer.
+            In this sample, trading is modeled as a social exchange between octopi rather than as a generic store interaction. One octopus can transfer a shell directly to a neighbour,
+            and a fuller marketplace implementation could extend that flow with Kiosk-style listing, discovery, settlement, and transfer.
           </p>
 
           <div class="code-switcher" data-code-group>
             <div class="code-tabs" role="tablist" aria-label="Code examples for trading a shell">
-              <button class="code-tab is-active" type="button" role="tab" id="trade-tab-curl" aria-selected="true" aria-controls="trade-panel-curl" data-code-tab="curl">cURL (game API)</button>
+              <button class="code-tab is-active" type="button" role="tab" id="trade-tab-curl" aria-selected="true" aria-controls="trade-panel-curl" data-code-tab="curl">cURL game API</button>
               <button class="code-tab" type="button" role="tab" id="trade-tab-ts" aria-selected="false" aria-controls="trade-panel-ts" tabindex="-1" data-code-tab="ts">TypeScript SDK</button>
             </div>
-
-            <pre class="code-panel is-active" id="trade-panel-curl" role="tabpanel" aria-labelledby="trade-tab-curl" data-code-panel="curl"><code>curl -X POST "{base_url}/api/octopus/v1/trades" \
+            <div class="code-block">
+              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+              <pre class="code-panel is-active" id="trade-panel-curl" role="tabpanel" aria-labelledby="trade-tab-curl" data-code-panel="curl"><code>curl -X POST "{base_url}/api/octopus/v1/trades" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer {seller_session_token}" \
   -d '{
     "object_id": "{shell_object_id}",
     "buyer_address": "{buyer_sui_address}",
     "price_token": "SUI",
-    "price_amount": "10",
+    "price_amount": 10,
     "trade_note": "Three bright pebbles and one rare shell would also work in a custom flow."
   }'</code></pre>
-
-            <pre class="code-panel" id="trade-panel-ts" role="tabpanel" aria-labelledby="trade-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
+              <pre class="code-panel" id="trade-panel-ts" role="tabpanel" aria-labelledby="trade-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
 
 const tx = new Transaction();
-
 tx.moveCall({
-  target: '{package_id}::assets::transfer_shell',
-  arguments: [
-    tx.object('{shell_object_id}'),
-    tx.pure.address(buyerAddress),
-  ],
+  target: `${packageId}::assets::transfer_shell`,
+  arguments: [tx.object(shellObjectId), tx.pure.address(buyerAddress)],
 });
 
-// In a fuller marketplace flow, your backend could instead prepare Kiosk listing
-// or purchase calls and return them for wallet approval.</code></pre>
+// In a fuller marketplace flow, your backend could instead prepare Kiosk listing or purchase calls and return them for wallet approval.</code></pre>
+            </div>
           </div>
-
           <p class="sample-summary">
-            The shell moves from one player to another through a direct transfer in this example, while a marketplace pattern
-            can build on the same object model and transaction flow.
+            The shell moves from one player to another through a direct transfer in this example, while a marketplace pattern can build on the same object model and transaction flow.
           </p>
         </article>
 
@@ -496,52 +429,37 @@ tx.moveCall({
           </div>
 
           <p class="sample-summary">
-            A mussel farm is a communal structure that several octopi can interact with. That makes it a stronger fit
-            for a shared object than for an individually owned object.
+            A mussel farm is a communal structure that several octopi can interact with. That makes it a stronger fit for a shared object than for an individually owned object.
           </p>
-
           <pre class="code-panel"><code>module octopus_society::farm {
   use sui::object::{Self, UID};
   use sui::tx_context::TxContext;
 
   public struct MusselFarm has key {
-    id: UID,
-    total_mussels_ready: u64,
-    last_harvest_epoch: u64,
+      id: UID,
+      total_mussels_ready: u64,
+      last_harvest_epoch: u64,
   }
 
-  public fun new_farm(
-    total_mussels_ready: u64,
-    last_harvest_epoch: u64,
-    ctx: &mut TxContext,
-  ): MusselFarm {
-    MusselFarm {
-      id: object::new(ctx),
-      total_mussels_ready,
-      last_harvest_epoch,
-    }
+  public fun new_farm(total_mussels_ready: u64, last_harvest_epoch: u64, ctx: &mut TxContext): MusselFarm {
+      MusselFarm {
+          id: object::new(ctx),
+          total_mussels_ready,
+          last_harvest_epoch,
+      }
   }
 
-  public entry fun restock_farm(
-    farm: &mut MusselFarm,
-    added_mussels: u64,
-  ) {
-    farm.total_mussels_ready = farm.total_mussels_ready + added_mussels;
+  public entry fun restock_farm(farm: &mut MusselFarm, added_mussels: u64) {
+      farm.total_mussels_ready = farm.total_mussels_ready + added_mussels;
   }
 
-  public entry fun harvest_farm(
-    farm: &mut MusselFarm,
-    harvested: u64,
-    current_epoch: u64,
-  ) {
-    farm.total_mussels_ready = farm.total_mussels_ready - harvested;
-    farm.last_harvest_epoch = current_epoch;
+  public entry fun harvest_farm(farm: &mut MusselFarm, harvested: u64, current_epoch: u64) {
+      farm.total_mussels_ready = farm.total_mussels_ready - harvested;
+      farm.last_harvest_epoch = current_epoch;
   }
 }</code></pre>
-
           <p class="sample-summary">
-            The same farm object can be referenced and mutated by multiple players through game rules,
-            which makes it a useful example of shared state on Sui.
+            The same farm object can be referenced and mutated by multiple players through game rules, which makes it a useful example of shared state on Sui.
           </p>
         </article>
 
@@ -549,26 +467,26 @@ tx.moveCall({
           <div class="sample-header">
             <div class="sample-heading">
               <h2>6. Harvest with a Programmable Transaction Block</h2>
-              <p class="meta">POST /api/octopus/v1/farms/{farm_id}/harvest · Introduce bundled transaction logic</p>
+              <p class="meta">POST /api/octopus/v1/farms/{farmId}/harvest · Introduce bundled transaction logic</p>
             </div>
           </div>
 
           <p class="sample-summary">
-            A trip to the farm is rarely a single isolated state change. In one visit, an octopus may check the shared
-            farm, harvest what is ready, update its own contribution trail, and receive mussels into personal inventory.
+            A trip to the farm is rarely a single isolated state change. In one visit, an octopus may check the shared farm, harvest what is ready,
+            update its own contribution trail, and receive mussels into personal inventory.
           </p>
           <p class="sample-summary">
-            Programmable Transaction Blocks help here by letting the player approve a bundled flow instead of
-            a chain of disconnected mutations.
+            Programmable Transaction Blocks help here by letting the player approve a bundled flow instead of a chain of disconnected mutations.
           </p>
 
           <div class="code-switcher" data-code-group>
             <div class="code-tabs" role="tablist" aria-label="Code examples for harvesting a mussel farm">
-              <button class="code-tab is-active" type="button" role="tab" id="farm-tab-curl" aria-selected="true" aria-controls="farm-panel-curl" data-code-tab="curl">cURL (game API)</button>
+              <button class="code-tab is-active" type="button" role="tab" id="farm-tab-curl" aria-selected="true" aria-controls="farm-panel-curl" data-code-tab="curl">cURL game API</button>
               <button class="code-tab" type="button" role="tab" id="farm-tab-ts" aria-selected="false" aria-controls="farm-panel-ts" tabindex="-1" data-code-tab="ts">TypeScript SDK</button>
             </div>
-
-            <pre class="code-panel is-active" id="farm-panel-curl" role="tabpanel" aria-labelledby="farm-tab-curl" data-code-panel="curl"><code>curl -X POST "{base_url}/api/octopus/v1/farms/{farm_object_id}/harvest" \
+            <div class="code-block">
+              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+              <pre class="code-panel is-active" id="farm-panel-curl" role="tabpanel" aria-labelledby="farm-tab-curl" data-code-panel="curl"><code>curl -X POST "{base_url}/api/octopus/v1/farms/{farm_object_id}/harvest" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer {player_session_token}" \
   -d '{
@@ -576,29 +494,22 @@ tx.moveCall({
     "harvest_amount": 8,
     "deposit_to_inventory": true
   }'</code></pre>
-
-            <pre class="code-panel" id="farm-panel-ts" role="tabpanel" aria-labelledby="farm-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
+              <pre class="code-panel" id="farm-panel-ts" role="tabpanel" aria-labelledby="farm-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
 
 const tx = new Transaction();
-
 tx.moveCall({
-  target: '{package_id}::farm::harvest_farm',
-  arguments: [
-    tx.object('{farm_object_id}'),
-    tx.pure.u64(8),
-    tx.pure.u64(currentEpoch),
-  ],
+  target: `${packageId}::farm::harvest_farm`,
+  arguments: [tx.object(farmObjectId), tx.pure.u64(8), tx.pure.u64(currentEpoch)],
 });
 
 // In a fuller PTB, you could also:
 // - update the player's octopus contribution record
 // - mint or transfer harvested mussels into player inventory
 // - attach additional bookkeeping calls before submission</code></pre>
+            </div>
           </div>
-
           <p class="sample-summary">
-            This example shows the starting point for a PTB-based harvest flow by updating the communal farm within
-            a transaction that can later be expanded with player-specific actions.
+            This example shows the starting point for a PTB-based harvest flow by updating the communal farm within a transaction that can later be expanded with player-specific actions.
           </p>
         </article>
 
@@ -611,13 +522,10 @@ tx.moveCall({
           </div>
 
           <p class="sample-summary">
-            Randomness matters in this game too. A newly discovered pebble may vary in shape, colour, or rarity,
-            and a seasonal farm event may produce an unexpectedly strong yield.
+            Randomness matters in this game too. A newly discovered pebble may vary in shape, colour, or rarity, and a seasonal farm event may produce an unexpectedly strong yield.
           </p>
           <p class="sample-summary">
-            The goal is not only surprise but trust. If the game says that a rare shell or pebble came from chance,
-            players should be able to treat that outcome as a chain-backed result rather than a server-side claim
-            they simply have to accept.
+            The goal is not only surprise but trust. If the game says that a rare shell or pebble came from chance, players should be able to treat that outcome as a chain-backed result rather than a server-side claim they simply have to accept.
           </p>
         </article>
 
@@ -625,38 +533,32 @@ tx.moveCall({
           <div class="sample-header">
             <div class="sample-heading">
               <h2>Retire a shell when it leaves the world</h2>
-              <p class="meta">DELETE /api/octopus/v1/shells/{object_id} · Remove the object</p>
+              <p class="meta">DELETE /api/octopus/v1/shells/{objectId} · Remove the object</p>
             </div>
           </div>
 
           <p class="sample-summary">
-            Some objects should disappear permanently. When a shell is intentionally retired from the world state,
-            the game should consume the object and delete its <code>UID</code> so it is no longer available for transfer or mutation.
+            Some objects should disappear permanently. When a shell is intentionally retired from the world state, the game should consume the object and delete its <code>UID</code>
+            so it is no longer available for transfer or mutation.
           </p>
 
           <div class="code-switcher" data-code-group>
             <div class="code-tabs" role="tablist" aria-label="Code examples for retiring a shell">
-              <button class="code-tab is-active" type="button" role="tab" id="retire-tab-curl" aria-selected="true" aria-controls="retire-panel-curl" data-code-tab="curl">cURL (game API)</button>
-              <button class="code-tab" type="button" role="tab" id="retire-tab-move" aria-selected="false" aria-controls="retire-panel-move" tabindex="-1" data-code-tab="move">Move (burn)</button>
+              <button class="code-tab is-active" type="button" role="tab" id="retire-tab-curl" aria-selected="true" aria-controls="retire-panel-curl" data-code-tab="curl">cURL game API</button>
+              <button class="code-tab" type="button" role="tab" id="retire-tab-move" aria-selected="false" aria-controls="retire-panel-move" tabindex="-1" data-code-tab="move">Move burn</button>
             </div>
-
-            <pre class="code-panel is-active" id="retire-panel-curl" role="tabpanel" aria-labelledby="retire-tab-curl" data-code-panel="curl"><code>curl -X DELETE "{base_url}/api/octopus/v1/shells/{object_id}" \
+            <div class="code-block">
+              <button class="code-copy-button" type="button" aria-label="Copy code">Copy</button>
+              <pre class="code-panel is-active" id="retire-panel-curl" role="tabpanel" aria-labelledby="retire-tab-curl" data-code-panel="curl"><code>curl -X DELETE "{base_url}/api/octopus/v1/shells/{objectId}" \
   -H "Authorization: Bearer {player_session_token}"</code></pre>
-
-            <pre class="code-panel" id="retire-panel-move" role="tabpanel" aria-labelledby="retire-tab-move" data-code-panel="move" hidden><code>public entry fun retire_shell(shell: Shell) {
-  let Shell {
-    id,
-    label: _,
-    origin_reef: _,
-    rarity: _,
-  } = shell;
-  object::delete(id);
+              <pre class="code-panel" id="retire-panel-move" role="tabpanel" aria-labelledby="retire-tab-move" data-code-panel="move" hidden><code>public entry fun retire_shell(shell: Shell) {
+    let Shell { id, label: _, origin_reef: _, rarity: _, .. } = shell;
+    object::delete(id)
 }</code></pre>
+            </div>
           </div>
-
           <p class="sample-summary">
-            Retiring the shell removes it from circulation and makes any future attempt to reference it an error,
-            which keeps the world state consistent with the narrative.
+            Retiring the shell removes it from circulation and makes any future attempt to reference it an error, which keeps the world state consistent with the narrative.
           </p>
         </article>
 
@@ -669,10 +571,8 @@ tx.moveCall({
           </div>
 
           <p class="sample-summary">
-            Blockchain flows introduce failure modes that a REST-only system does not: insufficient gas, signature
-            rejection, stale object references, and on-chain execution errors.
+            Blockchain flows introduce failure modes that a REST-only system does not: insufficient gas, signature rejection, stale object references, and on-chain execution errors.
           </p>
-
           <ul>
             <li>Model transaction creation, signature approval, submission, execution, and indexed state as separate states.</li>
             <li>Rebuild transactions when object references become stale.</li>
@@ -704,33 +604,61 @@ tx.moveCall({
 
   <footer class="site-footer">
     <div class="container site-footer__inner">
-      <span>Piotr Oszenda — Technical Writer · Knowledge Manager · Documentation Architect</span>
+      <span>Piotr Oszenda · Technical Writer · Knowledge Manager · Documentation Architect</span>
       <span>Based in Gijón, Spain · Working across product, developer, and knowledge systems</span>
     </div>
   </footer>
 
   <script>
-    document.querySelectorAll("[data-code-group]").forEach((group) => {
-      const tabs = group.querySelectorAll("[data-code-tab]");
-      const panels = group.querySelectorAll("[data-code-panel]");
+    document.querySelectorAll('[data-code-group]').forEach((group) => {
+      const tabs = Array.from(group.querySelectorAll('[data-code-tab]'));
+      const panels = Array.from(group.querySelectorAll('[data-code-panel]'));
 
       tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
+        tab.addEventListener('click', () => {
           const selected = tab.dataset.codeTab;
 
           tabs.forEach((item) => {
             const isSelected = item === tab;
-            item.classList.toggle("is-active", isSelected);
-            item.setAttribute("aria-selected", String(isSelected));
+            item.classList.toggle('is-active', isSelected);
+            item.setAttribute('aria-selected', String(isSelected));
             item.tabIndex = isSelected ? 0 : -1;
           });
 
           panels.forEach((panel) => {
             const isSelected = panel.dataset.codePanel === selected;
-            panel.classList.toggle("is-active", isSelected);
-            panel.toggleAttribute("hidden", !isSelected);
+            panel.classList.toggle('is-active', isSelected);
+            panel.toggleAttribute('hidden', !isSelected);
           });
         });
+      });
+    });
+
+    document.querySelectorAll('.code-copy-button').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const codeBlock = button.closest('.code-block');
+        const activePanel = codeBlock?.querySelector('.code-panel.is-active code');
+        const fallbackPanel = codeBlock?.querySelector('.code-panel code');
+        const codeElement = activePanel ?? fallbackPanel;
+
+        if (!codeElement) return;
+
+        const originalLabel = button.textContent;
+        const codeText = codeElement.textContent ?? '';
+
+        try {
+          await navigator.clipboard.writeText(codeText);
+          button.textContent = 'Copied';
+          button.classList.add('is-copied');
+        } catch (error) {
+          button.textContent = 'Failed';
+          button.classList.add('is-copied');
+        }
+
+        window.setTimeout(() => {
+          button.textContent = originalLabel;
+          button.classList.remove('is-copied');
+        }, 1800);
       });
     });
   </script>
