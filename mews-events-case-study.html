@@ -1,105 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mews Events case study — Piotr Oszenda</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Knowledge migration for Mews Events — Piotr Oszenda</title>
   <meta
     name="description"
-    content="Case study about designing the documentation architecture for Mews Events."
-  />
-  <link rel="stylesheet" href="./style.css" />
+    content="Case study by Piotr Oszenda showing how Mews Events documentation can be reframed as a knowledge migration and documentation architecture project."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <main id="main" class="container">
-    <section class="hero hero--compact">
-      <p class="eyebrow">Case study</p>
-      <h1>Mews Events</h1>
-      <p class="lede">
-        Documentation architecture for a newly acquired module used to manage
-        quotes for hotel-hosted events.
-      </p>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html#top" aria-label="Go to homepage">
+        <span class="brand__mark" aria-hidden="true">PO</span>
+        <span>Piotr Oszenda</span>
+      </a>
 
-      <div class="hero-links">
-        <a class="sample-link" href="./index.html#work">Back to portfolio</a>
-        <a
-          class="sample-link"
-          href="https://help.mews.com/s/topic/0TOQC000000pMxl4AE/mews-events"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Open documentation hub
-        </a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#approach">Approach</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#samples">Samples</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" id="top">
+      <div class="container">
+        <p class="case-back"><a href="index.html#samples">Back to portfolio</a></p>
+
+        <div class="case-hero__grid">
+          <div>
+            <p class="eyebrow">Case study · Knowledge migration</p>
+            <h1>Knowledge migration for Mews Events</h1>
+            <p class="case-intro">
+              This case study reframes Mews Events documentation as a knowledge migration problem: moving from fragmented,
+              feature-led information toward a clearer, workflow-based model that supports users, support teams, and future maintenance.
+            </p>
+
+            <div class="case-hero__meta">
+              <span class="chip">Knowledge migration</span>
+              <span class="chip">Information architecture</span>
+              <span class="chip">Documentation strategy</span>
+            </div>
+          </div>
+
+          <aside class="hero-panel" aria-labelledby="case-proof-title">
+            <p class="hero-panel__label" id="case-proof-title">Why this matters</p>
+            <ul class="case-proof-list">
+              <li>
+                <strong>The core issue was structural, not only editorial.</strong>
+                <span>Users needed guidance that matched real tasks, not a scattered set of product explanations.</span>
+              </li>
+              <li>
+                <strong>The work had migration value.</strong>
+                <span>It translated implicit product knowledge into a more explicit, reusable, and maintainable documentation model.</span>
+              </li>
+              <li>
+                <strong>The output supports scale.</strong>
+                <span>A better content structure helps documentation stay usable as workflows, ownership, and features evolve.</span>
+              </li>
+            </ul>
+          </aside>
+        </div>
       </div>
     </section>
 
-    <section class="section">
-      <article class="sample">
-        <div class="sample-header">
+    <section class="section section--accent" aria-labelledby="context-heading">
+      <div class="container">
+        <div class="section__header">
           <div>
-            <h2>Overview</h2>
-            <p class="meta">Information architecture · Help center content</p>
+            <p class="section-kicker">Context</p>
+            <h2 class="section-title" id="context-heading">A documentation problem shaped by cross-functional workflows.</h2>
           </div>
+          <p class="section-intro">
+            Mews Events sits in a product area where operational steps, commercial decisions, and system behaviour intersect.
+            That makes the documentation challenge less about writing isolated articles and more about organising knowledge in a way that reflects how people actually work.
+          </p>
         </div>
-        <p>
-          Mews Events, originally quotello, was brought into the Mews product
-          ecosystem as a module for event quotes and related workflows. Before
-          release, the documentation existed only as fragmented internal notes,
-          written mainly for support use and not ready for public help content.
-        </p>
-      </article>
 
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>What I did</h2>
-            <p class="meta">Structure · Writing · Localization readiness</p>
-          </div>
-        </div>
-        <p>
-          I designed the documentation architecture for the new product area,
-          including navigation nodes, internal CMS structure in Salesforce, page
-          templates, cross-linking, tagging, and content writing. The goal was
-          to align the module with the existing Mews help center model and make
-          the content easier to find, localize, and maintain.
-        </p>
-      </article>
+        <div class="case-results">
+          <article class="result-card">
+            <span class="result-card__value">Task</span>
+            <p>Turn complex event-related product knowledge into guidance that is easier to navigate, interpret, and maintain.</p>
+          </article>
 
-      <article class="sample">
-        <div class="sample-header">
-          <div>
-            <h2>Approach</h2>
-            <p class="meta">
-              Audit · Workflow-based structure · Terminology alignment
-            </p>
-          </div>
+          <article class="result-card">
+            <span class="result-card__value">Scope</span>
+            <p>Documentation structure, terminology, workflow clarity, and the relationship between feature content and user outcomes.</p>
+          </article>
         </div>
-        <p>
-          I worked from limited original material, product demos, stage testing,
-          and discussions with product, UX, onboarding, support, and
-          development teams. The final structure combined UI-based navigation
-          with task-based workflows and clearer glossary alignment, while also
-          linking key articles back into the product UI.
-        </p>
-      </article>
+      </div>
+    </section>
 
-      <article class="sample">
-        <div class="sample-header">
+    <section class="section" aria-labelledby="challenge-heading">
+      <div class="container">
+        <div class="section__header">
           <div>
-            <h2>Result</h2>
-            <p class="meta">Release-ready documentation</p>
+            <p class="section-kicker">Challenge</p>
+            <h2 class="section-title" id="challenge-heading">The issue was fragmented knowledge, not simply missing content.</h2>
           </div>
+          <p class="section-intro">
+            In product areas like Mews Events, users rarely think in terms of isolated features. They think in tasks, decisions,
+            exceptions, and handoffs. When documentation is organised too closely around product surfaces, users often struggle to find the right entry point.
+          </p>
         </div>
-        <p>
-          The result was a public-facing documentation hub ready at release,
-          with a clearer structure for users, better support for onboarding, and
-          a solid base for future content improvements, localization, and AI
-          consumption.
-        </p>
-      </article>
+
+        <div class="case-grid">
+          <article class="case-panel">
+            <h3>Symptoms in the knowledge model</h3>
+            <ul>
+              <li>Information can become fragmented across related topics and support scenarios.</li>
+              <li>Terminology may drift between product language, internal language, and user-facing guidance.</li>
+              <li>Feature-oriented pages can make workflow understanding harder than it needs to be.</li>
+              <li>Users may depend on support or tribal knowledge to bridge missing context.</li>
+            </ul>
+          </article>
+
+          <article class="case-panel">
+            <h3>Why this matters operationally</h3>
+            <ul>
+              <li>Documentation becomes harder to trust when users cannot predict where an answer will live.</li>
+              <li>Maintenance cost rises when overlapping explanations live in multiple places.</li>
+              <li>Support load increases when important context is implicit rather than documented.</li>
+              <li>Future product change becomes harder to communicate cleanly.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="approach-heading">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Migration approach</p>
+            <h2 class="section-title" id="approach-heading">Restructure the knowledge, not just the wording.</h2>
+          </div>
+          <p class="section-intro">
+            I would position this work as documentation architecture with a migration lens: understanding the current knowledge landscape,
+            identifying where users lose context, and reshaping the content model so guidance follows the logic of real work.
+          </p>
+        </div>
+
+        <div class="case-grid">
+          <article class="case-panel">
+            <h3>1. Audit the current state</h3>
+            <p>Review existing articles, user questions, edge cases, terminology, and product flows to identify overlap, gaps, and ambiguous entry points.</p>
+          </article>
+
+          <article class="case-panel">
+            <h3>2. Reframe around workflows</h3>
+            <p>Shift the structure from feature-led explanations toward task-led guidance, so users can move through event-related decisions with less friction.</p>
+          </article>
+
+          <article class="case-panel">
+            <h3>3. Align terminology</h3>
+            <p>Reduce ambiguity across labels, concepts, and support-facing language so the same idea is described consistently throughout the experience.</p>
+          </article>
+
+          <article class="case-panel">
+            <h3>4. Support future maintenance</h3>
+            <p>Build a structure that scales better over time, with clearer ownership boundaries, easier updates, and less duplicated explanation.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--accent" aria-labelledby="changed-heading">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">What changed</p>
+            <h2 class="section-title" id="changed-heading">A better documentation model makes the product easier to learn and support.</h2>
+          </div>
+          <p class="section-intro">
+            Even without presenting private internal metrics, the value of this work can be shown by the shift in structure,
+            findability, and maintainability between an older knowledge state and a clearer target model.
+          </p>
+        </div>
+
+        <article class="case-table" aria-labelledby="before-after-heading">
+          <header>
+            <h3 id="before-after-heading">Before and after</h3>
+          </header>
+          <table>
+            <tbody>
+              <tr>
+                <th scope="row">Before</th>
+                <td>Feature-oriented content, scattered explanations, and harder-to-predict navigation paths.</td>
+              </tr>
+              <tr>
+                <th scope="row">After</th>
+                <td>Workflow-oriented guidance with clearer grouping, stronger entry points, and more explicit context.</td>
+              </tr>
+              <tr>
+                <th scope="row">Before</th>
+                <td>Terminology and mental models can vary between teams, features, and support conversations.</td>
+              </tr>
+              <tr>
+                <th scope="row">After</th>
+                <td>Documentation supports a more stable language model and reduces the gap between product behaviour and user understanding.</td>
+              </tr>
+              <tr>
+                <th scope="row">Before</th>
+                <td>Knowledge is harder to maintain when related explanations are distributed across overlapping pages.</td>
+              </tr>
+              <tr>
+                <th scope="row">After</th>
+                <td>A clearer structure creates stronger conditions for ownership, updates, reuse, and long-term governance.</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="lens-heading">
+      <div class="container note-layout">
+        <article class="note-card">
+          <p class="section-kicker">Knowledge migration lens</p>
+          <blockquote id="lens-heading">
+            This was not only a writing problem. It was a migration from fragmented, implicit product knowledge toward a clearer and more maintainable documentation system.
+          </blockquote>
+          <cite>Mews Events case framing</cite>
+        </article>
+
+        <article class="note-card">
+          <p class="section-kicker">Why this framing is stronger</p>
+          <p>
+            Presenting the work this way better reflects the actual value of senior documentation practice. It shows analysis, content modelling,
+            workflow thinking, and information architecture, not just content production. In the context of the main portfolio, it also connects naturally to knowledge management and migration work.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="role-heading">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">My role</p>
+            <h2 class="section-title" id="role-heading">Documentation strategy, structure, and editorial simplification.</h2>
+          </div>
+          <p class="section-intro">
+            The role in a case like this should be presented as broader than article writing. The value comes from content analysis,
+            structural decisions, and the translation of product complexity into documentation people can actually use.
+          </p>
+        </div>
+
+        <div class="case-role">
+          <article class="case-callout">
+            <h3>Core responsibilities</h3>
+            <ul>
+              <li>Analyse product workflows and identify where documentation needs stronger structure.</li>
+              <li>Clarify terminology and organise topics around user tasks and decision points.</li>
+              <li>Create or reshape content so it is easier to navigate and maintain.</li>
+              <li>Support alignment between product, support, and documentation perspectives.</li>
+            </ul>
+          </article>
+
+          <article class="case-callout">
+            <h3>Portfolio relevance</h3>
+            <ul>
+              <li>Shows how technical writing overlaps with knowledge architecture.</li>
+              <li>Demonstrates migration thinking without needing to expose sensitive internal details.</li>
+              <li>Supports the positioning used on the homepage: documentation strategy, knowledge migration, and scalable content systems.</li>
+              <li>Works well as a strategic sample rather than only a product-writing sample.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--accent" aria-labelledby="next-heading">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Sample summary</p>
+            <h2 class="section-title" id="next-heading">A documentation case study that communicates architecture, not only execution.</h2>
+          </div>
+          <p class="section-intro">
+            As part of this portfolio, the Mews Events sample works best when it is presented as evidence of how documentation can reduce ambiguity,
+            support self-service, and turn complex product knowledge into a more scalable system.
+          </p>
+        </div>
+
+        <div class="hero__actions">
+          <a class="button-link button-link--primary" href="index.html#samples">Back to selected work</a>
+          <a class="button-link button-link--secondary" href="index.html#contact">Discuss documentation projects</a>
+        </div>
+      </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>Piotr Oszenda — Technical Writer · Knowledge Manager · Documentation Architect</span>
+      <span>Based in Gijón, Asturias · Working across product, developer, and knowledge systems</span>
+    </div>
+  </footer>
 </body>
 </html>

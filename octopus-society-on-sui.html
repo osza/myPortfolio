@@ -1,207 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Building an Octopus Society on Sui | Technical Writing Sample by Piotr Oszenda</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <title>Octopus Society on Sui tutorial — Developer documentation sample (Piotr Oszenda)</title>
   <meta
     name="description"
-    content="Technical writing sample by Piotr Oszenda explaining why Sui is a strong architectural fit for a multiplayer blockchain game built around persistent identity, unique objects, shared community structures, and verifiable randomness."
-  />
-  <meta name="author" content="Piotr Oszenda" />
-  <meta name="robots" content="index,follow" />
-
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="Building an Octopus Society on Sui" />
-  <meta
-    property="og:description"
-    content="An interview-style technical writing sample explaining why Sui fits a multiplayer blockchain game built around shared ownership, unique assets, and verifiable randomness."
-  />
-
-  <link rel="canonical" href="./octopus-society-on-sui.html" />
-  <link rel="stylesheet" href="./style.css" />
+    content="Hands-on Sui tutorial illustrating a fictional onboarding flow for connecting a wallet, joining Octopus Society, verifying membership, and claiming a reward."
+  >
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
-    <div class="container">
-      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-        <a href="./index.html">Portfolio</a>
-        <span aria-hidden="true">/</span>
-        <span>Writing sample</span>
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html#top" aria-label="Go to homepage">
+        <span class="brand__mark" aria-hidden="true">PO</span>
+        <span>Piotr Oszenda</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#approach">Approach</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#samples">Samples</a>
+        <a href="index.html#contact">Contact</a>
       </nav>
-
-      <p class="eyebrow">Technical writing sample · Web3 gaming · Sui blockchain</p>
-
-      <h1>Building an Octopus Society on Sui</h1>
-
-      <p class="intro-secondary">
-        This sample uses an interview format to explain why Sui is a strong
-        architectural fit for a multiplayer blockchain game where each player
-        embodies a single octopus living in a shared ocean society, trading
-        unique objects and maintaining communal farms.
-      </p>
-
-      <div class="sample-summary" aria-labelledby="sample-summary-title">
-        <h2 id="sample-summary-title">What this sample demonstrates</h2>
-        <ul>
-          <li>Audience-aware explanation of blockchain architecture through a fictional product concept.</li>
-          <li>Clear translation of technical primitives into user-facing design implications.</li>
-          <li>Structured long-form writing designed for readability, scannability, and portfolio review.</li>
-        </ul>
-      </div>
-
-      <div class="header-links">
-        <a href="./index.html">Back to portfolio</a>
-      </div>
     </div>
   </header>
 
-  <main id="main">
-    <article class="section writing-sample">
-      <div class="container">
-        <header class="section-header">
-          <p class="section-kicker">Interview format</p>
-          <h2 class="section-title">Why Sui fits the concept</h2>
-          <p class="section-intro">
-            The sections below show how the platform choice is justified through
-            gameplay requirements such as identity, ownership, shared state,
-            scalability, and trust.
+  <main id="main" tabindex="-1">
+    <section class="hero" id="top">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">SUI onboarding tutorial</p>
+          <h1>Join Octopus Society on Sui</h1>
+          <p class="hero__lead">
+            A hands-on tutorial illustrating a fictional membership flow for connecting a wallet,
+            joining Octopus Society, verifying membership on-chain, and claiming a member reward.
           </p>
-        </header>
 
-        <section class="sample" aria-labelledby="scene-title">
-          <div class="sample-header">
-            <div>
-              <h3 id="scene-title">Setting the scene</h3>
-              <p class="meta">Concept framing · Multiplayer society design</p>
-            </div>
+          <div class="hero__actions">
+            <a class="button-link button-link--primary" href="#overview">Read tutorial</a>
+            <a class="button-link button-link--secondary" href="index.html#samples">Back to selected work</a>
           </div>
-          <p><strong>Interviewer:</strong> Let's set the scene. This isn't a "collect and hoard" game — it's a society. Every player is one octopus, living among other octopi, trading shells and pebbles, farming mussels together. Why does that framing matter when you're choosing a blockchain?</p>
-          <p><strong>Developer:</strong> Because it changes what actually needs to be true on-chain. A collection game just needs "player owns object." A society needs objects to move between many owners constantly, some objects to be jointly managed, and the whole thing to feel alive and responsive rather than like a spreadsheet with a shell icon.</p>
-          <p>That is a much higher bar for the underlying platform, and it is exactly the bar I used when I looked at Sui.</p>
-        </section>
 
-        <section class="sample" aria-labelledby="identity-title">
-          <div class="sample-header">
-            <div>
-              <h3 id="identity-title">One player, one octopus</h3>
-              <p class="meta">Persistent identity · On-chain player model</p>
-            </div>
+          <div class="hero-stats" aria-label="Tutorial metadata">
+            <span class="hero-stat">Sui CLI</span>
+            <span class="hero-stat">Move objects</span>
+            <span class="hero-stat">CLI + TypeScript</span>
+            <span class="hero-stat">Documentation sample</span>
           </div>
-          <p><strong>Interviewer:</strong> Start with the octopus itself. One player, one octopus — that's the player's identity in this world. What does that need from the chain?</p>
-          <p><strong>Developer:</strong> It needs to be a genuine, persistent object, not a login record. On Sui, my octopus is a Move object with its own on-chain identity. Its age, territory, and relationships with other octopi can all live as fields on that one object.</p>
-          <p>The player does not just have an account that references an octopus somewhere in a database. The player holds the octopus the same way they would hold any other asset in their wallet. That distinction matters enormously for a game built around identity and belonging in a community, rather than just ownership of loot.</p>
-        </section>
+        </div>
 
-        <section class="sample" aria-labelledby="objects-title">
-          <div class="sample-header">
-            <div>
-              <h3 id="objects-title">Unique pebbles and shells</h3>
-              <p class="meta">Object model · Tradeable unique assets</p>
-            </div>
-          </div>
-          <p><strong>Interviewer:</strong> Now the pebbles and shells. You've decided these are unique — every pebble is its own thing, not an interchangeable currency. Why does that decision push you toward Sui specifically?</p>
-          <p><strong>Developer:</strong> Because unique, tradeable objects are Sui's native data model, not a workaround bolted onto a token standard. Every pebble and shell can be its own object on-chain, with its own traits such as where it was found, its shape, or its rarity.</p>
-          <p>Because Sui separates owned objects cleanly at the protocol level, transferring a shell from one octopus to another is a direct, first-class operation. I am not simulating uniqueness on top of a fungible token. Uniqueness is simply how the object exists.</p>
-        </section>
-
-        <section class="sample" aria-labelledby="trading-title">
-          <div class="sample-header">
-            <div>
-              <h3 id="trading-title">Trading in the tide pool</h3>
-              <p class="meta">Marketplace model · Social exchange</p>
-            </div>
-          </div>
-          <p><strong>Interviewer:</strong> And trading between players — since everything is unique and freely tradeable, how does that actually work without you building a marketplace from scratch?</p>
-          <p><strong>Developer:</strong> This is where Sui's <code>Kiosk</code> model comes back in, and it fits this game even better than it would fit a simple collectible. In an octopus society, trading is not just "buy the rarest item." It is closer to how a real community exchanges goods.</p>
-          <p>An octopus might swap three pebbles for one rare shell, list something for other octopi to browse, or make a direct trade with a neighbour. Kiosk gives me listing, purchasing, and ownership transfer as a native pattern, so I can build that social marketplace feel without writing escrow and settlement logic from the ground up.</p>
-        </section>
-
-        <section class="sample" aria-labelledby="farms-title">
-          <div class="sample-header">
-            <div>
-              <h3 id="farms-title">Communal mussel farms</h3>
-              <p class="meta">Shared objects · Group-owned game structures</p>
-            </div>
-          </div>
-          <p><strong>Interviewer:</strong> Let's talk about the mussel farms. You said these have a community dimension — they're not purely solo. What does that require, technically?</p>
-          <p><strong>Developer:</strong> It requires shared control over a single object, which is a genuinely hard problem on a lot of chains. A mussel farm is not owned by one octopus in the way a pebble is. It might be tended by several octopi who each contribute effort and each have a claim on what it produces.</p>
-          <p>On Sui, I can model a farm as a <code>shared object</code> — one that is not locked to a single owner's authority but can be referenced and mutated by transactions from multiple players, with the game's Move logic defining exactly who is allowed to do what. That is the difference between one player's private idle timer and a real communal structure that a group of octopi maintain together.</p>
-        </section>
-
-        <section class="sample" aria-labelledby="actions-title">
-          <div class="sample-header">
-            <div>
-              <h3 id="actions-title">Day-to-day farm actions</h3>
-              <p class="meta">Programmable Transaction Blocks · Multi-step player actions</p>
-            </div>
-          </div>
-          <p><strong>Interviewer:</strong> How does that shared-object model affect the day-to-day feel of the game — an octopus checking on the farm, harvesting mussels, restocking it?</p>
-          <p><strong>Developer:</strong> This is where <code>Programmable Transaction Blocks</code> earn their keep again, just at a bigger scale than a single-player action. A visit to the farm might involve checking the shared farm object, harvesting whatever is ready, updating that octopus's contribution record, and depositing mussels into that player's own inventory — all as one transaction the player approves once.</p>
-          <p>Because Sui's object model tracks exactly which objects a transaction touches — the shared farm, the player's own octopus, the mussels being minted — the network can process these efficiently even with lots of octopi visiting the same farm, without everything queuing up behind a single global bottleneck.</p>
-        </section>
-
-        <section class="sample" aria-labelledby="parallel-title">
-          <div class="sample-header">
-            <div>
-              <h3 id="parallel-title">Parallel activity</h3>
-              <p class="meta">Scalability · Non-conflicting transactions</p>
-            </div>
-          </div>
-          <p><strong>Interviewer:</strong> Speaking of many players touching the same objects — doesn't a shared farm become a congestion point if fifty octopi want to harvest at once?</p>
-          <p><strong>Developer:</strong> That is a real concern on chains where all state changes funnel through one global sequence. Sui's object-centric execution model is specifically built to parallelise transactions that do not actually conflict.</p>
-          <p>If two octopi are harvesting from two different farms, there is no reason those transactions should compete with each other, and Sui's architecture is designed to recognise that automatically. That is not just a nice side effect for me. It is close to a hard requirement once you accept that the whole premise of the game is many players interacting with shared community structures at once.</p>
-        </section>
-
-        <section class="sample" aria-labelledby="randomness-title">
-          <div class="sample-header">
-            <div>
-              <h3 id="randomness-title">Randomness and trust</h3>
-              <p class="meta">Fair outcomes · Verifiable game logic</p>
-            </div>
-          </div>
-          <p><strong>Interviewer:</strong> Randomness comes up naturally too, I'd guess — what a pebble looks like when it's found, how much a farm yields this season.</p>
-          <p><strong>Developer:</strong> Exactly, and the same argument applies here as it would in any game asking players to trust an outcome. If I want players to believe that finding a rare pebble or getting a strong harvest is genuinely down to chance and not something I quietly control server-side, that randomness needs to be verifiable, not just asserted.</p>
-          <p>Sui's built-in on-chain randomness lets me generate those outcomes in a way players can actually check, which matters even more in a society-style game because trust between the game and its community is the whole point.</p>
-        </section>
-
-        <section class="sample" aria-labelledby="architecture-title">
-          <div class="sample-header">
-            <div>
-              <h3 id="architecture-title">Architecture in one paragraph</h3>
-              <p class="meta">Closing argument · Why Sui fits the concept</p>
-            </div>
-          </div>
-          <p><strong>Interviewer:</strong> Zooming out — if you had to justify this whole architecture in one paragraph, what would you say?</p>
-          <p><strong>Developer:</strong> I'd say this: I am not building a game where players collect isolated pets and occasionally trade them. I am building a small society, and a society needs individual identity, unique tradeable belongings, shared communal structures, fair chance mechanics, and low-friction interaction — all at once, all the time.</p>
-          <p>Sui's object model gives me persistent identity for each octopus, native uniqueness for every pebble and shell, shared objects for farms multiple players tend together, verifiable randomness for fair outcomes, and transaction bundling that keeps the whole experience feeling like play rather than paperwork. I did not have to bend the platform to fit the concept. The concept just happens to be exactly the kind of system Sui was built to represent.</p>
-        </section>
-
-        <aside class="editorial-note" aria-labelledby="editorial-note-title">
-          <h3 id="editorial-note-title">Editorial note</h3>
-          <p class="meta">Scope note · Positioning of the sample</p>
-          <p>
-            This version keeps pebbles and shells as unique NFT-style objects
-            rather than fungible currency, models mussel farms as Sui shared
-            objects to reflect communal ownership, and stays within an
-            “advantages of Sui” framing without naming competing chains.
-          </p>
+        <aside class="hero-panel" aria-labelledby="tutorial-proof-title">
+          <p class="hero-panel__label" id="tutorial-proof-title">What this tutorial demonstrates</p>
+          <ul class="case-proof-list">
+            <li>
+              <strong>A membership workflow centered on one object.</strong>
+              <span>The reader follows a single membership object from minting to verification and reward claim.</span>
+            </li>
+            <li>
+              <strong>Examples in Sui CLI and TypeScript.</strong>
+              <span>The tutorial pairs command-line steps with matching application-level examples.</span>
+            </li>
+            <li>
+              <strong>Preparation, reference, and workflow.</strong>
+              <span>Setup, object inspection, and step-by-step tasks give the sample a clear onboarding structure.</span>
+            </li>
+          </ul>
         </aside>
       </div>
-    </article>
-  </main>
+    </section>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>Piotr Oszenda · Technical writing sample for portfolio review</p>
-      <p>
-        Sample topic: blockchain game architecture on Sui
-        <span aria-hidden="true">·</span>
-        Format: interview-style explanatory article
-      </p>
-    </div>
-  </footer>
+    <section class="section" id="overview" aria-labelledby="overview-title">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Context</p>
+            <h2 class="section-title" id="overview-title">Overview</h2>
+          </div>
+          <p class="section-intro">
+            This tutorial is structured as a compact onboarding-style flow for a fictional membership module on Sui.
+          </p>
+        </div>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>Overview</h3>
+              <p class="meta">Tutorial sample · Fictional Move package</p>
+            </div>
+          </div>
+
+          <p class="sample-summary">
+            This tutorial demonstrates a sample workflow for joining Octopus Society, a fictional membership module built with Move on Sui. The package ID, object IDs, and example data are included to illustrate structure, flow, and documentation style.
+          </p>
+
+          <p class="sample-summary">
+            By the end of the tutorial, you will have walked through connecting a wallet, minting a membership object, verifying ownership on-chain, and claiming a reward tied to that membership.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="prerequisites-title">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Prerequisites</p>
+            <h2 class="section-title" id="prerequisites-title">Environment and setup</h2>
+          </div>
+          <p class="section-intro">
+            This section helps new Sui developers verify their local setup before they run the tutorial.
+          </p>
+        </div>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>Requirements</h3>
+              <p class="meta">CLI · Wallet · TypeScript tooling</p>
+            </div>
+          </div>
+
+          <p class="sample-summary">
+            Before you begin, make sure you have the following in place:
+          </p>
+          <ul>
+            <li>The Sui CLI installed and configured for the target network, such as testnet.</li>
+            <li>A wallet with test SUI available for gas fees.</li>
+            <li>Node.js installed if you plan to run the TypeScript examples.</li>
+            <li>A code editor and a terminal for running Sui commands.</li>
+            <li>The package ID for the fictional Octopus Society Move module used in the examples below.</li>
+          </ul>
+          <p class="sample-summary">
+            If you are new to Sui, treat this as a quick readiness check: once the CLI works, the wallet is funded, and the package ID is available, you are ready to follow the tutorial as written.
+          </p>
+          <p class="sample-summary">
+            The examples below use placeholder IDs and sample responses so the structure stays clear and reusable.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--accent" aria-labelledby="flow-title">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Workflow</p>
+            <h2 class="section-title" id="flow-title">Join and verify</h2>
+          </div>
+          <p class="section-intro">
+            The core of the tutorial is a practical sequence that follows the membership flow from joining to on-chain verification and reward claim.
+          </p>
+        </div>
+
+        <div class="case-grid">
+          <article class="case-panel">
+            <h3>Step 1 · Connect a wallet</h3>
+            <p>
+              Start by connecting a compatible wallet in Sui Wallet or another supported browser extension. This keeps the first step lightweight so the reader can focus on the membership flow itself.
+            </p>
+            <ul>
+              <li>Confirm the wallet is set to the intended network.</li>
+              <li>Check that the account has enough test SUI for gas.</li>
+            </ul>
+          </article>
+
+          <article class="case-panel">
+            <h3>Step 2 · Join Octopus Society</h3>
+            <p>
+              Submit the join transaction against the Move module to mint a membership object. The tutorial presents a command-line flow and a corresponding TypeScript example.
+            </p>
+            <ul>
+              <li>Capture the transaction digest.</li>
+              <li>Store the newly created membership object ID.</li>
+            </ul>
+          </article>
+
+          <article class="case-panel">
+            <h3>Step 3 · Verify membership</h3>
+            <p>
+              Use the object ID to confirm ownership and inspect the membership fields. This reinforces the object-centric model used throughout the tutorial.
+            </p>
+            <ul>
+              <li>Query the object through the CLI.</li>
+              <li>Repeat the check with the SDK response.</li>
+            </ul>
+          </article>
+
+          <article class="case-panel">
+            <h3>Step 4 · Claim the reward</h3>
+            <p>
+              Finish by claiming a reward tied to the membership. This closes the onboarding loop with a concrete outcome.
+            </p>
+            <ul>
+              <li>Confirm the reward transaction succeeded.</li>
+              <li>Review the updated object state after the claim.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="samples-title">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Code</p>
+            <h2 class="section-title" id="samples-title">CLI and TypeScript examples</h2>
+          </div>
+          <p class="section-intro">
+            The examples below are intentionally practical: they represent the flow a developer might follow to mint, inspect, and verify a membership object in Sui.
+          </p>
+        </div>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>1. Join with Sui CLI</h3>
+              <p class="meta">Run the transaction from the terminal</p>
+            </div>
+          </div>
+
+          <p class="sample-summary">
+            Use the CLI when you want to validate the contract entry point quickly and inspect the transaction output before wiring the flow into an app.
+          </p>
+
+          <pre><code>sui client call \
+  --package &lt;PACKAGE_ID&gt; \
+  --module octopus_society \
+  --function join \
+  --args &lt;WALLET_ADDRESS&gt; \
+  --gas-budget 10000000</code></pre>
+
+          <p class="sample-summary">
+            The call mints a membership object and returns a transaction digest that you can use to inspect the result.
+          </p>
+        </article>
+
+        <article class="sample sample--spaced">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>2. Verify the membership object</h3>
+              <p class="meta">Check ownership and state</p>
+            </div>
+          </div>
+
+          <p class="sample-summary">
+            After the join transaction succeeds, inspect the object directly so the reader can review the same state the app will later consume.
+          </p>
+
+          <pre><code>sui client object &lt;MEMBERSHIP_OBJECT_ID&gt;</code></pre>
+
+          <p class="sample-summary">
+            At this stage, the relevant fields typically include owner, membership tier, join timestamp, and reward eligibility.
+          </p>
+        </article>
+
+        <article class="sample sample--spaced">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>3. Join from TypeScript</h3>
+              <p class="meta">Embed the flow in an app</p>
+            </div>
+          </div>
+
+          <p class="sample-summary">
+            This version shows how the same action can be represented from application code.
+          </p>
+
+          <pre><code>import { SuiClient, TransactionBlock } from '@mysten/sui.js';
+
+const client = new SuiClient({ url: 'https://fullnode.testnet.sui.io' });
+
+const tx = new TransactionBlock();
+tx.moveCall({
+  target: `${packageId}::octopus_society::join`,
+  arguments: [tx.pure(walletAddress)],
+});
+
+const result = await client.signAndExecuteTransactionBlock({
+  signer: keypair,
+  transactionBlock: tx,
+});
+
+console.log(result.digest);</code></pre>
+
+          <p class="sample-summary">
+            This example shows the same call path in a form that can be adapted for a game client, script, or demo app.
+          </p>
+        </article>
+
+        <article class="sample sample--spaced">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>4. Read the object in TypeScript</h3>
+              <p class="meta">Fetch the result and render it in UI</p>
+            </div>
+          </div>
+
+          <p class="sample-summary">
+            Use the object ID from the transaction result to fetch the current membership state for an app or game UI.
+          </p>
+
+          <pre><code>const object = await client.getObject({
+  id: membershipObjectId,
+  options: { showContent: true, showOwner: true },
+});
+
+console.log(object.data?.content);</code></pre>
+
+          <p class="sample-summary">
+            This closes the loop from transaction result to object inspection and UI-facing data retrieval.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="wrapup-title">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Outcome</p>
+            <h2 class="section-title" id="wrapup-title">What the reader leaves with</h2>
+          </div>
+          <p class="section-intro">
+            The closing section reinforces the documentation purpose of the portfolio sample and clarifies the practical outcome for the reader.
+          </p>
+        </div>
+
+        <article class="sample">
+          <div class="sample-header">
+            <div class="sample-heading">
+              <h3>Outcome</h3>
+              <p class="meta">Reusable onboarding sample</p>
+            </div>
+          </div>
+
+          <p class="sample-summary">
+            By the end of the tutorial, the reader understands how to connect a wallet, join a module, verify the resulting on-chain object, and claim a reward. The structure is intentionally compact so it can serve as portfolio evidence for content design, technical clarity, and developer-facing documentation.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
