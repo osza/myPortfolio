@@ -43,7 +43,7 @@
 
           <div class="hero__actions">
             <a class="button-link button-link--primary" href="#content">Read tutorial</a>
-            <a class="button-link button-link--secondary" href="index.html#work">Back to portfolio</a>
+            <a class="button-link button-link--secondary" href="octopus-society-on-sui.html">Start with membership onboarding</a>
           </div>
         </div>
 
@@ -143,6 +143,9 @@
           <p class="sample-summary">
             Replace <code>packageId</code>, <code>octopusObjectId</code>, <code>shellObjectId</code>, <code>farmObjectId</code>, and wallet addresses with values from your environment.
             Keep private keys, admin capabilities, and RPC secrets out of client code and out of source control.
+          </p>
+          <p class="sample-summary">
+            The REST-shaped endpoints in this sample are fictional orchestration endpoints, not Sui APIs. A backend may prepare a transaction, but a player-owned action still needs the player’s wallet approval unless the product explicitly uses sponsorship or a trusted service signer.
           </p>
         </article>
 
@@ -383,8 +386,7 @@ tx.moveCall({
           </div>
 
           <p class="sample-summary">
-            In this sample, trading is modeled as a social exchange between octopi rather than as a generic store interaction. One octopus can transfer a shell directly to a neighbour,
-            and a fuller marketplace implementation could extend that flow with Kiosk-style listing, discovery, settlement, and transfer.
+            This step is a direct, no-payment transfer between two players. It deliberately does not claim to be a marketplace: a priced sale needs its own escrow or marketplace design, including settlement and failure handling.
           </p>
 
           <div class="code-switcher" data-code-group>
@@ -399,10 +401,7 @@ tx.moveCall({
   -H "Authorization: Bearer {seller_session_token}" \
   -d '{
     "object_id": "{shell_object_id}",
-    "buyer_address": "{buyer_sui_address}",
-    "price_token": "SUI",
-    "price_amount": 10,
-    "trade_note": "Three bright pebbles and one rare shell would also work in a custom flow."
+    "recipient_address": "{recipient_sui_address}"
   }'</code></pre>
               <pre class="code-panel" id="trade-panel-ts" role="tabpanel" aria-labelledby="trade-tab-ts" data-code-panel="ts" hidden><code>import { Transaction } from '@mysten/sui/transactions';
 
@@ -412,11 +411,11 @@ tx.moveCall({
   arguments: [tx.object(shellObjectId), tx.pure.address(buyerAddress)],
 });
 
-// In a fuller marketplace flow, your backend could instead prepare Kiosk listing or purchase calls and return them for wallet approval.</code></pre>
+// A priced sale needs a separate marketplace or escrow design.</code></pre>
             </div>
           </div>
           <p class="sample-summary">
-            The shell moves from one player to another through a direct transfer in this example, while a marketplace pattern can build on the same object model and transaction flow.
+            The shell moves directly from one player to another. Keeping this example payment-free makes the ownership change, signer responsibility, and failure boundary easy to inspect.
           </p>
         </article>
 
@@ -433,6 +432,7 @@ tx.moveCall({
           </p>
           <pre class="code-panel"><code>module octopus_society::farm {
   use sui::object::{Self, UID};
+  use sui::transfer;
   use sui::tx_context::TxContext;
 
   public struct MusselFarm has key {
@@ -449,6 +449,10 @@ tx.moveCall({
       }
   }
 
+  public entry fun create_farm(ctx: &mut TxContext) {
+      transfer::share_object(new_farm(0, 0, ctx));
+  }
+
   public entry fun restock_farm(farm: &mut MusselFarm, added_mussels: u64) {
       farm.total_mussels_ready = farm.total_mussels_ready + added_mussels;
   }
@@ -459,7 +463,7 @@ tx.moveCall({
   }
 }</code></pre>
           <p class="sample-summary">
-            The same farm object can be referenced and mutated by multiple players through game rules, which makes it a useful example of shared state on Sui.
+            The farm becomes shared only when <code>create_farm</code> calls <code>transfer::share_object</code>. Once shared, multiple players can reference it through game rules; the contract must still validate available inventory and any player-specific eligibility before it mutates state.
           </p>
         </article>
 
@@ -525,7 +529,7 @@ tx.moveCall({
             Randomness matters in this game too. A newly discovered pebble may vary in shape, colour, or rarity, and a seasonal farm event may produce an unexpectedly strong yield.
           </p>
           <p class="sample-summary">
-            The goal is not only surprise but trust. If the game says that a rare shell or pebble came from chance, players should be able to treat that outcome as a chain-backed result rather than a server-side claim they simply have to accept.
+            The goal is not only surprise but trust. Do not let the browser or a game backend choose a valuable outcome on its own. Define the randomness source, when it is read, and how the contract verifies the outcome before publishing a rarity rule.
           </p>
         </article>
 
@@ -577,6 +581,7 @@ tx.moveCall({
             <li>Model transaction creation, signature approval, submission, execution, and indexed state as separate states.</li>
             <li>Rebuild transactions when object references become stale.</li>
             <li>Store transaction digests and reconcile backend metadata from transaction effects.</li>
+            <li>Wait for the transaction before reading an object that it created or changed; indexed reads can lag execution.</li>
             <li>Avoid treating API acceptance as final success until on-chain execution is confirmed.</li>
             <li>Be especially careful with shared objects such as communal farms, where concurrency and current object state matter directly to transaction validity.</li>
           </ul>
@@ -605,7 +610,7 @@ tx.moveCall({
   <footer class="site-footer">
     <div class="container site-footer__inner">
       <span>Piotr Oszenda · Technical Writer · Knowledge Manager · Documentation Architect</span>
-      <span>Based in Gijón, Spain · Working across product, developer, and knowledge systems</span>
+      <span>Fictional Sui documentation sample · Testnet-oriented examples</span>
     </div>
   </footer>
 

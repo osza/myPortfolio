@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Octopus Society on Sui tutorial — Developer documentation sample (Piotr Oszenda)</title>
+  <title>Join Octopus Society on Sui — Developer documentation sample (Piotr Oszenda)</title>
   <meta
     name="description"
     content="Hands-on Sui tutorial illustrating a fictional onboarding flow for connecting a wallet, joining Octopus Society, verifying membership, and claiming a reward."
@@ -40,8 +40,8 @@
     <section class="hero" id="top">
       <div class="container hero__grid">
         <div>
-          <p class="eyebrow">SUI onboarding tutorial</p>
-          <h1>Join Octopus Society on Sui</h1>
+          <p class="eyebrow">Sui onboarding tutorial</p>
+          <h1>Join the Octopus Society on Sui</h1>
           <p class="hero__lead">
             A hands-on tutorial illustrating a fictional membership flow for connecting a wallet,
             joining Octopus Society, verifying membership on-chain, and claiming a member reward.
@@ -53,7 +53,7 @@
           </div>
 
           <div class="hero-stats" aria-label="Tutorial metadata">
-            <span class="hero-stat">Sui CLI</span>
+            <span class="hero-stat">Testnet</span>
             <span class="hero-stat">Move objects</span>
             <span class="hero-stat">CLI + TypeScript</span>
             <span class="hero-stat">Documentation sample</span>
@@ -68,8 +68,8 @@
               <span>The reader follows a single membership object from minting to verification and reward claim.</span>
             </li>
             <li>
-              <strong>Examples in Sui CLI and TypeScript.</strong>
-              <span>The tutorial pairs command-line steps with matching application-level examples.</span>
+              <strong>Current Sui SDK conventions.</strong>
+              <span>The TypeScript example uses <code>Transaction</code>, a signer, and a current Sui client.</span>
             </li>
             <li>
               <strong>Preparation, reference, and workflow.</strong>
@@ -147,6 +147,12 @@
           <p class="sample-summary">
             The examples below use placeholder IDs and sample responses so the structure stays clear and reusable.
           </p>
+          <pre class="code-panel"><code>sui client active-env
+sui client active-address
+sui client gas</code></pre>
+          <p class="sample-summary">
+            Run these checks before the tutorial. The active environment, active address, and available gas coins must all refer to the same testnet account. The package and object IDs below are fictional, so use them as a structure to adapt rather than commands to run unchanged.
+          </p>
         </article>
       </div>
     </section>
@@ -178,7 +184,7 @@
           <article class="case-panel">
             <h3>Step 2 · Join Octopus Society</h3>
             <p>
-              Submit the join transaction against the Move module to mint a membership object. The tutorial presents a command-line flow and a corresponding TypeScript example.
+              Submit the join transaction against the Move module to mint a membership object. The sender is derived from the signer; it should not be passed as an untrusted, separate argument.
             </p>
             <ul>
               <li>Capture the transaction digest.</li>
@@ -189,7 +195,7 @@
           <article class="case-panel">
             <h3>Step 3 · Verify membership</h3>
             <p>
-              Use the object ID to confirm ownership and inspect the membership fields. This reinforces the object-centric model used throughout the tutorial.
+              Wait for the transaction to become readable, then use the object ID to confirm ownership and inspect membership fields. This avoids treating an accepted submission as immediately indexed state.
             </p>
             <ul>
               <li>Query the object through the CLI.</li>
@@ -219,7 +225,7 @@
             <h2 class="section-title" id="samples-title">CLI and TypeScript examples</h2>
           </div>
           <p class="section-intro">
-            The examples below are intentionally practical: they represent the flow a developer might follow to mint, inspect, and verify a membership object in Sui.
+            The examples below are for a local script or backend signer. A browser application should build the same <code>Transaction</code> and hand it to a connected wallet or dApp kit; it must never receive a private key.
           </p>
         </div>
 
@@ -235,15 +241,14 @@
             Use the CLI when you want to validate the contract entry point quickly and inspect the transaction output before wiring the flow into an app.
           </p>
 
-          <pre><code>sui client call \
+          <pre class="code-panel"><code>sui client call \
   --package &lt;PACKAGE_ID&gt; \
   --module octopus_society \
   --function join \
-  --args &lt;WALLET_ADDRESS&gt; \
   --gas-budget 10000000</code></pre>
 
           <p class="sample-summary">
-            The call mints a membership object and returns a transaction digest that you can use to inspect the result.
+            The sender comes from the active CLI address and the Move function receives <code>TxContext</code> implicitly. Record the transaction digest, then identify the created membership object from the transaction effects before moving to the next step.
           </p>
         </article>
 
@@ -259,10 +264,10 @@
             After the join transaction succeeds, inspect the object directly so the reader can review the same state the app will later consume.
           </p>
 
-          <pre><code>sui client object &lt;MEMBERSHIP_OBJECT_ID&gt;</code></pre>
+          <pre class="code-panel"><code>sui client object &lt;MEMBERSHIP_OBJECT_ID&gt;</code></pre>
 
           <p class="sample-summary">
-            At this stage, the relevant fields typically include owner, membership tier, join timestamp, and reward eligibility.
+            Confirm that the object type is the expected membership type and that its owner is the active address. The exact fields depend on the package; do not assume a fixed schema from a fictional example.
           </p>
         </article>
 
@@ -278,25 +283,35 @@
             This version shows how the same action can be represented from application code.
           </p>
 
-          <pre><code>import { SuiClient, TransactionBlock } from '@mysten/sui.js';
+          <pre class="code-panel"><code>import { SuiGrpcClient } from '@mysten/sui/grpc';
+import { Transaction } from '@mysten/sui/transactions';
 
-const client = new SuiClient({ url: 'https://fullnode.testnet.sui.io' });
+const client = new SuiGrpcClient({
+  network: 'testnet',
+  baseUrl: 'https://fullnode.testnet.sui.io:443',
+});
 
-const tx = new TransactionBlock();
+const tx = new Transaction();
 tx.moveCall({
   target: `${packageId}::octopus_society::join`,
-  arguments: [tx.pure(walletAddress)],
+  arguments: [],
 });
 
-const result = await client.signAndExecuteTransactionBlock({
+const result = await client.signAndExecuteTransaction({
   signer: keypair,
-  transactionBlock: tx,
+  transaction: tx,
+  include: { effects: true },
 });
 
-console.log(result.digest);</code></pre>
+if (result.$kind === 'FailedTransaction') {
+  throw new Error(result.FailedTransaction.status.error?.message);
+}
+
+await client.waitForTransaction({ result });
+console.log(result.Transaction.digest);</code></pre>
 
           <p class="sample-summary">
-            This example shows the same call path in a form that can be adapted for a game client, script, or demo app.
+            This example uses a keypair only because it represents a script or backend. In a browser, construct the transaction but let the user’s wallet sign and execute it.
           </p>
         </article>
 
@@ -312,15 +327,16 @@ console.log(result.digest);</code></pre>
             Use the object ID from the transaction result to fetch the current membership state for an app or game UI.
           </p>
 
-          <pre><code>const object = await client.getObject({
-  id: membershipObjectId,
-  options: { showContent: true, showOwner: true },
+          <pre class="code-panel"><code>const { object } = await client.getObject({
+  objectId: membershipObjectId,
+  include: { json: true },
 });
 
-console.log(object.data?.content);</code></pre>
+console.log(object.owner);
+console.log(object.json);</code></pre>
 
           <p class="sample-summary">
-            This closes the loop from transaction result to object inspection and UI-facing data retrieval.
+            This closes the loop from transaction result to object inspection. JSON is convenient for a demo; production code should use generated BCS bindings when it needs a stable, typed object shape.
           </p>
         </article>
       </div>
@@ -334,7 +350,7 @@ console.log(object.data?.content);</code></pre>
             <h2 class="section-title" id="wrapup-title">What the reader leaves with</h2>
           </div>
           <p class="section-intro">
-            The closing section reinforces the documentation purpose of the portfolio sample and clarifies the practical outcome for the reader.
+            The closing section makes the hand-off to the game-state tutorial explicit.
           </p>
         </div>
 
@@ -347,11 +363,19 @@ console.log(object.data?.content);</code></pre>
           </div>
 
           <p class="sample-summary">
-            By the end of the tutorial, the reader understands how to connect a wallet, join a module, verify the resulting on-chain object, and claim a reward. The structure is intentionally compact so it can serve as portfolio evidence for content design, technical clarity, and developer-facing documentation.
+            By the end of the tutorial, the reader can prepare a testnet account, submit a membership transaction from a trusted signer, wait for indexed state, and inspect the resulting object. Continue to the game-state tutorial to apply the same ownership model to player assets and shared structures.
           </p>
+          <p class="sample-summary"><a href="game-assets-on-sui.html">Continue to game assets on Sui →</a></p>
         </article>
       </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>Piotr Oszenda — Technical Writer · Knowledge Manager · Documentation Architect</span>
+      <span>Fictional Sui documentation sample · Testnet-oriented examples</span>
+    </div>
+  </footer>
 </body>
 </html>
