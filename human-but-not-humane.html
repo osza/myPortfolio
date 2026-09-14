@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Human, but Not Humane — Piotr Oszenda</title>
+  <meta
+    name="description"
+    content="An essay by Piotr Oszenda on AI-assisted development, project memory, and the limits of treating a chat-based tool as a collaborator."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html#top" aria-label="Go to homepage">
+        <span class="brand__mark" aria-hidden="true">PO</span>
+        <span>Piotr Oszenda</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#approach">Approach</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#samples">Samples</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" id="top">
+      <div class="container">
+        <p class="case-back"><a href="index.html#samples">Back to portfolio</a></p>
+
+        <div class="case-hero__grid">
+          <div>
+            <p class="eyebrow">Essay · AI-assisted development</p>
+            <h1>Human, but Not Humane</h1>
+            <p class="case-intro">
+              What building CitizenHub with AI taught me about project memory, responsibility, and the difference between a human-like interface and a humane workflow.
+            </p>
+
+            <div class="case-hero__meta">
+              <span class="chip">Project memory</span>
+              <span class="chip">AI-assisted development</span>
+            </div>
+          </div>
+
+          <aside class="hero-panel" aria-labelledby="essay-focus-title">
+            <p class="hero-panel__label" id="essay-focus-title">The central distinction</p>
+            <ul class="case-proof-list">
+              <li>
+                <strong>Human describes resemblance.</strong>
+                <span>AI can be articulate, encouraging, inventive, apologetic, and confidently wrong, all at the same time.</span>
+              </li>
+              <li>
+                <strong>Humane describes treatment.</strong>
+                <span>A humane workflow preserves constraints, exposes uncertainty, and respects the user’s attention.</span>
+              </li>
+              <li>
+                <strong>Project truth needs a durable home.</strong>
+                <span>Chats can assist the work, but they should not be asked to keep organisational memory.</span>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--accent" aria-labelledby="citizenhub-heading">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">CitizenHub</p>
+            <h2 class="section-title" id="citizenhub-heading">A small idea with a clear order of operations.</h2>
+          </div>
+          <p class="section-intro">
+            CitizenHub began with a small and slightly selfish goal: helping a foreign resident in Spain understand administrative changes without treating the Boletín Oficial del Estado as a postgraduate course in bureaucratic endurance.
+          </p>
+        </div>
+
+        <article class="sample">
+          <p class="sample-summary">
+            The idea was simple. Each day, or a set interval, the system would find relevant changes, explain why they might matter, and redirect me to the official source. Two minutes, more or less. Three on a difficult morning.
+          </p>
+          <p class="sample-summary">
+            I named it CitizenHub, which sounded reassuringly hyped. Plus, the work-in-progress bit did not sound like a full-blown repository containing multiple architectural philosophies or packages called final, final2, and actually-final.
+          </p>
+          <p class="sample-summary">The intended logic was pretty straightforward:</p>
+          <p class="sample-summary"><strong>New BOE item → meaning → relevance → priority → communication</strong></p>
+          <p class="sample-summary">
+            First, establish what an official document says. Then decide whether it matters to a particular person. Only then explain it. An item should not produce a new meaning just because its reader uses the app. They are rather busy, foreign, confused, or trying to understand it before the morning coffee. The displayed personalised content should follow interpretation. Not the other way round.
+          </p>
+          <p class="sample-summary">
+            For a while, the project behaved well. It parsed real BOE XML documents, preserved source provenance, separated complex materials into usable segments, represented claims structurally, checked evidence references, and connected to an LLM API. For a while.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="filing-system-heading">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">A colleague with no filing system</p>
+            <h2 class="section-title" id="filing-system-heading">AI was responsive, but not especially cumulative.</h2>
+          </div>
+          <p class="section-intro">
+            At first, AI was everything it promised to be: fast, tireless, encouraging, and always ready to explain code that, let's face it, I had not touched.
+          </p>
+        </div>
+
+        <article class="sample">
+          <p class="sample-summary">
+            It suggested data models. It drafted tests. It produced architectural diagrams with the relaxed confidence of someone who would never be asked to maintain any of this six weeks later.
+          </p>
+          <p class="sample-summary">I gave it a clearly defined constraint.</p>
+          <p class="sample-summary">It returned a solution that violated the constraint, but did so with impressive confidence.</p>
+          <p class="sample-summary">I explained that the constraint was intentional.</p>
+          <p class="sample-summary">It apologised.</p>
+          <p class="sample-summary">Then it proposed essentially the same solution again, now with more elegant naming.</p>
+          <p class="sample-summary">
+            This is the peculiar charm of AI collaboration: it can be extremely responsive without being especially cumulative.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="memory-heading">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">When decisions evaporate, disaster strikes</p>
+            <h2 class="section-title" id="memory-heading">The difficult part was that the project did not remember.</h2>
+          </div>
+          <p class="section-intro">
+            People make mistakes too, with rather less publicity. The difference was the invisible work of maintaining continuity across a growing project.
+          </p>
+        </div>
+
+        <article class="sample">
+          <p class="sample-summary">
+            Decisions disappeared into long conversations. Rejected ideas returned wearing different terminology. Temporary experiments began presenting themselves as permanent architecture. Documentation described the system "we" meant to build, while the code pursued a more imaginative version of the plan.
+          </p>
+          <p class="sample-summary">
+            I became the person responsible for continuity: project owner, requirements editor, architecture reviewer, regression detector, and archivist of decisions nobody could quite find anymore.
+          </p>
+          <p class="sample-summary">The AI generated momentum. I generated memory.</p>
+          <p class="sample-summary">It was efficient in the same way that carrying a bicycle uphill is technically a form of transport.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--accent" aria-labelledby="humane-heading">
+      <div class="container note-layout">
+        <article class="note-card">
+          <p class="section-kicker">Human is not humane</p>
+          <blockquote id="humane-heading">
+            AI can be human-like without being humane.
+          </blockquote>
+          <cite>CitizenHub lesson</cite>
+        </article>
+
+        <article class="note-card">
+          <p class="section-kicker">What a humane collaborator would do</p>
+          <p>
+            It would respect settled decisions, preserve context, disclose uncertainty, and avoid turning a quick task into an hour of verification. It would understand that attention is not an infinite resource and that “here are three alternatives” is not always a gift. Sometimes it is simply homework wearing a friendly interface.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="operating-model-heading">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">The boring answer worked</p>
+            <h2 class="section-title" id="operating-model-heading">The solution was an operating model, not a more dramatic, all-caps, prompt.</h2>
+          </div>
+          <p class="section-intro">
+            No direct instruction or solemn request for the model to “think carefully” could substitute for clear responsibility and durable project records.
+          </p>
+        </div>
+
+        <div class="case-grid">
+          <article class="case-panel">
+            <h3>Human</h3>
+            <p>Defines the problem, constraints, examples, and acceptance criteria.</p>
+          </article>
+          <article class="case-panel">
+            <h3>AI</h3>
+            <p>Implements one approved change, tests it, and reports its limits.</p>
+          </article>
+          <article class="case-panel">
+            <h3>Automation</h3>
+            <p>Checks contracts, quality rules, and regressions.</p>
+          </article>
+        </div>
+
+        <article class="sample sample--spaced">
+          <p class="sample-summary">
+            Project truth had to leave the chat and enter the repository: state files, Architecture Decision Records (ADRs), bounded tasks, explicit no-nos, and automated checks.
+          </p>
+          <p class="sample-summary">
+            This did not make AI less useful. It made its usefulness easier to trust.
+          </p>
+          <p class="sample-summary">
+            CitizenHub did not teach me that AI-assisted development is impossible for non-developers. It showed me something less dramatic and basic, to be honest: autonomy without durable memory transfers invisible engineering work to the human.
+          </p>
+          <p class="sample-summary">AI can be human-like without being humane.</p>
+          <p class="sample-summary">So I do not expect it to develop a conscience.</p>
+          <p class="sample-summary">I just no longer let it keep the project memory.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>Piotr Oszenda — Technical Writer · Knowledge Manager · Documentation Architect</span>
+      <span>Based in Gijón, Spain · Working across product, developer, and knowledge systems</span>
+    </div>
+  </footer>
+</body>
+</html>
