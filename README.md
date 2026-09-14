@@ -45,7 +45,7 @@ The GitHub Actions workflow runs on pull requests and on pushes to `main` and `r
 - Fails when the generated HTML differs from the committed version.
 - Validates local links and required tutorial markers.
 
-Before committing a documentation change, run the following commands locally:
+Before committing changes to `customers-api-tutorial-v2.md` or the tutorial build and validation scripts, run the following commands locally:
 
 ```bash
 npm run build
