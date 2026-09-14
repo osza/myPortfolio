@@ -107,6 +107,51 @@ a {
     box-shadow var(--transition);
 }
 
+/* Inline links inside editorial/tutorial content */
+.hero__lead a,
+.section-intro a,
+.sample-summary a,
+.sample li a,
+.case-panel p a,
+.case-panel li a,
+.case-callout p a,
+.case-callout li a,
+.case-table td a,
+.note-card p a {
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.14em;
+  text-decoration-color: rgba(13, 102, 102, 0.45);
+}
+
+.hero__lead a:hover,
+.hero__lead a:focus-visible,
+.section-intro a:hover,
+.section-intro a:focus-visible,
+.sample-summary a:hover,
+.sample-summary a:focus-visible,
+.sample li a:hover,
+.sample li a:focus-visible,
+.case-panel p a:hover,
+.case-panel p a:focus-visible,
+.case-panel li a:hover,
+.case-panel li a:focus-visible,
+.case-callout p a:hover,
+.case-callout p a:focus-visible,
+.case-callout li a:hover,
+.case-callout li a:focus-visible,
+.case-table td a:hover,
+.case-table td a:focus-visible,
+.note-card p a:hover,
+.note-card p a:focus-visible {
+  color: var(--color-primary-hover);
+  text-decoration-color: currentColor;
+  background: rgba(13, 102, 102, 0.08);
+  border-radius: 0.2rem;
+}
+
 button,
 input,
 textarea,
