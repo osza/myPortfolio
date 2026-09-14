@@ -34,15 +34,29 @@ I’m a Senior Technical Writer and Knowledge Architect with experience document
 
 The Customers API tutorial is generated from `customers-api-tutorial-v2.md`.
 
-```sh
+```bash
 npm run build
 npm run validate
 ```
 
-The GitHub Actions workflow rebuilds the page, fails if generated output is not committed, and checks local links on pull requests and changes to `main`.
+The GitHub Actions workflow runs on pull requests and on pushes to `main` and `release/v4.0.0`. It:
+
+- Builds `customers-api-tutorial-v2.html` from the Markdown source.
+- Fails when the generated HTML differs from the committed version.
+- Validates local links and required tutorial markers.
+
+Before committing a documentation change, run the following commands locally:
+
+```bash
+npm run build
+npm run validate
+```
+
+Then review and commit both the Markdown source and any generated HTML changes.
 
 ## Contact
 
-- Email: <piotr.oszenda@outlook.com>
+- Email: [piotr.oszenda@outlook.com](mailto:piotr.oszenda@outlook.com)
 - Location: Gijón, Spain
 - [LinkedIn](https://www.linkedin.com/in/piotr-oszenda/)
+  
