@@ -1,19 +1,35 @@
-name: Check published documentation
+name: Build and validate docs
 
 on:
   pull_request:
+    paths:
+      - "customers-api-tutorial-v2.md"
+      - "customers-api-tutorial-v2.html"
+      - "scripts/build-docs.mjs"
+      - "scripts/validate-site.mjs"
+      - "package.json"
+      - ".github/workflows/docs.yml"
   push:
     branches:
       - main
+      - release/v4.0.0
+    paths:
+      - "customers-api-tutorial-v2.md"
+      - "customers-api-tutorial-v2.html"
+      - "scripts/build-docs.mjs"
+      - "scripts/validate-site.mjs"
+      - "package.json"
+      - ".github/workflows/docs.yml"
 
 jobs:
-  check:
+  build-and-validate-docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - run: npm ci
       - run: npm run build
       - run: git diff --exit-code
       - run: npm run validate
