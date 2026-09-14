@@ -25,7 +25,6 @@
         <span class="brand__mark" aria-hidden="true">PO</span>
         <span>Piotr Oszenda</span>
       </a>
-
       <nav class="main-nav" aria-label="Primary">
         <a href="index.html#work">Work</a>
         <a href="index.html#approach">Approach</a>
@@ -44,14 +43,14 @@
           <h1>Join the Octopus Society on Sui</h1>
           <p class="hero__lead">
             A hands-on tutorial illustrating a fictional membership flow for connecting a wallet,
-            joining Octopus Society, verifying membership on-chain, and claiming a member reward.
+            joining Octopus Society, verifying a membership
+            <a href="https://docs.sui.io/develop/sui-architecture/object-model" target="_blank" rel="noopener noreferrer">object on-chain</a>,
+            and claiming a member reward.
           </p>
-
           <div class="hero__actions">
             <a class="button-link button-link--primary" href="#overview">Read tutorial</a>
             <a class="button-link button-link--secondary" href="index.html#samples">Back to selected work</a>
           </div>
-
           <div class="hero-stats" aria-label="Tutorial metadata">
             <span class="hero-stat">Testnet</span>
             <span class="hero-stat">Move objects</span>
@@ -99,11 +98,10 @@
               <p class="meta">Tutorial sample · Fictional Move package</p>
             </div>
           </div>
-
           <p class="sample-summary">
-            This tutorial demonstrates a sample workflow for joining Octopus Society, a fictional membership module built with Move on Sui. The package ID, object IDs, and example data are included to illustrate structure, flow, and documentation style.
+            This tutorial demonstrates a sample workflow for joining Octopus Society, a fictional membership module built with Move on Sui.
+            The package ID, object IDs, and example data are included to illustrate structure, flow, and documentation style.
           </p>
-
           <p class="sample-summary">
             By the end of the tutorial, you will have walked through connecting a wallet, minting a membership object, verifying ownership on-chain, and claiming a reward tied to that membership.
           </p>
@@ -130,19 +128,19 @@
               <p class="meta">CLI · Wallet · TypeScript tooling</p>
             </div>
           </div>
-
           <p class="sample-summary">
             Before you begin, make sure you have the following in place:
           </p>
           <ul>
-            <li>The Sui CLI installed and configured for the target network, such as testnet.</li>
-            <li>A wallet with test SUI available for gas fees.</li>
+            <li>The <a href="https://docs.sui.io/references/cli" target="_blank" rel="noopener noreferrer">Sui CLI</a> installed and configured for the target network, such as testnet.</li>
+            <li>A wallet with <a href="https://docs.sui.io/getting-started/onboarding/get-coins" target="_blank" rel="noopener noreferrer">test SUI for gas fees</a>.</li>
             <li>Node.js installed if you plan to run the TypeScript examples.</li>
             <li>A code editor and a terminal for running Sui commands.</li>
             <li>The package ID for the fictional Octopus Society Move module used in the examples below.</li>
           </ul>
           <p class="sample-summary">
-            If you are new to Sui, treat this as a quick readiness check: once the CLI works, the wallet is funded, and the package ID is available, you are ready to follow the tutorial as written.
+            If you are new to Sui, treat this as a quick readiness check: once the CLI works, the wallet is funded, and the package ID is available,
+            you are ready to follow the tutorial as written.
           </p>
           <p class="sample-summary">
             The examples below use placeholder IDs and sample responses so the structure stays clear and reusable.
@@ -173,7 +171,12 @@ sui client gas</code></pre>
           <article class="case-panel">
             <h3>Step 1 · Connect a wallet</h3>
             <p>
-              Start by connecting a compatible wallet in Sui Wallet or another supported browser extension. This keeps the first step lightweight so the reader can focus on the membership flow itself.
+              Start by connecting a compatible wallet in Sui Wallet or another supported browser extension.
+              For app-based integrations, follow the official
+              <a href="https://docs.sui.io/getting-started/examples/dapp-kit-frontend" target="_blank" rel="noopener noreferrer">dApp Kit frontend pattern</a>
+              or the
+              <a href="https://docs.sui.io/onchain-finance/asset-custody/wallets/wallet-standard" target="_blank" rel="noopener noreferrer">Wallet Standard</a>.
+              This keeps the first step lightweight so the reader can focus on the membership flow itself.
             </p>
             <ul>
               <li>Confirm the wallet is set to the intended network.</li>
@@ -195,7 +198,10 @@ sui client gas</code></pre>
           <article class="case-panel">
             <h3>Step 3 · Verify membership</h3>
             <p>
-              Wait for the transaction to become readable, then use the object ID to confirm ownership and inspect membership fields. This avoids treating an accepted submission as immediately indexed state.
+              Wait for the transaction to become readable, then use the object ID to confirm ownership and inspect membership fields.
+              This avoids treating an accepted submission as immediately indexed state and aligns with how the
+              <a href="https://docs.sui.io/develop/sui-architecture/object-model" target="_blank" rel="noopener noreferrer">Sui object model</a>
+              exposes object ownership and history.
             </p>
             <ul>
               <li>Query the object through the CLI.</li>
@@ -236,17 +242,14 @@ sui client gas</code></pre>
               <p class="meta">Run the transaction from the terminal</p>
             </div>
           </div>
-
           <p class="sample-summary">
             Use the CLI when you want to validate the contract entry point quickly and inspect the transaction output before wiring the flow into an app.
           </p>
-
           <pre class="code-panel"><code>sui client call \
-  --package &lt;PACKAGE_ID&gt; \
-  --module octopus_society \
-  --function join \
-  --gas-budget 10000000</code></pre>
-
+ --package &lt;PACKAGE_ID&gt; \
+ --module octopus_society \
+ --function join \
+ --gas-budget 10000000</code></pre>
           <p class="sample-summary">
             The sender comes from the active CLI address and the Move function receives <code>TxContext</code> implicitly. Record the transaction digest, then identify the created membership object from the transaction effects before moving to the next step.
           </p>
@@ -259,13 +262,10 @@ sui client gas</code></pre>
               <p class="meta">Check ownership and state</p>
             </div>
           </div>
-
           <p class="sample-summary">
             After the join transaction succeeds, inspect the object directly so the reader can review the same state the app will later consume.
           </p>
-
           <pre class="code-panel"><code>sui client object &lt;MEMBERSHIP_OBJECT_ID&gt;</code></pre>
-
           <p class="sample-summary">
             Confirm that the object type is the expected membership type and that its owner is the active address. The exact fields depend on the package; do not assume a fixed schema from a fictional example.
           </p>
@@ -278,11 +278,10 @@ sui client gas</code></pre>
               <p class="meta">Embed the flow in an app</p>
             </div>
           </div>
-
           <p class="sample-summary">
-            This version shows how the same action can be represented from application code.
+            This version shows how the same action can be represented from application code using
+            <a href="https://docs.sui.io/develop/transactions/ptbs/ts-sdk-ptb-template" target="_blank" rel="noopener noreferrer">the current TypeScript PTB pattern</a>.
           </p>
-
           <pre class="code-panel"><code>import { SuiGrpcClient } from '@mysten/sui/grpc';
 import { Transaction } from '@mysten/sui/transactions';
 
@@ -292,6 +291,7 @@ const client = new SuiGrpcClient({
 });
 
 const tx = new Transaction();
+
 tx.moveCall({
   target: `${packageId}::octopus_society::join`,
   arguments: [],
@@ -309,9 +309,9 @@ if (result.$kind === 'FailedTransaction') {
 
 await client.waitForTransaction({ result });
 console.log(result.Transaction.digest);</code></pre>
-
           <p class="sample-summary">
-            This example uses a keypair only because it represents a script or backend. In a browser, construct the transaction but let the user’s wallet sign and execute it.
+            This example uses a keypair only because it represents a script or backend. In a browser, construct the transaction but let the user’s wallet sign and execute it through
+            <a href="https://docs.sui.io/getting-started/examples/dapp-kit-frontend" target="_blank" rel="noopener noreferrer">dApp Kit</a>.
           </p>
         </article>
 
@@ -322,11 +322,10 @@ console.log(result.Transaction.digest);</code></pre>
               <p class="meta">Fetch the result and render it in UI</p>
             </div>
           </div>
-
           <p class="sample-summary">
-            Use the object ID from the transaction result to fetch the current membership state for an app or game UI.
+            Use the object ID from the transaction result to fetch the current membership state for an app or game UI. After submission, wait for confirmation before reading indexed state, as described in
+            <a href="https://docs.sui.io/develop/transactions/ptbs/building-ptb" target="_blank" rel="noopener noreferrer">the transaction-building guidance</a>.
           </p>
-
           <pre class="code-panel"><code>const { object } = await client.getObject({
   objectId: membershipObjectId,
   include: { json: true },
@@ -334,7 +333,6 @@ console.log(result.Transaction.digest);</code></pre>
 
 console.log(object.owner);
 console.log(object.json);</code></pre>
-
           <p class="sample-summary">
             This closes the loop from transaction result to object inspection. JSON is convenient for a demo; production code should use generated BCS bindings when it needs a stable, typed object shape.
           </p>
@@ -361,9 +359,10 @@ console.log(object.json);</code></pre>
               <p class="meta">Reusable onboarding sample</p>
             </div>
           </div>
-
           <p class="sample-summary">
-            By the end of the tutorial, the reader can prepare a testnet account, submit a membership transaction from a trusted signer, wait for indexed state, and inspect the resulting object. Continue to the game-state tutorial to apply the same ownership model to player assets and shared structures.
+            By the end of the tutorial, the reader can prepare a testnet account, submit a membership transaction from a trusted signer,
+            wait for indexed state, and inspect the resulting object. Continue to the game-state tutorial to apply the same ownership model
+            to player assets and shared structures.
           </p>
           <p class="sample-summary"><a href="game-assets-on-sui.html">Continue to game assets on Sui →</a></p>
         </article>
