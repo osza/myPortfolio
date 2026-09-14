@@ -1,0 +1,9 @@
+{
+  "name": "piotr-oszenda-technical-writing-portfolio",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-docs.mjs",
+    "validate": "node scripts/validate-site.mjs",
+    "check": "npm run build && npm run validate"
+  }
+}

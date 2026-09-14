@@ -16,7 +16,7 @@ I specialise in developer documentation, API content, product documentation, and
 - `index.html` — Main portfolio page with selected work, experience, and contact details.
 - `api-tutorials.html` — Overview page for API and SUI tutorial samples.
 - `customers-api-tutorial-v2.html` — HTML version of a CRUD tutorial for a Customers API.
-- `customers-api-tutorial-v2.md` — Markdown source version of the same tutorial, showing a docs-as-code workflow.
+- `customers-api-tutorial-v2.md` — Markdown source for the generated Customers API tutorial.
 - `mews-events-case-study.html` — Case study about reorganising product knowledge for a new documentation hub.
 - `octopus-society-on-sui.html` — Concept-focused guide on SUI.
 - `game-assets-on-sui.html` — Tutorial-style guide on game assets in SUI.
@@ -29,6 +29,17 @@ I’m a Senior Technical Writer and Knowledge Architect with experience document
 ## Live site
 
 [GitHub Pages](https://osza.github.io/myPortfolio/)
+
+## Documentation workflow
+
+The Customers API tutorial is generated from `customers-api-tutorial-v2.md`.
+
+```sh
+npm run build
+npm run validate
+```
+
+The GitHub Actions workflow rebuilds the page, fails if generated output is not committed, and checks local links on pull requests and changes to `main`.
 
 ## Contact
 
