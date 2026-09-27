@@ -7,8 +7,8 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 process.chdir(repoRoot);
 import { renderDocumentationPage } from '../layouts/doc-page.mjs';
 
-const sourcePath = 'customers-api-tutorial-v2.md';
-const outputPath = 'customers-api-tutorial-v2.html';
+const sourcePath = 'customers-api-tutorial.md';
+const outputPath = 'customers-api-tutorial.html';
 const source = await readFile(sourcePath, 'utf8');
 const lines = source.replace(/\r\n/g, '\n').split('\n');
 

@@ -26,14 +26,14 @@ for (const file of files) {
   }
 }
 
-const source = await readFile('customers-api-tutorial-v2.md', 'utf8');
-const output = await readFile('customers-api-tutorial-v2.html', 'utf8');
-if (!output.includes('Generated from customers-api-tutorial-v2.md')) {
-  failures.push('customers-api-tutorial-v2.html: missing generated-file marker');
+const source = await readFile('customers-api-tutorial.md', 'utf8');
+const output = await readFile('customers-api-tutorial.html', 'utf8');
+if (!output.includes('Generated from customers-api-tutorial.md')) {
+  failures.push('customers-api-tutorial.html: missing generated-file marker');
 }
 for (const marker of ['Manage customer data with the Customers API', 'CRUD tutorial']) {
   if (!source.includes(marker) || !output.includes(marker)) {
-    failures.push(`customers-api-tutorial-v2.html: generated output is missing "${marker}"`);
+    failures.push(`customers-api-tutorial.html: generated output is missing "${marker}"`);
   }
 }
 
