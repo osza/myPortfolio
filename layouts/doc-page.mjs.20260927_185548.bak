@@ -9,30 +9,7 @@ const inline = (value) => escapeHtml(value)
   .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
   .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
 
-const renderProofList = (items) => items
-  .map((item) => `<li><strong>${inline(item.title)}</strong><span>${inline(item.text)}</span></li>`)
-  .join('');
-
-const renderCaseProofList = (items) => items
-  .map((item) => `            <li>\n              <strong>${inline(item.title)}</strong>\n              <span>${inline(item.text)}</span>\n            </li>`)
-  .join('\n');
-
-const renderHeroStats = (stats) => stats
-  .map((stat) => `            <span class="hero-stat">${inline(stat)}</span>`)
-  .join('\n');
-
-export const renderDocumentationPage = ({
-  sourcePath,
-  title,
-  lead,
-  body,
-  metadata,
-  eyebrow = 'Developer documentation sample',
-  primaryLink = { href: '#what-this-tutorial-demonstrates', label: 'Read tutorial' },
-  heroStats = null,
-  heroPanel = null,
-  footerTag = 'Built from Markdown source'
-}) => `<!DOCTYPE html>
+export const renderDocumentationPage = ({ sourcePath, title, lead, body, metadata }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -59,28 +36,19 @@ export const renderDocumentationPage = ({
     <section class="hero" id="top">
       <div class="container hero__grid">
         <div>
-          <p class="eyebrow">${inline(eyebrow)}</p>
+          <p class="eyebrow">Developer documentation sample</p>
           <h1>${inline(title)}</h1>
           <p class="hero__lead">${inline(lead)}</p>
-          <div class="hero__actions"><a class="button-link button-link--primary" href="${escapeHtml(primaryLink.href)}">${inline(primaryLink.label)}</a><a class="button-link button-link--secondary" href="index.html#samples">Back to selected work</a></div>
-${heroStats ? `          <div class="hero-stats" aria-label="Tutorial metadata">
-${renderHeroStats(heroStats)}
-          </div>
-` : ''}        </div>
-        <aside class="hero-panel" aria-labelledby="${heroPanel?.id ?? 'sample-proof-title'}">
-          <p class="hero-panel__label" id="${heroPanel?.id ?? 'sample-proof-title'}">${inline(heroPanel?.label ?? 'Build status')}</p>
-${heroPanel?.style === 'case'
-  ? `          <ul class="case-proof-list">\n${renderCaseProofList(heroPanel.items)}\n          </ul>`
-  : `          <ul class="proof-list">${renderProofList(heroPanel?.items ?? [
-    { title: 'Markdown source', text: sourcePath },
-    { title: 'Generated HTML', text: 'Built locally before publication.' },
-    { title: 'Checked output', text: 'Source markers and local links are validated in CI.' }
-  ])}</ul>`}
+          <div class="hero__actions"><a class="button-link button-link--primary" href="#what-this-tutorial-demonstrates">Read tutorial</a><a class="button-link button-link--secondary" href="index.html#samples">Back to selected work</a></div>
+        </div>
+        <aside class="hero-panel" aria-labelledby="sample-proof-title">
+          <p class="hero-panel__label" id="sample-proof-title">Build status</p>
+          <ul class="proof-list"><li><strong>Markdown source</strong><span>${sourcePath}</span></li><li><strong>Generated HTML</strong><span>Built locally before publication.</span></li><li><strong>Checked output</strong><span>Source markers and local links are validated in CI.</span></li></ul>
         </aside>
       </div>
     </section>
 ${body}  </main>
-  <footer class="site-footer"><div class="container site-footer__inner"><span>Piotr Oszenda — Technical Writer · Knowledge Manager · Documentation Architect</span><span>${escapeHtml(footerTag)}</span></div></footer>
+  <footer class="site-footer"><div class="container site-footer__inner"><span>Piotr Oszenda — Technical Writer · Knowledge Manager · Documentation Architect</span><span>Built from Markdown source</span></div></footer>
   <script>
     document.querySelectorAll('[data-code-group]').forEach((group) => {
       const tabs = Array.from(group.querySelectorAll('[data-code-tab]'));

@@ -73,9 +73,7 @@ const pages = [
     },
     footerTag: 'Fictional Sui documentation sample · Testnet-oriented examples',
     // Section slugs that should receive the accent background on this page.
-    // 'overview' is NOT accented here (unlike the customers page).
     accentSections: ['join-and-verify'],
-    noAccentOverview: true,
     // Sections whose articles (after the first) get extra top spacing.
     spacedArticles: true
   }

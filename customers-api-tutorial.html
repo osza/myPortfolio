@@ -44,12 +44,10 @@
             <h2 class="section-title">What this tutorial demonstrates</h2>
           </div>
         </div>
-        <article class="sample">
           <ul><li><strong>A full CRUD journey on one resource.</strong> The reader follows a single customer record from creation to deletion, reducing cognitive load.</li><li><strong>Parallel examples in cURL and JavaScript.</strong> Developers can switch between code styles without losing context or task continuity.</li><li><strong>Explicit preparation, reference, and workflow.</strong> Setup, resource model, and step-by-step tasks make the tutorial reusable as onboarding material.</li></ul>
-        </article>
       </div>
     </section>
-    <section class="section section--accent" id="overview">
+    <section class="section" id="overview">
       <div class="container">
         <div class="section__header">
           <div>
@@ -84,7 +82,7 @@
           <div class="sample-header"><div class="sample-heading"><h3>Base URL and headers</h3></div></div>
           <p class="sample-summary"><strong>Authentication and request format</strong></p>
           <p class="sample-summary">All examples in this tutorial use bearer token authentication and JSON request bodies where applicable.</p>
-          <pre class="code-panel is-active"><code class="language-http">Authorization: Bearer {access_token}
+          <pre class="code-panel"><code class="language-http">Authorization: Bearer {access_token}
 Content-Type: application/json</code></pre>
           <p class="sample-summary">Include the <code>Authorization</code> header in every request. Include <code>Content-Type: application/json</code> when the request contains a JSON body, such as <code>POST</code> or <code>PATCH</code>.</p>
           <p class="sample-summary">In a real implementation, handle HTTP status codes such as <code>201 Created</code> or <code>4xx</code> errors explicitly and log or surface error messages to make debugging easier.</p>
