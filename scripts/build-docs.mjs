@@ -1,4 +1,10 @@
 import { readFile, writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+
+// Resolve paths relative to the repo root so the script works from any cwd.
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+process.chdir(repoRoot);
 import { renderDocumentationPage } from '../layouts/doc-page.mjs';
 
 const sourcePath = 'customers-api-tutorial-v2.md';

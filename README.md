@@ -57,6 +57,6 @@ Then review and commit both the Markdown source and any generated HTML changes.
 ## Contact
 
 - Email: [piotr.oszenda@outlook.com](mailto:piotr.oszenda@outlook.com)
-- Location: Gijón, Spain
+- Location: Gliwice, Poland or Gijón, Spain (remote)
 - [LinkedIn](https://www.linkedin.com/in/piotr-oszenda/)
   

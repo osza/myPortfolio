@@ -1,5 +1,10 @@
 import { access, readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+// Resolve paths relative to the repo root so the script works from any cwd.
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+process.chdir(repoRoot);
 
 const files = (await readdir('.')).filter((file) => file.endsWith('.html'));
 const failures = [];
@@ -8,7 +13,9 @@ for (const file of files) {
   const html = await readFile(file, 'utf8');
   for (const match of html.matchAll(/href="([^"]+)"/g)) {
     const href = match[1];
-    if (/^(https?:|mailto:|#)/.test(href)) continue;
+    // Skip external links, anchors, and non-file protocols
+    if (/^(https?:|mailto:|tel:|#)/.test(href)) continue;
+    // Treat every other href as a local file (with or without leading './')
     const target = href.split('#')[0].replace(/^\.\//, '');
     if (!target) continue;
     try {
