@@ -2,7 +2,7 @@ const escapeHtml = (value) => value
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
   .replaceAll('>', '&gt;')
-  .replaceAll('"', '&quot;');
+  .replaceAll('\"', '&quot;');
 
 const inline = (value) => escapeHtml(value)
   .replace(/`([^`]+)`/g, '<code>$1</code>')
@@ -31,7 +31,8 @@ export const renderDocumentationPage = ({
   primaryLink = { href: '#what-this-tutorial-demonstrates', label: 'Read tutorial' },
   heroStats = null,
   heroPanel = null,
-  footerTag = 'Built from Markdown source'
+  footerTag = 'Built from Markdown source',
+  usesMermaid = false
 }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +43,7 @@ export const renderDocumentationPage = ({
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  ${usesMermaid ? '  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>\n  <script>\n    mermaid.initialize({ startOnLoad: true, theme: \'default\' });\n  </script>\n' : ''}  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Generated from ${sourcePath}. Run npm run build after editing the source. -->

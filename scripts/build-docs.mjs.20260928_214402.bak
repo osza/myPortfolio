@@ -16,7 +16,7 @@ const escapeHtml = (value) => value
 const inline = (value) => escapeHtml(value)
   .replace(/`([^`]+)`/g, '<code>$1</code>')
   .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, text, href) => {
+  .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, text, href) => {
     const external = /^https?:\/\//.test(href);
     const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : '';
     return `<a href="${escapeHtml(href)}"${attrs}>${text}</a>`;
@@ -72,35 +72,12 @@ const pages = [
       ]
     },
     footerTag: 'Fictional Sui documentation sample · Testnet-oriented examples',
+    // Section slugs that should receive the accent background on this page.
+    // 'overview' is NOT accented here (unlike the customers page).
     accentSections: ['join-and-verify'],
     noAccentOverview: true,
+    // Sections whose articles (after the first) get extra top spacing.
     spacedArticles: true
-  },
-  {
-    sourcePath: 'docs-as-code.md',
-    outputPath: 'docs-as-code.html',
-    metadata: {
-      title: 'Docs-as-code workflow sample — Piotr Oszenda',
-      description: 'A documentation architecture sample showing how I design docs-as-code workflows, contributor processes, review rules, and publishing structures.'
-    },
-    eyebrow: 'Documentation architecture sample',
-    primaryLink: { href: '#documentation-systems-need-more-than-version-control', label: 'Read the workflow' },
-    heroPanel: {
-      id: 'focus-title',
-      label: 'Workflow focus',
-      items: [
-        { title: 'Docs-as-code', text: 'Versioned content, structured source files, and reusable publishing patterns.' },
-        { title: 'Governance', text: 'Ownership, review paths, and release control for documentation teams.' },
-        { title: 'Contributor flow', text: 'Clear rules for authors, reviewers, and maintainers working across product areas.' }
-      ]
-    },
-    usesMermaid: true,
-    accentSections: [
-      'documentation-systems-need-more-than-version-control',
-      'a-simple-path-from-draft-to-publish',
-      'docs-as-code-as-part-of-reliable-documentation-practice',
-      'available-for-documentation-related-projects-and-content-governance'
-    ]
   }
 ];
 
@@ -123,27 +100,13 @@ const buildPage = (page) => {
     let articleOpen = false;
     let caseGridOpen = false;
     let casePanelOpen = false;
-    let cardGridOpen = false;
-    let cardOpen = false;
-    let stepsGridOpen = false;
-    let stepOpen = false;
-    let timelineOpen = false;
-    let timelineCardOpen = false;
-    let contactGridOpen = false;
-    let contactCardOpen = false;
     let sectionArticleCount = 0;
     let index = firstSection;
     let codeGroup = 0;
+    // Pending meta line captured from a '::: meta' block, applied to the next heading.
     let pendingMeta = null;
+    // Intro paragraph for the current section header, captured from '::: intro'.
     let pendingIntro = null;
-
-    const inCustomBlock = () => (
-      caseGridOpen || casePanelOpen ||
-      cardGridOpen || cardOpen ||
-      stepsGridOpen || stepOpen ||
-      timelineOpen || timelineCardOpen ||
-      contactGridOpen || contactCardOpen
-    );
 
     const closeArticle = () => {
       if (articleOpen) {
@@ -167,71 +130,7 @@ const buildPage = (page) => {
       }
     };
 
-    const closeCard = () => {
-      if (cardOpen) {
-        body += '          </article>\n';
-        cardOpen = false;
-      }
-    };
-
-    const closeCardGrid = () => {
-      closeCard();
-      if (cardGridOpen) {
-        body += '        </div>\n';
-        cardGridOpen = false;
-      }
-    };
-
-    const closeStep = () => {
-      if (stepOpen) {
-        body += '          </article>\n';
-        stepOpen = false;
-      }
-    };
-
-    const closeStepsGrid = () => {
-      closeStep();
-      if (stepsGridOpen) {
-        body += '        </div>\n';
-        stepsGridOpen = false;
-      }
-    };
-
-    const closeTimelineCard = () => {
-      if (timelineCardOpen) {
-        body += '          </article>\n';
-        timelineCardOpen = false;
-      }
-    };
-
-    const closeTimeline = () => {
-      closeTimelineCard();
-      if (timelineOpen) {
-        body += '        </div>\n';
-        timelineOpen = false;
-      }
-    };
-
-    const closeContactCard = () => {
-      if (contactCardOpen) {
-        body += '          </article>\n';
-        contactCardOpen = false;
-      }
-    };
-
-    const closeContactGrid = () => {
-      closeContactCard();
-      if (contactGridOpen) {
-        body += '        </div>\n';
-        contactGridOpen = false;
-      }
-    };
-
     const closeSection = () => {
-      closeContactGrid();
-      closeTimeline();
-      closeStepsGrid();
-      closeCardGrid();
       closeCaseGrid();
       closeArticle();
       if (sectionOpen) {
@@ -247,12 +146,13 @@ const buildPage = (page) => {
         closeSection();
         const heading = line.slice(3).trim();
         const id = slug(heading);
-        const defaultAccents = page.noAccentOverview ? [] : ['overview'];
-        const accentIds = new Set([...(page.accentSections ?? []), ...defaultAccents]);
+        // Backwards compatible: 'overview' is accented by default (as in the
+        // original customers build); pages may extend the list.
+        const accentIds = new Set([...(page.accentSections ?? []), 'overview']);
         const accent = accentIds.has(id) ? ' section--accent' : '';
         sectionArticleCount = 0;
         pendingIntro = null;
-
+        // Look ahead for an optional '::: intro' block belonging to this section.
         let look = index + 1;
         while (look < lines.length && lines[look] === '') look += 1;
         if (lines[look] === '::: intro') {
@@ -267,19 +167,11 @@ const buildPage = (page) => {
         } else {
           index += 1;
         }
-
-        body += `    <section class="section${accent}" id="${id}">
-      <div class="container">
-        <div class="section__header">
-          <div>
-            <p class="section-kicker">Tutorial</p>
-            <h2 class="section-title">${inline(heading)}</h2>
-          </div>
-`;
+        body += `    <section class="section${accent}" id="${id}">\n      <div class="container">\n        <div class="section__header">\n          <div>\n            <p class="section-kicker">Tutorial</p>\n            <h2 class="section-title">${inline(heading)}</h2>\n          </div>\n`;
         if (pendingIntro) {
           body += `          <p class="section-intro">${inline(pendingIntro)}</p>\n`;
         }
-        body += '        </div>\n';
+        body += `        </div>\n`;
         sectionOpen = true;
         continue;
       }
@@ -312,117 +204,9 @@ const buildPage = (page) => {
         continue;
       }
 
-      if (line === '::: card-grid') {
-        closeArticle();
-        body += '        <div class="samples-grid">\n';
-        cardGridOpen = true;
-        index += 1;
-        continue;
-      }
-
-      if (line === '::: card') {
-        closeCard();
-        body += '          <article class="sample-card sample-card--regular">\n';
-        cardOpen = true;
-        index += 1;
-        continue;
-      }
-
-      if (line === '::: steps-grid') {
-        closeArticle();
-        body += '        <div class="results-grid">\n';
-        stepsGridOpen = true;
-        index += 1;
-        continue;
-      }
-
-      if (line === '::: step') {
-        closeStep();
-        body += '          <article class="result-card">\n';
-        stepOpen = true;
-        index += 1;
-        continue;
-      }
-
-      if (line === '::: timeline') {
-        closeArticle();
-        body += '        <div class="timeline">\n';
-        timelineOpen = true;
-        index += 1;
-        continue;
-      }
-
-      if (line === '::: timeline-card') {
-        closeTimelineCard();
-        body += '          <article class="timeline-card">\n';
-        timelineCardOpen = true;
-        index += 1;
-        continue;
-      }
-
-      if (line === '::: contact-grid') {
-        closeArticle();
-        body += '        <div class="contact-grid">\n';
-        contactGridOpen = true;
-        index += 1;
-        continue;
-      }
-
-      if (line === '::: contact-card') {
-        closeContactCard();
-        body += '          <article class="contact-card">\n';
-        contactCardOpen = true;
-        index += 1;
-        continue;
-      }
-
-      if (line === '::: actions') {
-        const actionLines = [];
-        index += 1;
-        while (index < lines.length && lines[index] !== ':::') {
-          if (lines[index]) actionLines.push(lines[index]);
-          index += 1;
-        }
-        const links = actionLines
-          .map((entry, actionIndex) => {
-            const match = entry.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-            if (!match) {
-              throw new Error(`Invalid action link in ${page.sourcePath}: "${entry}"`);
-            }
-            const [, text, href] = match;
-            const variant = actionIndex === 0 ? 'button-link button-link--primary' : 'button-link button-link--secondary';
-            const external = /^https?:\/\//.test(href);
-            const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : '';
-            return `<a class="${variant}" href="${escapeHtml(href)}"${attrs}>${text}</a>`;
-          })
-          .join('');
-        body += `        <div class="hero__actions">${links}</div>\n`;
-        index += 1;
-        continue;
-      }
-
-      if (line === '::: mermaid') {
-        const mermaidLines = [];
-        index += 1;
-        while (index < lines.length && lines[index] !== ':::') {
-          mermaidLines.push(lines[index]);
-          index += 1;
-        }
-        body += `          <div class="sample-summary mermaid-wrap">\n            <pre class="mermaid">${escapeHtml(mermaidLines.join('\n'))}</pre>\n          </div>\n`;
-        index += 1;
-        continue;
-      }
-
       if (line === ':::') {
-        if (contactCardOpen) closeContactCard();
-        else if (contactGridOpen) closeContactGrid();
-        else if (timelineCardOpen) closeTimelineCard();
-        else if (timelineOpen) closeTimeline();
-        else if (stepOpen) closeStep();
-        else if (stepsGridOpen) closeStepsGrid();
-        else if (cardOpen) closeCard();
-        else if (cardGridOpen) closeCardGrid();
-        else if (casePanelOpen) closeCasePanel();
+        // Generic closer for any open ':::' block.
+        if (casePanelOpen) closeCasePanel();
         else if (caseGridOpen) closeCaseGrid();
         index += 1;
         continue;
@@ -430,36 +214,10 @@ const buildPage = (page) => {
 
       if (line.startsWith('### ')) {
         const heading = line.slice(4).trim();
-
         if (casePanelOpen) {
           body += `            <h3>${inline(heading)}</h3>\n`;
-        } else if (cardOpen) {
-          if (pendingMeta) {
-            const chips = pendingMeta.split('·').map((item) => item.trim()).filter(Boolean);
-            body += `            <div class="sample-card__meta">${chips.map((chip) => `<span class="chip">${inline(chip)}</span>`).join('')}</div>\n`;
-          }
-          body += `            <h3>${inline(heading)}</h3>\n`;
-          pendingMeta = null;
-        } else if (stepOpen) {
-          const value = pendingMeta ? inline(pendingMeta) : '';
-          if (value) {
-            body += `            <span class="result-card__value">${value}</span>\n`;
-          }
-          body += `            <p>${inline(lines[index + 1] ?? '')}</p>\n`;
-          pendingMeta = null;
-          index += 2;
-          if (lines[index] === ':::') continue;
-          continue;
-        } else if (timelineCardOpen) {
-          if (pendingMeta) {
-            const chips = pendingMeta.split('·').map((item) => item.trim()).filter(Boolean);
-            body += `            <div class="timeline-card__meta">${chips.map((chip) => `<span>${inline(chip)}</span>`).join('')}</div>\n`;
-          }
-          body += `            <h3>${inline(heading)}</h3>\n`;
-          pendingMeta = null;
-        } else if (contactCardOpen) {
-          body += `            <h3>${inline(heading)}</h3>\n`;
         } else {
+          // Inside a regular sample article each ### starts a new sample-header block.
           if (caseGridOpen) {
             body += `            <h3>${inline(heading)}</h3>\n`;
           } else {
@@ -471,10 +229,9 @@ const buildPage = (page) => {
             const meta = pendingMeta ? `<p class="meta">${inline(pendingMeta)}</p>` : '';
             body += `          <div class="sample-header"><div class="sample-heading"><h3>${inline(heading)}</h3>${meta}</div></div>\n`;
             sectionArticleCount += 1;
-            pendingMeta = null;
           }
         }
-
+        pendingMeta = null;
         index += 1;
         continue;
       }
@@ -513,15 +270,7 @@ const buildPage = (page) => {
             if (cursor === lines.length) throw new Error(`Unclosed code fence in ${page.sourcePath}.`);
 
             const groupId = `code-group-${codeGroup += 1}`;
-            body += `          <div class="code-switcher" data-code-group>
-            <div class="code-tabs" role="tablist" aria-label="Code examples for ${inline(firstExample[2])}">
-              <button class="code-tab is-active" type="button" role="tab" id="${groupId}-curl" aria-selected="true" aria-controls="${groupId}-curl-panel" data-code-tab="curl">cURL</button>
-              <button class="code-tab" type="button" role="tab" id="${groupId}-javascript" aria-selected="false" aria-controls="${groupId}-javascript-panel" tabindex="-1" data-code-tab="javascript">JavaScript</button>
-            </div>
-            <pre class="code-panel is-active" id="${groupId}-curl-panel" role="tabpanel" aria-labelledby="${groupId}-curl" data-code-panel="curl"><code class="language-${escapeHtml(firstLanguage)}">${escapeHtml(firstCode.join('\n'))}</code></pre>
-            <pre class="code-panel" id="${groupId}-javascript-panel" role="tabpanel" aria-labelledby="${groupId}-javascript" data-code-panel="javascript" hidden><code class="language-${escapeHtml(secondLanguage)}">${escapeHtml(secondCode.join('\n'))}</code></pre>
-          </div>
-`;
+            body += `          <div class="code-switcher" data-code-group>\n            <div class="code-tabs" role="tablist" aria-label="Code examples for ${inline(firstExample[2])}">\n              <button class="code-tab is-active" type="button" role="tab" id="${groupId}-curl" aria-selected="true" aria-controls="${groupId}-curl-panel" data-code-tab="curl">cURL</button>\n              <button class="code-tab" type="button" role="tab" id="${groupId}-javascript" aria-selected="false" aria-controls="${groupId}-javascript-panel" tabindex="-1" data-code-tab="javascript">JavaScript</button>\n            </div>\n            <pre class="code-panel is-active" id="${groupId}-curl-panel" role="tabpanel" aria-labelledby="${groupId}-curl" data-code-panel="curl"><code class="language-${escapeHtml(firstLanguage)}">${escapeHtml(firstCode.join('\n'))}</code></pre>\n            <pre class="code-panel" id="${groupId}-javascript-panel" role="tabpanel" aria-labelledby="${groupId}-javascript" data-code-panel="javascript" hidden><code class="language-${escapeHtml(secondLanguage)}">${escapeHtml(secondCode.join('\n'))}</code></pre>\n          </div>\n`;
             index = cursor + 1;
             continue;
           }
@@ -541,7 +290,7 @@ const buildPage = (page) => {
           index += 1;
         }
         if (index === lines.length) throw new Error(`Unclosed code fence in ${page.sourcePath}.`);
-        const indent = inCustomBlock() ? '            ' : '          ';
+        const indent = casePanelOpen ? '            ' : '          ';
         body += `${indent}<pre class="code-panel"><code class="language-${escapeHtml(language)}">${escapeHtml(code.join('\n'))}</code></pre>\n`;
         index += 1;
         continue;
@@ -563,13 +312,7 @@ const buildPage = (page) => {
           items.push(lines[index].slice(2));
           index += 1;
         }
-
-        if (timelineCardOpen) {
-          body += `            <ul>${items.map((item) => `<li>${inline(item)}</li>`).join('')}</ul>\n`;
-          continue;
-        }
-
-        const indent = inCustomBlock() ? '            ' : '          ';
+        const indent = casePanelOpen ? '            ' : '          ';
         body += `${indent}<ul>${items.map((item) => `<li>${inline(item)}</li>`).join('')}</ul>\n`;
         continue;
       }
@@ -591,13 +334,13 @@ const buildPage = (page) => {
       }
 
       if (line) {
-        if (!articleOpen && !inCustomBlock() && sectionOpen) {
+        // Ensure a sample article is open before emitting body content.
+        if (!articleOpen && !casePanelOpen && sectionOpen && !caseGridOpen) {
           const spaced = page.spacedArticles && sectionArticleCount > 0 ? ' sample--spaced' : '';
           body += `        <article class="sample${spaced}">\n`;
           articleOpen = true;
           sectionArticleCount += 1;
         }
-
         const paragraph = [line];
         index += 1;
         while (index < lines.length && lines[index] && !/^(#{2,4} |```|\||- |\d+\. |> |:::)/.test(lines[index])) {
@@ -605,8 +348,7 @@ const buildPage = (page) => {
           index += 1;
         }
         const text = paragraph.join(' ');
-
-        if (casePanelOpen || cardOpen || timelineCardOpen || contactCardOpen) {
+        if (casePanelOpen) {
           body += `            <p>${inline(text)}</p>\n`;
         } else {
           body += `          <p class="sample-summary">${inline(text)}</p>\n`;
@@ -629,8 +371,7 @@ const buildPage = (page) => {
       primaryLink: page.primaryLink,
       heroStats: page.heroStats,
       heroPanel: page.heroPanel,
-      footerTag: page.footerTag,
-      usesMermaid: page.usesMermaid
+      footerTag: page.footerTag
     });
 
     await writeFile(page.outputPath, html);
