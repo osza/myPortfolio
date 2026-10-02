@@ -1,25 +1,92 @@
-const escapeHtml = (value) => value
+const escapeHtml = (value = '') => String(value)
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
   .replaceAll('>', '&gt;')
-  .replaceAll('\"', '&quot;');
+  .replaceAll('"', '&quot;');
 
-const inline = (value) => escapeHtml(value)
+const inline = (value = '') => escapeHtml(value)
   .replace(/`([^`]+)`/g, '<code>$1</code>')
   .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-  .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+  .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, text, href) => {
+    const external = /^https?:\/\//.test(href) || href.startsWith('mailto:');
+    const attrs = external && !href.startsWith('mailto:')
+      ? ' target="_blank" rel="noopener noreferrer"'
+      : '';
+    return `<a href="${escapeHtml(href)}"${attrs}>${text}</a>`;
+  });
 
-const renderProofList = (items) => items
+const renderProofList = (items = []) => items
   .map((item) => `<li><strong>${inline(item.title)}</strong><span>${inline(item.text)}</span></li>`)
   .join('');
 
-const renderCaseProofList = (items) => items
-  .map((item) => `            <li>\n              <strong>${inline(item.title)}</strong>\n              <span>${inline(item.text)}</span>\n            </li>`)
+const renderCaseProofList = (items = []) => items
+  .map((item) => `            <li>
+              <strong>${inline(item.title)}</strong>
+              <span>${inline(item.text)}</span>
+            </li>`)
   .join('\n');
 
-const renderHeroStats = (stats) => stats
+const renderHeroStats = (stats = []) => stats
   .map((stat) => `            <span class="hero-stat">${inline(stat)}</span>`)
   .join('\n');
+
+const renderHeroPanel = (heroPanel, sourcePath) => {
+  const panel = heroPanel ?? {
+    label: 'Build status',
+    items: [
+      { title: 'Markdown source', text: sourcePath },
+      { title: 'Generated HTML', text: 'Built locally before publication.' },
+      { title: 'Checked output', text: 'Source markers and local links are validated in CI.' }
+    ]
+  };
+
+  return panel.style === 'case'
+    ? `          <ul class="case-proof-list">\n${renderCaseProofList(panel.items)}\n          </ul>`
+    : `          <ul class="proof-list">${renderProofList(panel.items)}</ul>`;
+};
+
+const renderTabsScript = () => `  <script>
+    document.querySelectorAll('[data-code-group]').forEach((group) => {
+      const tabs = Array.from(group.querySelectorAll('[data-code-tab]'));
+      const panels = Array.from(group.querySelectorAll('[data-code-panel]'));
+
+      tabs.forEach((tab) => tab.addEventListener('click', () => {
+        const selected = tab.dataset.codeTab;
+
+        tabs.forEach((item) => {
+          const active = item === tab;
+          item.classList.toggle('is-active', active);
+          item.setAttribute('aria-selected', String(active));
+          item.tabIndex = active ? 0 : -1;
+        });
+
+        panels.forEach((panel) => {
+          const active = panel.dataset.codePanel === selected;
+          panel.hidden = !active;
+        });
+      }));
+
+      tabs.forEach((tab) => tab.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+
+        const currentIndex = tabs.indexOf(tab);
+        let nextIndex = currentIndex;
+
+        if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+        if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = tabs.length - 1;
+
+        tabs[nextIndex].focus();
+        tabs[nextIndex].click();
+      }));
+
+      if (!tabs.some((tab) => tab.classList.contains('is-active')) && tabs[0]) {
+        tabs[0].click();
+      }
+    });
+  </script>`;
 
 export const renderDocumentationPage = ({
   sourcePath,
@@ -28,11 +95,12 @@ export const renderDocumentationPage = ({
   body,
   metadata,
   eyebrow = 'Developer documentation sample',
-  primaryLink = { href: '#what-this-tutorial-demonstrates', label: 'Read tutorial' },
+  primaryLink = { href: '#overview', label: 'Read page' },
   heroStats = null,
   heroPanel = null,
   footerTag = 'Built from Markdown source',
-  usesMermaid = false
+  usesMermaid = false,
+  sectionKicker = 'Tutorial'
 }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,44 +132,18 @@ export const renderDocumentationPage = ({
           <h1>${inline(title)}</h1>
           <p class="hero__lead">${inline(lead)}</p>
           <div class="hero__actions"><a class="button-link button-link--primary" href="${escapeHtml(primaryLink.href)}">${inline(primaryLink.label)}</a><a class="button-link button-link--secondary" href="index.html#samples">Back to selected work</a></div>
-${heroStats ? `          <div class="hero-stats" aria-label="Tutorial metadata">
+${heroStats ? `          <div class="hero-stats" aria-label="Page metadata">
 ${renderHeroStats(heroStats)}
           </div>
 ` : ''}        </div>
         <aside class="hero-panel" aria-labelledby="${heroPanel?.id ?? 'sample-proof-title'}">
           <p class="hero-panel__label" id="${heroPanel?.id ?? 'sample-proof-title'}">${inline(heroPanel?.label ?? 'Build status')}</p>
-${heroPanel?.style === 'case'
-  ? `          <ul class="case-proof-list">\n${renderCaseProofList(heroPanel.items)}\n          </ul>`
-  : `          <ul class="proof-list">${renderProofList(heroPanel?.items ?? [
-    { title: 'Markdown source', text: sourcePath },
-    { title: 'Generated HTML', text: 'Built locally before publication.' },
-    { title: 'Checked output', text: 'Source markers and local links are validated in CI.' }
-  ])}</ul>`}
+${renderHeroPanel(heroPanel, sourcePath)}
         </aside>
       </div>
     </section>
 ${body}  </main>
   <footer class="site-footer"><div class="container site-footer__inner"><span>Piotr Oszenda — Technical Writer · Knowledge Manager · Documentation Architect</span><span>${escapeHtml(footerTag)}</span></div></footer>
-  <script>
-    document.querySelectorAll('[data-code-group]').forEach((group) => {
-      const tabs = Array.from(group.querySelectorAll('[data-code-tab]'));
-      const panels = Array.from(group.querySelectorAll('[data-code-panel]'));
-      tabs.forEach((tab) => tab.addEventListener('click', () => {
-        const selected = tab.dataset.codeTab;
-        tabs.forEach((item) => {
-          const active = item === tab;
-          item.classList.toggle('is-active', active);
-          item.setAttribute('aria-selected', String(active));
-          item.tabIndex = active ? 0 : -1;
-        });
-        panels.forEach((panel) => {
-          const active = panel.dataset.codePanel === selected;
-          panel.classList.toggle('is-active', active);
-          panel.toggleAttribute('hidden', !active);
-        });
-      }));
-    });
-  </script>
+${renderTabsScript()}
 </body>
-</html>
-`;
+</html>`;

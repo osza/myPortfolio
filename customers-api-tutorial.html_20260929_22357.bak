@@ -37,6 +37,7 @@
         </aside>
       </div>
     </section>
+        <p class="sample-summary">A hands-on tutorial that walks through a complete customer lifecycle using create, retrieve, update, and delete operations on a single resource.</p>
     <section class="section" id="what-this-tutorial-demonstrates">
       <div class="container">
         <div class="section__header">
@@ -48,7 +49,7 @@
         <ul><li><strong>A full CRUD journey on one resource.</strong> The reader follows a single customer record from creation to deletion, reducing cognitive load.</li><li><strong>Parallel examples in cURL and JavaScript.</strong> Developers can switch between code styles without losing context or task continuity.</li><li><strong>Explicit preparation, reference, and workflow.</strong> Setup, resource model, and step-by-step tasks make the tutorial reusable as onboarding material.</li></ul>
       </div>
     </section>
-    <section class="section section--accent" id="overview">
+    <section class="section" id="overview">
       <div class="container">
         <div class="section__header">
           <div>
@@ -62,7 +63,7 @@
         <p class="sample-summary">By the end of the tutorial, you will have created a customer record, retrieved it by ID, updated selected fields, and deleted the resource.</p>
       </div>
     </section>
-    <section class="section section--accent" id="before-you-start">
+    <section class="section" id="before-you-start">
       <div class="container">
         <div class="section__header">
           <div>
@@ -87,14 +88,14 @@
           </div></div>
           <p class="sample-summary"><strong>Authentication and request format</strong></p>
           <p class="sample-summary">All examples in this tutorial use bearer token authentication and JSON request bodies where applicable.</p>
-          <pre class="code-panel is-active"><code class="language-http">Authorization: Bearer {access_token}
+          <pre class="code-panel"><code class="language-http">Authorization: Bearer {access_token}
 Content-Type: application/json</code></pre>
           <p class="sample-summary">Include the <code>Authorization</code> header in every request. Include <code>Content-Type: application/json</code> when the request contains a JSON body, such as <code>POST</code> or <code>PATCH</code>.</p>
           <p class="sample-summary">In a real implementation, handle HTTP status codes such as <code>201 Created</code> or <code>4xx</code> errors explicitly and log or surface error messages to make debugging easier.</p>
         </article>
       </div>
     </section>
-    <section class="section section--accent" id="resource-model">
+    <section class="section" id="resource-model">
       <div class="container">
         <div class="section__header">
           <div>
@@ -121,7 +122,7 @@ Content-Type: application/json</code></pre>
         </article>
       </div>
     </section>
-    <section class="section section--accent" id="crud-tutorial">
+    <section class="section" id="crud-tutorial">
       <div class="container">
         <div class="section__header">
           <div>
@@ -136,12 +137,8 @@ Content-Type: application/json</code></pre>
           </div></div>
           <p class="sample-summary"><code>POST /api/1.0/customers</code></p>
           <p class="sample-summary">Create the customer record that you will use throughout the rest of this tutorial. The response returns its generated <code>id</code>, which you need for the retrieve, update, and delete requests.</p>
-          <div class="code-block" data-code-group>
-            <div class="code-switcher" role="tablist" aria-label="Code examples">
-            <button class="code-switcher__tab is-active" type="button" role="tab" aria-selected="true" aria-controls="code-group-1-panel-0" id="code-group-1-tab-0" data-code-tab="cURL" tabindex="0">cURL</button>
-            <button class="code-switcher__tab" type="button" role="tab" aria-selected="false" aria-controls="code-group-1-panel-1" id="code-group-1-tab-1" data-code-tab="JavaScript" tabindex="-1">JavaScript</button>
-            </div>
-          <pre class="code-panel is-active" id="code-group-1-panel-0" role="tabpanel" aria-labelledby="code-group-1-tab-0" data-code-panel="cURL"><code class="language-bash">curl --request POST \
+          <p class="sample-summary"><strong>cURL</strong></p>
+          <pre class="code-panel"><code class="language-bash">curl --request POST \
   --url {base_url}/api/1.0/customers \
   --header &quot;Authorization: Bearer {access_token}&quot; \
   --header &quot;Content-Type: application/json&quot; \
@@ -150,7 +147,8 @@ Content-Type: application/json</code></pre>
     &quot;email&quot;: &quot;john@doe.com&quot;,
     &quot;business_name&quot;: &quot;Northwind Studio&quot;
   }'</code></pre>
-          <pre class="code-panel" id="code-group-1-panel-1" role="tabpanel" aria-labelledby="code-group-1-tab-1" data-code-panel="JavaScript" hidden><code class="language-javascript">const response = await fetch(`${baseUrl}/api/1.0/customers`, {
+          <p class="sample-summary"><strong>JavaScript</strong></p>
+          <pre class="code-panel"><code class="language-javascript">const response = await fetch(`${baseUrl}/api/1.0/customers`, {
   method: &quot;POST&quot;,
   headers: {
     Authorization: `Bearer ${accessToken}`,
@@ -168,7 +166,6 @@ if (!response.ok) {
 }
 
 const customer = await response.json();</code></pre>
-          </div>
           <p class="sample-summary">The client creates the initial customer record and obtains an <code>id</code> that you reuse in later requests.</p>
         </article>
         <article class="sample">
@@ -177,15 +174,12 @@ const customer = await response.json();</code></pre>
           </div></div>
           <p class="sample-summary"><code>GET /api/1.0/customers/{id}</code></p>
           <p class="sample-summary">Retrieve the customer that you created in the previous step to confirm that it exists and to inspect the data returned by the API.</p>
-          <div class="code-block" data-code-group>
-            <div class="code-switcher" role="tablist" aria-label="Code examples">
-            <button class="code-switcher__tab is-active" type="button" role="tab" aria-selected="true" aria-controls="code-group-2-panel-0" id="code-group-2-tab-0" data-code-tab="cURL" tabindex="0">cURL</button>
-            <button class="code-switcher__tab" type="button" role="tab" aria-selected="false" aria-controls="code-group-2-panel-1" id="code-group-2-tab-1" data-code-tab="JavaScript" tabindex="-1">JavaScript</button>
-            </div>
-          <pre class="code-panel is-active" id="code-group-2-panel-0" role="tabpanel" aria-labelledby="code-group-2-tab-0" data-code-panel="cURL"><code class="language-bash">curl --request GET \
+          <p class="sample-summary"><strong>cURL</strong></p>
+          <pre class="code-panel"><code class="language-bash">curl --request GET \
   --url {base_url}/api/1.0/customers/{id} \
   --header &quot;Authorization: Bearer {access_token}&quot;</code></pre>
-          <pre class="code-panel" id="code-group-2-panel-1" role="tabpanel" aria-labelledby="code-group-2-tab-1" data-code-panel="JavaScript" hidden><code class="language-javascript">const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
+          <p class="sample-summary"><strong>JavaScript</strong></p>
+          <pre class="code-panel"><code class="language-javascript">const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
   method: &quot;GET&quot;,
   headers: {
     Authorization: `Bearer ${accessToken}`
@@ -197,7 +191,6 @@ if (!response.ok) {
 }
 
 const customerRecord = await response.json();</code></pre>
-          </div>
           <p class="sample-summary">Use this step to confirm that the resource was created successfully and that the API returns the expected fields.</p>
         </article>
         <article class="sample">
@@ -206,12 +199,8 @@ const customerRecord = await response.json();</code></pre>
           </div></div>
           <p class="sample-summary"><code>PATCH /api/1.0/customers/{id}</code></p>
           <p class="sample-summary">Update selected fields on the existing customer without replacing the entire resource. This request changes the customer's name and business name while preserving fields that are not included in the request body.</p>
-          <div class="code-block" data-code-group>
-            <div class="code-switcher" role="tablist" aria-label="Code examples">
-            <button class="code-switcher__tab is-active" type="button" role="tab" aria-selected="true" aria-controls="code-group-3-panel-0" id="code-group-3-tab-0" data-code-tab="cURL" tabindex="0">cURL</button>
-            <button class="code-switcher__tab" type="button" role="tab" aria-selected="false" aria-controls="code-group-3-panel-1" id="code-group-3-tab-1" data-code-tab="JavaScript" tabindex="-1">JavaScript</button>
-            </div>
-          <pre class="code-panel is-active" id="code-group-3-panel-0" role="tabpanel" aria-labelledby="code-group-3-tab-0" data-code-panel="cURL"><code class="language-bash">curl --request PATCH \
+          <p class="sample-summary"><strong>cURL</strong></p>
+          <pre class="code-panel"><code class="language-bash">curl --request PATCH \
   --url {base_url}/api/1.0/customers/{id} \
   --header &quot;Authorization: Bearer {access_token}&quot; \
   --header &quot;Content-Type: application/json&quot; \
@@ -219,7 +208,8 @@ const customerRecord = await response.json();</code></pre>
     &quot;business_name&quot;: &quot;Northwind Labs&quot;,
     &quot;full_name&quot;: &quot;John A. Doe&quot;
   }'</code></pre>
-          <pre class="code-panel" id="code-group-3-panel-1" role="tabpanel" aria-labelledby="code-group-3-tab-1" data-code-panel="JavaScript" hidden><code class="language-javascript">const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
+          <p class="sample-summary"><strong>JavaScript</strong></p>
+          <pre class="code-panel"><code class="language-javascript">const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
   method: &quot;PATCH&quot;,
   headers: {
     Authorization: `Bearer ${accessToken}`,
@@ -236,7 +226,6 @@ if (!response.ok) {
 }
 
 const updatedCustomer = await response.json();</code></pre>
-          </div>
           <p class="sample-summary">The partial update modifies only the fields included in the request body. Other fields remain unchanged.</p>
         </article>
         <article class="sample">
@@ -245,15 +234,12 @@ const updatedCustomer = await response.json();</code></pre>
           </div></div>
           <p class="sample-summary"><code>DELETE /api/1.0/customers/{id}</code></p>
           <p class="sample-summary">Delete the test customer to complete the resource lifecycle and leave your environment in a clean state.</p>
-          <div class="code-block" data-code-group>
-            <div class="code-switcher" role="tablist" aria-label="Code examples">
-            <button class="code-switcher__tab is-active" type="button" role="tab" aria-selected="true" aria-controls="code-group-4-panel-0" id="code-group-4-tab-0" data-code-tab="cURL" tabindex="0">cURL</button>
-            <button class="code-switcher__tab" type="button" role="tab" aria-selected="false" aria-controls="code-group-4-panel-1" id="code-group-4-tab-1" data-code-tab="JavaScript" tabindex="-1">JavaScript</button>
-            </div>
-          <pre class="code-panel is-active" id="code-group-4-panel-0" role="tabpanel" aria-labelledby="code-group-4-tab-0" data-code-panel="cURL"><code class="language-bash">curl --request DELETE \
+          <p class="sample-summary"><strong>cURL</strong></p>
+          <pre class="code-panel"><code class="language-bash">curl --request DELETE \
   --url {base_url}/api/1.0/customers/{id} \
   --header &quot;Authorization: Bearer {access_token}&quot;</code></pre>
-          <pre class="code-panel" id="code-group-4-panel-1" role="tabpanel" aria-labelledby="code-group-4-tab-1" data-code-panel="JavaScript" hidden><code class="language-javascript">const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
+          <p class="sample-summary"><strong>JavaScript</strong></p>
+          <pre class="code-panel"><code class="language-javascript">const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
   method: &quot;DELETE&quot;,
   headers: {
     Authorization: `Bearer ${accessToken}`
@@ -263,12 +249,11 @@ const updatedCustomer = await response.json();</code></pre>
 if (!response.ok) {
   // Handle non-2xx responses in a real implementation
 }</code></pre>
-          </div>
           <p class="sample-summary">After the <code>DELETE</code> request succeeds, the API removes the customer record and typically returns <code>204 No Content</code>. A later <code>GET</code> request for the same <code>id</code> should return <code>404 Not Found</code>.</p>
         </article>
       </div>
     </section>
-    <section class="section section--accent" id="expected-workflow-result">
+    <section class="section" id="expected-workflow-result">
       <div class="container">
         <div class="section__header">
           <div>
@@ -277,11 +262,11 @@ if (!response.ok) {
           </div>
         </div>
         <p class="sample-summary">At the end of this tutorial, you should have completed the following sequence on a single customer resource:</p>
-        <ol><li>Create a customer record.</li><li>Retrieve the record by ID.</li><li>Update selected fields on the record.</li><li>Delete the record when testing is complete.</li></ol>
+        <p class="sample-summary">1. Create a customer record. 2. Retrieve the record by ID. 3. Update selected fields on the record. 4. Delete the record when testing is complete.</p>
         <p class="sample-summary">This structure helps new developers understand a complete resource lifecycle before they work with more complex endpoints or multi-resource workflows.</p>
       </div>
     </section>
-    <section class="section section--accent" id="why-this-tutorial-structure-works">
+    <section class="section" id="why-this-tutorial-structure-works">
       <div class="container">
         <div class="section__header">
           <div>
@@ -318,51 +303,5 @@ if (!response.ok) {
       <a href="#top">Back to top</a>
     </div>
   </footer>
-  <script>
-(() => {
-  const groups = document.querySelectorAll('[data-code-group]');
-  for (const group of groups) {
-    const tabs = Array.from(group.querySelectorAll('[data-code-tab]'));
-    const panels = Array.from(group.querySelectorAll('[data-code-panel]'));
-
-    if (!tabs.length || !panels.length) continue;
-
-    const activate = (index) => {
-      tabs.forEach((tab, tabIndex) => {
-        const active = tabIndex === index;
-        tab.classList.toggle('is-active', active);
-        tab.setAttribute('aria-selected', active ? 'true' : 'false');
-        tab.setAttribute('tabindex', active ? '0' : '-1');
-      });
-
-      panels.forEach((panel, panelIndex) => {
-        const active = panelIndex === index;
-        panel.classList.toggle('is-active', active);
-        panel.hidden = !active;
-      });
-    };
-
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => activate(index));
-      tab.addEventListener('keydown', (event) => {
-        if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
-
-        event.preventDefault();
-
-        let nextIndex = index;
-        if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
-        if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
-        if (event.key === 'Home') nextIndex = 0;
-        if (event.key === 'End') nextIndex = tabs.length - 1;
-
-        activate(nextIndex);
-        tabs[nextIndex].focus();
-      });
-    });
-
-    activate(0);
-  }
-})();
-</script>
 </body>
 </html>

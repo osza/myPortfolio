@@ -37,6 +37,7 @@
         </aside>
       </div>
     </section>
+        <p class="sample-summary">A hands-on tutorial that walks through a complete customer lifecycle using create, retrieve, update, and delete operations on a single resource.</p>
     <section class="section" id="what-this-tutorial-demonstrates">
       <div class="container">
         <div class="section__header">
@@ -48,7 +49,7 @@
         <ul><li><strong>A full CRUD journey on one resource.</strong> The reader follows a single customer record from creation to deletion, reducing cognitive load.</li><li><strong>Parallel examples in cURL and JavaScript.</strong> Developers can switch between code styles without losing context or task continuity.</li><li><strong>Explicit preparation, reference, and workflow.</strong> Setup, resource model, and step-by-step tasks make the tutorial reusable as onboarding material.</li></ul>
       </div>
     </section>
-    <section class="section section--accent" id="overview">
+    <section class="section" id="overview">
       <div class="container">
         <div class="section__header">
           <div>
@@ -62,7 +63,7 @@
         <p class="sample-summary">By the end of the tutorial, you will have created a customer record, retrieved it by ID, updated selected fields, and deleted the resource.</p>
       </div>
     </section>
-    <section class="section section--accent" id="before-you-start">
+    <section class="section" id="before-you-start">
       <div class="container">
         <div class="section__header">
           <div>
@@ -94,7 +95,7 @@ Content-Type: application/json</code></pre>
         </article>
       </div>
     </section>
-    <section class="section section--accent" id="resource-model">
+    <section class="section" id="resource-model">
       <div class="container">
         <div class="section__header">
           <div>
@@ -121,7 +122,7 @@ Content-Type: application/json</code></pre>
         </article>
       </div>
     </section>
-    <section class="section section--accent" id="crud-tutorial">
+    <section class="section" id="crud-tutorial">
       <div class="container">
         <div class="section__header">
           <div>
@@ -268,7 +269,7 @@ if (!response.ok) {
         </article>
       </div>
     </section>
-    <section class="section section--accent" id="expected-workflow-result">
+    <section class="section" id="expected-workflow-result">
       <div class="container">
         <div class="section__header">
           <div>
@@ -277,11 +278,11 @@ if (!response.ok) {
           </div>
         </div>
         <p class="sample-summary">At the end of this tutorial, you should have completed the following sequence on a single customer resource:</p>
-        <ol><li>Create a customer record.</li><li>Retrieve the record by ID.</li><li>Update selected fields on the record.</li><li>Delete the record when testing is complete.</li></ol>
+        <p class="sample-summary">1. Create a customer record. 2. Retrieve the record by ID. 3. Update selected fields on the record. 4. Delete the record when testing is complete.</p>
         <p class="sample-summary">This structure helps new developers understand a complete resource lifecycle before they work with more complex endpoints or multi-resource workflows.</p>
       </div>
     </section>
-    <section class="section section--accent" id="why-this-tutorial-structure-works">
+    <section class="section" id="why-this-tutorial-structure-works">
       <div class="container">
         <div class="section__header">
           <div>

@@ -1,4 +1,4 @@
-import { readdir, readFile, writeFile } from 'node:fs/promises';
+scripts/build-docs.mjsimport { readdir, readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
@@ -65,21 +65,19 @@ const parseScalar = (key, rawValue) => {
   if (rawValue === 'true') return true;
   if (rawValue === 'false') return false;
 
-  const normalizedValue =
-    ((rawValue.startsWith('"') && rawValue.endsWith('"')) ||
-      (rawValue.startsWith("'") && rawValue.endsWith("'")))
-      ? rawValue.slice(1, -1)
-      : rawValue;
+  if ((rawValue.startsWith('"') && rawValue.endsWith('"')) || (rawValue.startsWith("'") && rawValue.endsWith("'"))) {
+    return rawValue.slice(1, -1);
+  }
 
   if (key === 'hero_stats' || key === 'accent_sections') {
-    return parseInlineList(normalizedValue);
+    return parseInlineList(rawValue);
   }
 
   if (key === 'hero_panel_items') {
-    return parseKeyValueList(normalizedValue);
+    return parseKeyValueList(rawValue);
   }
 
-  return normalizedValue;
+  return rawValue;
 };
 
 const parseFrontmatter = (source) => {
@@ -282,74 +280,25 @@ const renderMarkdown = (lines, page) => {
   let index = 0;
   let paragraph = [];
   let listItems = [];
-  let orderedListItems = [];
   let quoteLines = [];
   let tableRows = [];
   let inSection = false;
   let articleOpen = false;
-  let containerStack = [];
-  let leadSkipped = false;
-  const normalizedLead = (() => {
-    const titleIndex = lines.findIndex((line) => line.startsWith('# '));
-    if (titleIndex === -1) return '';
 
-    for (let i = titleIndex + 1; i < lines.length; i += 1) {
-      const trimmed = lines[i].trim();
-      if (!trimmed) continue;
-      if (trimmed.startsWith('## ')) break;
-      if (trimmed.startsWith('# ')) continue;
-      return trimmed;
-    }
-
-    return '';
-  })();
-
-  const currentIndent = () => {
-    const base = articleOpen ? '          ' : '        ';
-    return base + '  '.repeat(containerStack.length);
-  };
+  const currentIndent = () => (articleOpen ? '          ' : '        ');
 
   const flushParagraph = () => {
     if (!paragraph.length) return;
-
-    const text = paragraph.join(' ').trim();
-    if (!text) {
-      paragraph = [];
-      return;
-    }
-
-    if (!leadSkipped && normalizedLead && text === normalizedLead) {
-      leadSkipped = true;
-      paragraph = [];
-      return;
-    }
-
-    const introMatch = text.match(/^:::\s*intro\s+([\s\S]+?)(?:\s*:::)?$/);
-    const metaMatch = text.match(/^:::\s*meta\s+([\s\S]+?)(?:\s*:::)?$/);
-
-    if (introMatch) {
-      html.push(`${currentIndent()}<p class="section-intro">${inline(introMatch[1].trim())}</p>`);
-    } else if (metaMatch) {
-      html.push(`${currentIndent()}<p class="sample-meta">${inline(metaMatch[1].trim())}</p>`);
-    } else {
-      html.push(`${currentIndent()}<p class="sample-summary">${inline(text)}</p>`);
-    }
-
+    const text = inline(paragraph.join(' '));
+    html.push(`${currentIndent()}<p class="sample-summary">${text}</p>`);
     paragraph = [];
   };
 
   const flushList = () => {
-    if (listItems.length) {
-      const markup = `<ul>${listItems.map((item) => `<li>${inline(item)}</li>`).join('')}</ul>`;
-      html.push(`${currentIndent()}${markup}`);
-      listItems = [];
-    }
-
-    if (orderedListItems.length) {
-      const markup = `<ol>${orderedListItems.map((item) => `<li>${inline(item)}</li>`).join('')}</ol>`;
-      html.push(`${currentIndent()}${markup}`);
-      orderedListItems = [];
-    }
+    if (!listItems.length) return;
+    const markup = `<ul>${listItems.map((item) => `<li>${inline(item)}</li>`).join('')}</ul>`;
+    html.push(`${currentIndent()}${markup}`);
+    listItems = [];
   };
 
   const flushQuote = () => {
@@ -365,35 +314,15 @@ const renderMarkdown = (lines, page) => {
     tableRows = [];
   };
 
-  const closeContainers = (targetDepth = 0) => {
-    flushParagraph();
-    flushList();
-    flushQuote();
-    flushTable();
-
-    while (containerStack.length > targetDepth) {
-      if (articleOpen) {
-        html.push('        </article>');
-        articleOpen = false;
-      }
-
-      containerStack.pop();
-      html.push(`${currentIndent()}</div>`);
-    }
-  };
-
   const closeArticle = () => {
     flushParagraph();
     flushList();
     flushQuote();
     flushTable();
-
     if (articleOpen) {
       html.push('        </article>');
       articleOpen = false;
     }
-
-    closeContainers();
   };
 
   const closeSection = () => {
@@ -405,14 +334,6 @@ const renderMarkdown = (lines, page) => {
     }
   };
 
-  const sectionKickerByType = {
-    tutorial: 'Tutorial',
-    essay: 'Essay',
-    doc: 'Documentation'
-  };
-
-  const sectionKicker = sectionKickerByType[page.frontmatter.type] ?? 'Documentation';
-
   const openSection = (headingText) => {
     closeSection();
     const sectionId = slug(headingText);
@@ -423,7 +344,7 @@ const renderMarkdown = (lines, page) => {
     html.push('      <div class="container">');
     html.push('        <div class="section__header">');
     html.push('          <div>');
-    html.push(`            <p class="section-kicker">${sectionKicker}</p>`);
+    html.push('            <p class="section-kicker">Tutorial</p>');
     html.push(`            <h2 class="section-title">${inline(headingText)}</h2>`);
     html.push('          </div>');
     html.push('        </div>');
@@ -431,59 +352,12 @@ const renderMarkdown = (lines, page) => {
   };
 
   const openArticle = (headingText, level = 3) => {
-    flushParagraph();
-    flushList();
-    flushQuote();
-    flushTable();
-
-    if (articleOpen) {
-      html.push('        </article>');
-      articleOpen = false;
-    }
-
-    html.push(`${currentIndent()}<article class="sample">`);
-    html.push(`${currentIndent()}  <div class="sample-header"><div class="sample-heading">`);
-    html.push(`${currentIndent()}    <h${level}>${inline(headingText)}</h${level}>`);
-    html.push(`${currentIndent()}  </div></div>`);
+    closeArticle();
+    html.push('        <article class="sample">');
+    html.push('          <div class="sample-header"><div class="sample-heading">');
+    html.push(`            <h${level}>${inline(headingText)}</h${level}>`);
+    html.push('          </div></div>');
     articleOpen = true;
-  };
-
-  const openContainer = (type) => {
-    if (type === 'case-grid') {
-      flushParagraph();
-      flushList();
-      flushQuote();
-      flushTable();
-
-      if (articleOpen) {
-        html.push('        </article>');
-        articleOpen = false;
-      }
-
-      closeContainers();
-      html.push(`${currentIndent()}<div class="case-grid">`);
-      containerStack.push(type);
-      return true;
-    }
-
-    if (type === 'case-panel') {
-      flushParagraph();
-      flushList();
-      flushQuote();
-      flushTable();
-
-      if (articleOpen) {
-        html.push('        </article>');
-        articleOpen = false;
-      }
-
-      closeContainers(1);
-      html.push(`${currentIndent()}<div class="case-panel">`);
-      containerStack.push(type);
-      return true;
-    }
-
-    return false;
   };
 
   while (index < lines.length) {
@@ -530,57 +404,6 @@ const renderMarkdown = (lines, page) => {
       continue;
     }
 
-    if (trimmed === ':::') {
-      flushParagraph();
-      flushList();
-      flushQuote();
-      flushTable();
-
-      if (articleOpen) {
-        html.push('        </article>');
-        articleOpen = false;
-      }
-
-      closeContainers(Math.max(containerStack.length - 1, 0));
-      index += 1;
-      continue;
-    }
-
-    if (trimmed.startsWith(':::')) {
-      const introSingleLine = trimmed.match(/^:::\s*intro\s+([\s\S]+?)(?:\s*:::)?$/);
-      if (introSingleLine) {
-        flushParagraph();
-        flushList();
-        flushQuote();
-        flushTable();
-        html.push(`${currentIndent()}<p class="section-intro">${inline(introSingleLine[1].trim())}</p>`);
-        index += 1;
-        continue;
-      }
-
-      const metaSingleLine = trimmed.match(/^:::\s*meta\s+([\s\S]+?)(?:\s*:::)?$/);
-      if (metaSingleLine) {
-        flushParagraph();
-        flushList();
-        flushQuote();
-        flushTable();
-        html.push(`${currentIndent()}<p class="sample-meta">${inline(metaSingleLine[1].trim())}</p>`);
-        index += 1;
-        continue;
-      }
-
-      flushParagraph();
-      flushList();
-      flushQuote();
-      flushTable();
-
-      const containerName = trimmed.replace(/^:::\s*/, '').trim();
-      if (openContainer(containerName)) {
-        index += 1;
-        continue;
-      }
-    }
-
     if (trimmed.startsWith('|')) {
       flushParagraph();
       flushList();
@@ -599,15 +422,6 @@ const renderMarkdown = (lines, page) => {
       continue;
     }
 
-    if (/^\d+\.\s+/.test(trimmed)) {
-      flushParagraph();
-      flushQuote();
-      flushTable();
-      orderedListItems.push(trimmed.replace(/^\d+\.\s+/, '').trim());
-      index += 1;
-      continue;
-    }
-
     if (trimmed.startsWith('- ')) {
       flushParagraph();
       flushQuote();
@@ -618,6 +432,10 @@ const renderMarkdown = (lines, page) => {
     }
 
     if (trimmed.startsWith('### ')) {
+      flushParagraph();
+      flushList();
+      flushQuote();
+      flushTable();
       openArticle(trimmed.slice(4).trim(), 3);
       index += 1;
       continue;
