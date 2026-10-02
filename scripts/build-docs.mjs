@@ -346,8 +346,25 @@ const renderMarkdown = (lines, page) => {
 
   const flushList = () => {
     if (listItems.length) {
-      const markup = `<ul>${listItems.map((item) => `<li>${inline(item)}</li>`).join('')}</ul>`;
-      html.push(`${currentIndent()}${markup}`);
+      if (containerStack.at(-1) === 'actions') {
+        const links = listItems.map((item) => {
+          const match = item.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+          return match ? { label: match[1], href: match[2] } : null;
+        });
+
+        if (links.every(Boolean) && links.length > 0) {
+          const markup = links.map((link, index) => (
+            `<a class="button-link button-link--${index === 0 ? 'primary' : 'secondary'}" href="${escapeHtml(link.href)}">${inline(link.label)}</a>`
+          )).join('');
+          html.push(`${currentIndent()}${markup}`);
+        } else {
+          const markup = `<ul>${listItems.map((item) => `<li>${inline(item)}</li>`).join('')}</ul>`;
+          html.push(`${currentIndent()}${markup}`);
+        }
+      } else {
+        const markup = `<ul>${listItems.map((item) => `<li>${inline(item)}</li>`).join('')}</ul>`;
+        html.push(`${currentIndent()}${markup}`);
+      }
       listItems = [];
     }
 
@@ -455,6 +472,23 @@ const renderMarkdown = (lines, page) => {
   };
 
   const openContainer = (type) => {
+    if (type === 'actions') {
+      flushParagraph();
+      flushList();
+      flushQuote();
+      flushTable();
+
+      if (articleOpen) {
+        html.push('        </article>');
+        articleOpen = false;
+      }
+
+      closeContainers();
+      html.push(`${currentIndent()}<div class="hero__actions">`);
+      containerStack.push(type);
+      return true;
+    }
+
     if (type === 'case-grid') {
       flushParagraph();
       flushList();

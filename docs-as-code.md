@@ -136,8 +136,10 @@ The source files behind this portfolio, including its HTML structure, shared CSS
 
 This sample connects the published page with the workflow behind it: source files, review, ownership, and a structure that makes documentation easier to maintain.
 
+::: actions
 - [Back to selected samples](./index.html#samples)
 - [Discuss documentation projects](./index.html#contact)
+:::
 
 ## Contact
 
