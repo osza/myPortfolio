@@ -221,7 +221,8 @@ const readCodeFence = (lines, startIndex) => {
       return {
         language,
         code: codeLines.join('\n'),
-        nextIndex: index + 1
+        nextIndex: index + 1,
+        isMermaid: language.toLowerCase() === 'mermaid'
       };
     }
 
@@ -279,6 +280,7 @@ const readConsecutiveCodeSamples = (lines, startIndex) => {
 
 const renderMarkdown = (lines, page) => {
   const html = [];
+  let usesMermaid = false;
   let index = 0;
   let paragraph = [];
   let listItems = [];
@@ -500,7 +502,12 @@ const renderMarkdown = (lines, page) => {
 
       if (groupedSamples.samples.length === 1) {
         const sample = groupedSamples.samples[0];
-        html.push(`${currentIndent()}<pre class="code-panel is-active"><code class="language-${sample.language || 'text'}">${escapeHtml(sample.code)}</code></pre>`);
+        if ((sample.language || '').toLowerCase() === 'mermaid') {
+          usesMermaid = true;
+          html.push(`${currentIndent()}<div class="mermaid-block"><pre class="mermaid">${escapeHtml(sample.code)}</pre></div>`);
+        } else {
+          html.push(`${currentIndent()}<pre class="code-panel is-active"><code class="language-${sample.language || 'text'}">${escapeHtml(sample.code)}</code></pre>`);
+        }
       } else {
         html.push(renderCodeSampleGroup(groupedSamples.samples, currentIndent()));
       }
@@ -525,7 +532,12 @@ const renderMarkdown = (lines, page) => {
       flushTable();
 
       const fence = readCodeFence(lines, index);
-      html.push(`${currentIndent()}<pre class="code-panel is-active"><code class="language-${fence.language || 'text'}">${escapeHtml(fence.code)}</code></pre>`);
+      if (fence.isMermaid) {
+        usesMermaid = true;
+        html.push(`${currentIndent()}<div class="mermaid-block"><pre class="mermaid">${escapeHtml(fence.code)}</pre></div>`);
+      } else {
+        html.push(`${currentIndent()}<pre class="code-panel is-active"><code class="language-${fence.language || 'text'}">${escapeHtml(fence.code)}</code></pre>`);
+      }
       index = fence.nextIndex;
       continue;
     }
@@ -643,7 +655,10 @@ const renderMarkdown = (lines, page) => {
   }
 
   closeSection();
-  return html.join('\n');
+  return {
+    html: html.join('\n'),
+    usesMermaid
+  };
 };
 
 const buildPage = async (filename) => {
@@ -669,7 +684,8 @@ const buildPage = async (filename) => {
     frontmatter
   };
 
-  const body = renderMarkdown(lines, page);
+  const rendered = renderMarkdown(lines, page);
+  const body = rendered.html;
   const metadata = {
     title: getPageTitle(frontmatter, title),
     description: getPageDescription(frontmatter, lead)
@@ -694,7 +710,7 @@ const buildPage = async (filename) => {
     heroStats: Array.isArray(frontmatter.hero_stats) ? frontmatter.hero_stats : null,
     heroPanel: buildHeroPanel(frontmatter, filename),
     footerTag: frontmatter.footer_tag,
-    usesMermaid: frontmatter.uses_mermaid === true
+    usesMermaid: rendered.usesMermaid || frontmatter.uses_mermaid === true
   });
 
   const outputPath = path.join(repoRoot, getOutputPath(filename, frontmatter));

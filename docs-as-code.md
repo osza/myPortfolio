@@ -71,12 +71,15 @@ This is the compact workflow I use to explain the operating model behind docs-as
 
 ### Stakeholder input to publication
 
-1. Stakeholder input and source research define the scope.
-2. Information design shapes structure, terminology, and task flow.
-3. Drafting and review turn the material into usable documentation.
-4. Editing and validation improve consistency and reduce avoidable errors.
-5. Publication makes the content available and creates a path for feedback.
-6. Customer feedback returns to research and informs the next iteration.
+```mermaid
+flowchart TD
+    A[Stakeholder input and source research] --> B[Information design]
+    B --> C[Drafting and review]
+    C --> D[Editing and validation]
+    D --> E[Publication]
+    E --> F[Customer feedback]
+    F --> A
+```
 
 This flow captures real-world documentation work by including stakeholder input from developers, SMEs, and product owners, followed by review and validation before publication. After publication, customer feedback goes back into research and helps improve the next version.
 

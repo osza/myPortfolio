@@ -8,7 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: true, theme: 'default' });
+  </script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Generated from docs-as-code.md. Run npm run build after editing the source. -->
@@ -131,7 +135,13 @@
           <div class="sample-header"><div class="sample-heading">
             <h3>Stakeholder input to publication</h3>
           </div></div>
-          <ol><li>Stakeholder input and source research define the scope.</li><li>Information design shapes structure, terminology, and task flow.</li><li>Drafting and review turn the material into usable documentation.</li><li>Editing and validation improve consistency and reduce avoidable errors.</li><li>Publication makes the content available and creates a path for feedback.</li><li>Customer feedback returns to research and informs the next iteration.</li></ol>
+          <div class="mermaid-block"><pre class="mermaid">flowchart TD
+    A[Stakeholder input and source research] --&gt; B[Information design]
+    B --&gt; C[Drafting and review]
+    C --&gt; D[Editing and validation]
+    D --&gt; E[Publication]
+    E --&gt; F[Customer feedback]
+    F --&gt; A</pre></div>
           <p class="sample-summary">This flow captures real-world documentation work by including stakeholder input from developers, SMEs, and product owners, followed by review and validation before publication. After publication, customer feedback goes back into research and helps improve the next version.</p>
         </article>
       </div>
