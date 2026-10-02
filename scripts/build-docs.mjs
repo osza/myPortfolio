@@ -15,6 +15,10 @@ const escapeHtml = (value = '') => String(value)
   .replaceAll('>', '&gt;')
   .replaceAll('"', '&quot;');
 
+const renderMermaidCode = (value = '') => escapeHtml(value)
+  .replaceAll('&lt;br/&gt;', '<br/>')
+  .replaceAll('&lt;br /&gt;', '<br />');
+
 const inline = (value = '') => escapeHtml(value)
   .replace(/`([^`]+)`/g, '<code>$1</code>')
   .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
@@ -504,7 +508,7 @@ const renderMarkdown = (lines, page) => {
         const sample = groupedSamples.samples[0];
         if ((sample.language || '').toLowerCase() === 'mermaid') {
           usesMermaid = true;
-          html.push(`${currentIndent()}<div class="mermaid-block"><pre class="mermaid">${escapeHtml(sample.code)}</pre></div>`);
+          html.push(`${currentIndent()}<div class="mermaid-block"><pre class="mermaid">${renderMermaidCode(sample.code)}</pre></div>`);
         } else {
           html.push(`${currentIndent()}<pre class="code-panel is-active"><code class="language-${sample.language || 'text'}">${escapeHtml(sample.code)}</code></pre>`);
         }
@@ -534,7 +538,7 @@ const renderMarkdown = (lines, page) => {
       const fence = readCodeFence(lines, index);
       if (fence.isMermaid) {
         usesMermaid = true;
-        html.push(`${currentIndent()}<div class="mermaid-block"><pre class="mermaid">${escapeHtml(fence.code)}</pre></div>`);
+        html.push(`${currentIndent()}<div class="mermaid-block"><pre class="mermaid">${renderMermaidCode(fence.code)}</pre></div>`);
       } else {
         html.push(`${currentIndent()}<pre class="code-panel is-active"><code class="language-${fence.language || 'text'}">${escapeHtml(fence.code)}</code></pre>`);
       }

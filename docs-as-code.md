@@ -72,13 +72,20 @@ This is the compact workflow I use to explain the operating model behind docs-as
 ### Stakeholder input to publication
 
 ```mermaid
-flowchart TD
-    A[Stakeholder input and source research] --> B[Information design]
-    B --> C[Drafting and review]
-    C --> D[Editing and validation]
-    D --> E[Publication]
-    E --> F[Customer feedback]
-    F --> A
+flowchart LR
+    A((Stakeholder input<br/>and research))
+    B((Information<br/>design))
+    C((Drafting<br/>and review))
+    D((Editing<br/>and validation))
+    E((Publication))
+    F((Customer<br/>feedback))
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F -. informs next cycle .-> A
 ```
 
 This flow captures real-world documentation work by including stakeholder input from developers, SMEs, and product owners, followed by review and validation before publication. After publication, customer feedback goes back into research and helps improve the next version.

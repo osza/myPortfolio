@@ -1119,14 +1119,73 @@ select {
 .mermaid-block > pre.mermaid > svg,
 .mermaid-wrap > pre.mermaid > svg {
   display: block;
+  width: 100%;
   max-width: 100%;
   height: auto;
+  margin-inline: auto;
+}
+
+.mermaid-block .label,
+.mermaid-wrap .label {
+  font-family: 'Inter', sans-serif !important;
+}
+
+.mermaid-block .cluster rect,
+.mermaid-wrap .cluster rect {
+  fill: rgba(248, 246, 241, 0.18) !important;
+  stroke: rgba(141, 128, 104, 0.24) !important;
+  stroke-width: 1px !important;
+}
+
+.mermaid-block .cluster-label,
+.mermaid-wrap .cluster-label {
+  color: rgba(82, 74, 61, 0.84) !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+}
+
+.mermaid-block .edgeLabel,
+.mermaid-wrap .edgeLabel {
+  background: transparent !important;
+  color: rgba(95, 86, 73, 0.78) !important;
+  font-size: 0.88rem !important;
+}
+
+.mermaid-block .edgeLabel rect,
+.mermaid-wrap .edgeLabel rect {
+  fill: rgba(255, 255, 255, 0.88) !important;
+  opacity: 1 !important;
+}
+
+.mermaid-block .flowchart-link.LS-F,
+.mermaid-wrap .flowchart-link.LS-F {
+  stroke: rgba(109, 101, 88, 0.72) !important;
+  stroke-width: 1.5px !important;
 }
 
 [data-theme='dark'] .mermaid-block,
 [data-theme='dark'] .mermaid-wrap {
   background: rgba(24, 34, 41, 0.88);
   border-color: rgba(148, 163, 184, 0.24);
+}
+
+[data-theme='dark'] .mermaid-block .cluster rect,
+[data-theme='dark'] .mermaid-wrap .cluster rect {
+  fill: rgba(77, 89, 104, 0.16) !important;
+  stroke: rgba(148, 163, 184, 0.24) !important;
+}
+
+[data-theme='dark'] .mermaid-block .cluster-label,
+[data-theme='dark'] .mermaid-wrap .cluster-label,
+[data-theme='dark'] .mermaid-block .edgeLabel,
+[data-theme='dark'] .mermaid-wrap .edgeLabel {
+  color: rgba(230, 223, 211, 0.82) !important;
+}
+
+[data-theme='dark'] .mermaid-block .edgeLabel rect,
+[data-theme='dark'] .mermaid-wrap .edgeLabel rect {
+  fill: rgba(23, 31, 37, 0.92) !important;
 }
 
 @media (max-width: 1100px) {

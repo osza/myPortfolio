@@ -111,7 +111,7 @@ export const renderDocumentationPage = ({
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  ${usesMermaid ? '  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>\n  <script>\n    mermaid.initialize({ startOnLoad: true, theme: \'default\' });\n  </script>\n' : ''}  <link rel="stylesheet" href="style.css">
+  ${usesMermaid ? '  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>\n  <script>\n    mermaid.initialize({\n      startOnLoad: true,\n      theme: \'base\',\n      securityLevel: \'loose\',\n      flowchart: {\n        useMaxWidth: true,\n        htmlLabels: false,\n        nodeSpacing: 30,\n        rankSpacing: 38,\n        curve: \'basis\'\n      },\n      themeVariables: {\n        fontFamily: \'Inter, sans-serif\',\n        fontSize: \'15px\',\n        primaryColor: \'#f8f6f1\',\n        primaryTextColor: \'#201d18\',\n        primaryBorderColor: \'#c7b794\',\n        lineColor: \'#6e6558\',\n        secondaryColor: \'#f4efe6\',\n        tertiaryColor: \'#fcfbf8\',\n        clusterBkg: \'#fcfbf8\',\n        clusterBorder: \'#d8ccba\',\n        clusterBkg0: \'#fcfbf8\',\n        clusterBorder0: \'#d8ccba\',\n        clusterBkg1: \'#fcfbf8\',\n        clusterBorder1: \'#d8ccba\'\n      }\n    });\n  </script>\n' : ''}  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Generated from ${sourcePath}. Run npm run build after editing the source. -->
