@@ -1086,6 +1086,7 @@ select {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
   gap: var(--space-4);
   color: var(--color-text-faint);
   font-size: var(--text-sm);

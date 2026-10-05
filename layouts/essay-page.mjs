@@ -1,4 +1,14 @@
-import { renderDocumentationPage } from './doc-page.mjs';
+import { renderSharedPageShell } from './shared-page-shell.mjs';
+
+const defaultEssayHeroPanel = {
+  style: 'case',
+  label: 'Essay focus',
+  items: [
+    { title: 'Angle', text: 'Long-form argument shaped for online reading.' },
+    { title: 'Structure', text: 'Clear narrative sections with editorial pacing.' },
+    { title: 'Output', text: 'Published as static HTML from a maintainable source file.' }
+  ]
+};
 
 export const renderEssayPage = ({
   sourcePath,
@@ -8,11 +18,12 @@ export const renderEssayPage = ({
   metadata,
   eyebrow = 'Essay sample',
   primaryLink = { href: '#the-argument', label: 'Read essay' },
+  secondaryLink = { href: 'index.html#samples', label: 'Back to selected work' },
   heroStats = null,
   heroPanel = null,
   footerTag = 'Essay page built from Markdown source',
   usesMermaid = false
-}) => renderDocumentationPage({
+}) => renderSharedPageShell({
   sourcePath,
   title,
   lead,
@@ -20,16 +31,11 @@ export const renderEssayPage = ({
   metadata,
   eyebrow,
   primaryLink,
+  secondaryLink,
   heroStats,
-  heroPanel: heroPanel ?? {
-    style: 'case',
-    label: 'Essay focus',
-    items: [
-      { title: 'Angle', text: 'Long-form argument shaped for online reading.' },
-      { title: 'Structure', text: 'Clear narrative sections with editorial pacing.' },
-      { title: 'Output', text: 'Published as static HTML from a maintainable source file.' }
-    ]
-  },
+  heroPanel: heroPanel ?? defaultEssayHeroPanel,
   footerTag,
-  usesMermaid
+  usesMermaid,
+  mermaidMode: 'doc',
+  footerMode: 'simple'
 });

@@ -118,7 +118,6 @@ const parseFrontmatter = (source) => {
 
 const inferTypeFromFilename = (filename) => {
   if (filename.includes('tutorial')) return 'tutorial';
-  if (filename.includes('essay') || filename.includes('human-but-not-humane') || filename.includes('when-productivity-starts-removing-people')) return 'essay';
   return 'doc';
 };
 

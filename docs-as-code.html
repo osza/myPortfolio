@@ -59,13 +59,8 @@
           <p class="eyebrow">Documentation workflow sample</p>
           <h1>How I design docs-as-code workflows</h1>
           <p class="hero__lead">A working portfolio sample that shows how I structure documentation systems around contribution flow, review rules, publishing control, and long-term maintainability.</p>
+          <div class="hero__meta"><span class="hero-stat">Docs as code</span><span class="hero-stat">Markdown workflow</span><span class="hero-stat">Version control</span><span class="hero-stat">Publishing model</span></div>
           <div class="hero__actions"><a class="button-link button-link--primary" href="#overview">Read sample</a><a class="button-link button-link--secondary" href="index.html#samples">Back to selected work</a></div>
-          <div class="hero-stats" aria-label="Page metadata">
-            <span class="hero-stat">Docs as code</span>
-            <span class="hero-stat">Markdown workflow</span>
-            <span class="hero-stat">Version control</span>
-            <span class="hero-stat">Publishing model</span>
-          </div>
         </div>
         <aside class="hero-panel" aria-labelledby="docs-workflow-title">
           <p class="hero-panel__label" id="docs-workflow-title">Workflow focus</p>
@@ -246,94 +241,60 @@
           </div>
         </div>
         <p class="sample-summary">This sample connects the published page with the workflow behind it: source files, review, ownership, and a structure that makes documentation easier to maintain.</p>
-        <div class="hero__actions">
-          <a class="button-link button-link--primary" href="./index.html#samples">Back to selected samples</a><a class="button-link button-link--secondary" href="./index.html#contact">Discuss documentation projects</a>
-        </div>
       </div>
     </section>
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="section__header">
-          <div>
-            <p class="section-kicker">Documentation</p>
-            <h2 class="section-title">Contact</h2>
-          </div>
-        </div>
-        <p class="sample-summary">I work remotely and collaborate comfortably across product, engineering, QA, support, and consulting environments.</p>
-        <article class="sample">
-          <div class="sample-header"><div class="sample-heading">
-            <h3>Email</h3>
-          </div></div>
-          <p class="sample-summary"><a href="mailto:piotr.oszenda@outlook.com">piotr.oszenda@outlook.com</a></p>
-        </article>
-        <article class="sample">
-          <div class="sample-header"><div class="sample-heading">
-            <h3>LinkedIn</h3>
-          </div></div>
-          <p class="sample-summary"><a href="https://www.linkedin.com/in/piotr-oszenda/" target="_blank" rel="noopener noreferrer">LinkedIn profile</a></p>
-        </article>
-        <article class="sample">
-          <div class="sample-header"><div class="sample-heading">
-            <h3>Location</h3>
-          </div></div>
-          <p class="sample-summary">Gliwice, Poland or Gijón, Spain · Remote</p>
-        </article>
-        <article class="sample">
-          <div class="sample-header"><div class="sample-heading">
-            <h3>Focus</h3>
-          </div></div>
-          <p class="sample-summary">Developer documentation, product docs, knowledge management, content governance, migration work, and documentation systems.</p>
-        </article>
-        <article class="sample">
-          <div class="sample-header"><div class="sample-heading">
-            <h3>Best fit</h3>
-          </div></div>
-          <p class="sample-summary">SaaS and API-first teams that need developer documentation, workflow-heavy product content, knowledge management, migration cleanup, or documentation restructuring.</p>
-        </article>
-      </div>
-    </section>  </main>
-  <footer class="site-footer"><div class="container site-footer__inner"><span>Piotr Oszenda — Technical Writer · Knowledge Manager · Documentation Architect</span><span>Documentation page built from Markdown source</span></div></footer>
+  </main>
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p>Documentation page built from Markdown source</p>
+      <a href="#top">Back to top</a>
+    </div>
+  </footer>
   <script>
-    document.querySelectorAll('[data-code-group]').forEach((group) => {
-      const tabs = Array.from(group.querySelectorAll('[data-code-tab]'));
-      const panels = Array.from(group.querySelectorAll('[data-code-panel]'));
+(() => {
+  const groups = document.querySelectorAll('[data-code-group]');
+  for (const group of groups) {
+    const tabs = Array.from(group.querySelectorAll('[data-code-tab]'));
+    const panels = Array.from(group.querySelectorAll('[data-code-panel]'));
 
-      tabs.forEach((tab) => tab.addEventListener('click', () => {
-        const selected = tab.dataset.codeTab;
+    if (!tabs.length || !panels.length) continue;
 
-        tabs.forEach((item) => {
-          const active = item === tab;
-          item.classList.toggle('is-active', active);
-          item.setAttribute('aria-selected', String(active));
-          item.tabIndex = active ? 0 : -1;
-        });
+    const activate = (index) => {
+      tabs.forEach((tab, tabIndex) => {
+        const active = tabIndex === index;
+        tab.classList.toggle('is-active', active);
+        tab.setAttribute('aria-selected', active ? 'true' : 'false');
+        tab.setAttribute('tabindex', active ? '0' : '-1');
+      });
 
-        panels.forEach((panel) => {
-          const active = panel.dataset.codePanel === selected;
-          panel.hidden = !active;
-        });
-      }));
+      panels.forEach((panel, panelIndex) => {
+        const active = panelIndex === index;
+        panel.classList.toggle('is-active', active);
+        panel.hidden = !active;
+      });
+    };
 
-      tabs.forEach((tab) => tab.addEventListener('keydown', (event) => {
-        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(index));
+      tab.addEventListener('keydown', (event) => {
+        if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+
         event.preventDefault();
 
-        const currentIndex = tabs.indexOf(tab);
-        let nextIndex = currentIndex;
-
-        if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
-        if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+        let nextIndex = index;
+        if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+        if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
         if (event.key === 'Home') nextIndex = 0;
         if (event.key === 'End') nextIndex = tabs.length - 1;
 
+        activate(nextIndex);
         tabs[nextIndex].focus();
-        tabs[nextIndex].click();
-      }));
-
-      if (!tabs.some((tab) => tab.classList.contains('is-active')) && tabs[0]) {
-        tabs[0].click();
-      }
+      });
     });
-  </script>
+
+    activate(0);
+  }
+})();
+</script>
 </body>
 </html>
