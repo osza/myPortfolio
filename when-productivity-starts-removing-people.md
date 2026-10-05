@@ -147,29 +147,3 @@ This does not remove responsibility for the words. It moves more of that respons
 A team may see a generated page and assume the important part happened automatically. In many cases, the important part sits one layer earlier: in the workflow, in the constraints, in the review path, and in the person who knows why the output looks the way it does.
 
 If organisations want the output, they also need to recognise the workflow behind it. Otherwise, they may remove the person who understands why the system works and then ask the remaining system to explain itself.
-
-## Contact
-
-Available for documentation-related projects and content governance.
-
-I work remotely and collaborate comfortably across product, engineering, QA, support, and consulting environments.
-
-### Email
-
-[piotr.oszenda@outlook.com](mailto:piotr.oszenda@outlook.com)
-
-### LinkedIn
-
-[LinkedIn profile](https://www.linkedin.com/in/piotr-oszenda/)
-
-### Location
-
-Gliwice, Poland or Gijón, Spain · Remote
-
-### Focus
-
-Developer documentation, product docs, knowledge management, content governance, migration work, and documentation systems.
-
-### Best fit
-
-SaaS and API-first teams that need developer documentation, workflow-heavy product content, knowledge management, migration cleanup, or documentation restructuring.

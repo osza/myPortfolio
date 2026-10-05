@@ -135,32 +135,3 @@ The source files behind this portfolio, including its HTML structure, shared CSS
 ## Docs-as-code as part of reliable documentation practice
 
 This sample connects the published page with the workflow behind it: source files, review, ownership, and a structure that makes documentation easier to maintain.
-
-::: actions
-- [Back to selected samples](./index.html#samples)
-- [Discuss documentation projects](./index.html#contact)
-:::
-
-## Contact
-
-I work remotely and collaborate comfortably across product, engineering, QA, support, and consulting environments.
-
-### Email
-
-[piotr.oszenda@outlook.com](mailto:piotr.oszenda@outlook.com)
-
-### LinkedIn
-
-[LinkedIn profile](https://www.linkedin.com/in/piotr-oszenda/)
-
-### Location
-
-Gliwice, Poland or Gijón, Spain · Remote
-
-### Focus
-
-Developer documentation, product docs, knowledge management, content governance, migration work, and documentation systems.
-
-### Best fit
-
-SaaS and API-first teams that need developer documentation, workflow-heavy product content, knowledge management, migration cleanup, or documentation restructuring.
