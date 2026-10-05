@@ -7,7 +7,39 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 process.chdir(repoRoot);
 
 const allowedTypes = new Set(['doc', 'tutorial', 'essay']);
-const markdownFiles = (await readdir('.')).filter((file) => file.endsWith('.md') && !['README.md', 'Piotr_Oszenda_CV.md'].includes(file));
+const markdownSourceDirectories = [
+  '.',
+  'content/docs',
+  'content/tutorials',
+  'content/essays',
+  'content/pages'
+];
+
+const readMarkdownPages = async () => {
+  const pages = [];
+
+  for (const directory of markdownSourceDirectories) {
+    const absoluteDirectory = path.join(repoRoot, directory);
+    let entries = [];
+
+    try {
+      entries = await readdir(absoluteDirectory, { withFileTypes: true });
+    } catch {
+      continue;
+    }
+
+    pages.push(
+      ...entries
+        .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
+        .filter((entry) => !['README.md', 'Piotr_Oszenda_CV.md'].includes(entry.name))
+        .map((entry) => (directory === '.' ? entry.name : path.posix.join(directory, entry.name)))
+    );
+  }
+
+  return pages.sort();
+};
+
+const markdownFiles = await readMarkdownPages();
 
 const parseFrontmatter = (source) => {
   if (!source.startsWith('---\n')) return {};
@@ -49,7 +81,7 @@ for (const file of markdownFiles) {
   if (!frontmatter.output) {
     failures.push(`${file}: missing required frontmatter field "output"`);
   } else {
-    const expectedOutput = file.replace(/\.md$/i, '.html');
+    const expectedOutput = path.basename(file).replace(/\.md$/i, '.html');
     if (frontmatter.output !== expectedOutput) {
       failures.push(`${file}: output must be "${expectedOutput}"`);
     }
@@ -75,7 +107,8 @@ for (const file of htmlFiles) {
 
 for (const file of markdownFiles) {
   const source = await readFile(file, 'utf8');
-  const outputFile = file.replace(/\.md$/i, '.html');
+  const frontmatter = parseFrontmatter(source);
+  const outputFile = frontmatter.output || path.basename(file).replace(/\.md$/i, '.html');
   const output = await readFile(outputFile, 'utf8');
 
   if (!output.includes(`Generated from ${file}`)) {
@@ -86,7 +119,6 @@ for (const file of markdownFiles) {
     failures.push(`${outputFile}: missing shared Markdown footer text`);
   }
 
-  const frontmatter = parseFrontmatter(source);
   for (const marker of [frontmatter.title, frontmatter.description].filter(Boolean)) {
     if (!output.includes(marker)) {
       failures.push(`${outputFile}: generated output is missing "${marker}"`);

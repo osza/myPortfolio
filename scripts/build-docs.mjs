@@ -9,6 +9,14 @@ import { renderDocumentationPage } from '../layouts/doc-page.mjs';
 import { renderTutorialPage } from '../layouts/tutorial-page.mjs';
 import { renderEssayPage } from '../layouts/essay-page.mjs';
 
+const markdownSourceDirectories = [
+  '.',
+  'content/docs',
+  'content/tutorials',
+  'content/essays',
+  'content/pages'
+];
+
 const escapeHtml = (value = '') => String(value)
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -128,18 +136,32 @@ const getRenderer = (type) => {
 };
 
 const readMarkdownPages = async () => {
-  const entries = await readdir(repoRoot, { withFileTypes: true });
+  const pages = [];
 
-  return entries
-    .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
-    .filter((entry) => !['README.md', 'Piotr_Oszenda_CV.md'].includes(entry.name))
-    .map((entry) => entry.name)
-    .sort();
+  for (const directory of markdownSourceDirectories) {
+    const absoluteDirectory = path.join(repoRoot, directory);
+    let entries = [];
+
+    try {
+      entries = await readdir(absoluteDirectory, { withFileTypes: true });
+    } catch {
+      continue;
+    }
+
+    pages.push(
+      ...entries
+        .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
+        .filter((entry) => !['README.md', 'Piotr_Oszenda_CV.md'].includes(entry.name))
+        .map((entry) => (directory === '.' ? entry.name : path.posix.join(directory, entry.name)))
+    );
+  }
+
+  return pages.sort();
 };
 
 const getPageTitle = (frontmatter, title) => frontmatter.title || `${title} — Piotr Oszenda`;
 const getPageDescription = (frontmatter, lead) => frontmatter.description || lead;
-const getOutputPath = (filename, frontmatter) => frontmatter.output || filename.replace(/\.md$/i, '.html');
+const getOutputPath = (filename, frontmatter) => frontmatter.output || path.basename(filename).replace(/\.md$/i, '.html');
 
 const buildHeroPanel = (frontmatter, sourcePath) => {
   const hasConfig = frontmatter.hero_panel_label || frontmatter.hero_panel_items || frontmatter.hero_panel_style || frontmatter.hero_panel_id;
