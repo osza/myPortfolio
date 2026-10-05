@@ -124,7 +124,7 @@ A published tutorial that shows how I explain CRUD operations and structure task
 
 The Markdown source for the same tutorial. The build script turns this file into the published HTML page.
 
-[View source](./customers-api-tutorial.md)
+[View source](./content/tutorials/customers-api-tutorial.md)
 
 ### Portfolio source repository
 
