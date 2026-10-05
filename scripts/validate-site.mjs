@@ -73,14 +73,24 @@ for (const file of htmlFiles) {
   }
 }
 
-const tutorialSource = await readFile('customers-api-tutorial.md', 'utf8');
-const tutorialOutput = await readFile('customers-api-tutorial.html', 'utf8');
-if (!tutorialOutput.includes('Generated from customers-api-tutorial.md')) {
-  failures.push('customers-api-tutorial.html: missing generated-file marker');
-}
-for (const marker of ['Manage customer data with the Customers API', 'CRUD tutorial']) {
-  if (!tutorialSource.includes(marker) || !tutorialOutput.includes(marker)) {
-    failures.push(`customers-api-tutorial.html: generated output is missing "${marker}"`);
+for (const file of markdownFiles) {
+  const source = await readFile(file, 'utf8');
+  const outputFile = file.replace(/\.md$/i, '.html');
+  const output = await readFile(outputFile, 'utf8');
+
+  if (!output.includes(`Generated from ${file}`)) {
+    failures.push(`${outputFile}: missing generated-file marker for ${file}`);
+  }
+
+  if (!output.includes('Built from Markdown source')) {
+    failures.push(`${outputFile}: missing shared Markdown footer text`);
+  }
+
+  const frontmatter = parseFrontmatter(source);
+  for (const marker of [frontmatter.title, frontmatter.description].filter(Boolean)) {
+    if (!output.includes(marker)) {
+      failures.push(`${outputFile}: generated output is missing "${marker}"`);
+    }
   }
 }
 
@@ -89,4 +99,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Validated ${htmlFiles.length} HTML pages, ${markdownFiles.length} Markdown sources, local links, and the generated Customers API tutorial.`);
+console.log(`Validated ${htmlFiles.length} HTML pages, ${markdownFiles.length} Markdown sources, local links, generated-file markers, and the shared Markdown footer.`);
