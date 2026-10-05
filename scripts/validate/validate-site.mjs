@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // Resolve paths relative to the repo root so the script works from any cwd.
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 process.chdir(repoRoot);
 
 const allowedTypes = new Set(['doc', 'tutorial', 'essay']);

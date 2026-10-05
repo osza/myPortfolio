@@ -1,13 +1,13 @@
-import { renderSharedPageShell } from './shared-page-shell.mjs';
+import { renderSharedPageShell } from '../shared/shared-page-shell.mjs';
 
-export const renderTutorialPage = ({
+export const renderDocumentationPage = ({
   sourcePath,
   title,
   lead,
   body,
   metadata,
   eyebrow = 'Developer documentation sample',
-  primaryLink = { href: '#what-this-tutorial-demonstrates', label: 'Read tutorial' },
+  primaryLink = { href: '#overview', label: 'Read page' },
   secondaryLink = { href: 'index.html#samples', label: 'Back to selected work' },
   heroStats = null,
   heroPanel = null,
@@ -26,6 +26,6 @@ export const renderTutorialPage = ({
   heroPanel,
   footerTag,
   usesMermaid,
-  mermaidMode: 'tutorial',
+  mermaidMode: 'doc',
   footerMode: 'simple'
 });

@@ -2,12 +2,12 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 process.chdir(repoRoot);
 
-import { renderDocumentationPage } from '../layouts/doc-page.mjs';
-import { renderTutorialPage } from '../layouts/tutorial-page.mjs';
-import { renderEssayPage } from '../layouts/essay-page.mjs';
+import { renderDocumentationPage } from '../../templates/page-types/doc-page.mjs';
+import { renderTutorialPage } from '../../templates/page-types/tutorial-page.mjs';
+import { renderEssayPage } from '../../templates/page-types/essay-page.mjs';
 
 const markdownSourceDirectories = [
   '.',

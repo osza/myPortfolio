@@ -1,4 +1,4 @@
-import { renderSharedPageShell } from './shared-page-shell.mjs';
+import { renderSharedPageShell } from '../shared/shared-page-shell.mjs';
 
 const defaultEssayHeroPanel = {
   style: 'case',
