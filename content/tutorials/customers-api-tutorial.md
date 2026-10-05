@@ -10,7 +10,7 @@ secondary_link_label: "Back to selected work"
 hero_panel_id: "sample-proof-title"
 hero_panel_label: "Build status"
 hero_panel_style: "default"
-hero_panel_items: "Markdown source::customers-api-tutorial.md | Generated HTML::Built locally before publication. | Checked output::Source markers and local links are validated in CI."
+hero_panel_items: "Markdown source::content/tutorials/customers-api-tutorial.md | Generated HTML::Built locally before publication. | Checked output::Source markers and local links are validated in CI."
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
 accent_sections: "overview|before-you-start|resource-model|crud-tutorial|expected-workflow-result|why-this-tutorial-structure-works"
