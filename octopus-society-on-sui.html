@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Join Octopus Society on Sui — Developer documentation sample (Piotr Oszenda)</title>
-  <meta name="description" content="Hands-on Sui tutorial illustrating a fictional onboarding flow for connecting a wallet, joining Octopus Society, verifying membership, and claiming a reward.">
+  <title>Octopus Society on Sui — Tutorial sample (Piotr Oszenda)</title>
+  <meta name="description" content="Hands-on Sui tutorial showing a fictional membership flow for joining Octopus Society, verifying an on-chain object, and claiming a member reward.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <!-- Generated from octopus-society-on-sui.md. Run npm run build after editing the source. -->
+  <!-- Generated from content/tutorials/octopus-society-on-sui.md. Run npm run build after editing the source. -->
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="container site-header__inner">
@@ -25,68 +25,62 @@
     <section class="hero" id="top">
       <div class="container hero__grid">
         <div>
-          <p class="eyebrow">Sui onboarding tutorial</p>
+          <p class="eyebrow">Developer documentation sample</p>
           <h1>Join the Octopus Society on Sui</h1>
-          <p class="hero__lead">A hands-on tutorial illustrating a fictional membership flow for connecting a wallet, joining Octopus Society, verifying a membership <a href="https://docs.sui.io/develop/sui-architecture/object-model">object on-chain</a>, and claiming a member reward.</p>
+          <p class="hero__lead">A hands-on tutorial illustrating a fictional membership flow for connecting a wallet, joining Octopus Society, verifying a membership <a href="https://docs.sui.io/develop/sui-architecture/object-model" target="_blank" rel="noopener noreferrer">object on-chain</a>, and claiming a member reward.</p>
+
           <div class="hero__actions"><a class="button-link button-link--primary" href="#overview">Read tutorial</a><a class="button-link button-link--secondary" href="index.html#samples">Back to selected work</a></div>
-          <div class="hero-stats" aria-label="Tutorial metadata">
-            <span class="hero-stat">Testnet</span>
-            <span class="hero-stat">Move objects</span>
-            <span class="hero-stat">CLI + TypeScript</span>
-            <span class="hero-stat">Documentation sample</span>
-          </div>
         </div>
-        <aside class="hero-panel" aria-labelledby="tutorial-proof-title">
-          <p class="hero-panel__label" id="tutorial-proof-title">What this tutorial demonstrates</p>
-          <ul class="case-proof-list">
-            <li>
-              <strong>A membership workflow centered on one object.</strong>
-              <span>The reader follows a single membership object from minting to verification and reward claim.</span>
-            </li>
-            <li>
-              <strong>Current Sui SDK conventions.</strong>
-              <span>The TypeScript example uses <code>Transaction</code>, a signer, and a current Sui client.</span>
-            </li>
-            <li>
-              <strong>Preparation, reference, and workflow.</strong>
-              <span>Setup, object inspection, and step-by-step tasks give the sample a clear onboarding structure.</span>
-            </li>
-          </ul>
+        <aside class="hero-panel" aria-labelledby="sui-tutorial-proof-title">
+          <p class="hero-panel__label" id="sui-tutorial-proof-title">Build status</p>
+          <ul class="proof-list"><li><strong>Markdown source</strong><span>octopus-society-on-sui.md</span></li><li><strong>Generated HTML</strong><span>Built locally before publication.</span></li><li><strong>Checked output</strong><span>Structure follows the API tutorial baseline and local links are validated in CI.</span></li></ul>
         </aside>
       </div>
     </section>
-    <section class="section" id="overview">
+    <section class="section section--accent" id="what-this-tutorial-demonstrates">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Tutorial</p>
+            <h2 class="section-title">What this tutorial demonstrates</h2>
+          </div>
+        </div>
+        <ul><li><strong>A complete membership flow on Sui.</strong> The reader follows one path from wallet setup to reward claim.</li><li><strong>Parallel CLI and TypeScript examples.</strong> The same flow is shown for terminal use and application code.</li><li><strong>A practical object-based model.</strong> The tutorial connects transactions, ownership checks, and object reads in one sequence.</li></ul>
+      </div>
+    </section>
+    <section class="section section--accent" id="overview">
       <div class="container">
         <div class="section__header">
           <div>
             <p class="section-kicker">Tutorial</p>
             <h2 class="section-title">Overview</h2>
           </div>
-          <p class="section-intro">This tutorial is structured as a compact onboarding-style flow for a fictional membership module on Sui.</p>
         </div>
-        <article class="sample">
-          <div class="sample-header"><div class="sample-heading"><h3>Overview</h3></div></div>
-          <p class="sample-summary">This tutorial demonstrates a sample workflow for joining Octopus Society, a fictional membership module built with Move on Sui. The package ID, object IDs, and example data are included to illustrate structure, flow, and documentation style.</p>
-          <p class="sample-summary">By the end of the tutorial, you will have walked through connecting a wallet, minting a membership object, verifying ownership on-chain, and claiming a reward tied to that membership.</p>
-        </article>
+        <p class="sample-summary">This tutorial is structured as a compact onboarding-style flow for a fictional membership module on Sui.</p>
+        <p class="sample-summary"><strong>Tutorial sample · Fictional Move package</strong></p>
+        <p class="sample-summary">This tutorial demonstrates a sample workflow for joining Octopus Society, a fictional membership module built with Move on Sui. The package ID, object IDs, and example data are included to illustrate structure, flow, and documentation style.</p>
+        <p class="sample-summary">By the end of the tutorial, you will have walked through connecting a wallet, minting a membership object, verifying ownership on-chain, and claiming a reward tied to that membership.</p>
       </div>
     </section>
-    <section class="section" id="environment-and-setup">
+    <section class="section section--accent" id="environment-and-setup">
       <div class="container">
         <div class="section__header">
           <div>
             <p class="section-kicker">Tutorial</p>
             <h2 class="section-title">Environment and setup</h2>
           </div>
-          <p class="section-intro">This section helps new Sui developers verify their local setup before they run the tutorial.</p>
         </div>
+        <p class="sample-summary">This section helps new Sui developers verify their local setup before they run the tutorial.</p>
         <article class="sample">
-          <div class="sample-header"><div class="sample-heading"><h3>Requirements</h3><p class="meta">Tutorial sample · Fictional Move package</p></div></div>
+          <div class="sample-header"><div class="sample-heading">
+            <h3>Requirements</h3>
+          </div></div>
+          <p class="sample-summary"><strong>CLI · Wallet · TypeScript tooling</strong></p>
           <p class="sample-summary">Before you begin, make sure you have the following in place:</p>
           <ul><li>The <a href="https://docs.sui.io/references/cli" target="_blank" rel="noopener noreferrer">Sui CLI</a> installed and configured for the target network, such as testnet.</li><li>A wallet with <a href="https://docs.sui.io/getting-started/onboarding/get-coins" target="_blank" rel="noopener noreferrer">test SUI for gas fees</a>.</li><li>Node.js installed if you plan to run the TypeScript examples.</li><li>A code editor and a terminal for running Sui commands.</li><li>The package ID for the fictional Octopus Society Move module used in the examples below.</li></ul>
           <p class="sample-summary">If you are new to Sui, treat this as a quick readiness check: once the CLI works, the wallet is funded, and the package ID is available, you are ready to follow the tutorial as written.</p>
           <p class="sample-summary">The examples below use placeholder IDs and sample responses so the structure stays clear and reusable.</p>
-          <pre class="code-panel"><code class="language-bash">sui client active-env
+          <pre class="code-panel is-active"><code class="language-bash">sui client active-env
 sui client active-address
 sui client gas</code></pre>
           <p class="sample-summary">Run these checks before the tutorial. The active environment, active address, and available gas coins must all refer to the same testnet account. The package and object IDs below are fictional, so use them as a structure to adapt rather than commands to run unchanged.</p>
@@ -100,57 +94,76 @@ sui client gas</code></pre>
             <p class="section-kicker">Tutorial</p>
             <h2 class="section-title">Join and verify</h2>
           </div>
-          <p class="section-intro">The core of the tutorial is a practical sequence that follows the membership flow from joining to on-chain verification and reward claim.</p>
         </div>
-        <div class="case-grid">
-          <article class="case-panel">
-            <h3>Step 1 · Connect a wallet</h3>
-            <p>Start by connecting a compatible wallet in Sui Wallet or another supported browser extension. For app-based integrations, follow the official <a href="https://docs.sui.io/getting-started/examples/dapp-kit-frontend" target="_blank" rel="noopener noreferrer">dApp Kit frontend pattern</a> or the <a href="https://docs.sui.io/onchain-finance/asset-custody/wallets/wallet-standard" target="_blank" rel="noopener noreferrer">Wallet Standard</a>. This keeps the first step lightweight so the reader can focus on the membership flow itself.</p>
-            <ul><li>Confirm the wallet is set to the intended network.</li><li>Check that the account has enough test SUI for gas.</li></ul>
-          </article>
-          <article class="case-panel">
-            <h3>Step 2 · Join Octopus Society</h3>
-            <p>Submit the join transaction against the Move module to mint a membership object. The sender is derived from the signer; it should not be passed as an untrusted, separate argument.</p>
-            <ul><li>Capture the transaction digest.</li><li>Store the newly created membership object ID.</li></ul>
-          </article>
-          <article class="case-panel">
-            <h3>Step 3 · Verify membership</h3>
-            <p>Wait for the transaction to become readable, then use the object ID to confirm ownership and inspect membership fields. This avoids treating an accepted submission as immediately indexed state and aligns with how the <a href="https://docs.sui.io/develop/sui-architecture/object-model" target="_blank" rel="noopener noreferrer">Sui object model</a> exposes object ownership and history.</p>
-            <ul><li>Query the object through the CLI.</li><li>Repeat the check with the SDK response.</li></ul>
-          </article>
-          <article class="case-panel">
-            <h3>Step 4 · Claim the reward</h3>
-            <p>Finish by claiming a reward tied to the membership. This closes the onboarding loop with a concrete outcome.</p>
-            <ul><li>Confirm the reward transaction succeeded.</li><li>Review the updated object state after the claim.</li></ul>
-          </article>
-        </div>
+        <p class="sample-summary">The core of the tutorial is a practical sequence that follows the membership flow from joining to on-chain verification and reward claim.</p>
+        <article class="sample">
+          <div class="sample-header"><div class="sample-heading">
+            <h3>1. Connect a wallet</h3>
+          </div></div>
+          <p class="sample-summary">Start by connecting a compatible wallet in Sui Wallet or another supported browser extension. For app-based integrations, follow the official <a href="https://docs.sui.io/getting-started/examples/dapp-kit-frontend" target="_blank" rel="noopener noreferrer">dApp Kit frontend pattern</a> or the <a href="https://docs.sui.io/onchain-finance/asset-custody/wallets/wallet-standard" target="_blank" rel="noopener noreferrer">Wallet Standard</a>. This keeps the first step lightweight so the reader can focus on the membership flow itself.</p>
+          <ul><li>Confirm the wallet is set to the intended network.</li><li>Check that the account has enough test SUI for gas.</li></ul>
+        </article>
+        <article class="sample">
+          <div class="sample-header"><div class="sample-heading">
+            <h3>2. Join Octopus Society</h3>
+          </div></div>
+          <p class="sample-summary">Submit the join transaction against the Move module to mint a membership object. The sender is derived from the signer; it should not be passed as an untrusted, separate argument.</p>
+          <ul><li>Capture the transaction digest.</li><li>Store the newly created membership object ID.</li></ul>
+        </article>
+        <article class="sample">
+          <div class="sample-header"><div class="sample-heading">
+            <h3>3. Verify membership</h3>
+          </div></div>
+          <p class="sample-summary">Wait for the transaction to become readable, then use the object ID to confirm ownership and inspect membership fields. This avoids treating an accepted submission as immediately indexed state and aligns with how the <a href="https://docs.sui.io/develop/sui-architecture/object-model" target="_blank" rel="noopener noreferrer">Sui object model</a> exposes object ownership and history.</p>
+          <ul><li>Query the object through the CLI.</li><li>Repeat the check with the SDK response.</li></ul>
+        </article>
+        <article class="sample">
+          <div class="sample-header"><div class="sample-heading">
+            <h3>4. Claim the reward</h3>
+          </div></div>
+          <p class="sample-summary">Finish by claiming a reward tied to the membership. This closes the onboarding loop with a concrete outcome.</p>
+          <ul><li>Confirm the reward transaction succeeded.</li><li>Review the updated object state after the claim.</li></ul>
+        </article>
       </div>
     </section>
-    <section class="section" id="cli-and-typescript-examples">
+    <section class="section section--accent" id="cli-and-typescript-examples">
       <div class="container">
         <div class="section__header">
           <div>
             <p class="section-kicker">Tutorial</p>
             <h2 class="section-title">CLI and TypeScript examples</h2>
           </div>
-          <p class="section-intro">The examples below are for a local script or backend signer. A browser application should build the same <code>Transaction</code> and hand it to a connected wallet or dApp kit; it must never receive a private key.</p>
         </div>
+        <p class="sample-summary">The examples below are for a local script or backend signer. A browser application should build the same <code>Transaction</code> and hand it to a connected wallet or dApp kit; it must never receive a private key.</p>
         <article class="sample">
-          <div class="sample-header"><div class="sample-heading"><h3>1. Join with Sui CLI</h3><p class="meta">CLI · Wallet · TypeScript tooling</p></div></div>
+          <div class="sample-header"><div class="sample-heading">
+            <h3>1. Join with Sui CLI</h3>
+          </div></div>
+          <p class="sample-summary"><strong>Run the transaction from the terminal</strong></p>
           <p class="sample-summary">Use the CLI when you want to validate the contract entry point quickly and inspect the transaction output before wiring the flow into an app.</p>
-          <pre class="code-panel"><code class="language-bash">sui client call \
+          <pre class="code-panel is-active"><code class="language-bash">sui client call \
  --package &lt;PACKAGE_ID&gt; \
  --module octopus_society \
  --function join \
  --gas-budget 10000000</code></pre>
           <p class="sample-summary">The sender comes from the active CLI address and the Move function receives <code>TxContext</code> implicitly. Record the transaction digest, then identify the created membership object from the transaction effects before moving to the next step.</p>
-          <div class="sample-header"><div class="sample-heading"><h3>2. Verify the membership object</h3><p class="meta">Run the transaction from the terminal</p></div></div>
+        </article>
+        <article class="sample">
+          <div class="sample-header"><div class="sample-heading">
+            <h3>2. Verify the membership object</h3>
+          </div></div>
+          <p class="sample-summary"><strong>Check ownership and state</strong></p>
           <p class="sample-summary">After the join transaction succeeds, inspect the object directly so the reader can review the same state the app will later consume.</p>
-          <pre class="code-panel"><code class="language-bash">sui client object &lt;MEMBERSHIP_OBJECT_ID&gt;</code></pre>
+          <pre class="code-panel is-active"><code class="language-bash">sui client object &lt;MEMBERSHIP_OBJECT_ID&gt;</code></pre>
           <p class="sample-summary">Confirm that the object type is the expected membership type and that its owner is the active address. The exact fields depend on the package; do not assume a fixed schema from a fictional example.</p>
-          <div class="sample-header"><div class="sample-heading"><h3>3. Join from TypeScript</h3><p class="meta">Check ownership and state</p></div></div>
+        </article>
+        <article class="sample">
+          <div class="sample-header"><div class="sample-heading">
+            <h3>3. Join from TypeScript</h3>
+          </div></div>
+          <p class="sample-summary"><strong>Embed the flow in an app</strong></p>
           <p class="sample-summary">This version shows how the same action can be represented from application code using <a href="https://docs.sui.io/develop/transactions/ptbs/ts-sdk-ptb-template" target="_blank" rel="noopener noreferrer">the current TypeScript PTB pattern</a>.</p>
-          <pre class="code-panel"><code class="language-typescript">import { SuiGrpcClient } from '@mysten/sui/grpc';
+          <pre class="code-panel is-active"><code class="language-typescript">import { SuiGrpcClient } from '@mysten/sui/grpc';
 import { Transaction } from '@mysten/sui/transactions';
 
 const client = new SuiGrpcClient({
@@ -178,9 +191,14 @@ if (result.$kind === 'FailedTransaction') {
 await client.waitForTransaction({ result });
 console.log(result.Transaction.digest);</code></pre>
           <p class="sample-summary">This example uses a keypair only because it represents a script or backend. In a browser, construct the transaction but let the user's wallet sign and execute it through <a href="https://docs.sui.io/getting-started/examples/dapp-kit-frontend" target="_blank" rel="noopener noreferrer">dApp Kit</a>.</p>
-          <div class="sample-header"><div class="sample-heading"><h3>4. Read the object in TypeScript</h3><p class="meta">Embed the flow in an app</p></div></div>
+        </article>
+        <article class="sample">
+          <div class="sample-header"><div class="sample-heading">
+            <h3>4. Read the object in TypeScript</h3>
+          </div></div>
+          <p class="sample-summary"><strong>Fetch the result and render it in UI</strong></p>
           <p class="sample-summary">Use the object ID from the transaction result to fetch the current membership state for an app or game UI. After submission, wait for confirmation before reading indexed state, as described in <a href="https://docs.sui.io/develop/transactions/ptbs/building-ptb" target="_blank" rel="noopener noreferrer">the transaction-building guidance</a>.</p>
-          <pre class="code-panel"><code class="language-typescript">const { object } = await client.getObject({
+          <pre class="code-panel is-active"><code class="language-typescript">const { object } = await client.getObject({
   objectId: membershipObjectId,
   include: { json: true },
 });
@@ -191,43 +209,77 @@ console.log(object.json);</code></pre>
         </article>
       </div>
     </section>
-    <section class="section" id="what-the-reader-leaves-with">
+    <section class="section section--accent" id="what-the-reader-leaves-with">
       <div class="container">
         <div class="section__header">
           <div>
             <p class="section-kicker">Tutorial</p>
             <h2 class="section-title">What the reader leaves with</h2>
           </div>
-          <p class="section-intro">The closing section makes the hand-off to the game-state tutorial explicit.</p>
         </div>
+        <p class="sample-summary">This closing section makes the hand-off to the game-state tutorial explicit.</p>
         <article class="sample">
-          <div class="sample-header"><div class="sample-heading"><h3>Outcome</h3><p class="meta">Fetch the result and render it in UI</p></div></div>
+          <div class="sample-header"><div class="sample-heading">
+            <h3>Outcome</h3>
+          </div></div>
+          <p class="sample-summary"><strong>Reusable onboarding sample</strong></p>
           <p class="sample-summary">By the end of the tutorial, the reader can prepare a testnet account, submit a membership transaction from a trusted signer, wait for indexed state, and inspect the resulting object. Continue to the game-state tutorial to apply the same ownership model to player assets and shared structures.</p>
           <p class="sample-summary"><a href="game-assets-on-sui.html">Continue to game assets on Sui →</a></p>
         </article>
       </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="container site-footer__inner"><span>Piotr Oszenda — Technical Writer · Knowledge Manager · Documentation Architect</span><span>Fictional Sui documentation sample · Testnet-oriented examples</span></div></footer>
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p>Built from Markdown source</p>
+      <a href="#top">Back to top</a>
+    </div>
+  </footer>
   <script>
-    document.querySelectorAll('[data-code-group]').forEach((group) => {
-      const tabs = Array.from(group.querySelectorAll('[data-code-tab]'));
-      const panels = Array.from(group.querySelectorAll('[data-code-panel]'));
-      tabs.forEach((tab) => tab.addEventListener('click', () => {
-        const selected = tab.dataset.codeTab;
-        tabs.forEach((item) => {
-          const active = item === tab;
-          item.classList.toggle('is-active', active);
-          item.setAttribute('aria-selected', String(active));
-          item.tabIndex = active ? 0 : -1;
-        });
-        panels.forEach((panel) => {
-          const active = panel.dataset.codePanel === selected;
-          panel.classList.toggle('is-active', active);
-          panel.toggleAttribute('hidden', !active);
-        });
-      }));
+(() => {
+  const groups = document.querySelectorAll('[data-code-group]');
+  for (const group of groups) {
+    const tabs = Array.from(group.querySelectorAll('[data-code-tab]'));
+    const panels = Array.from(group.querySelectorAll('[data-code-panel]'));
+
+    if (!tabs.length || !panels.length) continue;
+
+    const activate = (index) => {
+      tabs.forEach((tab, tabIndex) => {
+        const active = tabIndex === index;
+        tab.classList.toggle('is-active', active);
+        tab.setAttribute('aria-selected', active ? 'true' : 'false');
+        tab.setAttribute('tabindex', active ? '0' : '-1');
+      });
+
+      panels.forEach((panel, panelIndex) => {
+        const active = panelIndex === index;
+        panel.classList.toggle('is-active', active);
+        panel.hidden = !active;
+      });
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(index));
+      tab.addEventListener('keydown', (event) => {
+        if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+
+        event.preventDefault();
+
+        let nextIndex = index;
+        if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+        if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = tabs.length - 1;
+
+        activate(nextIndex);
+        tabs[nextIndex].focus();
+      });
     });
-  </script>
+
+    activate(0);
+  }
+})();
+</script>
 </body>
 </html>

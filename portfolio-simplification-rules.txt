@@ -1,0 +1,48 @@
+Portfolio simplification rules
+
+Goal
+- Show a clear docs-as-code flow: write in Markdown, run through a pipeline, produce HTML.
+- Keep the portfolio simple, useful, and pleasant to read.
+- Use existing patterns first; avoid unnecessary complexity.
+- This is a technical writer portfolio, not a UI design showcase.
+
+Core source of truth
+- Treat customers-api-tutorial.html as the visual and structural reference for shared page chrome.
+- Preserve the same overall feel from index.html.
+- Reuse the existing look and feel rather than redesigning it.
+
+Must keep
+- Code samples must stay.
+- The hero must keep id="top".
+- A readable, clear navigation must stay.
+- A light, unobtrusive footer must stay.
+- The page should still include visible code/documentation elements.
+
+Preferred page pattern
+- Keep a shared header, hero, and footer pattern across tutorial, doc, and essay pages.
+- Use one common shell where possible.
+- Keep differences mostly in the body content, not in the page chrome.
+- Use optional hero details only when they add value.
+
+Front matter policy
+- Keep front matter small and practical.
+- Use it for content intent and routing, not for duplicating layout logic.
+- Prefer optional fields over many required ones.
+- Avoid adding new fields unless they clearly reduce complexity.
+
+Layout policy
+- Prefer simple, consistent layouts.
+- Do not over-engineer the pipeline.
+- Do not introduce new visual systems unless they improve clarity.
+- Avoid making tutorial, doc, and essay pages look like three different products.
+
+Writing tone
+- Keep the text useful, direct, and calm.
+- Make the page readable first.
+- Preserve a technical writer’s voice: clear structure, concrete examples, practical flow.
+
+Change strategy
+- Reuse what already works.
+- Simplify before adding new abstractions.
+- If a change increases complexity without improving clarity, do not do it.
+- When uncertain, choose the simpler option that keeps the current look and feel.

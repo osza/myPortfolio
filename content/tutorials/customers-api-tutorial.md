@@ -1,10 +1,26 @@
+---
+type: tutorial
+title: "Customers API tutorial — Developer documentation sample (Piotr Oszenda)"
+description: "Hands-on API tutorial showing how to create, retrieve, update, and delete customer records with a fictional Customers API."
+eyebrow: "Developer documentation sample"
+primary_link_href: "#what-this-tutorial-demonstrates"
+primary_link_label: "Read tutorial"
+secondary_link_href: "index.html#samples"
+secondary_link_label: "Back to selected work"
+hero_panel_id: "sample-proof-title"
+hero_panel_label: "Build status"
+hero_panel_style: "default"
+hero_panel_items: "Markdown source::content/tutorials/customers-api-tutorial.md | Generated HTML::Built locally before publication. | Checked output::Source markers and local links are validated in CI."
+footer_tag: "Built from Markdown source"
+uses_mermaid: false
+accent_sections: "overview|before-you-start|resource-model|crud-tutorial|expected-workflow-result|why-this-tutorial-structure-works"
+spaced_articles: false
+output: "customers-api-tutorial.html"
+---
+
 # Manage customer data with the Customers API
 
 A hands-on tutorial that walks through a complete customer lifecycle using create, retrieve, update, and delete operations on a single resource.
-
-[Read tutorial](#overview) · [Back to selected work](index.html#samples)
-
-> REST API · CRUD workflow · cURL + JavaScript · Expanded sample
 
 ## What this tutorial demonstrates
 
@@ -16,7 +32,7 @@ A hands-on tutorial that walks through a complete customer lifecycle using creat
 
 This tutorial is structured as a compact but complete onboarding flow for a fictional resource-oriented API.
 
-> Tutorial sample · Fictional REST API
+**Tutorial sample · Fictional REST API**
 
 This tutorial demonstrates an end-to-end workflow for managing customer data with a fictional Customers API. The API, URLs, and example data are provided to illustrate structure, flow, and documentation style.
 
@@ -28,7 +44,7 @@ The setup section establishes the environment, credentials, and request tooling 
 
 ### Requirements and setup
 
-> Authentication · Environment · Request tooling
+**Authentication · Environment · Request tooling**
 
 Before you begin, make sure you have:
 
@@ -43,7 +59,7 @@ For safety, use a sandbox environment and a non-production token while testing t
 
 ### Base URL and headers
 
-> Authentication and request format
+**Authentication and request format**
 
 All examples in this tutorial use bearer token authentication and JSON request bodies where applicable.
 
@@ -62,9 +78,10 @@ The tutorial introduces the resource model before the task sequence so the later
 
 ### Customer resource
 
-> Field reference
+**Field reference**
 
 The tutorial uses a single `Customer` resource with the following fields:
+
 
 | Field | Type | Required | Description |
 | :-- | :-- | :-- | :-- |
@@ -77,7 +94,7 @@ The tutorial uses a single `Customer` resource with the following fields:
 
 ### Customers API snapshot
 
-> Endpoint overview
+**Endpoint overview**
 
 - `POST /api/1.0/customers` — Create a new customer.
 - `GET /api/1.0/customers/{id}` — Retrieve a customer by ID.
@@ -96,7 +113,7 @@ Each step keeps the task sequence explicit and lets the reader switch between cU
 
 Create the customer record that you will use throughout the rest of this tutorial. The response returns its generated `id`, which you need for the retrieve, update, and delete requests.
 
-#### cURL - Create customer
+**cURL**
 
 ```bash
 curl --request POST \
@@ -110,7 +127,7 @@ curl --request POST \
   }'
 ```
 
-#### JavaScript - Create customer
+**JavaScript**
 
 ```javascript
 const response = await fetch(`${baseUrl}/api/1.0/customers`, {
@@ -141,7 +158,7 @@ The client creates the initial customer record and obtains an `id` that you reus
 
 Retrieve the customer that you created in the previous step to confirm that it exists and to inspect the data returned by the API.
 
-#### cURL - Retrieve customer
+**cURL**
 
 ```bash
 curl --request GET \
@@ -149,7 +166,7 @@ curl --request GET \
   --header "Authorization: Bearer {access_token}"
 ```
 
-#### JavaScript - Retrieve customer
+**JavaScript**
 
 ```javascript
 const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
@@ -174,7 +191,7 @@ Use this step to confirm that the resource was created successfully and that the
 
 Update selected fields on the existing customer without replacing the entire resource. This request changes the customer's name and business name while preserving fields that are not included in the request body.
 
-#### cURL - Update customer
+**cURL**
 
 ```bash
 curl --request PATCH \
@@ -187,7 +204,7 @@ curl --request PATCH \
   }'
 ```
 
-#### JavaScript - Update customer
+**JavaScript**
 
 ```javascript
 const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
@@ -217,7 +234,7 @@ The partial update modifies only the fields included in the request body. Other 
 
 Delete the test customer to complete the resource lifecycle and leave your environment in a clean state.
 
-#### cURL - Delete customer
+**cURL**
 
 ```bash
 curl --request DELETE \
@@ -225,7 +242,7 @@ curl --request DELETE \
   --header "Authorization: Bearer {access_token}"
 ```
 
-#### JavaScript - Delete customer
+**JavaScript**
 
 ```javascript
 const response = await fetch(`${baseUrl}/api/1.0/customers/${customer.id}`, {
