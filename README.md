@@ -15,8 +15,8 @@ I specialise in developer documentation, API content, product documentation, and
 
 - `index.html` — Main portfolio page with selected work, experience, and contact details.
 - `api-tutorials.html` — Overview page for API and SUI tutorial samples.
-- `customers-api-tutorial-v2.html` — HTML version of a CRUD tutorial for a Customers API.
-- `customers-api-tutorial-v2.md` — Markdown source version of the same tutorial, showing a docs-as-code workflow.
+- `customers-api-tutorial.html` — HTML version of a CRUD tutorial for a Customers API.
+- `customers-api-tutorial.md` — Markdown source for the generated Customers API tutorial.
 - `mews-events-case-study.html` — Case study about reorganising product knowledge for a new documentation hub.
 - `octopus-society-on-sui.html` — Concept-focused guide on SUI.
 - `game-assets-on-sui.html` — Tutorial-style guide on game assets in SUI.
@@ -30,8 +30,33 @@ I’m a Senior Technical Writer and Knowledge Architect with experience document
 
 [GitHub Pages](https://osza.github.io/myPortfolio/)
 
+## Documentation workflow
+
+The Customers API tutorial is generated from `customers-api-tutorial.md`.
+
+```bash
+npm run build
+npm run validate
+```
+
+The GitHub Actions workflow runs on pull requests and on pushes to `main` and `release/v4.0.0`. It:
+
+- Builds `customers-api-tutorial.html` from the Markdown source.
+- Fails when the generated HTML differs from the committed version.
+- Validates local links and required tutorial markers.
+
+Before committing changes to `customers-api-tutorial.md` or the tutorial build and validation scripts, run the following commands locally:
+
+```bash
+npm run build
+npm run validate
+```
+
+Then review and commit both the Markdown source and any generated HTML changes.
+
 ## Contact
 
-- Email: <piotr.oszenda@outlook.com>
-- Location: Gijón, Spain
+- Email: [piotr.oszenda@outlook.com](mailto:piotr.oszenda@outlook.com)
+- Location: Gliwice, Poland or Gijón, Spain (remote)
 - [LinkedIn](https://www.linkedin.com/in/piotr-oszenda/)
+  
