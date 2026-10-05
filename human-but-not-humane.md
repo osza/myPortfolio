@@ -12,7 +12,7 @@ hero_panel_id: "essay-focus-title"
 hero_panel_label: "The central distinction"
 hero_panel_style: "case"
 hero_panel_items: "Human describes resemblance.::AI can be articulate, encouraging, inventive, apologetic, and confidently wrong, all at the same time. | Humane describes treatment.::A humane workflow preserves constraints, exposes uncertainty, and respects the user’s attention. | Project truth needs a durable home.::Chats can assist the work, but they should not be asked to keep organisational memory."
-footer_tag: "Essay page built from Markdown source"
+footer_tag: "Built from Markdown source"
 uses_mermaid: false
 spaced_articles: true
 output: "human-but-not-humane.html"

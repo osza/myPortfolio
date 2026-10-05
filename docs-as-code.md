@@ -12,7 +12,7 @@ hero_panel_id: "docs-workflow-title"
 hero_panel_label: "Workflow focus"
 hero_panel_style: "default"
 hero_panel_items: "Approach::Documentation is treated as maintainable source content, not as isolated files. | Workflow::Version control, review, and publishing are connected in one repeatable process. | Outcome::The result is easier to update, audit, and scale across teams."
-footer_tag: "Documentation page built from Markdown source"
+footer_tag: "Built from Markdown source"
 uses_mermaid: false
 accent_sections: "overview|workflow-components|draft-to-publish|workflow-map|repo-visibility|connected-samples"
 spaced_articles: false
