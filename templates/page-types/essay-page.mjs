@@ -21,7 +21,7 @@ export const renderEssayPage = ({
   secondaryLink = { href: 'index.html#samples', label: 'Back to selected work' },
   heroStats = null,
   heroPanel = null,
-  footerTag = 'Essay page built from Markdown source',
+  footerTag = 'Built from Markdown source',
   usesMermaid = false
 }) => renderSharedPageShell({
   sourcePath,

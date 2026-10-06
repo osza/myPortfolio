@@ -195,6 +195,33 @@ const buildHeroPanel = (frontmatter, sourcePath) => {
   };
 };
 
+const normalizeHeadingLabel = (value = '') => String(value)
+  .toLowerCase()
+  .replace(/[^a-z0-9]+/g, ' ')
+  .trim();
+
+const warnOnEssayHeroPanelDuplication = (filename, lines, frontmatter) => {
+  if (frontmatter.type !== 'essay') return;
+
+  const heroPanelLabel = String(frontmatter.hero_panel_label || '').trim();
+  if (!heroPanelLabel) return;
+
+  const firstSectionLine = lines.find((line) => line.trim().startsWith('## '));
+  if (!firstSectionLine) return;
+
+  const firstSectionTitle = firstSectionLine.trim().slice(3).trim();
+
+  if (normalizeHeadingLabel(heroPanelLabel) !== normalizeHeadingLabel(firstSectionTitle)) {
+    return;
+  }
+
+  console.warn(
+    `[build warning] ${filename}: hero_panel_label matches the first essay section heading ` +
+    `("${firstSectionTitle}"). This often creates duplicated hero/body content. ` +
+    `Prefer a summary-style hero panel label such as "Essay focus" or "Why this matters".`
+  );
+};
+
 const validatePageStructure = (filename, lines) => {
   const h1Lines = lines
     .map((line, index) => ({ line, index }))
@@ -260,6 +287,7 @@ const readCodeFence = (lines, startIndex) => {
 
 const readCodeSamplePair = (lines, startIndex) => {
   const labelLine = lines[startIndex]?.trim();
+
   const labelMatch = labelLine?.match(/^\*\*(cURL|JavaScript|HTTP|JSON)\*\*$/i);
   if (!labelMatch) return null;
 
@@ -370,7 +398,7 @@ const renderMarkdown = (lines, page) => {
       if (containerStack.at(-1) === 'actions') {
         const links = listItems.map((item) => {
           const match = item.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-          return match ? { label: match[1], href: match[2] } : null;
+          return match ? { label: match, href: match } : null;[3][4]
         });
 
         if (links.every(Boolean) && links.length > 0) {
@@ -560,7 +588,7 @@ const renderMarkdown = (lines, page) => {
       flushTable();
 
       if (groupedSamples.samples.length === 1) {
-        const sample = groupedSamples.samples[0];
+        const sample = groupedSamples.samples;
         if ((sample.language || '').toLowerCase() === 'mermaid') {
           usesMermaid = true;
           html.push(`${currentIndent()}<div class="mermaid-block"><pre class="mermaid">${renderMermaidCode(sample.code)}</pre></div>`);
@@ -726,6 +754,7 @@ const buildPage = async (filename) => {
   const { data: frontmatter, content } = parseFrontmatter(source);
   const lines = content.split('\n');
   validatePageStructure(filename, lines);
+  warnOnEssayHeroPanelDuplication(filename, lines, frontmatter);
 
   const titleLine = lines.find((line) => line.startsWith('# ')) || '# Untitled';
   const title = titleLine.slice(2).trim();

@@ -9,9 +9,9 @@ secondary_link_href: "index.html#samples"
 secondary_link_label: "Back to selected work"
 hero_stats: "Project memory | AI-assisted development"
 hero_panel_id: "essay-focus-title"
-hero_panel_label: "The central distinction"
+hero_panel_label: "Essay focus"
 hero_panel_style: "case"
-hero_panel_items: "Human describes resemblance.::AI can be articulate, encouraging, inventive, apologetic, and confidently wrong, all at the same time. | Humane describes treatment.::A humane workflow preserves constraints, exposes uncertainty, and respects the user’s attention. | Project truth needs a durable home.::Chats can assist the work, but they should not be asked to keep organisational memory."
+hero_panel_items: "Workflow lens::The essay examines AI-assisted development through project memory, responsibility, and decision-making rather than surface-level productivity claims. | Core distinction::It separates human-like interaction from humane working methods that preserve context, constraints, and user trust. | Practical conclusion::Chats can support delivery, but durable project truth still needs a maintained system outside the conversation."
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
 spaced_articles: true

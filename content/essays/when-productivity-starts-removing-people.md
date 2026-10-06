@@ -9,9 +9,9 @@ secondary_link_href: "index.html#samples"
 secondary_link_label: "Back to selected work"
 hero_stats: "Technical writing | AI and work | Documentation workflows"
 hero_panel_id: "essay-focus-title"
-hero_panel_label: "The argument"
+hero_panel_label: "Essay focus"
 hero_panel_style: "case"
-hero_panel_items: "The profession may survive while becoming smaller and less forgiving.::Productivity gains can change how companies divide work and how many people they retain. | Plausible output is not reliable documentation.::A generated draft still depends on context, verification, constraints, and review. | The role is moving into workflow design.::Technical writers increasingly shape the systems, terminology, sources, and review paths that make AI-assisted documentation usable."
+hero_panel_items: "Pressure point::The essay looks at what productivity claims can hide when AI changes staffing decisions. | Core tension::Documentation work may remain necessary even as fewer people are asked to do more of it. | Reader takeaway::The piece argues that technical writing is shifting toward verification, system context, and workflow design."
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
 spaced_articles: true
