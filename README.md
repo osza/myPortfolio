@@ -2,7 +2,7 @@
 
 This repository contains my technical writing portfolio for GitHub Pages.
 
-I specialise in developer documentation, API content, product documentation, and knowledge architecture for SaaS and enterprise platforms. My work includes user-facing documentation, help content, onboarding materials, release notes, knowledge base content, developer-focused documentation, and docs-as-code examples.
+My work includes developer documentation, API content, product documentation, and knowledge architecture for SaaS and enterprise platforms. I specialized in user-facing documentation, help content, onboarding materials, release notes, knowledge base content, developer-focused documentation, and docs-as-code workflows.
 
 ## What this portfolio shows
 
@@ -13,29 +13,29 @@ I specialise in developer documentation, API content, product documentation, and
 
 ## Repository structure
 
-- `content/docs/` — Markdown sources for documentation samples.
-- `content/tutorials/` — Markdown sources for tutorial samples.
-- `content/essays/` — Markdown sources for essay samples.
-- `content/pages/` — Reserved for special or custom Markdown pages.
-- `templates/shared/` — Shared page shell and rendering helpers.
-- `templates/page-types/` — Documentation, tutorial, and essay page renderers.
-- `assets/css/` — Shared stylesheet used by the portfolio pages.
-- `scripts/build/` — Markdown-to-HTML build logic.
-- `scripts/validate/` — Site and generated-output validation logic.
-- `index.html` — Main portfolio entry point, kept in the repository root.
+- `content/docs/` - Markdown sources for documentation samples.
+- `content/tutorials/` - Markdown sources for tutorial samples.
+- `content/essays/` - Markdown sources for essay samples.
+- `content/pages/` - Reserved for special or custom Markdown pages.
+- `templates/shared/` - Shared page shell and rendering helpers.
+- `templates/page-types/` - Documentation, tutorial, and essay page renderers.
+- `assets/css/` - Shared stylesheet used by the portfolio pages.
+- `scripts/build/` - Markdown-to-HTML build logic.
+- `scripts/validate/` - Site and generated-output validation logic.
+- `index.html` - Main portfolio entry point, kept in the repository root.
 
 ## Key samples
 
-- `index.html` — Main portfolio page with selected work, experience, and contact details.
-- `api-tutorials.html` — Overview page for API and SUI tutorial samples.
-- `customers-api-tutorial.html` — HTML version of a CRUD tutorial for a Customers API.
-- `content/tutorials/customers-api-tutorial.md` — Markdown source for the generated Customers API tutorial.
-- `mews-events-case-study.html` — Case study about reorganising product knowledge for a new documentation hub.
-- `content/docs/docs-as-code.md` — Markdown source for the docs-as-code sample.
-- `content/docs/mews-events-case-study.md` — Markdown source for the case study.
-- `octopus-society-on-sui.html` — Concept-focused guide on SUI.
-- `game-assets-on-sui.html` — Tutorial-style guide on game assets in SUI.
-- `docs-as-code.html` — Sample page focused on docs-as-code thinking and documentation workflow.
+- `index.html` - Main portfolio page with selected work, experience, and contact details.
+- `api-tutorials.html` - Overview page for API and SUI tutorial samples.
+- `customers-api-tutorial.html` - HTML version of a CRUD tutorial for a Customers API.
+- `content/tutorials/customers-api-tutorial.md` - Markdown source for the generated Customers API tutorial.
+- `mews-events-case-study.html` - Case study about reorganising product knowledge for a new documentation hub.
+- `content/docs/docs-as-code.md` - Markdown source for the docs-as-code sample.
+- `content/docs/mews-events-case-study.md` - Markdown source for the case study.
+- `octopus-society-on-sui.html` - Concept-focused guide on SUI.
+- `game-assets-on-sui.html` - Tutorial-style guide on game assets in SUI.
+- `docs-as-code.html` - Sample page focused on docs-as-code thinking and documentation workflow.
 
 ## Background
 
@@ -59,7 +59,7 @@ npm run check
 
 `npm run build` generates HTML from the Markdown sources. `npm run validate` checks local links, required frontmatter, generated-file markers, and the shared `Built from Markdown source` footer. `npm run check` runs both commands in sequence.
 
-After changing a Markdown source or the build templates, run the commands locally and review both the generated HTML and the diff before committing.
+If, for any reason you'd like to change the content locally, after changing a Markdown source or the build templates, run the commands on you rmachine and review both the generated HTML and the diff before proceeding.
 
 ## Contact
 
