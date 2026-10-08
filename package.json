@@ -4,6 +4,6 @@
   "scripts": {
     "build": "node scripts/build/build-docs.mjs",
     "validate": "node scripts/validate/validate-site.mjs",
-    "check": "npm run build && npm run validate"
+    "check": "npm run build && git diff --exit-code && npm run validate"
   }
 }

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>How myPortfolio v5 works (with v4 comparison)</title>
+  <meta name="description" content="A documentation sample explaining how myPortfolio v5 uses Markdown, frontmatter, Node.js, validation, and AI-assisted development compared with version 4.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Generated from content/docs/how-myportfolio-works.md. Run npm run build after editing the source. -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html#top" aria-label="Go to homepage"><span class="brand__mark" aria-hidden="true">PO</span><span>Piotr Oszenda</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html#work">Work</a><a href="index.html#approach">Approach</a><a href="index.html#experience">Experience</a><a href="index.html#samples">Samples</a><a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+    <section class="hero" id="top">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">Portfolio architecture sample</p>
+          <h1>How myPortfolio v5 works</h1>
+          <p class="hero__lead">This piece briefly explains how <strong>myPortfolio</strong> v5 turns Markdown into published HTML and how the current architecture improves on version 4.</p>
+          <div class="hero__meta"><span class="hero-stat">Docs as code</span><span class="hero-stat">Markdown workflow</span><span class="hero-stat">AI-assisted development</span><span class="hero-stat">Version comparison</span></div>
+          <div class="hero__actions"><a class="button-link button-link--primary" href="#overview">Read sample</a><a class="button-link button-link--secondary" href="index.html#samples">Back to selected work</a></div>
+        </div>
+        <aside class="hero-panel" aria-labelledby="myportfolio-v5-title">
+          <p class="hero-panel__label" id="myportfolio-v5-title">Architecture focus</p>
+          <ul class="proof-list"><li><strong>Approach</strong><span>Markdown files act as source content, while frontmatter controls routing, rendering, and validation.</span></li><li><strong>Change</strong><span>Version 5 separates content, templates, scripts, and assets more clearly than version 4.</span></li><li><strong>Reality</strong><span>AI helps write the code, but human review is still needed to catch invented decisions and unintended changes.</span></li></ul>
+        </aside>
+      </div>
+    </section>
+    <section class="section section--accent" id="overview">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Documentation</p>
+            <h2 class="section-title">Overview</h2>
+          </div>
+        </div>
+        <p class="sample-summary">AI helped build this version of my portfolio. The working arrangement is simple: I complain; the AI writes code. I ask for a feature; it improvises, changes something without asking (the footer text was one example), and I catch the decision in a diff. AI proposes structure and phrasing; I remove filler, correct the logic, and verify the implementation. I remain the AI project manager because the tool is fast, shallow, and not accountable. The point from my <a href="human-but-not-humane.html">Human, but not humane</a> essay still holds: adding skills or commands remains a fight with the system, not a smooth upgrade.</p>
+      </div>
+    </section>
+    <section class="section" id="from-v4-to-v5-what-changed">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Documentation</p>
+            <h2 class="section-title">From v4 to v5: what changed</h2>
+          </div>
+        </div>
+        <p class="sample-summary">In v4, the root directory mixed source files, build output, assets, layouts, scripts, backups, and special pages. It worked, but it made the repository harder to navigate and easier to break.</p>
+        <p class="sample-summary">v5 uses a source-first docs-as-code structure. Content lives in <code>content/</code>, organised as <code>content/docs/</code>, <code>content/tutorials/</code>, and <code>content/essays/</code>; <code>content/pages/</code> holds special pages. Shared templates live in <code>templates/shared/</code>, page-type templates in <code>templates/page-types/</code>, assets in <code>assets/css/</code>, and scripts in <code>scripts/</code>.</p>
+        <p class="sample-summary">The pipeline is now explicit. In v4, Markdown files in the root used ad-hoc layouts and inconsistent metadata. In v5, every article is an <code>.md</code> file with YAML frontmatter. It declares the page type (<code>doc</code>, <code>tutorial</code>, or <code>essay</code>), title, description, hero content, footer tag, and output filename. Frontmatter is the control layer: it tells the build which template to use, where to write the page, and what to validate.</p>
+        <p class="sample-summary">The workflow is explicit: <code>npm run build</code> generates HTML, <code>npm run validate</code> checks existing output, and <code>npm run check</code> runs both as a pre-CI quality warden.</p>
+      </div>
+    </section>
+    <section class="section" id="how-v5-works-now">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Documentation</p>
+            <h2 class="section-title">How v5 works now</h2>
+          </div>
+        </div>
+        <p class="sample-summary">Frontmatter is the single source of truth for rendering. Change a field and the page changes without editing the prose. It keeps metadata separate from content and makes each page machine-readable, so the pipeline can validate, index, and reuse it.</p>
+        <p class="sample-summary">The build uses <code>.mjs</code> files, so Node.js treats scripts as ECMAScript modules and they use <code>import</code> and <code>export</code>. Shared templates provide common page chrome; page-type templates render documentation, tutorials, and essays.</p>
+        <p class="sample-summary">Validation runs after the build. It checks the output, footer consistency, and frontmatter-driven rules before changes reach CI.</p>
+        <p class="sample-summary">Accent sections in the HTML files are matched against slugs derived from H2 titles, so styling follows headings rather than duplicated identifiers.</p>
+      </div>
+    </section>
+    <section class="section" id="why-v5-is-better-than-v4">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Documentation</p>
+            <h2 class="section-title">Why v5 is better than v4</h2>
+          </div>
+        </div>
+        <p class="sample-summary">v5 is clearer and safer to change. In v4, a layout or page-type change meant editing a crowded root and risking a published file. In v5, content, templates, scripts, assets, and output have distinct roles. Changes stay local and diffs are easier to review.</p>
+        <p class="sample-summary">The pipeline also makes regressions easier to detect. Frontmatter-driven rendering produces predictable pages, while validation checks that source and output still follow the agreed model. The system remains small enough for one author, but follows practices that scale to a team.</p>
+      </div>
+    </section>
+    <section class="section section--accent" id="future-improvements">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <p class="section-kicker">Documentation</p>
+            <h2 class="section-title">Future improvements</h2>
+          </div>
+        </div>
+        <p class="sample-summary">A later version could move published HTML into <code>dist/</code>. Validation could check internal links, heading hierarchy, and required frontmatter. The build could create a page index for search, and frontmatter flags could enable optional features such as Mermaid diagrams.</p>
+        <p class="sample-summary">That would improve the system, not remove the supervision problem. Adding skills or commands will still require someone to inspect the diff and decide whether the tool solved the right problem.</p>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p>Built from Markdown source</p>
+      <a href="#top">Back to top</a>
+    </div>
+  </footer>
+  <script>
+(() => {
+  const groups = document.querySelectorAll('[data-code-group]');
+  for (const group of groups) {
+    const tabs = Array.from(group.querySelectorAll('[data-code-tab]'));
+    const panels = Array.from(group.querySelectorAll('[data-code-panel]'));
+
+    if (!tabs.length || !panels.length) continue;
+
+    const activate = (index) => {
+      tabs.forEach((tab, tabIndex) => {
+        const active = tabIndex === index;
+        tab.classList.toggle('is-active', active);
+        tab.setAttribute('aria-selected', active ? 'true' : 'false');
+        tab.setAttribute('tabindex', active ? '0' : '-1');
+      });
+
+      panels.forEach((panel, panelIndex) => {
+        const active = panelIndex === index;
+        panel.classList.toggle('is-active', active);
+        panel.hidden = !active;
+      });
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(index));
+      tab.addEventListener('keydown', (event) => {
+        if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+
+        event.preventDefault();
+
+        let nextIndex = index;
+        if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+        if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = tabs.length - 1;
+
+        activate(nextIndex);
+        tabs[nextIndex].focus();
+      });
+    });
+
+    activate(0);
+  }
+})();
+</script>
+</body>
+</html>

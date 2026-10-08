@@ -30,6 +30,7 @@ const renderMermaidCode = (value = '') => escapeHtml(value)
 const inline = (value = '') => escapeHtml(value)
   .replace(/`([^`]+)`/g, '<code>$1</code>')
   .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+  .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>')
   .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, text, href) => {
     const external = /^https?:\/\//.test(href) || href.startsWith('mailto:');
     const attrs = external && !href.startsWith('mailto:')
