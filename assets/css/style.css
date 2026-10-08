@@ -484,6 +484,10 @@ select {
   padding-block: clamp(0.75rem, 1.6vw, 1.5rem);
 }
 
+.page--tutorial .section {
+  padding-block: clamp(1rem, 2vw, 1.75rem);
+}
+
 .section--accent {
   background: var(--color-accent-wash);
   border-top: 1px solid var(--color-divider);

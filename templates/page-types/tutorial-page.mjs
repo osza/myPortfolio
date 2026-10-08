@@ -27,5 +27,6 @@ export const renderTutorialPage = ({
   footerTag,
   usesMermaid,
   mermaidMode: 'tutorial',
-  footerMode: 'simple'
+  footerMode: 'simple',
+  bodyClassName: 'page--tutorial'
 });
