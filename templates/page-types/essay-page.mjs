@@ -37,5 +37,6 @@ export const renderEssayPage = ({
   footerTag,
   usesMermaid,
   mermaidMode: 'doc',
-  footerMode: 'simple'
+  footerMode: 'simple',
+  bodyClassName: 'page--essay'
 });

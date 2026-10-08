@@ -98,7 +98,8 @@ export const renderSharedPageShell = ({
   usesMermaid = false,
   mermaidMode = 'tutorial',
   footerMode = 'simple',
-  extraFooterContent = ''
+  extraFooterContent = '',
+  bodyClassName = ''
 }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,7 +112,7 @@ export const renderSharedPageShell = ({
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   ${usesMermaid ? renderMermaidScript(mermaidMode) : ''}  <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body${bodyClassName ? ` class="${escapeHtml(bodyClassName)}"` : ''}>
   <!-- Generated from ${sourcePath}. Run npm run build after editing the source. -->
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">

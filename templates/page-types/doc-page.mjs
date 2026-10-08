@@ -27,5 +27,6 @@ export const renderDocumentationPage = ({
   footerTag,
   usesMermaid,
   mermaidMode: 'doc',
-  footerMode: 'simple'
+  footerMode: 'simple',
+  bodyClassName: 'page--doc'
 });
