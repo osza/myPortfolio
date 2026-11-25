@@ -79,7 +79,8 @@
           <p class="sample-summary">Before you begin, make sure you have the following in place:</p>
           <ul><li>The <a href="https://docs.sui.io/references/cli" target="_blank" rel="noopener noreferrer">Sui CLI</a> installed and configured for the target network, such as testnet.</li><li>A wallet with <a href="https://docs.sui.io/getting-started/onboarding/get-coins" target="_blank" rel="noopener noreferrer">test SUI for gas fees</a>.</li><li>Node.js installed if you plan to run the TypeScript examples.</li><li>A code editor and a terminal for running Sui commands.</li><li>The package ID for the fictional Octopus Society Move module used in the examples below.</li></ul>
           <p class="sample-summary">If you are new to Sui, treat this as a quick readiness check: once the CLI works, the wallet is funded, and the package ID is available, you are ready to follow the tutorial as written.</p>
-          <p class="sample-summary">The examples below use placeholder IDs and sample responses so the structure stays clear and reusable.</p>
+          <p class="sample-summary">The examples below use placeholder IDs and sample responses. Treat them as a contract-integration pattern, not commands to run unchanged.</p>
+          <p class="sample-summary"><strong>Terms used here:</strong> an <em>object</em> is on-chain state with an owner and fields; a <em>PTB</em> (programmable transaction block) groups on-chain commands into one transaction; <code>TxContext</code> gives a Move function information about the current transaction and sender.</p>
           <pre class="code-panel is-active"><code class="language-bash">sui client active-env
 sui client active-address
 sui client gas</code></pre>
@@ -100,7 +101,7 @@ sui client gas</code></pre>
           <div class="sample-header"><div class="sample-heading">
             <h3>1. Connect a wallet</h3>
           </div></div>
-          <p class="sample-summary">Start by connecting a compatible wallet in Sui Wallet or another supported browser extension. For app-based integrations, follow the official <a href="https://docs.sui.io/getting-started/examples/dapp-kit-frontend" target="_blank" rel="noopener noreferrer">dApp Kit frontend pattern</a> or the <a href="https://docs.sui.io/onchain-finance/asset-custody/wallets/wallet-standard" target="_blank" rel="noopener noreferrer">Wallet Standard</a>. This keeps the first step lightweight so the reader can focus on the membership flow itself.</p>
+          <p class="sample-summary">Start by connecting a compatible wallet in Sui Wallet or another supported browser extension. For app-based integrations, use the official <a href="https://docs.sui.io/develop/transactions/ptbs/ts-sdk-ptb-template" target="_blank" rel="noopener noreferrer">TypeScript SDK transaction pattern</a> or the <a href="https://docs.sui.io/onchain-finance/asset-custody/wallets/wallet-standard" target="_blank" rel="noopener noreferrer">Wallet Standard</a>.</p>
           <ul><li>Confirm the wallet is set to the intended network.</li><li>Check that the account has enough test SUI for gas.</li></ul>
         </article>
         <article class="sample">
@@ -114,14 +115,14 @@ sui client gas</code></pre>
           <div class="sample-header"><div class="sample-heading">
             <h3>3. Verify membership</h3>
           </div></div>
-          <p class="sample-summary">Wait for the transaction to become readable, then use the object ID to confirm ownership and inspect membership fields. This avoids treating an accepted submission as immediately indexed state and aligns with how the <a href="https://docs.sui.io/develop/sui-architecture/object-model" target="_blank" rel="noopener noreferrer">Sui object model</a> exposes object ownership and history.</p>
+          <p class="sample-summary">After submission, wait for indexed state with <code>client.waitForTransaction({ result })</code>, then use the object ID to confirm ownership and inspect membership fields. This avoids treating an accepted submission as immediately queryable state and aligns with how the <a href="https://docs.sui.io/develop/sui-architecture/object-model" target="_blank" rel="noopener noreferrer">Sui object model</a> exposes object ownership and history.</p>
           <ul><li>Query the object through the CLI.</li><li>Repeat the check with the SDK response.</li></ul>
         </article>
         <article class="sample">
           <div class="sample-header"><div class="sample-heading">
             <h3>4. Claim the reward</h3>
           </div></div>
-          <p class="sample-summary">Finish by claiming a reward tied to the membership. This closes the onboarding loop with a concrete outcome.</p>
+          <p class="sample-summary">Claim a reward tied to the membership object. In this fictional package, <code>claim_reward</code> accepts the membership object as its first argument; adapt the function name and arguments to your package.</p>
           <ul><li>Confirm the reward transaction succeeded.</li><li>Review the updated object state after the claim.</li></ul>
         </article>
       </div>
@@ -140,13 +141,13 @@ sui client gas</code></pre>
             <h3>1. Join with Sui CLI</h3>
           </div></div>
           <p class="sample-summary"><strong>Run the transaction from the terminal</strong></p>
-          <p class="sample-summary">Use the CLI when you want to validate the contract entry point quickly and inspect the transaction output before wiring the flow into an app.</p>
+          <p class="sample-summary">Use the CLI to validate the contract entry point and inspect the transaction output before wiring the flow into an app.</p>
           <pre class="code-panel is-active"><code class="language-bash">sui client call \
  --package &lt;PACKAGE_ID&gt; \
  --module octopus_society \
  --function join \
  --gas-budget 10000000</code></pre>
-          <p class="sample-summary">The sender comes from the active CLI address and the Move function receives <code>TxContext</code> implicitly. Record the transaction digest, then identify the created membership object from the transaction effects before moving to the next step.</p>
+          <p class="sample-summary">The sender comes from the active CLI address and the Move function receives <code>TxContext</code> implicitly. Record the transaction digest, then identify the created membership object from the transaction effects before moving to the next step. The current CLI can estimate gas when you omit <code>--gas-budget</code>; keep an explicit budget only when your environment requires one.</p>
         </article>
         <article class="sample">
           <div class="sample-header"><div class="sample-heading">
@@ -159,10 +160,24 @@ sui client gas</code></pre>
         </article>
         <article class="sample">
           <div class="sample-header"><div class="sample-heading">
-            <h3>3. Join from TypeScript</h3>
+            <h3>3. Claim the reward with Sui CLI</h3>
+          </div></div>
+          <p class="sample-summary"><strong>Complete the membership flow</strong></p>
+          <p class="sample-summary">Pass the membership object to the package entry point that grants the reward.</p>
+          <pre class="code-panel is-active"><code class="language-bash">sui client call \
+ --package &lt;PACKAGE_ID&gt; \
+ --module octopus_society \
+ --function claim_reward \
+ --args &lt;MEMBERSHIP_OBJECT_ID&gt; \
+ --gas-budget 10000000</code></pre>
+          <p class="sample-summary">Record the reward transaction digest. A successful result should show a successful execution status and the object changes or events defined by your package. Re-query the membership object if claiming changes one of its fields.</p>
+        </article>
+        <article class="sample">
+          <div class="sample-header"><div class="sample-heading">
+            <h3>4. Join from TypeScript</h3>
           </div></div>
           <p class="sample-summary"><strong>Embed the flow in an app</strong></p>
-          <p class="sample-summary">This version shows how the same action can be represented from application code using <a href="https://docs.sui.io/develop/transactions/ptbs/ts-sdk-ptb-template" target="_blank" rel="noopener noreferrer">the current TypeScript PTB pattern</a>.</p>
+          <p class="sample-summary">This version represents the same action in a backend script. Set <code>packageId</code> from your published package and load <code>keypair</code> from a server-side secret; never place a keypair in browser code.</p>
           <pre class="code-panel is-active"><code class="language-typescript">import { SuiGrpcClient } from '@mysten/sui/grpc';
 import { Transaction } from '@mysten/sui/transactions';
 
@@ -190,11 +205,11 @@ if (result.$kind === 'FailedTransaction') {
 
 await client.waitForTransaction({ result });
 console.log(result.Transaction.digest);</code></pre>
-          <p class="sample-summary">This example uses a keypair only because it represents a script or backend. In a browser, construct the transaction but let the user's wallet sign and execute it through <a href="https://docs.sui.io/getting-started/examples/dapp-kit-frontend" target="_blank" rel="noopener noreferrer">dApp Kit</a>.</p>
+          <p class="sample-summary">This example uses a keypair only because it represents a script or backend. In a browser, construct the transaction but let the user's wallet sign and execute it through your wallet integration.</p>
         </article>
         <article class="sample">
           <div class="sample-header"><div class="sample-heading">
-            <h3>4. Read the object in TypeScript</h3>
+            <h3>5. Read the object in TypeScript</h3>
           </div></div>
           <p class="sample-summary"><strong>Fetch the result and render it in UI</strong></p>
           <p class="sample-summary">Use the object ID from the transaction result to fetch the current membership state for an app or game UI. After submission, wait for confirmation before reading indexed state, as described in <a href="https://docs.sui.io/develop/transactions/ptbs/building-ptb" target="_blank" rel="noopener noreferrer">the transaction-building guidance</a>.</p>
@@ -205,7 +220,33 @@ console.log(result.Transaction.digest);</code></pre>
 
 console.log(object.owner);
 console.log(object.json);</code></pre>
-          <p class="sample-summary">This closes the loop from transaction result to object inspection. JSON is convenient for a demo; production code should use generated BCS bindings when it needs a stable, typed object shape.</p>
+          <p class="sample-summary">JSON is convenient for a demo; production code should use generated BCS bindings when it needs a stable, typed object shape.</p>
+        </article>
+        <article class="sample">
+          <div class="sample-header"><div class="sample-heading">
+            <h3>6. Claim the reward from TypeScript</h3>
+          </div></div>
+          <p class="sample-summary"><strong>Pass the verified membership object to the claim entry point</strong></p>
+          <pre class="code-panel is-active"><code class="language-typescript">const claimTx = new Transaction();
+
+claimTx.moveCall({
+  target: `${packageId}::octopus_society::claim_reward`,
+  arguments: [claimTx.object(membershipObjectId)],
+});
+
+const claimResult = await client.signAndExecuteTransaction({
+  signer: keypair,
+  transaction: claimTx,
+  include: { effects: true },
+});
+
+if (claimResult.$kind === 'FailedTransaction') {
+  throw new Error(claimResult.FailedTransaction.status.error?.message);
+}
+
+await client.waitForTransaction({ result: claimResult });
+console.log(claimResult.Transaction.digest);</code></pre>
+          <p class="sample-summary">Use the transaction effects or package events to identify the reward. The exact reward type and object changes are package-specific.</p>
         </article>
       </div>
     </section>
@@ -217,13 +258,12 @@ console.log(object.json);</code></pre>
             <h2 class="section-title">What the reader leaves with</h2>
           </div>
         </div>
-        <p class="sample-summary">This closing section makes the hand-off to the game-state tutorial explicit.</p>
         <article class="sample">
           <div class="sample-header"><div class="sample-heading">
             <h3>Outcome</h3>
           </div></div>
           <p class="sample-summary"><strong>Reusable onboarding sample</strong></p>
-          <p class="sample-summary">By the end of the tutorial, the reader can prepare a testnet account, submit a membership transaction from a trusted signer, wait for indexed state, and inspect the resulting object. Continue to the game-state tutorial to apply the same ownership model to player assets and shared structures.</p>
+          <p class="sample-summary">By the end of the tutorial, the reader can prepare a testnet account, join from a trusted signer, wait for indexed state, inspect the membership object, and claim a reward. Continue to the game-state tutorial to apply the same ownership model to player assets and shared structures.</p>
           <p class="sample-summary"><a href="game-assets-on-sui.html">Continue to game assets on Sui →</a></p>
         </article>
       </div>
