@@ -14,7 +14,6 @@ hero_panel_style: "case"
 hero_panel_items: "The core issue was structural, not only editorial.::Users needed guidance that matched real tasks, not a scattered set of product explanations. | The work had migration value.::It translated implicit product knowledge into a more explicit, reusable, and maintainable documentation model. | The output supports scale.::A better content structure helps documentation stay usable as workflows, ownership, and features evolve."
 footer_tag: "Built from Markdown source"
 accent_sections: "context|what-changed"
-spaced_articles: true
 output: "mews-events-case-study.html"
 ---
 

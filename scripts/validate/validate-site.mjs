@@ -92,15 +92,31 @@ for (const file of htmlFiles) {
   const html = await readFile(file, 'utf8');
   for (const match of html.matchAll(/href="([^"]+)"/g)) {
     const href = match[1];
-    // Skip external links, anchors, and non-file protocols
-    if (/^(https?:|mailto:|tel:|#)/.test(href)) continue;
-    // Treat every other href as a local file (with or without leading './')
-    const target = href.split('#')[0].replace(/^\.\//, '');
-    if (!target) continue;
+    // Skip external links and non-file protocols.
+    if (/^(https?:|mailto:|tel:)/.test(href)) continue;
+
+    const [targetPath, fragment] = href.split('#', 2);
+    // Treat every other href as a local file (with or without leading './').
+    // A fragment-only href targets the current file.
+    const target = targetPath.replace(/^\.\//, '') || file;
+    const targetAbsolutePath = path.resolve(target);
+
     try {
-      await access(path.resolve(target));
+      await access(targetAbsolutePath);
     } catch {
       failures.push(`${file}: missing local target ${href}`);
+      continue;
+    }
+
+    if (fragment) {
+      const targetHtml = target === file ? html : await readFile(targetAbsolutePath, 'utf8');
+      const targetIds = new Set(
+        [...targetHtml.matchAll(/\bid=(?:"([^"]+)"|'([^']+)')/g)].map((idMatch) => idMatch[1] || idMatch[2])
+      );
+
+      if (!targetIds.has(fragment)) {
+        failures.push(`${file}: missing fragment target ${href}`);
+      }
     }
   }
 }
@@ -115,8 +131,9 @@ for (const file of markdownFiles) {
     failures.push(`${outputFile}: missing generated-file marker for ${file}`);
   }
 
-  if (!output.includes('Built from Markdown source')) {
-    failures.push(`${outputFile}: missing shared Markdown footer text`);
+  const footerTag = frontmatter.footer_tag || 'Built from Markdown source';
+  if (!output.includes(footerTag)) {
+    failures.push(`${outputFile}: missing footer text "${footerTag}"`);
   }
 
   for (const marker of [frontmatter.title, frontmatter.description].filter(Boolean)) {

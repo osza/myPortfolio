@@ -160,6 +160,7 @@ const readMarkdownPages = async () => {
   return pages.sort();
 };
 
+// Frontmatter title renders as HTML metadata; the Markdown H1 is the visible page heading.
 const getPageTitle = (frontmatter, title) => frontmatter.title || `${title} — Piotr Oszenda`;
 const getPageDescription = (frontmatter, lead) => frontmatter.description || lead;
 const getOutputPath = (filename, frontmatter) => frontmatter.output || path.basename(filename).replace(/\.md$/i, '.html');
@@ -399,7 +400,7 @@ const renderMarkdown = (lines, page) => {
       if (containerStack.at(-1) === 'actions') {
         const links = listItems.map((item) => {
           const match = item.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-          return match ? { label: match, href: match } : null;[3][4]
+          return match ? { label: match[1], href: match[2] } : null;
         });
 
         if (links.every(Boolean) && links.length > 0) {
@@ -589,7 +590,7 @@ const renderMarkdown = (lines, page) => {
       flushTable();
 
       if (groupedSamples.samples.length === 1) {
-        const sample = groupedSamples.samples;
+        const sample = groupedSamples.samples[0];
         if ((sample.language || '').toLowerCase() === 'mermaid') {
           usesMermaid = true;
           html.push(`${currentIndent()}<div class="mermaid-block"><pre class="mermaid">${renderMermaidCode(sample.code)}</pre></div>`);

@@ -1,6 +1,6 @@
 ---
 type: doc
-title: "How myPortfolio v5 works (with v4 comparison)"
+title: "How myPortfolio v5 works — Piotr Oszenda"
 description: "A documentation sample explaining how myPortfolio v5 uses Markdown, frontmatter, Node.js, validation, and AI-assisted development compared with version 4."
 eyebrow: "Portfolio architecture sample"
 primary_link_href: "#overview"
@@ -15,7 +15,6 @@ hero_panel_items: "Approach::Markdown files act as source content, while frontma
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
 accent_sections: "overview|from-v4-to-v5|how-v5-works|why-v5-is-better|future-improvements"
-spaced_articles: false
 output: "how-myportfolio-works.html"
 ---
 

@@ -59,7 +59,19 @@ npm run check
 
 `npm run build` generates HTML from the Markdown sources. `npm run validate` checks local links, required frontmatter, generated-file markers, and the shared `Built from Markdown source` footer. `npm run check` runs both commands in sequence.
 
-If, for any reason you'd like to change the content locally, after changing a Markdown source or the build templates, run the commands on you rmachine and review both the generated HTML and the diff before proceeding.
+### Frontmatter reference
+
+`title` is the browser and SEO title. It renders as the HTML `<title>` element. The Markdown H1 (`# ...`) is the visible page heading in the hero section.
+
+```yaml
+title: "How I design docs-as-code workflows — Piotr Oszenda"
+```
+
+```md
+# How I design docs-as-code workflows
+```
+
+After changing a Markdown source or the build templates, run the commands locally and review both the generated HTML and the diff before proceeding.
 
 ## Contact
 

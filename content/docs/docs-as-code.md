@@ -1,6 +1,6 @@
 ---
 type: doc
-title: "Docs as Code — Documentation workflow sample (Piotr Oszenda)"
+title: "How I design docs-as-code workflows — Piotr Oszenda"
 description: "Documentation sample showing a docs-as-code workflow built around Markdown, version control, review, and structured publishing practices."
 eyebrow: "Documentation workflow sample"
 primary_link_href: "#overview"
@@ -15,7 +15,6 @@ hero_panel_items: "Approach::Documentation is treated as maintainable source con
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
 accent_sections: "overview|workflow-components|draft-to-publish|workflow-map|repo-visibility|connected-samples"
-spaced_articles: false
 output: "docs-as-code.html"
 ---
 

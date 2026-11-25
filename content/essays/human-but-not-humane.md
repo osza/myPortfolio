@@ -14,7 +14,6 @@ hero_panel_style: "case"
 hero_panel_items: "Workflow lens::The essay examines AI-assisted development through project memory, responsibility, and decision-making rather than surface-level productivity claims. | Core distinction::It separates human-like interaction from humane working methods that preserve context, constraints, and user trust. | Practical conclusion::Chats can support delivery, but durable project truth still needs a maintained system outside the conversation."
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
-spaced_articles: true
 output: "human-but-not-humane.html"
 ---
 

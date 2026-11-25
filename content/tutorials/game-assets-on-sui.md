@@ -1,6 +1,6 @@
 ---
 type: tutorial
-title: "Game assets on Sui — Tutorial sample (Piotr Oszenda)"
+title: "Build an octopus society on Sui — Piotr Oszenda"
 description: "Hands-on tutorial showing how a game backend and client can model octopus identities, unique assets, communal structures, and transaction flows on Sui."
 eyebrow: "Developer documentation sample"
 primary_link_href: "#what-this-tutorial-demonstrates"
@@ -15,7 +15,6 @@ hero_panel_items: "Markdown source::game-assets-on-sui.md | Generated HTML::Buil
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
 accent_sections: "what-this-tutorial-demonstrates|overview|architecture-at-a-glance|before-you-start|define-the-core-game-objects|model-shared-structures|connect-the-api-layer|follow-a-transaction-flow|what-the-reader-leaves-with"
-spaced_articles: false
 output: "game-assets-on-sui.html"
 ---
 

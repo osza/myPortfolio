@@ -1,6 +1,6 @@
 ---
 type: tutorial
-title: "Octopus Society on Sui — Tutorial sample (Piotr Oszenda)"
+title: "Join the Octopus Society on Sui — Piotr Oszenda"
 description: "Hands-on Sui tutorial showing a fictional membership flow for joining Octopus Society, verifying an on-chain object, and claiming a member reward."
 eyebrow: "Developer documentation sample"
 primary_link_href: "#overview"
@@ -14,7 +14,6 @@ hero_panel_items: "Markdown source::octopus-society-on-sui.md | Generated HTML::
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
 accent_sections: "what-this-tutorial-demonstrates|overview|environment-and-setup|join-and-verify|cli-and-typescript-examples|what-the-reader-leaves-with"
-spaced_articles: false
 output: "octopus-society-on-sui.html"
 ---
 

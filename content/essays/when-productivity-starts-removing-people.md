@@ -14,7 +14,6 @@ hero_panel_style: "case"
 hero_panel_items: "Pressure point::The essay looks at what productivity claims can hide when AI changes staffing decisions. | Core tension::Documentation work may remain necessary even as fewer people are asked to do more of it. | Reader takeaway::The piece argues that technical writing is shifting toward verification, system context, and workflow design."
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
-spaced_articles: true
 output: "when-productivity-starts-removing-people.html"
 ---
 

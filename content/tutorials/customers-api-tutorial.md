@@ -1,6 +1,6 @@
 ---
 type: tutorial
-title: "Customers API tutorial — Developer documentation sample (Piotr Oszenda)"
+title: "Manage customer data with the Customers API — Piotr Oszenda"
 description: "Hands-on API tutorial showing how to create, retrieve, update, and delete customer records with a fictional Customers API."
 eyebrow: "Developer documentation sample"
 primary_link_href: "#what-this-tutorial-demonstrates"
@@ -14,7 +14,6 @@ hero_panel_items: "Markdown source::content/tutorials/customers-api-tutorial.md 
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
 accent_sections: "overview|before-you-start|resource-model|crud-tutorial|expected-workflow-result|why-this-tutorial-structure-works"
-spaced_articles: false
 output: "customers-api-tutorial.html"
 ---
 
