@@ -1,6 +1,6 @@
 ---
 type: doc
-title: "Docs as Code — Documentation workflow sample (Piotr Oszenda)"
+title: "How I design docs-as-code workflows — Piotr Oszenda"
 description: "Documentation sample showing a docs-as-code workflow built around Markdown, version control, review, and structured publishing practices."
 eyebrow: "Documentation workflow sample"
 primary_link_href: "#overview"
@@ -15,7 +15,6 @@ hero_panel_items: "Approach::Documentation is treated as maintainable source con
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
 accent_sections: "overview|workflow-components|draft-to-publish|workflow-map|repo-visibility|connected-samples"
-spaced_articles: false
 output: "docs-as-code.html"
 ---
 
@@ -29,9 +28,7 @@ A docs-as-code setup works best when contribution flow, ownership, review, and p
 
 ### Core principle
 
-I treat docs-as-code as an operating model, not just a repository pattern. The repository, branching strategy, review path, and publishing process must all support the people who maintain the documentation.
-
-The goal is not simply to store docs in Git. The goal is to make documentation easier to update, review, reuse, and trust over time.
+Docs-as-code is an operating model: the repository, branching strategy, review path, and publishing process must support the people who maintain the documentation. The result should be documentation that is easier to update, review, reuse, and trust.
 
 ## Workflow components
 
@@ -66,8 +63,6 @@ Review for correctness, terminology, and task completeness before content moves 
 Publish through a controlled process that preserves consistency across the wider documentation set.
 
 ## Workflow map
-
-This is the compact workflow I use to explain the operating model behind docs-as-code.
 
 ### Stakeholder input to publication
 

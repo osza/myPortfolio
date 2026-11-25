@@ -14,7 +14,6 @@ hero_panel_style: "case"
 hero_panel_items: "Workflow lens::The essay examines AI-assisted development through project memory, responsibility, and decision-making rather than surface-level productivity claims. | Core distinction::It separates human-like interaction from humane working methods that preserve context, constraints, and user trust. | Practical conclusion::Chats can support delivery, but durable project truth still needs a maintained system outside the conversation."
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
-spaced_articles: true
 output: "human-but-not-humane.html"
 ---
 
@@ -82,8 +81,6 @@ A humane workflow would respect settled decisions, preserve context, disclose un
 
 ## The solution was an operating model, not a more dramatic, all-caps, prompt.
 
-No direct instruction or solemn request for the model to "think carefully" could substitute for clear responsibility and durable project records.
-
 ### Human
 
 Defines the problem, constraints, examples, and acceptance criteria.
@@ -94,20 +91,18 @@ Implements one approved change, tests it, and reports its limits.
 
 ### Automation
 
-Checks contracts, quality rules, and regressions.
+- Checks contracts, quality rules, and regressions.
+- Uses [clear prompting guidance](https://developers.openai.com/api/docs/guides/prompt-engineering) to make task boundaries and acceptance criteria explicit.
+- Keeps project decisions in repository records: state files, Architecture Decision Records (ADRs), bounded tasks, explicit no-nos, and automated checks.
 
-Project truth had to leave the chat and enter the repository: state files, Architecture Decision Records (ADRs), bounded tasks, explicit no-nos, and automated checks.
+:::
 
 This did not make AI less useful. It made its usefulness easier to trust.
 
 CitizenHub did not teach me that AI-assisted development is impossible for non-developers. It showed me something less dramatic and basic, to be honest: autonomy without durable memory transfers invisible engineering work to the human.
 
-AI can be human-like without being humane.
+AI can be human-like without being humane. So I do not expect it to develop a conscience.
 
-So I do not expect it to develop a conscience.
+AI can move work forward, but [conversation state is bounded by a context window](https://developers.openai.com/api/docs/guides/conversation-state), so project memory must live in records the next person can inspect, question, and maintain.
 
 I just no longer let it keep the project memory.
-
-## AI-assisted development needs durable project memory.
-
-This essay connects documentation practice with the working conditions around AI: clear constraints, preserved decisions, and accountable use of generated output.

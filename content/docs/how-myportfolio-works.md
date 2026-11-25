@@ -1,6 +1,6 @@
 ---
 type: doc
-title: "How myPortfolio v5 works (with v4 comparison)"
+title: "How myPortfolio v5 works — Piotr Oszenda"
 description: "A documentation sample explaining how myPortfolio v5 uses Markdown, frontmatter, Node.js, validation, and AI-assisted development compared with version 4."
 eyebrow: "Portfolio architecture sample"
 primary_link_href: "#overview"
@@ -15,17 +15,18 @@ hero_panel_items: "Approach::Markdown files act as source content, while frontma
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
 accent_sections: "overview|from-v4-to-v5|how-v5-works|why-v5-is-better|future-improvements"
-spaced_articles: false
 output: "how-myportfolio-works.html"
 ---
 
 # How myPortfolio v5 works
 
-This piece briefly explains how **myPortfolio** v5 turns Markdown into published HTML and how the current architecture improves on version 4. 
+This piece briefly explains how **myPortfolio** v5 turns Markdown into published HTML and how the current architecture improves on version 4.
 
 ## Overview
 
-AI helped build this version of my portfolio. The working arrangement is simple: I complain; the AI writes code. I ask for a feature; it improvises, changes something without asking (the footer text was one example), and I catch the decision in a diff. AI proposes structure and phrasing; I remove filler, correct the logic, and verify the implementation. I remain the AI project manager because the tool is fast, shallow, and not accountable. The point from my [Human, but not humane](human-but-not-humane.html) essay still holds: adding skills or commands remains a fight with the system, not a smooth upgrade.
+AI helped build this version of my portfolio. It is fast, but it does not preserve intent or take responsibility for its changes. I use it for structure and phrasing, then review the diff, remove filler, correct the logic, and verify the implementation.
+
+The point from my [Human, but not humane](human-but-not-humane.html) essay still holds: adding skills or commands remains a fight with the system, not a smooth upgrade.
 
 ## From v4 to v5: what changed
 
@@ -35,11 +36,11 @@ v5 uses a source-first docs-as-code structure. Content lives in `content/`, orga
 
 The pipeline is now explicit. In v4, Markdown files in the root used ad-hoc layouts and inconsistent metadata. In v5, every article is an `.md` file with YAML frontmatter. It declares the page type (`doc`, `tutorial`, or `essay`), title, description, hero content, footer tag, and output filename. Frontmatter is the control layer: it tells the build which template to use, where to write the page, and what to validate.
 
-The workflow is explicit: `npm run build` generates HTML, `npm run validate` checks existing output, and `npm run check` runs both as a pre-CI quality warden.
+Run `npm run build` to generate HTML, `npm run validate` to check existing output, and `npm run check` to run both before CI.
 
 ## How v5 works now
 
-Frontmatter is the single source of truth for rendering. Change a field and the page changes without editing the prose. It keeps metadata separate from content and makes each page machine-readable, so the pipeline can validate, index, and reuse it.
+Frontmatter controls metadata and rendering options; the Markdown body supplies visible headings and prose. This separation keeps metadata machine-readable, so the pipeline can validate, index, and reuse it.
 
 The build uses `.mjs` files, so Node.js treats scripts as ECMAScript modules and they use `import` and `export`. Shared templates provide common page chrome; page-type templates render documentation, tutorials, and essays.
 
@@ -51,7 +52,7 @@ Accent sections in the HTML files are matched against slugs derived from H2 titl
 
 v5 is clearer and safer to change. In v4, a layout or page-type change meant editing a crowded root and risking a published file. In v5, content, templates, scripts, assets, and output have distinct roles. Changes stay local and diffs are easier to review.
 
-The pipeline also makes regressions easier to detect. Frontmatter-driven rendering produces predictable pages, while validation checks that source and output still follow the agreed model. The system remains small enough for one author, but follows practices that scale to a team.
+The pipeline makes regressions easier to detect. Source files, templates, scripts, assets, and generated pages have separate roles, so changes stay local and diffs remain reviewable for one author or a team.
 
 ## Future improvements
 

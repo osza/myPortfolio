@@ -14,7 +14,6 @@ hero_panel_style: "case"
 hero_panel_items: "Pressure point::The essay looks at what productivity claims can hide when AI changes staffing decisions. | Core tension::Documentation work may remain necessary even as fewer people are asked to do more of it. | Reader takeaway::The piece argues that technical writing is shifting toward verification, system context, and workflow design."
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
-spaced_articles: true
 output: "when-productivity-starts-removing-people.html"
 ---
 
@@ -29,8 +28,6 @@ What an AI-linked contract termination taught me about productivity, professiona
 - **The role is moving into workflow design.** Technical writers increasingly shape the systems, terminology, sources, and review paths that make AI-assisted documentation usable.
 
 ## This time, the explanation was shorter. It named AI.
-
-Companies have many ways to describe a departure without explaining the decision in much detail. The experience here was quieter and more direct.
 
 When my contract ended in June 2025, I expected the usual language: restructuring, changing priorities, a shift in strategy. Companies have many ways to describe a departure without explaining the decision in much detail. This time, the explanation included one more factor. It named AI.
 
@@ -130,20 +127,6 @@ The value is not only the final page of text. It is the work required to make th
 - Keep ownership of product information and publishing decisions explicit.
 - Do not count the human work as eliminated simply because the final draft arrived faster.
 
-Technical writers still need product understanding, editorial judgment, and an eye for failure. But the role is no longer only about writing the page. It increasingly includes designing the path that leads to the page.
+Technical writers still need product understanding, editorial judgment, and an eye for failure. The role now also includes designing the workflow that produces the page.
 
-In some environments, that path may stay relatively light. In others, especially regulated ones, it may require explicit sources, approval points, traceability, and evidence of review. The workflow changes with the level of risk.
-
-## Technical writing under AI-driven productivity pressure.
-
-This essay looks at the economics of AI-assisted documentation work, with a focus on workflow design, verification, and responsibility rather than on generated text alone.
-
-There is still a future for technical writers. Not because AI has failed to change the economics of the job, and not because producing a first draft has suddenly become difficult again.
-
-The role is moving towards the design of documentation workflows. Technical writers increasingly define the context an agent receives, connect it to useful sources, coordinate specialised tools, and provide the style guidance, glossary, preferred terminology, and product constraints that shape the result.
-
-This does not remove responsibility for the words. It moves more of that responsibility into the system that produces them.
-
-A team may see a generated page and assume the important part happened automatically. In many cases, the important part sits one layer earlier: in the workflow, in the constraints, in the review path, and in the person who knows why the output looks the way it does.
-
-If organisations want the output, they also need to recognise the workflow behind it. Otherwise, they may remove the person who understands why the system works and then ask the remaining system to explain itself.
+The required controls depend on risk. In regulated environments, that can mean explicit sources, approval points, traceability, and evidence of review. Organisations that depend on AI-assisted output still need people who understand the workflow behind it.

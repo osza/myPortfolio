@@ -13,8 +13,7 @@ hero_panel_label: "Why this matters"
 hero_panel_style: "case"
 hero_panel_items: "The core issue was structural, not only editorial.::Users needed guidance that matched real tasks, not a scattered set of product explanations. | The work had migration value.::It translated implicit product knowledge into a more explicit, reusable, and maintainable documentation model. | The output supports scale.::A better content structure helps documentation stay usable as workflows, ownership, and features evolve."
 footer_tag: "Built from Markdown source"
-accent_sections: "context|what-changed"
-spaced_articles: true
+accent_sections: "context|target-model"
 output: "mews-events-case-study.html"
 ---
 
@@ -51,7 +50,7 @@ In product areas like Mews Events, users rarely think in terms of isolated featu
 
 ## Migration approach
 
-I would position this work as documentation architecture with a migration lens: understanding the current knowledge landscape, identifying where users lose context, and reshaping the content model so guidance follows the logic of real work.
+This case study treats the work as documentation architecture with a migration lens: understanding the current knowledge landscape, identifying where users lose context, and reshaping the content model so guidance follows the logic of real work.
 
 ### 1. Audit the current state
 
@@ -69,9 +68,9 @@ Reduce ambiguity across labels, concepts, and support-facing language so the sam
 
 Build a structure that scales better over time, with clearer ownership boundaries, easier updates, and less duplicated explanation.
 
-## What changed
+## Target model
 
-Even without presenting private internal metrics, the value of this work can be shown by the shift in structure, findability, and maintainability between an older knowledge state and a clearer target model.
+This comparison describes a target documentation model, not measured outcomes or private internal metrics.
 
 | Before | After |
 | --- | --- |
@@ -83,11 +82,9 @@ Even without presenting private internal metrics, the value of this work can be 
 
 > This was not only a writing problem. It was a migration from fragmented, implicit product knowledge toward a clearer and more maintainable documentation system.
 
-Presenting the work this way better reflects the actual value of senior documentation practice. It shows analysis, content modelling, workflow thinking, and information architecture, not just content production. In the context of the main portfolio, it also connects naturally to knowledge management and migration work.
-
 ## My role
 
-The role in a case like this should be presented as broader than article writing. The value comes from content analysis, structural decisions, and the translation of product complexity into documentation people can actually use.
+This work extends beyond article writing: it requires content analysis, structural decisions, and the translation of product complexity into usable documentation.
 
 ### Core responsibilities
 
@@ -95,12 +92,3 @@ The role in a case like this should be presented as broader than article writing
 - Clarify terminology and organise topics around user tasks and decision points.
 - Create or reshape content so it is easier to navigate and maintain.
 - Support alignment between product, support, and documentation perspectives.
-
-## Portfolio relevance
-
-- Shows how technical writing overlaps with knowledge architecture.
-- Demonstrates migration thinking without needing to expose sensitive internal details.
-- Supports the positioning used on the homepage: documentation strategy, knowledge migration, and scalable content systems.
-- Works well as a strategic sample rather than only a product-writing sample.
-
-This case study shows how content structure, terminology, and ownership can turn fragmented product knowledge into guidance that is easier to use and maintain.
