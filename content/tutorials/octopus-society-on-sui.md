@@ -55,7 +55,9 @@ Before you begin, make sure you have the following in place:
 
 If you are new to Sui, treat this as a quick readiness check: once the CLI works, the wallet is funded, and the package ID is available, you are ready to follow the tutorial as written.
 
-The examples below use placeholder IDs and sample responses so the structure stays clear and reusable.
+The examples below use placeholder IDs and sample responses. Treat them as a contract-integration pattern, not commands to run unchanged.
+
+**Terms used here:** an *object* is on-chain state with an owner and fields; a *PTB* (programmable transaction block) groups on-chain commands into one transaction; `TxContext` gives a Move function information about the current transaction and sender.
 
 ```bash
 sui client active-env
@@ -71,7 +73,7 @@ The core of the tutorial is a practical sequence that follows the membership flo
 
 ### 1. Connect a wallet
 
-Start by connecting a compatible wallet in Sui Wallet or another supported browser extension. For app-based integrations, follow the official [dApp Kit frontend pattern](https://docs.sui.io/getting-started/examples/dapp-kit-frontend) or the [Wallet Standard](https://docs.sui.io/onchain-finance/asset-custody/wallets/wallet-standard). This keeps the first step lightweight so the reader can focus on the membership flow itself.
+Start by connecting a compatible wallet in Sui Wallet or another supported browser extension. For app-based integrations, use the official [TypeScript SDK transaction pattern](https://docs.sui.io/develop/transactions/ptbs/ts-sdk-ptb-template) or the [Wallet Standard](https://docs.sui.io/onchain-finance/asset-custody/wallets/wallet-standard).
 
 - Confirm the wallet is set to the intended network.
 - Check that the account has enough test SUI for gas.
@@ -85,14 +87,14 @@ Submit the join transaction against the Move module to mint a membership object.
 
 ### 3. Verify membership
 
-Wait for the transaction to become readable, then use the object ID to confirm ownership and inspect membership fields. This avoids treating an accepted submission as immediately indexed state and aligns with how the [Sui object model](https://docs.sui.io/develop/sui-architecture/object-model) exposes object ownership and history.
+After submission, wait for indexed state with `client.waitForTransaction({ result })`, then use the object ID to confirm ownership and inspect membership fields. This avoids treating an accepted submission as immediately queryable state and aligns with how the [Sui object model](https://docs.sui.io/develop/sui-architecture/object-model) exposes object ownership and history.
 
 - Query the object through the CLI.
 - Repeat the check with the SDK response.
 
 ### 4. Claim the reward
 
-Finish by claiming a reward tied to the membership. This closes the onboarding loop with a concrete outcome.
+Claim a reward tied to the membership object. In this fictional package, `claim_reward` accepts the membership object as its first argument; adapt the function name and arguments to your package.
 
 - Confirm the reward transaction succeeded.
 - Review the updated object state after the claim.
@@ -105,7 +107,7 @@ The examples below are for a local script or backend signer. A browser applicati
 
 **Run the transaction from the terminal**
 
-Use the CLI when you want to validate the contract entry point quickly and inspect the transaction output before wiring the flow into an app.
+Use the CLI to validate the contract entry point and inspect the transaction output before wiring the flow into an app.
 
 ```bash
 sui client call \
@@ -115,7 +117,7 @@ sui client call \
  --gas-budget 10000000
 ```
 
-The sender comes from the active CLI address and the Move function receives `TxContext` implicitly. Record the transaction digest, then identify the created membership object from the transaction effects before moving to the next step.
+The sender comes from the active CLI address and the Move function receives `TxContext` implicitly. Record the transaction digest, then identify the created membership object from the transaction effects before moving to the next step. The current CLI can estimate gas when you omit `--gas-budget`; keep an explicit budget only when your environment requires one.
 
 ### 2. Verify the membership object
 
@@ -129,11 +131,28 @@ sui client object <MEMBERSHIP_OBJECT_ID>
 
 Confirm that the object type is the expected membership type and that its owner is the active address. The exact fields depend on the package; do not assume a fixed schema from a fictional example.
 
-### 3. Join from TypeScript
+### 3. Claim the reward with Sui CLI
+
+**Complete the membership flow**
+
+Pass the membership object to the package entry point that grants the reward.
+
+```bash
+sui client call \
+ --package <PACKAGE_ID> \
+ --module octopus_society \
+ --function claim_reward \
+ --args <MEMBERSHIP_OBJECT_ID> \
+ --gas-budget 10000000
+```
+
+Record the reward transaction digest. A successful result should show a successful execution status and the object changes or events defined by your package. Re-query the membership object if claiming changes one of its fields.
+
+### 4. Join from TypeScript
 
 **Embed the flow in an app**
 
-This version shows how the same action can be represented from application code using [the current TypeScript PTB pattern](https://docs.sui.io/develop/transactions/ptbs/ts-sdk-ptb-template).
+This version represents the same action in a backend script. Set `packageId` from your published package and load `keypair` from a server-side secret; never place a keypair in browser code.
 
 ```typescript
 import { SuiGrpcClient } from '@mysten/sui/grpc';
@@ -165,9 +184,9 @@ await client.waitForTransaction({ result });
 console.log(result.Transaction.digest);
 ```
 
-This example uses a keypair only because it represents a script or backend. In a browser, construct the transaction but let the user's wallet sign and execute it through [dApp Kit](https://docs.sui.io/getting-started/examples/dapp-kit-frontend).
+This example uses a keypair only because it represents a script or backend. In a browser, construct the transaction but let the user's wallet sign and execute it through your wallet integration.
 
-### 4. Read the object in TypeScript
+### 5. Read the object in TypeScript
 
 **Fetch the result and render it in UI**
 
@@ -183,16 +202,42 @@ console.log(object.owner);
 console.log(object.json);
 ```
 
-This closes the loop from transaction result to object inspection. JSON is convenient for a demo; production code should use generated BCS bindings when it needs a stable, typed object shape.
+JSON is convenient for a demo; production code should use generated BCS bindings when it needs a stable, typed object shape.
+
+### 6. Claim the reward from TypeScript
+
+**Pass the verified membership object to the claim entry point**
+
+```typescript
+const claimTx = new Transaction();
+
+claimTx.moveCall({
+  target: `${packageId}::octopus_society::claim_reward`,
+  arguments: [claimTx.object(membershipObjectId)],
+});
+
+const claimResult = await client.signAndExecuteTransaction({
+  signer: keypair,
+  transaction: claimTx,
+  include: { effects: true },
+});
+
+if (claimResult.$kind === 'FailedTransaction') {
+  throw new Error(claimResult.FailedTransaction.status.error?.message);
+}
+
+await client.waitForTransaction({ result: claimResult });
+console.log(claimResult.Transaction.digest);
+```
+
+Use the transaction effects or package events to identify the reward. The exact reward type and object changes are package-specific.
 
 ## What the reader leaves with
-
-This closing section makes the hand-off to the game-state tutorial explicit.
 
 ### Outcome
 
 **Reusable onboarding sample**
 
-By the end of the tutorial, the reader can prepare a testnet account, submit a membership transaction from a trusted signer, wait for indexed state, and inspect the resulting object. Continue to the game-state tutorial to apply the same ownership model to player assets and shared structures.
+By the end of the tutorial, the reader can prepare a testnet account, join from a trusted signer, wait for indexed state, inspect the membership object, and claim a reward. Continue to the game-state tutorial to apply the same ownership model to player assets and shared structures.
 
 [Continue to game assets on Sui →](game-assets-on-sui.html)

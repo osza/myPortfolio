@@ -34,17 +34,11 @@ This tutorial uses a fictional octopus society to explain how game assets and sh
 
 **Tutorial sample · Fictional game backend**
 
-Imagine you are building a game where each player is one octopus living among other octopi, trading shells and pebbles, tending communal mussel farms, and building a reputation in a shared tide pool.
+Imagine a game where each player controls an octopus, owns shells and pebbles, and helps tend a communal mussel farm. In a traditional Web2 stack, those are studio-controlled database records. On Sui, they can be on-chain objects: player identities and belongings can be address-owned, while the farm can be shared through explicit Move rules.
 
-In a traditional Web2 stack, that world is often represented as rows in a studio-controlled database. The octopus identity, the shells it owns, and the farm it helps maintain may all be stored as records the developer controls directly.
-
-On Sui, those parts of the world can be modeled as on-chain objects defined in Move. The player can hold an octopus object in a wallet, own unique shells and pebbles directly, and interact with shared structures through explicit transaction logic.
-
-The examples stay intentionally simplified and focus on object shape, transaction flow, and system boundaries rather than full production concerns such as sponsored transactions, indexing pipelines, retries, observability, or custody design.
+The examples focus on object shape, transaction flow, and system boundaries rather than full production concerns such as sponsored transactions, indexing pipelines, retries, observability, or custody design.
 
 ## Architecture at a glance
-
-This section maps the application flow before the tutorial moves into object and transaction examples.
 
 ### Client, backend, wallet, and network
 
@@ -53,8 +47,8 @@ This section maps the application flow before the tutorial moves into object and
 One common Sui integration pattern still follows a familiar structure: the backend validates request context and prepares transaction data, while signing happens in a wallet or another explicitly trusted signer.
 
 - The game client calls your API, for example `POST /api/octopus/v1/shells` or `POST /api/octopus/v1/farms/{farmId}/harvest`.
-- Your backend validates the request, resolves current on-chain object inputs, and builds a transaction payload.
-- The payload is returned to the client for [wallet approval](https://docs.sui.io/develop/transactions/transaction-auth/auth-overview), or routed to an authorized signer when the product flow requires service-controlled minting.
+- Your backend validates the request and resolves the current on-chain object inputs.
+- For a player-owned action, it returns the approved inputs or an unsigned transaction for [wallet approval](https://docs.sui.io/develop/transactions/transaction-auth/auth-overview). For a sponsored or service-owned action, an authorized server-side signer executes the transaction instead.
 - The signed transaction is submitted to the Sui network.
 - Your backend stores transaction digests, reads effects, and reconciles local metadata with the resulting on-chain object state.
 
@@ -77,7 +71,9 @@ Before you begin, make sure you have:
 
 Replace `packageId`, `octopusObjectId`, `shellObjectId`, `farmObjectId`, and wallet addresses with values from your environment. Keep private keys, admin capabilities, and RPC secrets out of client code and out of source control.
 
-The REST-shaped endpoints in this sample are fictional orchestration endpoints, not Sui APIs. A backend may prepare a transaction, but a player-owned action still needs the player’s wallet approval unless the product explicitly uses sponsorship or a trusted service signer.
+The REST-shaped endpoints in this sample are fictional orchestration endpoints, not Sui APIs. A backend can prepare player-owned actions, but the player’s wallet sets the sender, selects gas, and signs. Sponsored or service-owned flows need an explicitly authorized server-side signer.
+
+**Terms used here:** an *address-owned object* belongs to one address; a *shared object* can be referenced by many users; a *PTB* is the transaction that groups the Move calls; and `TxContext` identifies the current transaction and sender in Move.
 
 ## Define the core game objects
 
@@ -89,7 +85,7 @@ This section introduces the main owned objects in the model.
 
 In this game, the first important object is not a weapon. It is the octopus itself. That object represents the player’s identity in the society, while shells and pebbles are unique belongings the octopus can own, trade, and carry between interactions.
 
-On Sui, owned objects need a [`UID`](https://docs.sui.io/develop/sui-architecture/object-model) field and the [`key`](https://docs.sui.io/develop/objects/) ability. If you want an object to be transferable with [`transfer::public_transfer`](https://docs.sui.io/references/framework/sui_sui/transfer), it must also have the `store` ability.
+On Sui, owned objects need a [`UID`](https://docs.sui.io/develop/sui-architecture/object-model) field and the [`key`](https://docs.sui.io/develop/objects/) ability. If you want an object to be transferable with [`transfer::public_transfer`](https://docs.sui.io/references/framework/sui_sui/transfer), it must also have the `store` ability. Use `public_transfer` only when any holder may transfer the object; use module-controlled transfer rules when the game needs tighter restrictions.
 
 ```move
 module octopus_society::assets {
@@ -109,7 +105,7 @@ module octopus_society::assets {
         rarity: u8,
     }
 
-    public fun mint_octopus(name: vector<u8>, ctx: &mut TxContext) {
+    public entry fun mint_octopus(name: vector<u8>, ctx: &mut TxContext) {
         let octopus = Octopus {
             id: object::new(ctx),
             name,
@@ -133,17 +129,29 @@ This section shows where a game world needs shared state rather than only player
 
 Not every game object should belong to one player. A mussel farm, market stall, or public bulletin stone may be a shared structure that multiple octopi can interact with under controlled rules.
 
-Shared objects are useful when many users need to read or mutate the same state. They should still have narrow mutation paths so each transaction expresses a clear game rule rather than unrestricted writes.
+Shared objects are useful when many users need to read or mutate the same state. They use consensus ordering, so reserve them for genuinely communal state and keep their mutation paths narrow.
 
 ```move
+use sui::object::{Self, UID};
+use sui::transfer;
+use sui::tx_context::TxContext;
+
 public struct MusselFarm has key {
     id: UID,
     mussel_count: u64,
     last_harvest_epoch: u64,
 }
+
+fun init(ctx: &mut TxContext) {
+    transfer::share_object(MusselFarm {
+        id: object::new(ctx),
+        mussel_count: 0,
+        last_harvest_epoch: 0,
+    });
+}
 ```
 
-A shared farm could be harvested by eligible players, replenished according to game logic, or affected by cooperative tasks. The important design choice is to make the mutation rule explicit in Move instead of hiding it only in backend code.
+`transfer::share_object` is the step that makes this `key` object shared. A production package would then expose a narrowly scoped `harvest` entry function, with eligibility and state-transition checks in Move rather than only in backend code.
 
 ## Connect the API layer
 
@@ -159,11 +167,9 @@ Many teams still want a backend API even when game assets live on-chain. That is
 - `POST /api/octopus/v1/shells` can prepare shell minting inputs.
 - `POST /api/octopus/v1/farms/{farmId}/harvest` can resolve the current farm object and build a harvest transaction.
 
-The backend can validate request context, enforce off-chain business rules, and return the transaction bytes or arguments the client needs for signing. It should not silently impersonate the player for player-owned actions.
+For player-owned actions, the backend can validate request context and return the allowed object IDs and pure-value inputs; the browser then builds and submits the transaction through the wallet. For sponsored or service-owned actions, the backend can build and sign only after applying explicit authorization. It should not silently impersonate the player.
 
 ## Follow a transaction flow
-
-This section connects the model to an end-to-end example.
 
 ### From API request to object read
 
@@ -172,12 +178,17 @@ This section connects the model to an end-to-end example.
 A typical player-owned flow might look like this:
 
 1. The client requests a harvest or trade action from the backend.
-2. The backend validates the request and builds a transaction.
+2. The backend validates the request and returns the current farm and octopus object IDs.
 3. The client asks the wallet to sign and submit it.
 4. The application stores the transaction digest and waits for confirmation.
 5. The client or backend reads the resulting object state and updates the game UI.
 
+The following is a backend or local-test-script fragment. It assumes that `client`, `keypair`, `packageId`, `farmObjectId`, and `octopusObjectId` are configured from your environment.
+
 ```typescript
+import { Transaction } from '@mysten/sui/transactions';
+
+// Backend or local test script only: load keypair from a server-side secret.
 const tx = new Transaction();
 
 tx.moveCall({
@@ -192,9 +203,10 @@ const result = await client.signAndExecuteTransaction({
 });
 
 await client.waitForTransaction({ result });
+console.log(result.Transaction.digest);
 ```
 
-The exact signing path depends on your product. A browser game should usually hand the transaction to the player’s wallet, while backend-controlled signing should be reserved for explicit service-owned flows.
+For a browser game, pass the same `Transaction` to the player’s wallet instead of using a keypair. After `waitForTransaction`, read the farm and octopus objects again and update the UI from the confirmed state.
 
 ## What the reader leaves with
 
