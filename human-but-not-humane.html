@@ -131,7 +131,6 @@
             <h2 class="section-title">The solution was an operating model, not a more dramatic, all-caps, prompt.</h2>
           </div>
         </div>
-        <p class="sample-summary">No direct instruction or solemn request for the model to &quot;think carefully&quot; could substitute for clear responsibility and durable project records.</p>
         <article class="sample">
           <div class="sample-header"><div class="sample-heading">
             <h3>Human</h3>
@@ -148,14 +147,13 @@
           <div class="sample-header"><div class="sample-heading">
             <h3>Automation</h3>
           </div></div>
-          <p class="sample-summary">Checks contracts, quality rules, and regressions.</p>
-          <p class="sample-summary">Project truth had to leave the chat and enter the repository: state files, Architecture Decision Records (ADRs), bounded tasks, explicit no-nos, and automated checks.</p>
-          <p class="sample-summary">This did not make AI less useful. It made its usefulness easier to trust.</p>
-          <p class="sample-summary">CitizenHub did not teach me that AI-assisted development is impossible for non-developers. It showed me something less dramatic and basic, to be honest: autonomy without durable memory transfers invisible engineering work to the human.</p>
-          <p class="sample-summary">AI can be human-like without being humane.</p>
-          <p class="sample-summary">So I do not expect it to develop a conscience.</p>
-          <p class="sample-summary">I just no longer let it keep the project memory.</p>
+          <ul><li>Checks contracts, quality rules, and regressions.</li><li>Uses <a href="https://developers.openai.com/api/docs/guides/prompt-engineering" target="_blank" rel="noopener noreferrer">clear prompting guidance</a> to make task boundaries and acceptance criteria explicit.</li><li>Keeps project decisions in repository records: state files, Architecture Decision Records (ADRs), bounded tasks, explicit no-nos, and automated checks.</li></ul>
         </article>
+        <p class="sample-summary">This did not make AI less useful. It made its usefulness easier to trust.</p>
+        <p class="sample-summary">CitizenHub did not teach me that AI-assisted development is impossible for non-developers. It showed me something less dramatic and basic, to be honest: autonomy without durable memory transfers invisible engineering work to the human.</p>
+        <p class="sample-summary">AI can be human-like without being humane. So I do not expect it to develop a conscience.</p>
+        <p class="sample-summary">AI can move work forward, but <a href="https://developers.openai.com/api/docs/guides/conversation-state" target="_blank" rel="noopener noreferrer">conversation state is bounded by a context window</a>, so project memory must live in records the next person can inspect, question, and maintain.</p>
+        <p class="sample-summary">I just no longer let it keep the project memory.</p>
       </div>
     </section>
   </main>
