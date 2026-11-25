@@ -32,8 +32,8 @@
           <div class="hero__actions"><a class="button-link button-link--primary" href="#what-this-tutorial-demonstrates">Read tutorial</a><a class="button-link button-link--secondary" href="octopus-society-on-sui.html">Start with membership onboarding</a></div>
         </div>
         <aside class="hero-panel" aria-labelledby="game-assets-proof-title">
-          <p class="hero-panel__label" id="game-assets-proof-title">Build status</p>
-          <ul class="proof-list"><li><strong>Markdown source</strong><span>game-assets-on-sui.md</span></li><li><strong>Generated HTML</strong><span>Built locally before publication.</span></li><li><strong>Checked output</strong><span>Structure follows the API tutorial baseline and local links are validated in CI.</span></li></ul>
+          <p class="hero-panel__label" id="game-assets-proof-title">Use this guide</p>
+          <ul class="proof-list"><li><strong>Scope</strong><span>A fictional Sui game with player-owned and shared objects.</span></li><li><strong>Prerequisites</strong><span>A testnet wallet, a published package, and a Sui provider endpoint.</span></li><li><strong>Outcome</strong><span>Model ownership, shared state, and wallet-signed transactions.</span></li></ul>
         </aside>
       </div>
     </section>
@@ -89,7 +89,6 @@
             <h2 class="section-title">Before you start</h2>
           </div>
         </div>
-        <p class="sample-summary">This section lists the minimum setup for following the examples safely.</p>
         <article class="sample">
           <div class="sample-header"><div class="sample-heading">
             <h3>Requirements</h3>
@@ -111,7 +110,6 @@
             <h2 class="section-title">Define the core game objects</h2>
           </div>
         </div>
-        <p class="sample-summary">This section introduces the main owned objects in the model.</p>
         <article class="sample">
           <div class="sample-header"><div class="sample-heading">
             <h3>Octopus identity and unique belongings</h3>
@@ -158,7 +156,6 @@
             <h2 class="section-title">Model shared structures</h2>
           </div>
         </div>
-        <p class="sample-summary">This section shows where a game world needs shared state rather than only player-owned state.</p>
         <article class="sample">
           <div class="sample-header"><div class="sample-heading">
             <h3>Farms, markets, and communal state</h3>
@@ -195,7 +192,6 @@ fun init(ctx: &amp;mut TxContext) {
             <h2 class="section-title">Connect the API layer</h2>
           </div>
         </div>
-        <p class="sample-summary">This section explains how a familiar API can orchestrate game actions without pretending to be the source of truth.</p>
         <article class="sample">
           <div class="sample-header"><div class="sample-heading">
             <h3>Backend endpoints and transaction preparation</h3>
@@ -245,22 +241,15 @@ console.log(result.Transaction.digest);</code></pre>
         </article>
       </div>
     </section>
-    <section class="section section--accent" id="what-the-reader-leaves-with">
+    <section class="section section--accent" id="outcome">
       <div class="container">
         <div class="section__header">
           <div>
             <p class="section-kicker">Tutorial</p>
-            <h2 class="section-title">What the reader leaves with</h2>
+            <h2 class="section-title">Outcome</h2>
           </div>
         </div>
-        <p class="sample-summary">This closing section makes the design takeaway explicit.</p>
-        <article class="sample">
-          <div class="sample-header"><div class="sample-heading">
-            <h3>Outcome</h3>
-          </div></div>
-          <p class="sample-summary"><strong>Reusable game-state tutorial</strong></p>
-          <p class="sample-summary">By the end of the tutorial, the reader has a compact model for representing a player identity, unique belongings, shared structures, and transaction flow boundaries on Sui. The key point is not the octopus theme itself, but how the object model supports ownership, mutation, and coordination in a game-oriented system.</p>
-        </article>
+        <p class="sample-summary">You have a model for player identities, unique belongings, shared structures, and transaction boundaries on Sui. The same pattern applies to other game themes where ownership, mutation, and coordination belong on-chain.</p>
       </div>
     </section>
   </main>

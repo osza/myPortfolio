@@ -8,12 +8,12 @@ primary_link_label: "Read tutorial"
 secondary_link_href: "index.html#samples"
 secondary_link_label: "Back to selected work"
 hero_panel_id: "sui-tutorial-proof-title"
-hero_panel_label: "Build status"
+hero_panel_label: "Before you begin"
 hero_panel_style: "default"
-hero_panel_items: "Markdown source::octopus-society-on-sui.md | Generated HTML::Built locally before publication. | Checked output::Structure follows the API tutorial baseline and local links are validated in CI."
+hero_panel_items: "Scope::A fictional Move package for a membership and reward flow. | Prerequisites::Testnet SUI, a configured wallet or CLI, and a package ID. | Outcome::Join, verify the membership object, and claim a reward."
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
-accent_sections: "what-this-tutorial-demonstrates|overview|environment-and-setup|join-and-verify|cli-and-typescript-examples|what-the-reader-leaves-with"
+accent_sections: "what-this-tutorial-demonstrates|overview|environment-and-setup|join-and-verify|cli-and-typescript-examples|outcome"
 output: "octopus-society-on-sui.html"
 ---
 
@@ -29,8 +29,6 @@ A hands-on tutorial illustrating a fictional membership flow for connecting a wa
 
 ## Overview
 
-This tutorial is structured as a compact onboarding-style flow for a fictional membership module on Sui.
-
 **Tutorial sample · Fictional Move package**
 
 This tutorial demonstrates a sample workflow for joining Octopus Society, a fictional membership module built with Move on Sui. The package ID, object IDs, and example data are included to illustrate structure, flow, and documentation style.
@@ -38,8 +36,6 @@ This tutorial demonstrates a sample workflow for joining Octopus Society, a fict
 By the end of the tutorial, you will have walked through connecting a wallet, minting a membership object, verifying ownership on-chain, and claiming a reward tied to that membership.
 
 ## Environment and setup
-
-This section helps new Sui developers verify their local setup before they run the tutorial.
 
 ### Requirements
 
@@ -68,8 +64,6 @@ sui client gas
 Run these checks before the tutorial. The active environment, active address, and available gas coins must all refer to the same testnet account. The package and object IDs below are fictional, so use them as a structure to adapt rather than commands to run unchanged.
 
 ## Join and verify
-
-The core of the tutorial is a practical sequence that follows the membership flow from joining to on-chain verification and reward claim.
 
 ### 1. Connect a wallet
 
@@ -232,12 +226,8 @@ console.log(claimResult.Transaction.digest);
 
 Use the transaction effects or package events to identify the reward. The exact reward type and object changes are package-specific.
 
-## What the reader leaves with
+## Outcome
 
-### Outcome
-
-**Reusable onboarding sample**
-
-By the end of the tutorial, the reader can prepare a testnet account, join from a trusted signer, wait for indexed state, inspect the membership object, and claim a reward. Continue to the game-state tutorial to apply the same ownership model to player assets and shared structures.
+You can prepare a testnet account, join from a trusted signer, wait for indexed state, inspect the membership object, and claim a reward. Continue to the game-state tutorial to apply the same ownership model to player assets and shared structures.
 
 [Continue to game assets on Sui →](game-assets-on-sui.html)

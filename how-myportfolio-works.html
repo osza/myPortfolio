@@ -45,7 +45,8 @@
             <h2 class="section-title">Overview</h2>
           </div>
         </div>
-        <p class="sample-summary">AI helped build this version of my portfolio. The working arrangement is simple: I complain; the AI writes code. I ask for a feature; it improvises, changes something without asking (the footer text was one example), and I catch the decision in a diff. AI proposes structure and phrasing; I remove filler, correct the logic, and verify the implementation. I remain the AI project manager because the tool is fast, shallow, and not accountable. The point from my <a href="human-but-not-humane.html">Human, but not humane</a> essay still holds: adding skills or commands remains a fight with the system, not a smooth upgrade.</p>
+        <p class="sample-summary">AI helped build this version of my portfolio. It is fast, but it does not preserve intent or take responsibility for its changes. I use it for structure and phrasing, then review the diff, remove filler, correct the logic, and verify the implementation.</p>
+        <p class="sample-summary">The point from my <a href="human-but-not-humane.html">Human, but not humane</a> essay still holds: adding skills or commands remains a fight with the system, not a smooth upgrade.</p>
       </div>
     </section>
     <section class="section" id="from-v4-to-v5-what-changed">
@@ -59,7 +60,7 @@
         <p class="sample-summary">In v4, the root directory mixed source files, build output, assets, layouts, scripts, backups, and special pages. It worked, but it made the repository harder to navigate and easier to break.</p>
         <p class="sample-summary">v5 uses a source-first docs-as-code structure. Content lives in <code>content/</code>, organised as <code>content/docs/</code>, <code>content/tutorials/</code>, and <code>content/essays/</code>; <code>content/pages/</code> holds special pages. Shared templates live in <code>templates/shared/</code>, page-type templates in <code>templates/page-types/</code>, assets in <code>assets/css/</code>, and scripts in <code>scripts/</code>.</p>
         <p class="sample-summary">The pipeline is now explicit. In v4, Markdown files in the root used ad-hoc layouts and inconsistent metadata. In v5, every article is an <code>.md</code> file with YAML frontmatter. It declares the page type (<code>doc</code>, <code>tutorial</code>, or <code>essay</code>), title, description, hero content, footer tag, and output filename. Frontmatter is the control layer: it tells the build which template to use, where to write the page, and what to validate.</p>
-        <p class="sample-summary">The workflow is explicit: <code>npm run build</code> generates HTML, <code>npm run validate</code> checks existing output, and <code>npm run check</code> runs both as a pre-CI quality warden.</p>
+        <p class="sample-summary">Run <code>npm run build</code> to generate HTML, <code>npm run validate</code> to check existing output, and <code>npm run check</code> to run both before CI.</p>
       </div>
     </section>
     <section class="section" id="how-v5-works-now">
@@ -70,7 +71,7 @@
             <h2 class="section-title">How v5 works now</h2>
           </div>
         </div>
-        <p class="sample-summary">Frontmatter is the single source of truth for rendering. Change a field and the page changes without editing the prose. It keeps metadata separate from content and makes each page machine-readable, so the pipeline can validate, index, and reuse it.</p>
+        <p class="sample-summary">Frontmatter controls metadata and rendering options; the Markdown body supplies visible headings and prose. This separation keeps metadata machine-readable, so the pipeline can validate, index, and reuse it.</p>
         <p class="sample-summary">The build uses <code>.mjs</code> files, so Node.js treats scripts as ECMAScript modules and they use <code>import</code> and <code>export</code>. Shared templates provide common page chrome; page-type templates render documentation, tutorials, and essays.</p>
         <p class="sample-summary">Validation runs after the build. It checks the output, footer consistency, and frontmatter-driven rules before changes reach CI.</p>
         <p class="sample-summary">Accent sections in the HTML files are matched against slugs derived from H2 titles, so styling follows headings rather than duplicated identifiers.</p>
@@ -85,7 +86,7 @@
           </div>
         </div>
         <p class="sample-summary">v5 is clearer and safer to change. In v4, a layout or page-type change meant editing a crowded root and risking a published file. In v5, content, templates, scripts, assets, and output have distinct roles. Changes stay local and diffs are easier to review.</p>
-        <p class="sample-summary">The pipeline also makes regressions easier to detect. Frontmatter-driven rendering produces predictable pages, while validation checks that source and output still follow the agreed model. The system remains small enough for one author, but follows practices that scale to a team.</p>
+        <p class="sample-summary">The pipeline makes regressions easier to detect. Source files, templates, scripts, assets, and generated pages have separate roles, so changes stay local and diffs remain reviewable for one author or a team.</p>
       </div>
     </section>
     <section class="section section--accent" id="future-improvements">

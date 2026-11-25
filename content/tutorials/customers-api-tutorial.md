@@ -3,17 +3,17 @@ type: tutorial
 title: "Manage customer data with the Customers API — Piotr Oszenda"
 description: "Hands-on API tutorial showing how to create, retrieve, update, and delete customer records with a fictional Customers API."
 eyebrow: "Developer documentation sample"
-primary_link_href: "#what-this-tutorial-demonstrates"
+primary_link_href: "#overview"
 primary_link_label: "Read tutorial"
 secondary_link_href: "index.html#samples"
 secondary_link_label: "Back to selected work"
 hero_panel_id: "sample-proof-title"
-hero_panel_label: "Build status"
+hero_panel_label: "Before you begin"
 hero_panel_style: "default"
-hero_panel_items: "Markdown source::content/tutorials/customers-api-tutorial.md | Generated HTML::Built locally before publication. | Checked output::Source markers and local links are validated in CI."
+hero_panel_items: "Scope::A fictional REST API used to demonstrate a complete CRUD flow. | Prerequisites::An API token, a base URL, and an HTTP client. | Outcome::Create, retrieve, update, and delete one customer record."
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
-accent_sections: "overview|before-you-start|resource-model|crud-tutorial|expected-workflow-result|why-this-tutorial-structure-works"
+accent_sections: "overview|before-you-start|resource-model|crud-tutorial|expected-workflow-result"
 output: "customers-api-tutorial.html"
 ---
 
@@ -21,15 +21,7 @@ output: "customers-api-tutorial.html"
 
 A hands-on tutorial that walks through a complete customer lifecycle using create, retrieve, update, and delete operations on a single resource.
 
-## What this tutorial demonstrates
-
-- **A full CRUD journey on one resource.** The reader follows a single customer record from creation to deletion, reducing cognitive load.
-- **Parallel examples in cURL and JavaScript.** Developers can switch between code styles without losing context or task continuity.
-- **Explicit preparation, reference, and workflow.** Setup, resource model, and step-by-step tasks make the tutorial reusable as onboarding material.
-
 ## Overview
-
-This tutorial is structured as a compact but complete onboarding flow for a fictional resource-oriented API.
 
 **Tutorial sample · Fictional REST API**
 
@@ -38,8 +30,6 @@ This tutorial demonstrates an end-to-end workflow for managing customer data wit
 By the end of the tutorial, you will have created a customer record, retrieved it by ID, updated selected fields, and deleted the resource.
 
 ## Before you start
-
-The setup section establishes the environment, credentials, and request tooling needed before the CRUD flow begins.
 
 ### Requirements and setup
 
@@ -73,8 +63,6 @@ In a real implementation, handle HTTP status codes such as `201 Created` or `4xx
 
 ## Resource model
 
-The tutorial introduces the resource model before the task sequence so the later examples stay predictable and easy to follow.
-
 ### Customer resource
 
 **Field reference**
@@ -103,8 +91,6 @@ The tutorial uses a single `Customer` resource with the following fields:
 The tutorial uses a partial update model for `PATCH`: only the fields included in the request body are changed.
 
 ## CRUD tutorial
-
-Each step keeps the task sequence explicit and lets the reader switch between cURL and JavaScript without losing context.
 
 ### 1. Create a customer
 
@@ -268,21 +254,5 @@ At the end of this tutorial, you should have completed the following sequence on
 4. Delete the record when testing is complete.
 
 This structure helps new developers understand a complete resource lifecycle before they work with more complex endpoints or multi-resource workflows.
-
-## Why this tutorial structure works
-
-The sample is intentionally sequenced to reduce cognitive load for first-time readers while preserving technical accuracy.
-
-### One resource, one journey
-
-A single resource model keeps the workflow easy to follow and avoids context switching between unrelated examples.
-
-### Reference-friendly sections
-
-Each step can be reused later as standalone guidance without losing the logic of the full tutorial sequence.
-
-### Fast path to confidence
-
-The reader completes one meaningful task loop quickly, which makes the broader API feel easier to approach.
 
 [Back to selected work](index.html#samples)

@@ -106,7 +106,3 @@ AI can be human-like without being humane.
 So I do not expect it to develop a conscience.
 
 I just no longer let it keep the project memory.
-
-## AI-assisted development needs durable project memory.
-
-This essay connects documentation practice with the working conditions around AI: clear constraints, preserved decisions, and accountable use of generated output.

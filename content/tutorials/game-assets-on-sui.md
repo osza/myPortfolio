@@ -9,12 +9,12 @@ secondary_link_href: "octopus-society-on-sui.html"
 secondary_link_label: "Start with membership onboarding"
 hero_stats: "Sui blockchain | Game backend | Move objects | Transaction flows"
 hero_panel_id: "game-assets-proof-title"
-hero_panel_label: "Build status"
+hero_panel_label: "Use this guide"
 hero_panel_style: "default"
-hero_panel_items: "Markdown source::game-assets-on-sui.md | Generated HTML::Built locally before publication. | Checked output::Structure follows the API tutorial baseline and local links are validated in CI."
+hero_panel_items: "Scope::A fictional Sui game with player-owned and shared objects. | Prerequisites::A testnet wallet, a published package, and a Sui provider endpoint. | Outcome::Model ownership, shared state, and wallet-signed transactions."
 footer_tag: "Built from Markdown source"
 uses_mermaid: false
-accent_sections: "what-this-tutorial-demonstrates|overview|architecture-at-a-glance|before-you-start|define-the-core-game-objects|model-shared-structures|connect-the-api-layer|follow-a-transaction-flow|what-the-reader-leaves-with"
+accent_sections: "what-this-tutorial-demonstrates|overview|architecture-at-a-glance|before-you-start|define-the-core-game-objects|model-shared-structures|connect-the-api-layer|follow-a-transaction-flow|outcome"
 output: "game-assets-on-sui.html"
 ---
 
@@ -56,8 +56,6 @@ This can keep the API familiar for application developers while making it clear 
 
 ## Before you start
 
-This section lists the minimum setup for following the examples safely.
-
 ### Requirements
 
 **Requirements · Wallet · Endpoint · Package · Indexing**
@@ -76,8 +74,6 @@ The REST-shaped endpoints in this sample are fictional orchestration endpoints, 
 **Terms used here:** an *address-owned object* belongs to one address; a *shared object* can be referenced by many users; a *PTB* is the transaction that groups the Move calls; and `TxContext` identifies the current transaction and sender in Move.
 
 ## Define the core game objects
-
-This section introduces the main owned objects in the model.
 
 ### Octopus identity and unique belongings
 
@@ -121,8 +117,6 @@ This example stays intentionally small. In a production package, you would usual
 
 ## Model shared structures
 
-This section shows where a game world needs shared state rather than only player-owned state.
-
 ### Farms, markets, and communal state
 
 **Shared objects · Cooperative mechanics · Mutation rules**
@@ -154,8 +148,6 @@ fun init(ctx: &mut TxContext) {
 `transfer::share_object` is the step that makes this `key` object shared. A production package would then expose a narrowly scoped `harvest` entry function, with eligibility and state-transition checks in Move rather than only in backend code.
 
 ## Connect the API layer
-
-This section explains how a familiar API can orchestrate game actions without pretending to be the source of truth.
 
 ### Backend endpoints and transaction preparation
 
@@ -208,12 +200,6 @@ console.log(result.Transaction.digest);
 
 For a browser game, pass the same `Transaction` to the player’s wallet instead of using a keypair. After `waitForTransaction`, read the farm and octopus objects again and update the UI from the confirmed state.
 
-## What the reader leaves with
+## Outcome
 
-This closing section makes the design takeaway explicit.
-
-### Outcome
-
-**Reusable game-state tutorial**
-
-By the end of the tutorial, the reader has a compact model for representing a player identity, unique belongings, shared structures, and transaction flow boundaries on Sui. The key point is not the octopus theme itself, but how the object model supports ownership, mutation, and coordination in a game-oriented system.
+You have a model for player identities, unique belongings, shared structures, and transaction boundaries on Sui. The same pattern applies to other game themes where ownership, mutation, and coordination belong on-chain.
